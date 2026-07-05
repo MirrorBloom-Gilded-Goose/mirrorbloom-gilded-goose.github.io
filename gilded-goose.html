@@ -6,51 +6,25 @@
 <title>The Gilded Goose — Mirrorbloom</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-.gg-hero { border-left: 4px solid #C8922A; padding-left: 1.4rem; margin-bottom: 2rem; }
-.gg-motto { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: #E8C060; margin-bottom: 0.5rem; }
-.gg-rep { font-size: 0.9rem; color: var(--ink-dim); }
-
-.member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
-.member-card { padding: 1.4rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); }
-.member-card .role { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6420; margin-bottom: 0.4rem; }
-.member-card h3 { font-family: var(--serif); font-size: 1.2rem; color: #E8C060; margin-bottom: 0.3rem; }
-.member-card .species { font-size: 0.8rem; color: var(--ink-dim); margin-bottom: 0.7rem; font-style: italic; }
-.member-card p { font-size: 0.88rem; color: var(--ink-dim); line-height: 1.6; }
-
-.elite-card { padding: 1.4rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); }
-.elite-card .title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6420; margin-bottom: 0.4rem; }
-.elite-card h3 { font-family: var(--serif); font-size: 1.3rem; color: #E8C060; margin-bottom: 0.2rem; }
-.elite-card .level { font-size: 0.8rem; color: var(--ink-dim); margin-bottom: 0.7rem; font-style: italic; }
-.elite-card .appearance { font-size: 0.88rem; color: var(--ink-dim); line-height: 1.6; margin-bottom: 0.7rem; font-style: italic; }
-.elite-card .personality { font-size: 0.88rem; color: var(--ink-dim); line-height: 1.6; }
-
-.div-block { padding: 1.4rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); margin-bottom: 1.2rem; }
-.div-block h3 { font-family: var(--serif); font-size: 1.2rem; color: #E8C060; margin-bottom: 0.3rem; }
-.div-block .div-nick { font-size: 0.78rem; color: var(--ink-dim); font-style: italic; margin-bottom: 0.7rem; }
-.div-block p { font-size: 0.9rem; color: var(--ink-dim); line-height: 1.6; margin-bottom: 0.8rem; }
-.rank-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
-.rank-tag { font-size: 0.75rem; padding: 0.25rem 0.7rem; border-radius: 4px; border: 1px solid #8A6420; color: #E8C060; }
-
-.hq-detail { margin-top: 1rem; }
-.hq-space { padding: 0.9rem 1.1rem; border-left: 2px solid #8A6420; margin-bottom: 0.8rem; }
-.hq-space h4 { font-family: var(--serif); font-size: 1rem; color: #E8C060; margin-bottom: 0.3rem; }
-.hq-space p { font-size: 0.88rem; color: var(--ink-dim); }
-</style>
+<script src="mirror.js"></script>
 </head>
 <body>
-<div class="ambient dm-tint" aria-hidden="true"></div>
+<div class="ambient lore-tint" aria-hidden="true"></div>
 <header>
   <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
   <nav>
     <a href="cosmology.html">Cosmology</a>
     <a href="timeline.html">Timeline</a>
-    <a href="lore.html">Lore</a>
+    <a href="empires.html">The Everlast</a>
     <a href="gilded-goose.html" class="active">Gilded Goose</a>
+    <a href="lore.html">Library</a>
   </nav>
-  <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Download Compendium</a>
+  <div class="header-actions">
+    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
+    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
+  </div>
 </header>
 
 <div class="breadcrumb">
@@ -59,112 +33,103 @@
 </div>
 
 <div class="page-hero">
-  <p class="page-eyebrow" style="color:#8A6420;">Guild &mdash; Top 5, The Shining Everlast</p>
+  <p class="page-eyebrow" style="color:#E8C060;">Guild &mdash; Top 5, The Shining Everlast</p>
   <h1 class="page-title" style="color:#E8C060;">The Gilded Goose</h1>
-  <div class="gg-hero">
-    <p class="gg-motto">"Find it. Understand it. Share it. Break the rules that say you can't."</p>
-    <p class="gg-rep">Top 5 active guilds in the Shining Everlast. Beloved by the public — the free meals, the open archive, the contracts they take that nobody else will. The Senate is split: half of them cannot stand the Gilded Goose, half find them genuinely amusing, and all of them know the guild is too valuable to do anything about. The experiments frequently get out of hand. There are disasters. The guild always cleans them up, which is reassuring, but not before the cleanup costs the government significant money, which is less reassuring. The Magical College has seventeen open complaints. Somehow the guild keeps getting invited to things.</p>
+  <p class="page-sub">Part research guild, part mercenary outfit, part organized disaster.</p>
+</div>
+
+<div class="motto-strip">
+  <p>&ldquo;Find it. Understand it. Share it. Break the rules that say you can't.&rdquo;</p>
+</div>
+
+<div class="section">
+  <p class="section-label">The Guild</p>
+  <p>One of the top five active guilds in the Shining Everlast. The public loves them &mdash; the free meals, the spectacles, the way they always pay for what they break. The Senate is split fifty-fifty on whether they are the empire's greatest asset or its most expensive liability, but every senator on both sides of that line acknowledges their value. The Gilded Goose causes catastrophic, costly disasters with remarkable regularity. They have also, without exception, cleaned up every one.</p>
+  <p>The guildhall stands in the heart of the capital and is significantly larger on the inside than the outside &mdash; a fact the guild has never explained and the city has stopped asking about.</p>
+</div>
+
+<div class="section">
+  <p class="section-label">Three Divisions</p>
+  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;">
+    <div class="char-card" style="cursor:default;"><span class="char-name">The Scroll</span><span class="char-epithet" style="display:block;">Research</span><span class="char-line">The guild's founding purpose: find it, understand it, share it. A research institution that learned early that research doesn't fund itself.</span></div>
+    <div class="char-card" style="cursor:default;"><span class="char-name">The Sword</span><span class="char-epithet" style="display:block;">Mercenary work</span><span class="char-line">Research requires travel, travel requires protection, and protection &mdash; done well &mdash; pays for everything else.</span></div>
+    <div class="char-card" style="cursor:default;"><span class="char-name">Administration</span><span class="char-epithet" style="display:block;">The quiet miracle</span><span class="char-line">The division that keeps the other two solvent, legal, and out of Senate hearings. Mostly.</span></div>
   </div>
 </div>
 
 <div class="section">
-  <p class="section-label">Overview</p>
-  <p class="lead">The Gilded Goose is a research institution that learned early that research doesn't fund itself. Founded by Crockett — a goblin who has been alive for approximately three hundred years, by mechanisms he does not explain, whose time magic has grown from chaotic accident into something closer to a second language — the guild exists to find things, understand them, and share them. Not to monetize discoveries. Not to lock findings behind institutional access. To put what they learn back into the world.</p>
-  <p style="color:var(--ink-dim); margin-top:1rem;">The mercenary arm came second. Research requires travel, travel requires protection, and protection that understands what it's protecting is worth more than protection that doesn't. The Sword Division funds the Scroll Division. The Scroll Division gives the Sword Division better information than any other outfit in the Shining Everlast has access to.</p>
-</div>
-
-<div class="section">
-  <p class="section-label">Guildmaster</p>
-  <div class="member-card" style="border-color:#C8922A; max-width:600px;">
-    <div class="role">Founder &mdash; CR 25 (75,000 XP)</div>
-    <h3 style="font-size:1.5rem;">Crockett</h3>
-    <div class="species">Small humanoid (goblin), chaotic neutral</div>
-    <p style="font-style:italic; margin-bottom:0.7rem;">A small, very old goblin who wears his three hundred years the way a well-used tool wears its history — with evidence of everything it has been through and no apparent interest in pretending otherwise. Large white beard. Vestments modified over centuries to include pockets in dimensions that should not exist at this scale. His eyes have the quality of someone watching several timelines at once and choosing, moment to moment, which one to act in. He moves like someone who has made three hundred years of mistakes, learned from most of them, and is actively working on the rest.</p>
-    <p>Chaotic in the way of something that has always been chaotic and has simply had three centuries to develop opinions about it. He has not calmed down — he has decided which direction to be chaotic in. Irreverent, genuinely kind, prone to decisions that make Anna put her face in her hands. He takes in outcasts because he has never believed that the people institutions reject are the problem — he believes the institutions are. The guild reflects this completely. He still breaks rules. He is now three hundred years old and has broken enough of them to know which ones deserve it.</p>
+  <p class="section-label">The Guildmaster</p>
+  <div class="char-grid" style="grid-template-columns:1fr;">
+    <a href="crockett.html" class="char-card">
+      <div class="sigil">C</div>
+      <span class="char-name">Crockett</span>
+      <span class="char-epithet" style="display:block;">Founder &amp; Guildmaster &mdash; The Oldest Goblin in the Everlast</span>
+      <span class="char-line">A small, very old goblin who wears his three hundred years the way a well-used tool wears its scratches. Chaotic time magic, catastrophic curiosity, and the single most expensive line of credit in the empire. Full character sheet &rarr;</span>
+    </a>
   </div>
 </div>
 
 <div class="section">
   <p class="section-label">The Council</p>
-  <div class="member-grid"><div class="member-card">
-  <div class="role">Head of Research</div>
-  <h3>Anna Linfay</h3>
-  <div class="species">Human &mdash; CR 9</div>
-  <p>Precise, formal, and possessed of a very specific patience for Crockett's chaos that is not the same as tolerance. The closest person to Crockett in the guild. Also the person most likely to tell him he has gone too far. She has done this fourteen times. He has listened twelve of those times.</p>
-</div><div class="member-card">
-  <div class="role">Swordmaster</div>
-  <h3>Gerald</h3>
-  <div class="species">Human &mdash; CR 10</div>
-  <p>A drunken fool by reputation and something close to that by choice — being underestimated is professionally useful. Beneath it is a heart of remarkable generosity and a tactical mind sharpened by decades of contracts that required more creativity than force. He would die for any member of the Sword Division and has come close twice.</p>
-</div><div class="member-card">
-  <div class="role">Head of Administration</div>
-  <h3>Sandy</h3>
-  <div class="species">Human &mdash; CR 4</div>
-  <p>Genuinely gentle. Not soft — there is a backbone in Sandy that becomes visible when she is defending something she believes in, at which point it becomes visible quickly — but her default mode is care, warmth, and deep professional competence. She actually likes the work.</p>
-</div></div>
+  <div class="char-grid">
+    <div class="char-card" style="cursor:default;">
+      <div class="sigil">A</div>
+      <span class="char-name">Anna Linfay</span>
+      <span class="char-epithet" style="display:block;">Head of Research</span>
+      <span class="char-line">Stern, precise, black hair and glasses. A former professor of the Hopelight Institution, and the person closest to Crockett &mdash; which mostly means she is the one who keeps him in check.</span>
+    </div>
+    <div class="char-card" style="cursor:default;">
+      <div class="sigil">G</div>
+      <span class="char-name">Gerald</span>
+      <span class="char-epithet" style="display:block;">Swordmaster</span>
+      <span class="char-line">An older, drunken gentleman with a heart of gold. A fool by reputation and something close to it by choice &mdash; being underestimated is a weapon, and in actual combat he is a menace.</span>
+    </div>
+    <div class="char-card" style="cursor:default;">
+      <div class="sigil">S</div>
+      <span class="char-name">Sandy</span>
+      <span class="char-epithet" style="display:block;">Head of Administration</span>
+      <span class="char-line">Small, blonde, green-eyed, and genuinely gentle. Not soft &mdash; there is a backbone in Sandy that becomes visible the moment someone threatens her ledgers or her people.</span>
+    </div>
+  </div>
 </div>
 
 <div class="section">
   <p class="section-label">The Elite Four</p>
-  <p style="color:var(--ink-dim); margin-bottom:1.5rem;">The guild's sharpest edge — its most powerful members in combat and capability.</p>
-  <div class="member-grid"><div class="elite-card">
-  <div class="title">The Wild Card &mdash; Sorcerer 15 (Wild Magic)</div>
-  <h3>Cherry</h3>
-  <div class="level">Medium fiend (tiefling), chaotic good &mdash; CR 12 (8,400 XP)</div>
-  <p class="appearance">A tiefling whose appearance is the first thing people notice and frequently the last thing they expected. Bright red hair that moves slightly more than wind accounts for. Black horns sweeping back from her temples. Pure black eyes with no iris or white. Skin the color of paper — completely white, bl...</p>
-  <p class="personality">Loving, chaotic, and completely sincere about both. She views Crockett as an uncle in the specific sense of someone who found her when things were very bad and decided she was worth saving, and she has never found a way to express how much that means to her that doesn't involve accidentally setting something on fire. She is also capable of a mean streak — not cruelty for its own sake, but a sharp, precise capacity for harm that surfaces when someone says the wrong thing about how she looks or treats someone she loves carelessly. The warmth is real. So is the other thing. She is ashamed of her appearance and does not let that stop her, which is a more complicated balance than it looks.</p>
-</div><div class="elite-card">
-  <div class="title">The Quiet One &mdash; Rogue 14 (Assassin/Spy)</div>
-  <h3>Tom</h3>
-  <div class="level">Medium humanoid (human), lawful neutral &mdash; CR 10 (5,900 XP)</div>
-  <p class="appearance">Completely, deliberately, professionally unremarkable. Black hair, medium build, leather clothes in a shade of brown that is not memorable. A face people describe as 'just sort of normal.' He has cultivated this. It is one of the most useful things about him. The only registering detail is that he i...</p>
-  <p class="personality">Speaks when he has something to say, quiet otherwise — not cold, but controlled in a way most people read as distant until they have worked with him long enough to read it as professional care. Has a dry humor that emerges sideways when he trusts the audience.</p>
-</div><div class="elite-card">
-  <div class="title">The Iron Shield &mdash; Barbarian 13</div>
-  <h3>Sansa</h3>
-  <div class="level">Large humanoid (half-giant), chaotic good &mdash; CR 11 (7,200 XP)</div>
-  <p class="appearance">Very tall — genuinely Large by the standards of the creature type table, with the proportions of someone whose giant heritage did not dilute cleanly. Built like a monument to the idea that the world is a physical place that you can interact with through force. Blonde hair in thick braids worn forwar...</p>
-  <p class="personality">Direct, warm, possessed of a specific honor that is neither naive nor inflexible. The best fighter in the guild and knows it without arrogance — it is simply a fact, like weather, and she treats it accordingly. Dry, understated humor that appears most when someone is trying to intimidate her, which never works.</p>
-</div><div class="elite-card">
-  <div class="title">The Physician &mdash; Cleric 10 / Wizard 6 (Biomancy)</div>
-  <h3>Will</h3>
-  <div class="level">Medium humanoid (human), chaotic neutral &mdash; CR 13 (10,000 XP)</div>
-  <p class="appearance">A lanky man with the distracted energy of someone whose mind is always three steps ahead of the room. White coat over whatever he last remembered to change into. Arcane lenses built into his eye sockets — they glow faintly blue and rotate when he is thinking hard, which is most of the time. Reinforc...</p>
-  <p class="personality">Brilliant, enthusiastic, and genuinely well-meaning in a way that does not fully account for how alarming most of his ideas are to people who haven't spent time around him. An excellent doctor — his patients recover at a rate that makes other healers ask questions — but his definition of treatment is broader than the medical consensus, and his definition of improvement broader still. He never modifies someone without consent. He is very persuasive about obtaining that consent.</p>
-</div></div>
+  <p>The guild's sharpest edge &mdash; its most powerful members in combat and capability, and the heart of the guild's strangest family.</p>
+  <div class="char-grid">
+    <a href="cherry.html" class="char-card">
+      <div class="sigil" style="border-color:var(--despair-bright);color:var(--despair-bright);">&#10047;</div>
+      <span class="char-name">Cherry</span>
+      <span class="char-epithet" style="display:block;">The Wild Card</span>
+      <span class="char-line">Tiefling wild magic sorceress. Circus magic, black tears, a smile that opens a little too wide, and a heart bigger than the damage bill.</span>
+    </a>
+    <a href="will.html" class="char-card">
+      <div class="sigil">&#9877;</div>
+      <span class="char-name">Will</span>
+      <span class="char-epithet" style="display:block;">The Physician</span>
+      <span class="char-line">Cleric and biomancer. Mad scientist doctor with arcane lens eyes, pure white hair, and an amulet of the All Mother he has never once taken off.</span>
+    </a>
+    <a href="tom.html" class="char-card">
+      <div class="sigil">&#9670;</div>
+      <span class="char-name">Tom</span>
+      <span class="char-epithet" style="display:block;">The Quiet One</span>
+      <span class="char-line">The guild's top spy. Completely, deliberately, professionally unremarkable. You have already forgotten what he looks like.</span>
+    </a>
+    <a href="sansa.html" class="char-card">
+      <div class="sigil">&#9876;</div>
+      <span class="char-name">Sansa</span>
+      <span class="char-epithet" style="display:block;">The Iron Shield</span>
+      <span class="char-line">Half-giant warrior princess. Blonde braids, an honest laugh, and a very complicated relationship with the word &ldquo;duty.&rdquo;</span>
+    </a>
+  </div>
 </div>
 
 <div class="section">
-  <p class="section-label">Divisions</p>
-  <div class="div-block">
-  <h3>The Scroll Division</h3>
-  <div class="div-nick">Also known as: Scholars, the Reading Half</div>
-  <p>Arcane research, discovery, documentation, and publication. The reason the guild exists.</p>
-  <div class="rank-row"><span class="rank-tag">Inkling</span> <span class="rank-tag">Scrivener</span> <span class="rank-tag">Lorekeeper</span> <span class="rank-tag">Arcanist of the Goose</span></div>
-</div><div class="div-block">
-  <h3>The Sword Division</h3>
-  <div class="div-nick">Also known as: Blades, the Running Half</div>
-  <p>Mercenary contracts, field protection for research teams, retrieval operations, and going somewhere dangerous and coming back with something.</p>
-  <div class="rank-row"><span class="rank-tag">Runner</span> <span class="rank-tag">Blade</span> <span class="rank-tag">Ironmark</span> <span class="rank-tag">Gilded Blade</span></div>
-</div><div class="div-block">
-  <h3>The Administrative Division</h3>
-  <div class="div-nick">Also known as: The Counting House, Sandy's People</div>
-  <p>Accounting, contracts, diplomacy, Senate relations, payroll — the infrastructure that makes everything else possible.</p>
-  <div class="rank-row"><span class="rank-tag">Clerk</span> <span class="rank-tag">Attaché</span> <span class="rank-tag">Envoy</span></div>
-</div>
-</div>
-
-<div class="section">
-  <p class="section-label">Headquarters &mdash; The Goose and Lantern</p>
-  <p style="color:var(--ink-dim);">The Lamplight Quarter, The Shining Everlast</p>
-  <p style="color:var(--ink-dim); margin-top:0.8rem;">From the outside it is a building. From the inside it is significantly more building than that. The sign above the door — a gilded goose carrying a lantern, painted by Crockett himself on the first day — is charming rather than professional. Step inside and the geometry stops being reliable: the ground floor common room is larger than the building's exterior allows. The research floors above are larger still. The archive floors exceed what should be physically possible given the roof. Will has an entire laboratory wing on the third floor that does not correspond to any exterior window. Nobody has mapped the building completely. Orvo Nix tried once and produced a document he describes as a working hypothesis. Crockett has not explained this. He finds the question mildly interesting.</p>
-  <div class="hq-detail"><div class="hq-space"><h4>The Common Room</h4><p>Open to the public. Free meals for anyone who brings something worth learning. Consistently the most interesting place to have dinner in the Lamplight Quarter.</p></div><div class="hq-space"><h4>Will's Workshop</h4><p>Third floor, marked KNOCK AND WAIT. Always occupied. Always mid-project.</p></div><div class="hq-space"><h4>The Open Archive</h4><p>Fifth floor. Freely accessible to credentialed visitors. Complete catalogue of guild publications.</p></div><div class="hq-space"><h4>The Restricted Archive</h4><p>Sixth floor. Lorekeeper rank or active partnership required. Incomplete findings and research awaiting verification.</p></div><div class="hq-space"><h4>Crockett's Office</h4><p>Eighth floor. Seventeen active projects, a board covered in string, and a door that opens differently each visit. Visitors welcome. The wait is sometimes longer than expected.</p></div></div>
-</div>
-
-<div class="section">
-  <p class="section-label">Culture</p>
-  <p style="color:var(--ink-dim);">The Gilded Goose has a reputation that contains a contradiction, and the contradiction is the point.</p>
-  <p style="color:var(--ink-dim); margin-top:1rem;">From the outside: a guildmaster who has been alive three hundred years and still approaches problems like they are personally interesting. A head of research who left the most prestigious institution in the city and considers this an upgrade. A swordmaster visibly drunk at most morning briefings who remains the most tactically dangerous person in any room he occupies. A head of administration who is small, blonde, green-eyed, and gentle, and runs the guild's finances with the precision of someone who knows exactly how much everything costs, including the things that aren't supposed to have a price.</p>
+  <a class="serial-banner" href="chapters.html">
+    <p class="sb-eyebrow">Read their story &mdash; Updates Mon / Wed / Fri</p>
+    <p class="sb-title">Tales of the Gilded Goose</p>
+    <p class="sb-desc">The web serial follows Crockett and the Elite Four on the expedition that broke through the floor of the world. Read the chapters right here on the site, or follow along on Royal Road.</p>
+  </a>
 </div>
 
 <footer>

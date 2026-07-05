@@ -363,3 +363,108 @@ footer {
   transition: all 0.2s; white-space: nowrap;
 }
 .download-btn:hover { background: rgba(212,162,86,0.16); border-color: var(--hope); }
+
+
+/* ===== The Mirror Crossing: Solance (light) theme ===== */
+:root { color-scheme: dark; }
+html[data-theme="solance"] { color-scheme: light; }
+html[data-theme="solance"] body {
+  --bg: #F5EDDC;
+  --bg-soft: #ECE1C8;
+  --bg-card: rgba(46,36,64,0.045);
+  --ink: #2E2440;
+  --ink-dim: #6E6284;
+  --hope: #9A6E14;
+  --hope-dim: #B08A3E;
+  --hope-bright: #7A5608;
+  --despair: #8A2B2B;
+  --despair-dim: #B98080;
+  --despair-bright: #942F2F;
+  --border: rgba(46,36,64,0.16);
+}
+html[data-theme="solance"] .ambient {
+  background:
+    radial-gradient(ellipse 900px 600px at 20% 10%, rgba(154,110,20,0.10), transparent 60%),
+    radial-gradient(ellipse 900px 600px at 80% 90%, rgba(138,43,43,0.06), transparent 60%);
+}
+body, header, .nav-card, .info-card, .deity-card .overlay, .download-btn, .mirror-toggle {
+  transition: background 0.45s ease, color 0.45s ease, border-color 0.45s ease;
+}
+
+.header-actions { display: flex; gap: 0.6rem; align-items: center; }
+.mirror-toggle {
+  cursor: pointer; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--hope); font-size: 1.05rem; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.mirror-toggle:hover { border-color: var(--hope); transform: rotate(180deg); }
+.mirror-toggle:focus-visible { outline: 2px solid var(--hope); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .mirror-toggle:hover { transform: none; } }
+
+/* ===== Mirror pairs (Cosmology: the Archfey) ===== */
+.pair-row {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 1rem; align-items: stretch; margin-bottom: 1.2rem;
+}
+.pair-glyph {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--hope-dim); font-family: var(--serif); font-size: 1.4rem;
+  min-width: 2.2rem;
+}
+.pair-row .deity-card { margin: 0; }
+@media (max-width: 640px) {
+  .pair-row { grid-template-columns: 1fr; }
+  .pair-glyph { transform: rotate(90deg); min-height: 2rem; }
+}
+
+/* ===== Character sheets (Gilded Goose) ===== */
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.2rem; margin-top: 1.5rem;
+}
+.char-card {
+  display: block; text-decoration: none; padding: 1.6rem 1.4rem;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card);
+  transition: transform 0.3s cubic-bezier(.2,.8,.2,1), border-color 0.2s;
+}
+.char-card:hover, .char-card:focus-visible { transform: translateY(-5px); border-color: var(--hope-dim); }
+.char-card .sigil {
+  width: 3.2rem; height: 3.2rem; border-radius: 50%;
+  border: 1px solid var(--hope-dim); color: var(--hope);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif-sc); font-size: 1.4rem; font-weight: 600;
+  margin-bottom: 0.9rem; background: rgba(212,162,86,0.07);
+}
+.char-card .char-name { font-family: var(--serif-sc); font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+.char-card .char-epithet { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: var(--hope); margin-bottom: 0.5rem; }
+.char-card .char-line { font-size: 0.8rem; color: var(--ink-dim); line-height: 1.55; }
+
+.sheet-block { border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); padding: 1.6rem 1.8rem; margin-bottom: 1.4rem; }
+.sheet-block h2 { font-family: var(--serif-sc); font-size: 1.15rem; color: var(--hope); margin-bottom: 0.6rem; }
+.sheet-block p { color: var(--ink-dim); font-size: 0.94rem; line-height: 1.7; margin-bottom: 0.7rem; }
+.sheet-block p:last-child { margin-bottom: 0; }
+.sheet-block p strong { color: var(--ink); }
+.statline {
+  font-family: var(--serif); font-style: italic; font-size: 1rem;
+  color: var(--ink-dim); border-left: 2px solid var(--hope-dim);
+  padding-left: 0.9rem; margin: 0.4rem 0 1.6rem;
+}
+
+.motto-strip {
+  text-align: center; padding: 2.2rem 1.5rem; margin: 2.5rem 0;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.motto-strip p { font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--hope); max-width: 34em; margin: 0 auto; line-height: 1.6; }
+
+.serial-banner {
+  display: block; text-decoration: none; margin-top: 2.5rem;
+  border: 1px solid var(--hope-dim); border-radius: 12px;
+  background: linear-gradient(120deg, rgba(212,162,86,0.10), rgba(138,43,43,0.06));
+  padding: 1.8rem 2rem; transition: border-color 0.2s, transform 0.3s;
+}
+.serial-banner:hover { border-color: var(--hope); transform: translateY(-3px); }
+.serial-banner .sb-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--hope-dim); margin-bottom: 0.4rem; }
+.serial-banner .sb-title { font-family: var(--serif-sc); font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+.serial-banner .sb-desc { font-size: 0.88rem; color: var(--ink-dim); line-height: 1.6; max-width: 62ch; }

@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lore — Mirrorbloom</title>
+<title>The Library — Mirrorbloom</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="mirror.js"></script>
 </head>
 <body>
 <div class="ambient lore-tint" aria-hidden="true"></div>
@@ -16,140 +17,78 @@
   <nav>
     <a href="cosmology.html">Cosmology</a>
     <a href="timeline.html">Timeline</a>
-    <a href="lore.html">Lore</a>
+    <a href="empires.html">The Everlast</a>
     <a href="gilded-goose.html">Gilded Goose</a>
+    <a href="lore.html" class="active">Library</a>
   </nav>
-  <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Download Compendium</a>
+  <div class="header-actions">
+    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
+    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
+  </div>
 </header>
 
 <div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span><span class="current">Lore</span>
+  <a href="index.html">Home</a><span class="sep">/</span>
+  <span class="current">Library</span>
 </div>
+
 <div class="page-hero">
-  <p class="page-eyebrow hope-tone">The Pantheon</p>
-  <h1 class="page-title">Gods &amp; Fey Lords</h1>
-  <p class="page-sub">Two gods, twelve Fey Lords &mdash; each split between a bright aspect above and a corrupted shadow below.</p>
+  <p class="page-eyebrow hope-tone">The Archive</p>
+  <h1 class="page-title">The Library</h1>
+  <p class="page-sub">Stories, adventures, creatures, and tools of the table &mdash; everything written in and about Mirrorbloom.</p>
 </div>
 
 <div class="section">
-  <p class="section-label">The Two Gods</p>
-  <div class="deity-grid">
-    <a href="great_hope.html" class="deity-card tier-god">
-  <img src="great_hope.jpeg" alt="The Great Hope" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Great Hope</div>
-    <div class="epithet">She Who Does Not Know</div>
-  </div>
-</a><a href="great_despair.html" class="deity-card tier-god">
-  <img src="great_despair.jpeg" alt="The Great Despair" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Great Despair</div>
-    <div class="epithet">The Uncrowned Queen</div>
-  </div>
-</a>
-  </div>
+  <a class="serial-banner" href="chapters.html">
+    <p class="sb-eyebrow">The Web Serial &mdash; Updates Mon / Wed / Fri</p>
+    <p class="sb-title">Tales of the Gilded Goose</p>
+    <p class="sb-desc">The Gilded Goose finds things. Understands things. Breaks every rule that says they can't. Follow Crockett and the guild's most catastrophic expedition yet &mdash; the one that broke through the floor of the world.</p>
+  </a>
 </div>
 
 <div class="section">
-  <p class="section-label">The Twelve Fey Lords</p>
-  <div class="deity-grid">
-    <a href="dawnward_king.html" class="deity-card ">
-  <img src="dawnward_king.jpeg" alt="The Dawnward King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Dawnward King</div>
-    <div class="epithet">First Light</div>
-  </div>
-</a><a href="duskward_king.html" class="deity-card ">
-  <img src="duskward_king.jpeg" alt="The Duskward King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Duskward King</div>
-    <div class="epithet">Last Light</div>
-  </div>
-</a><a href="verdant_lady.html" class="deity-card ">
-  <img src="verdant_lady.jpeg" alt="The Verdant Lady" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Verdant Lady</div>
-    <div class="epithet">The Garden Unbroken</div>
-  </div>
-</a><a href="bloated_lady.html" class="deity-card ">
-  <img src="bloated_lady.jpeg" alt="The Bloated Lady" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Bloated Lady</div>
-    <div class="epithet">What Growth Becomes</div>
-  </div>
-</a><a href="jester_king.html" class="deity-card ">
-  <img src="jester_king.jpeg" alt="The Jester King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Jester King</div>
-    <div class="epithet">A Thousand Faces, Each One Borrowed</div>
-  </div>
-</a><a href="mocking_king.html" class="deity-card ">
-  <img src="mocking_king.jpeg" alt="The Mocking King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Mocking King</div>
-    <div class="epithet">The Smile That Cannot Move</div>
-  </div>
-</a><a href="lady_of_dreaming.html" class="deity-card ">
-  <img src="lady_of_dreaming.jpeg" alt="The Lady Of Dreaming" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Lady Of Dreaming</div>
-    <div class="epithet">The Shape Sleep Takes</div>
-  </div>
-</a><a href="lady_of_waking.html" class="deity-card ">
-  <img src="lady_of_waking.jpeg" alt="The Lady Of Waking" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Lady Of Waking</div>
-    <div class="epithet">The Eyes That Will Not Close</div>
-  </div>
-</a><a href="hearthkeeper.html" class="deity-card ">
-  <img src="hearthkeeper.jpeg" alt="The Hearthkeeper" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Hearthkeeper</div>
-    <div class="epithet">The Open Door</div>
-  </div>
-</a><a href="hollow_host.html" class="deity-card ">
-  <img src="hollow_host.jpeg" alt="The Hollow Host" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Hollow Host</div>
-    <div class="epithet">The Same Warm Welcome</div>
-  </div>
-</a><a href="hunter_king.html" class="deity-card ">
-  <img src="hunter_king.jpeg" alt="The Hunter King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Hunter King</div>
-    <div class="epithet">The Fair Chase</div>
-  </div>
-</a><a href="stalking_king.html" class="deity-card ">
-  <img src="stalking_king.jpeg" alt="The Stalking King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Stalking King</div>
-    <div class="epithet">The Chase That Never Ends</div>
-  </div>
-</a>
+  <p class="section-label">Adventures &amp; Tools</p>
+  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;">
+    <a href="oneshot-two-doors.html" class="char-card"><span class="char-name">Two Doors on the Old Road</span><span class="char-epithet" style="display:block;">A Mirrorbloom one-shot</span><span class="char-line">A wandering doorway, an invitation that should not be accepted, and a horde-mode escape where every round costs three hours.</span></a>
+    <a href="dm-tools.html" class="char-card"><span class="char-name">DM Tools</span><span class="char-epithet" style="display:block;">Stat blocks &amp; references</span><span class="char-line">Full 5e stat blocks for every god, Fey Lord, and court creature in the setting.</span></a>
+    <a href="courts.html" class="char-card"><span class="char-name">Courts &amp; Realms</span><span class="char-epithet" style="display:block;">The fourteen courts</span><span class="char-line">Seventy characters across fourteen courts &mdash; seneschals, champions, heralds, confessors, and the forsaken.</span></a>
+    <a href="mirrorbloom_compendium.pdf" class="char-card" download><span class="char-name">The Compendium</span><span class="char-epithet" style="display:block;">Download the PDF</span><span class="char-line">The full Mirrorbloom compendium, gathered into a single document for the table.</span></a>
   </div>
 </div>
 
 <div class="section">
-  <p class="section-label">Explore Further</p>
-  <div class="card-grid">
-    <a href="cosmology.html" class="info-card">
-      <h3>Cosmology</h3>
-      <p>The Breaking, the Law of Reflection, and how the pantheon came to be.</p>
-    </a>
-    <a href="courts.html" class="info-card">
-      <h3>Courts &amp; Realms</h3>
-      <p>Where each Lord holds court, and the realm tied to it.</p>
-    </a>
-    <a href="empires.html" class="info-card">
-      <h3>The Empires</h3>
-      <p>The Shining Everlast and its shadow twin, the Last Shine.</p>
-    </a>
+  <p class="section-label">Bestiary &mdash; Court Creatures</p>
+  <p style="margin-bottom:1.2rem;">Fourteen creatures of the courts, from the first bright things of dawn to what waits at the table below.</p>
+  <div class="char-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
+    <a href="minion-butterfly_first_dawn.html" class="char-card"><span class="char-name" style="font-size:1rem;">Butterfly of the First Dawn</span></a>
+<a href="minion-first_morning_sprite.html" class="char-card"><span class="char-name" style="font-size:1rem;">First Morning Sprite</span></a>
+<a href="minion-hound_open_field.html" class="char-card"><span class="char-name" style="font-size:1rem;">Hound of the Open Field</span></a>
+<a href="minion-bower_thorn.html" class="char-card"><span class="char-name" style="font-size:1rem;">Bower Thorn</span></a>
+<a href="minion-wandering_notion.html" class="char-card"><span class="char-name" style="font-size:1rem;">Wandering Notion</span></a>
+<a href="minion-table_setter.html" class="char-card"><span class="char-name" style="font-size:1rem;">Table Setter</span></a>
+<a href="minion-lingering_echo.html" class="char-card"><span class="char-name" style="font-size:1rem;">Lingering Echo</span></a>
+<a href="minion-masked_courtier.html" class="char-card"><span class="char-name" style="font-size:1rem;">Masked Courtier</span></a>
+<a href="minion-quiet_guest.html" class="char-card"><span class="char-name" style="font-size:1rem;">Quiet Guest</span></a>
+<a href="minion-stitched_jester.html" class="char-card"><span class="char-name" style="font-size:1rem;">Stitched Jester</span></a>
+<a href="minion-sleepless_watcher.html" class="char-card"><span class="char-name" style="font-size:1rem;">Sleepless Watcher</span></a>
+<a href="minion-bone_hound.html" class="char-card"><span class="char-name" style="font-size:1rem;">Bone Hound</span></a>
+<a href="minion-rotblossom_crawler.html" class="char-card"><span class="char-name" style="font-size:1rem;">Rotblossom Crawler</span></a>
+<a href="minion-the_forgotten.html" class="char-card"><span class="char-name" style="font-size:1rem;">The Forgotten</span></a>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label">Deeper Reading</p>
+  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;">
+    <a href="cosmology.html" class="char-card"><span class="char-name">Cosmology</span><span class="char-line">The Breaking, the gods, and the Archfey.</span></a>
+    <a href="magic.html" class="char-card"><span class="char-name">Magic &amp; the Law of Reflection</span><span class="char-line">The three layers of magic and the Shackle System in depth.</span></a>
+    <a href="timeline.html" class="char-card"><span class="char-name">Timeline</span><span class="char-line">Five eras of Mirrorbloom's history.</span></a>
+    <a href="empires.html" class="char-card"><span class="char-name">The Shining Everlast</span><span class="char-line">The empire above &mdash; and its mirror below.</span></a>
   </div>
 </div>
 
 <footer>
   Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
 </footer>
-
 </body>
 </html>

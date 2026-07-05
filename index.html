@@ -4,136 +4,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mirrorbloom</title>
+<meta name="description" content="Mirrorbloom — a flat world split between Solance above and Umbrasol below, bound by the Law of Reflection. Home of the Gilded Goose.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --bg: #120E1A;
-  --bg-soft: #1A1424;
-  --ink: #E9E4F2;
-  --ink-dim: #9C92B0;
-  --hope: #D4A256;
-  --hope-dim: #8A6B3A;
-  --hope-bright: #F3D9A8;
-  --despair: #8A2B2B;
-  --despair-bright: #C96E6E;
-  --border: rgba(233,228,242,0.1);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --serif-sc: 'Cormorant SC', Georgia, serif;
-  --sans: 'Inter', -apple-system, sans-serif;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--ink); font-family: var(--sans); overflow-x: hidden; }
-
-.ambient {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 900px 600px at 20% 10%, rgba(212,162,86,0.07), transparent 60%),
-    radial-gradient(ellipse 900px 600px at 80% 90%, rgba(138,43,43,0.09), transparent 60%);
-}
-
-header {
-  position: relative; z-index: 10;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.6rem 3rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 1rem;
-}
-.wordmark {
-  font-family: var(--serif-sc); font-size: 1.3rem; letter-spacing: 0.08em;
-  font-weight: 600; color: var(--ink); text-decoration: none;
-}
-.wordmark span { color: var(--hope); }
-nav { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
-nav a {
-  color: var(--ink-dim); text-decoration: none; font-size: 0.92rem;
-  letter-spacing: 0.02em; transition: color 0.2s;
-}
-nav a:hover { color: var(--ink); }
-nav a.active { color: var(--hope); }
-
-.download-btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.55rem 1.1rem; border-radius: 6px;
-  border: 1px solid var(--hope-dim); color: var(--hope-bright);
-  background: rgba(212,162,86,0.08); text-decoration: none;
-  font-size: 0.82rem; font-family: var(--sans); letter-spacing: 0.02em;
-  transition: all 0.2s; white-space: nowrap;
-}
-.download-btn:hover { background: rgba(212,162,86,0.16); border-color: var(--hope); }
-
 .hero {
   position: relative; z-index: 1;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 70vh; text-align: center; padding: 4rem 2rem;
+  min-height: 62vh; text-align: center; padding: 4rem 2rem 3rem;
 }
-.hero-eyebrow {
-  font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--hope-dim); margin-bottom: 1.2rem;
-}
-.hero-title {
-  font-family: var(--serif-sc); font-size: clamp(3rem, 9vw, 7rem);
-  font-weight: 600; line-height: 1; letter-spacing: 0.05em; margin-bottom: 0.8rem;
-}
+.hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--hope-dim); margin-bottom: 1.2rem; }
+.hero-title { font-family: var(--serif-sc); font-size: clamp(2.6rem, 8vw, 6.4rem); font-weight: 600; line-height: 1; letter-spacing: 0.05em; margin-bottom: 0.8rem; }
 .hero-title .top { color: var(--hope-bright); }
-.hero-title .divider { display: block; font-size: 0.3em; letter-spacing: 0.3em; color: var(--border); margin: 0.5em 0; }
+.hero-title .divider { display: block; font-size: 0.28em; letter-spacing: 0.34em; color: var(--ink-dim); margin: 0.55em 0; }
 .hero-title .bottom { color: var(--despair-bright); }
-.hero-sub {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(1rem, 2vw, 1.3rem); color: var(--ink-dim);
-  max-width: 50em; margin-bottom: 3rem; line-height: 1.6;
-}
+.hero-sub { font-family: var(--serif); font-style: italic; font-size: clamp(1rem, 2vw, 1.25rem); color: var(--ink-dim); max-width: 46em; margin-bottom: 3rem; line-height: 1.65; }
 
-.nav-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1.2rem; max-width: 900px; width: 100%;
-}
+.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.1rem; max-width: 1050px; width: 100%; position: relative; z-index: 1; }
 .nav-card {
-  display: block; text-decoration: none; padding: 1.6rem 1.4rem;
+  display: block; text-decoration: none; padding: 1.6rem 1.2rem;
   border: 1px solid var(--border); border-radius: 8px;
-  background: rgba(255,255,255,0.02); text-align: center;
+  background: var(--bg-card); text-align: center;
   transition: transform 0.3s cubic-bezier(.2,.8,.2,1), border-color 0.2s, background 0.2s;
 }
-.nav-card:hover { transform: translateY(-5px); }
-.nav-card.cosmology:hover { border-color: #6A4ABA; background: rgba(106,74,186,0.06); }
-.nav-card.timeline:hover { border-color: #4A7A3A; background: rgba(74,122,58,0.06); }
-.nav-card.lore:hover { border-color: var(--hope); background: rgba(212,162,86,0.06); }
-.nav-card.guild:hover { border-color: #C8922A; background: rgba(200,146,42,0.06); }
-
-.nav-card .icon { font-size: 1.8rem; margin-bottom: 0.7rem; display: block; }
-.nav-card .label {
-  font-family: var(--serif-sc); font-size: 1.05rem;
-  font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.3rem;
-}
+.nav-card:hover, .nav-card:focus-visible { transform: translateY(-5px); }
+.nav-card.cosmology:hover { border-color: #6A4ABA; }
+.nav-card.timeline:hover  { border-color: #4A7A3A; }
+.nav-card.everlast:hover  { border-color: #4A7ABA; }
+.nav-card.guild:hover     { border-color: #C8922A; }
+.nav-card.library:hover   { border-color: var(--hope); }
+.nav-card .icon { font-size: 1.7rem; margin-bottom: 0.7rem; display: block; }
+.nav-card .label { font-family: var(--serif-sc); font-size: 1.02rem; font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.35rem; }
 .nav-card.cosmology .label { color: #A89ADA; }
-.nav-card.timeline .label { color: #8ABA7A; }
-.nav-card.lore .label { color: var(--hope-bright); }
-.nav-card.guild .label { color: #E8C060; }
-.nav-card .desc { font-size: 0.78rem; color: var(--ink-dim); line-height: 1.5; }
+.nav-card.timeline .label  { color: #8ABA7A; }
+.nav-card.everlast .label  { color: #7AA5DA; }
+.nav-card.guild .label     { color: #E8C060; }
+.nav-card.library .label   { color: var(--hope-bright); }
+.nav-card .desc { font-size: 0.76rem; color: var(--ink-dim); line-height: 1.5; }
+html[data-theme="solance"] .nav-card.cosmology .label { color: #5A3EA8; }
+html[data-theme="solance"] .nav-card.timeline .label  { color: #3E6E30; }
+html[data-theme="solance"] .nav-card.everlast .label  { color: #2F5E96; }
+html[data-theme="solance"] .nav-card.guild .label     { color: #96690E; }
 
-.law-strip {
-  position: relative; z-index: 1;
-  text-align: center; padding: 3rem 2rem;
-  border-top: 1px solid var(--border);
-}
-.law-strip p {
-  font-family: var(--serif); font-style: italic;
-  font-size: 1.1rem; color: var(--ink-dim); max-width: 60ch; margin: 0 auto;
-}
-.law-strip span.hope { color: var(--hope-bright); }
-.law-strip span.despair { color: var(--despair-bright); }
+.home-wrap { display: flex; flex-direction: column; align-items: center; padding: 0 2rem; position: relative; z-index: 1; }
+.home-serial { max-width: 1050px; width: 100%; margin-bottom: 3rem; }
+.law-strip { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+.law-strip p { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--ink-dim); max-width: 60ch; margin: 0 auto; line-height: 1.7; }
+.law-strip .law-name { color: var(--hope); }
+.mirror-hint { margin-top: 1.4rem; font-size: 0.78rem; color: var(--ink-dim); letter-spacing: 0.06em; }
+.mirror-hint span { color: var(--hope); }
 
-footer {
-  position: relative; z-index: 1; text-align: center;
-  padding: 2rem 1.5rem 3rem; color: var(--ink-dim);
-  font-size: 0.82rem; border-top: 1px solid var(--border);
-}
-
-@media (max-width: 700px) {
-  header { padding: 1.2rem 1.4rem; }
-  nav { gap: 1rem; }
-  .nav-grid { grid-template-columns: repeat(2, 1fr); }
-}
+@media (max-width: 900px) { .nav-grid { grid-template-columns: repeat(2, 1fr); } .nav-card.library { grid-column: 1 / -1; } }
 </style>
+<script src="mirror.js"></script>
 </head>
 <body>
 <div class="ambient" aria-hidden="true"></div>
@@ -142,55 +67,65 @@ footer {
   <nav>
     <a href="cosmology.html">Cosmology</a>
     <a href="timeline.html">Timeline</a>
-    <a href="lore.html">Lore</a>
+    <a href="empires.html">The Everlast</a>
     <a href="gilded-goose.html">Gilded Goose</a>
+    <a href="lore.html">Library</a>
   </nav>
-  <a href="mirrorbloom_compendium.pdf" download class="download-btn">
-    &#8659; Download Compendium
-  </a>
+  <div class="header-actions">
+    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
+    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
+  </div>
 </header>
 
-<section class="hero">
-  <p class="hero-eyebrow">A Homebrew D&amp;D Setting</p>
+<div class="hero">
+  <p class="hero-eyebrow">A homebrew world for D&amp;D 5e &amp; the Tales of the Gilded Goose serial</p>
   <h1 class="hero-title">
     <span class="top">Solance</span>
-    <span class="divider">&#9724;</span>
+    <span class="divider">&mdash; MIRRORBLOOM &mdash;</span>
     <span class="bottom">Umbrasol</span>
   </h1>
-  <p class="hero-sub">One flat world, split top and bottom like a reflection on still water. Everything beautiful above feeds everything terrible below. This is not a metaphor.</p>
+  <p class="hero-sub">One flat world, split top and bottom like a reflection on still water. Everything beautiful above feeds something hungry below &mdash; and everyone born here is shackled to the self on the other side of the glass.</p>
 
   <div class="nav-grid">
     <a href="cosmology.html" class="nav-card cosmology">
-      <span class="icon">&#9685;</span>
+      <span class="icon">&#9737;</span>
       <span class="label">Cosmology</span>
-      <span class="desc">The Breaking, the Law of Reflection, how the world came to be split.</span>
+      <span class="desc">The Law of Reflection, the Breaking, the two gods, and the Archfey courts.</span>
     </a>
     <a href="timeline.html" class="nav-card timeline">
-      <span class="icon">&#8987;</span>
-      <span class="label">Timeline</span>
-      <span class="desc">Ten thousand years of history across five ages, from the Primordial Era to today.</span>
-    </a>
-    <a href="lore.html" class="nav-card lore">
       <span class="icon">&#10022;</span>
-      <span class="label">Lore</span>
-      <span class="desc">The gods, the Fey Lords, their courts and realms, and the empires of Solance.</span>
+      <span class="label">Timeline</span>
+      <span class="desc">Five eras of history, from the Primordial round world to the Fourth Age.</span>
+    </a>
+    <a href="empires.html" class="nav-card everlast">
+      <span class="icon">&#9820;</span>
+      <span class="label">The Everlast</span>
+      <span class="desc">The vertical empire of Hopelight &mdash; and the Last Shine, its mirror below.</span>
     </a>
     <a href="gilded-goose.html" class="nav-card guild">
-      <span class="icon">&#10004;</span>
+      <span class="icon">&#129727;</span>
       <span class="label">Gilded Goose</span>
-      <span class="desc">The guild. Crockett's people. Find it, understand it, share it.</span>
+      <span class="desc">The guild, the council, the Elite Four, and their catastrophic guildmaster.</span>
+    </a>
+    <a href="lore.html" class="nav-card library">
+      <span class="icon">&#128218;</span>
+      <span class="label">Library</span>
+      <span class="desc">The serial, the bestiary, adventures, and DM tools.</span>
     </a>
   </div>
-</section>
+</div>
+
+<div class="home-wrap">
+  <a class="serial-banner home-serial" href="chapters.html">
+    <p class="sb-eyebrow">The Web Serial &mdash; New chapters Mon / Wed / Fri</p>
+    <p class="sb-title">Tales of the Gilded Goose</p>
+    <p class="sb-desc">Crockett has run the guild for three hundred years. Their latest job should be simple: dig into the ruins beneath the Yenfin Empire, find what's down there, write it up over drinks. Getting in was an accident. Getting out will cost them everything.</p>
+  </a>
+</div>
 
 <div class="law-strip">
-  <p>
-    <span class="hope">Beauty and goodness generated above</span>
-    directly feeds
-    <span class="despair">horror and evil below.</span>
-    It is not optional. It is not metaphorical.
-    It is closer to a law of physics than a moral teaching.
-  </p>
+  <p><span class="law-name">The Law of Reflection:</span> beauty and goodness generated above directly feeds horror and evil below. It is not metaphorical, and it is not optional. A kindness performed in Mirrorbloom is, somewhere beneath it, paid for.</p>
+  <p class="mirror-hint">Use the <span>&#9788;/&#9789;</span> button above to cross the mirror &mdash; view this site from Solance or from Umbrasol.</p>
 </div>
 
 <footer>
