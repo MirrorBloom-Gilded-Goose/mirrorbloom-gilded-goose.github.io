@@ -67,3 +67,11 @@ html[data-theme="solance"] .hint-glyph::before { font-size: .95rem; }
 .new-list li { padding: .45rem 0; break-inside: avoid; color: var(--ink-2); }
 .new-list li::before { content: '\2726'; color: var(--here); margin-right: .6rem; font-size: .8em; }
 .new-list a { color: var(--ink); }
+
+.map-teaser { margin-top: 2.5rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 2.5rem; align-items: center; }
+.map-teaser p { max-width: 42ch; color: var(--ink-2); }
+.map-card { display: block; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .5s cubic-bezier(.2,.7,.2,1), border-color .3s; }
+.map-card:hover { border-color: var(--here); transform: translateY(-3px); }
+.map-img { width: 100%; height: auto; display: block; }
+.above-only { display: none; } html[data-theme="solance"] .above-only { display: block; } html[data-theme="solance"] .below-only { display: none; }
+@media (max-width: 820px) { .map-teaser { grid-template-columns: 1fr; } }

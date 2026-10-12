@@ -13,6 +13,7 @@
       { key: 'cosmology', label: 'Cosmology', href: 'cosmology.html' },
       { key: 'magic', label: 'Magic', href: 'magic.html' },
       { key: 'world', label: 'World', href: 'world.html' },
+      { key: 'map', label: 'Map', href: 'map.html' },
       { key: 'timeline', label: 'Timeline', href: 'timeline.html' },
       { key: 'guild', label: 'Gilded Goose', href: 'gilded-goose.html' },
       { key: 'library', label: 'Library', href: 'lore.html' }
