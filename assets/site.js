@@ -21,7 +21,7 @@
     contents: [
       { part: 'The Mirror', note: 'How the world is built', items: [
         ['Cosmology', 'cosmology.html'], ['The Archfey', 'cosmology.html#archfey'], ['Courts & Realms', 'courts.html'],
-        ['Magic', 'magic.html'], ['The Sleeping Meadows', 'meadow.html'], ['The Knowledge Iceberg', 'iceberg.html'], ['Timeline', 'timeline.html'] ] },
+        ['Magic', 'magic.html'], ['The Kinds of Magic', 'magic-types.html'], ['The Sleeping Meadows', 'meadow.html'], ['The Knowledge Iceberg', 'iceberg.html'], ['Timeline', 'timeline.html'] ] },
       { part: 'The World', note: 'Nations, roads and orders', items: [
         ['The Thirteen Nations', 'world.html'], ['The Map', 'map.html'], ['The Shining Everlast', 'empires.html'],
         ['Life in the Everlast', 'everlast.html'], ['The Kenanism Empire', 'kenanism.html'], ['The Yenfin Empire', 'yenfin.html'],

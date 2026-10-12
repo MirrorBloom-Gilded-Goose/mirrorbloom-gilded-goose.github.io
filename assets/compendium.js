@@ -2,7 +2,7 @@
    To add a page to the book, add it to PARTS below. */
 (function () {
   var PARTS = [
-    { name: 'The Mirror', pages: ['cosmology.html', 'magic.html', 'meadow.html', 'iceberg.html', 'courts.html', 'timeline.html'] },
+    { name: 'The Mirror', pages: ['cosmology.html', 'magic.html', 'magic-types.html', 'meadow.html', 'iceberg.html', 'courts.html', 'timeline.html'] },
     { name: 'The Gods and the Archfey', pages: ['great_hope.html', 'great_despair.html', 'dawnward_king.html', 'duskward_king.html', 'verdant_lady.html', 'bloated_lady.html', 'revel_king.html', 'mocking_king.html', 'lady_of_dreaming.html', 'lady_of_waking.html', 'hearthkeeper.html', 'hollow_host.html', 'hunter_king.html', 'stalking_king.html'] },
     { name: 'The World', pages: ['world.html', 'empires.html', 'everlast.html', 'kenanism.html', 'yenfin.html', 'travel.html', 'orders.html'] },
     { name: 'The Gilded Goose', pages: ['gilded-goose.html', 'crockett.html', 'cherry.html', 'will.html', 'tom.html', 'sansa.html', 'serial.html'] }
