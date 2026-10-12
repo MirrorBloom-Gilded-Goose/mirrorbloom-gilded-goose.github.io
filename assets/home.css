@@ -1,0 +1,69 @@
+/* Home page: the name on the waterline, and the contents of the book. */
+.mirror-hero { position: relative; text-align: center; padding: clamp(3rem, 9vh, 6.5rem) var(--gutter) 3rem; overflow: hidden; }
+.mirror-hero .defs { position: absolute; }
+.world-name { font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.5rem); margin: 0; letter-spacing: .02em; }
+.world-name.above { color: var(--gold); margin-bottom: .2rem; }
+.world-name.below { color: var(--crimson); margin-top: .1rem; }
+.hero-word { font-family: var(--display); font-weight: 400; font-size: clamp(3.4rem, 13.5vw, 10.5rem); line-height: .86; margin: 0; letter-spacing: -0.005em; }
+h1.hero-word { color: var(--ink); text-shadow: 0 0 60px color-mix(in srgb, var(--gold) 22%, transparent); }
+.hero-line { width: min(980px, 92%); height: 1px; margin: .55rem auto .2rem; background: linear-gradient(90deg, transparent, var(--line-strong) 12%, var(--here) 50%, var(--line-strong) 88%, transparent); position: relative; }
+.hero-line::before { content: ''; position: absolute; inset: -14px 0; background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--here) 18%, transparent), transparent 70%); }
+.hero-reflection {
+  transform: scaleY(-1); color: var(--crimson); opacity: .62; filter: url(#water);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,.65) 45%, transparent 92%);
+          mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,.65) 45%, transparent 92%);
+  user-select: none;
+}
+html[data-theme="solance"] h1.hero-word { color: var(--ink); text-shadow: 0 0 50px rgba(220,170,80,.35); }
+html[data-theme="solance"] .hero-reflection { color: var(--crimson); opacity: .5; }
+.hero-sub { max-width: 40ch; margin: 1.6rem auto 0; font-size: clamp(1.12rem, 1.9vw, 1.32rem); font-style: italic; color: var(--ink-2); line-height: 1.6; }
+.hero-actions { justify-content: center; margin-top: 2rem; }
+.hero-hint { font-size: .95rem; color: var(--ink-3); margin-top: 1.6rem; }
+.hint-glyph { color: var(--here); }
+.where-above { display: none; }
+html[data-theme="solance"] .where-above { display: inline; }
+html[data-theme="solance"] .where-below { display: none; }
+html[data-theme="solance"] .hint-glyph::before { content: '\263D'; }
+html[data-theme="solance"] .hint-glyph { font-size: 0; }
+html[data-theme="solance"] .hint-glyph::before { font-size: .95rem; }
+
+/* the reflection settles in once, when the page opens */
+@media (prefers-reduced-motion: no-preference) {
+  h1.hero-word { animation: rise 1.4s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-reflection { animation: sink 1.8s cubic-bezier(.2,.7,.2,1) .15s both; }
+  .hero-line { animation: line 1.2s cubic-bezier(.3,.6,.2,1) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); letter-spacing: .06em; } to { opacity: 1; transform: none; } }
+  @keyframes sink { from { opacity: 0; transform: scaleY(-1) translateY(18px); } to { opacity: .62; transform: scaleY(-1); } }
+  @keyframes line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+
+.home-h { font-size: clamp(2rem, 4vw, 2.7rem); margin: 0 0 1.4rem; }
+.home-contents { margin-top: 3rem; }
+.book { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 3.2rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+@media (max-width: 900px) { .book { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .book { grid-template-columns: 1fr; } }
+.part h3 { font-size: 1.5rem; color: var(--here); margin: 0 0 .9rem; }
+.part h3.part-gap { margin-top: 2.2rem; }
+.part ol { list-style: none; margin: 0; padding: 0; }
+.part li { padding: .55rem 0; border-bottom: 1px dotted var(--line-strong); }
+.part li a { font-family: var(--display); font-size: 1.25rem; text-decoration: none; color: var(--ink); }
+.part li a:hover { color: var(--here); }
+.part li span { display: block; font-size: .98rem; color: var(--ink-2); line-height: 1.5; margin-top: .15rem; }
+
+.law { margin-top: 5.5rem; text-align: center; }
+.law-text { font-family: var(--display); font-style: italic; font-size: clamp(1.7rem, 4.2vw, 3rem); line-height: 1.2; max-width: 22ch; margin: 0 auto; color: var(--ink); }
+.law-cite { color: var(--ink-3); font-style: italic; margin-top: 1rem; font-size: 1rem; }
+
+.serial-band { margin-top: 5.5rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-top: 3rem; padding-bottom: 3rem; }
+.serial-band h2 { font-size: clamp(2.1rem, 4.5vw, 3.1rem); margin-bottom: .8rem; }
+.serial-band p { max-width: 58ch; }
+.serial-sigils { display: grid; gap: 0; width: 150px; }
+.serial-sigils span:first-child { color: var(--gold); }
+.serial-sigils span:last-child { color: var(--crimson); opacity: .55; margin-top: 8px; border-top: 1px solid var(--line-strong); padding-top: 8px; }
+@media (max-width: 720px) { .serial-band { grid-template-columns: 1fr; } .serial-sigils { display: none; } }
+
+.new-in { margin-top: 4.5rem; }
+.new-list { list-style: none; padding: 0; margin: 0; columns: 2 320px; column-gap: 3rem; }
+.new-list li { padding: .45rem 0; break-inside: avoid; color: var(--ink-2); }
+.new-list li::before { content: '\2726'; color: var(--here); margin-right: .6rem; font-size: .8em; }
+.new-list a { color: var(--ink); }

@@ -1,71 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sansa — Mirrorbloom</title>
+<meta name="description" content="Sansa, The iron shield of the Elite Four, and a princess of Vaelgard, of the Gilded Goose guild in Mirrorbloom.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html" class="active">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="gilded-goose.html">The Gilded Goose</a><span class="sep">/</span>
-  <span class="current">Sansa</span>
+<body data-section="guild">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="gilded-goose.html">The Guild</a><span aria-hidden="true">/</span><a href="sansa.html">Sansa</a></p>
+  <h1 class="title">Sansa</h1>
+  <p class="standfirst">The iron shield of the Elite Four, and a princess of Vaelgard</p>
 </div>
+<div class="layout has-rail">
+<article class="prose">
+<dl class="facts"><dt>Role</dt><dd>Elite Four</dd><dt>From</dt><dd>Vaelgard</dd><dt>Craft</dt><dd>Front-line fighter, ice and lightning</dd></dl>
+<section class="section" id="appearance"><h2>Appearance</h2><p>Tall, blonde-braided, with an easy grin and a giant axe. At rest she looks like what she is, a tall warrior in fighting shape. When she gets serious, her mutation wakes and she visibly bulks up in real time, which is usually the last warning anyone gets. She channels ice and lightning natively.</p></section><section class="section" id="personality"><h2>Personality</h2><p>Direct, warm, and possessed of a specific kind of honor that is neither naive nor inflexible. The best drinking company in the guild and the worst person to face across a battlefield. She is also a princess, a fact she mentions never, thinks about constantly, and left home specifically to stop being.</p></section><section class="section" id="home"><h2>Home</h2><p>Sansa comes from <a href="world.html#vaelgard">Vaelgard</a>, where everyone trains as a warrior first and a tradesperson second, a custom her great-grandfather began when he broke a siege during the War. Its general, Ragnar, is retiring, and her mother wants Sansa home to take command of the army. Her mother always favored her brothers.</p></section><section class="section" id="serial"><h2>In the serial</h2><p>Sansa holds the line on the expedition below, cheerfully volunteering for every duty except the one waiting for her back home. Her story keeps circling the same question from new directions: the difference between the responsibility you are handed, and the responsibility you choose.</p></section>
 
-<div class="page-hero">
-  <p class="page-eyebrow" style="color:#E8C060;">The Gilded Goose</p>
-  <h1 class="page-title">Sansa</h1>
-  <p class="page-sub">The Iron Shield of the Elite Four</p>
+<div class="waterline"></div>
+<p class="btn-row"><a class="btn" href="gilded-goose.html">Back to the guild</a><a class="btn" href="serial.html">Read the serial</a></p>
+</article>
+<aside class="rail" aria-label="On this page"><div class="rail-inner"><div><h3>The Gilded Goose</h3><ul><li><a href="gilded-goose.html">The Guild</a></li><li><a href="crockett.html">Crockett</a></li><li><a href="cherry.html">Cherry</a></li><li><a href="will.html">Will</a></li><li><a href="tom.html">Tom</a></li></ul></div><div><h3>On this page</h3><ul><li><a href="#appearance">Appearance</a></li><li><a href="#personality">Personality</a></li><li><a href="#home">Home</a></li><li><a href="#serial">In the serial</a></li></ul></div></div></aside>
 </div>
-
-<div class="section">
-  <p class="statline">Large humanoid (half-giant), chaotic good &mdash; Barbarian 13, CR 11 (7,200 XP)</p>
-  <div class="sheet-block">
-    <h2>Appearance</h2>
-    <p>Very tall &mdash; genuinely Large by the standards of the creature type table &mdash; with blonde braids, an easy grin, and the proportions of someone who once carried a wagon home because the horse looked tired.</p>
-  </div>
-  <div class="sheet-block">
-    <h2>Personality</h2>
-    <p>Direct, warm, and possessed of a specific kind of honor that is neither naive nor inflexible. The best drinking company in the guild and the worst person to face across a battlefield. She is also a princess, a fact she mentions never, thinks about constantly, and left home specifically to stop being.</p>
-  </div>
-  <div class="sheet-block">
-    <h2>Craft</h2>
-    <p>Front-line devastation. Sansa is the wall the guild stands behind and the hammer it swings &mdash; the Iron Shield in both senses. Her rage is not loss of control; it is the one place where all the things she refuses to carry get put down at once.</p>
-  </div>
-  <div class="sheet-block">
-    <h2>In the Serial</h2>
-    <p>Sansa holds the line on the expedition below, cheerfully volunteering for every duty except the one waiting for her back home. Her story keeps circling the same question from new directions: the difference between the responsibility you are handed, and the responsibility you choose.</p>
-  </div>
-
-  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:0.5rem;">
-    <a href="gilded-goose.html" class="char-card"><span class="char-name">&larr; The Gilded Goose</span><span class="char-line">Back to the guild.</span></a>
-    <a href="serial.html" class="char-card"><span class="char-name">Tales of the Gilded Goose</span><span class="char-line">Read the serial on Royal Road.</span></a>
-  </div>
-</div>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
+</main>
 </body>
 </html>

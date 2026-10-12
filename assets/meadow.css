@@ -1,0 +1,17 @@
+/* The Sleeping Meadows: the hero is always night, because the Meadow's sky is. */
+.meadow-sky { position: relative; min-height: min(78vh, 720px); display: grid; align-items: end; overflow: hidden; color: #EEE8F6;
+  background: radial-gradient(120% 90% at 50% 110%, #2b2a4a 0%, #15132a 45%, #0a0918 100%); }
+.meadow-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.meadow-head { position: relative; z-index: 2; max-width: var(--wide); width: 100%; margin: 0 auto; padding: 0 var(--gutter) clamp(9rem, 30vh, 15rem); text-shadow: 0 2px 18px rgba(8,6,20,.9); }
+.meadow-head .title { color: #F4EEFA; text-shadow: 0 0 40px rgba(170, 160, 255, .35); }
+.meadow-head .standfirst { color: #C9C1DA; }
+.meadow-head .crumbs, .meadow-head .crumbs a { color: #A79FC0; }
+.meadow-grass { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; z-index: 1;
+  background:
+    radial-gradient(60% 120% at 20% 100%, #0c1612 40%, transparent 41%),
+    radial-gradient(70% 140% at 75% 100%, #0b1410 40%, transparent 41%),
+    linear-gradient(to top, #0a120f 0%, rgba(10,18,15,.0) 100%);
+}
+.meadow-body { margin-top: 3rem; }
+.gorge { border-top: 1px solid color-mix(in srgb, var(--crimson) 45%, var(--line)); padding-top: 2.5rem; }
+.gorge h2 { color: var(--crimson); }

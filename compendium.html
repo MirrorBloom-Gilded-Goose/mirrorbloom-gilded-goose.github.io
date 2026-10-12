@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Compendium — Mirrorbloom</title>
+<meta name="description" content="The whole Mirrorbloom record gathered into one printable book, built fresh from the site every time it opens.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/compendium.js" defer></script>
+</head>
+<body data-section="library">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head no-print">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="lore.html">The Library</a></p>
+  <h1 class="title">The Compendium</h1>
+  <p class="standfirst">The whole record in one book, gathered fresh from the site each time you open it.</p>
+  <p class="btn-row"><button class="btn primary" type="button" onclick="window.print()">Print or save as PDF</button><span class="muted" id="compStatus" role="status">Gathering the pages&hellip;</span></p>
+  <p class="sealed-only muted"><em>You are signed in, so this edition includes the sealed lore and the Dungeon Master's material.</em></p>
+</div>
+<div class="layout">
+  <div class="prose wide compendium" id="book">
+    <section class="comp-title">
+      <p class="world-a">Solance</p>
+      <h1>Mirrorbloom</h1>
+      <p class="world-b">Umbrasol</p>
+      <p class="comp-sub">A compendium of the world split like a mirror</p>
+      <p class="comp-date" id="compDate"></p>
+    </section>
+    <nav class="comp-toc" id="compToc" aria-label="Compendium contents"></nav>
+    <div id="compBody"></div>
+  </div>
+</div>
+</main>
+</body>
+</html>

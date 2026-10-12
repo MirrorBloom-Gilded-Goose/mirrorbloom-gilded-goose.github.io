@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sanctum — Mirrorbloom</title>
+<meta name="description" content="The Dungeon Master&#x27;s Sanctum.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/sanctum.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/sanctum.js" defer></script>
+</head>
+<body data-section="sanctum" data-sealed-page>
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="sanctum.html">The Sanctum</a></p>
+  <h1 class="title">The Sanctum</h1><span class="title-ref" aria-hidden="true">The Sanctum</span>
+  <p class="standfirst">Everything sealed: stat blocks, the bestiary, adventures, secret lore and the tools for the table.</p>
+  <p class="btn-row"><a class="btn" href="vault-editor.html">Open the vault editor</a><a class="btn" href="sealed.html#guide">How the Sanctum works</a><button class="btn" type="button" id="lockBtn">Lock this device</button></p>
+</div>
+<div class="layout has-rail">
+<article class="prose wide" id="sanctum">
+  <section class="section" id="statblocks"><h2>Stat blocks</h2><p class="muted">Both gods at Challenge 30 and all twelve Archfey at Challenge 26.</p><div class="pairs sanctum-coins" id="sbList"></div></section>
+  <section class="section" id="bestiary"><h2>Bestiary</h2><div class="entries" id="bestList"></div></section>
+  <section class="section" id="adventures"><h2>Adventures</h2><div class="entries" id="advList"></div></section>
+  <section class="section" id="secrets"><h2>Secret lore</h2><div class="entries" id="secList"></div></section>
+  <section class="section" id="tools"><h2>Table tools</h2>
+    <div class="tool" id="tool-mirror">
+      <h3>The Mirror Self</h3>
+      <p class="muted">Roll a character's reflection on the other side of the glass.</p>
+      <form id="mirrorForm" class="tool-form">
+        <div><label for="msName">Name</label><input id="msName" type="text" placeholder="Any character"></div>
+        <div><label for="msAlign">Alignment</label><select id="msAlign"></select></div>
+        <div><label for="msCall">Class or calling</label><select id="msCall"></select></div>
+        <div><label for="msVirtue">Greatest virtue</label><select id="msVirtue"></select></div>
+        <div><label for="msHome">Home</label><input id="msHome" type="text" value="the Shining Everlast"></div>
+        <div class="tool-actions"><button class="btn primary" type="submit">Look into the glass</button></div>
+      </form>
+      <div class="mirror-card hidden" id="msOut" aria-live="polite"></div>
+    </div>
+    <div class="tool" id="tool-initiative">
+      <h3>Initiative</h3>
+      <form id="initForm" class="tool-form init-form">
+        <div><label for="inName">Name</label><input id="inName" type="text" required></div>
+        <div><label for="inInit">Initiative</label><input id="inInit" type="number" required></div>
+        <div><label for="inHp">HP</label><input id="inHp" type="number"></div>
+        <div><label for="inAc">AC</label><input id="inAc" type="number"></div>
+        <div class="tool-actions"><button class="btn" type="submit">Add</button></div>
+      </form>
+      <p class="init-bar"><span id="roundLbl">Round 1</span> <button class="btn small primary" type="button" id="nextTurn">Next turn</button> <button class="btn small" type="button" id="clearInit">Clear</button></p>
+      <div class="table-wrap"><table class="init-table"><thead><tr><th>Init</th><th>Name</th><th>HP</th><th>AC</th><th><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="initBody"></tbody></table></div>
+      <p class="muted small-note">Saved in this browser only.</p>
+    </div>
+    <div class="tool" id="tool-encounters">
+      <h3>Encounters by realm</h3>
+      <p class="muted">Built from each realm's places, court and creatures.</p>
+      <div class="tool-form enc-form"><div><label for="encRealm">Realm</label><select id="encRealm"></select></div><div class="tool-actions"><button class="btn primary" type="button" id="encRoll">Roll</button></div></div>
+      <ol class="enc-list" id="encList"></ol>
+    </div>
+    <div class="tool" id="tool-threads">
+      <h3>Open threads</h3>
+      <p class="muted">Your loose ends. Change a status by clicking it; add your own below. Saved in this browser only.</p>
+      <ul class="threads" id="threadList"></ul>
+      <form id="threadForm" class="tool-form thread-form"><div><label for="thTitle">New thread</label><input id="thTitle" type="text" required></div><div class="tool-actions"><button class="btn" type="submit">Add</button></div></form>
+    </div>
+  </section>
+  <section class="section" id="archive"><h2>Archive</h2><div class="entries" id="arcList"></div></section>
+</article>
+<aside class="rail" aria-label="Sanctum"><div class="rail-inner"><div><h3>The Sanctum</h3><ul><li><a href="#statblocks">Stat blocks</a></li><li><a href="#bestiary">Bestiary</a></li><li><a href="#adventures">Adventures</a></li><li><a href="#secrets">Secret lore</a></li><li><a href="#tools">Table tools</a></li><li><a href="#archive">Archive</a></li></ul></div><div><h3>Sealed pages</h3><ul><li><a href="vault-editor.html">Vault editor</a></li><li><a href="sealed.html#guide">How it works</a></li></ul></div></div></aside>
+</div>
+</main>
+</body>
+</html>

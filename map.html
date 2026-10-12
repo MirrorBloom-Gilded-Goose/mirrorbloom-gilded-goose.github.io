@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Map — Mirrorbloom</title>
+<meta name="description" content="A map of Solance: the three continents, the Skyhold Dominion, the kingdoms beneath the sea, the air currents, the tunnels and the ley line wells.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/map.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+<script src="assets/map-data.js" defer></script>
+<script src="assets/map.js" defer></script>
+</head>
+<body data-section="world">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="world.html">The World</a></p>
+  <h1 class="title">The Map</h1>
+  <p class="standfirst">Solance from above. Cross the mirror and the map turns over with you.</p>
+</div>
+<div class="wrap">
+  <div class="map-frame"><div id="worldmap" role="region" aria-label="Interactive map of Solance"></div></div>
+  <div class="map-controls">
+    <fieldset><legend>Show</legend>
+      <label><input type="checkbox" data-layer="nations" checked> Nations and places</label>
+      <label><input type="checkbox" data-layer="currents" checked> Air currents</label>
+      <label><input type="checkbox" data-layer="tunnels" checked> Undersea tunnels</label>
+      <label><input type="checkbox" data-layer="wells" checked> Ley line wells</label>
+      <label><input type="checkbox" id="labelsToggle" checked> Labels</label>
+    </fieldset>
+    <div class="map-note">
+      <p><strong>A sketch, not a survey.</strong> The coastlines and pin positions are placeholders until the real map is drawn. The geography follows the record: Solmarch has mountains in the north and desert in the south, Skyhold floats, and three kingdoms hold the sea floor.</p>
+      <label class="pin-toggle"><input type="checkbox" id="pinMode"> Pin mode: click the map to read a position</label>
+      <p class="muted" id="pinOut" role="status"></p>
+    </div>
+  </div>
+  <div class="prose" style="margin-top:2.5rem"><p>Read about the routes in <a href="travel.html">Roads, Skies &amp; Tunnels</a>, and the nations in <a href="world.html">The Thirteen Nations</a>.</p></div>
+</div>
+</main>
+</body>
+</html>

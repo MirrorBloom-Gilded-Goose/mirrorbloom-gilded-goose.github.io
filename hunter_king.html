@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Hunter King — Mirrorbloom</title>
+<meta name="description" content="The Hunter King, The Fair Chase. The bright aspect of Mirrorbloom&#x27;s divine order.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="cosmology.html">Cosmology</a><span class="sep">/</span>
-  <span class="current">The Hunter King</span>
-</div>
-
-<div class="deity-layout">
-  <div class="deity-portrait">
-    <img src="hunter_king.jpeg" alt="The Hunter King">
-  </div>
-  <div class="deity-content">
-    <h1>The Hunter King</h1>
-    <p class="epithet">The Fair Chase</p>
-    <p class="meta">Fey Lord &mdash; <span>Large archfey, neutral</span> &mdash; Challenge <span>15</span></p>
-    <div class="lore-text">
-      <p>The hunt, to the Hunter King, has never been about the kill — it is about the chase itself, conducted with total honesty on both sides, hunter and prey equally capable of winning. His horn, sounded at the right moment, ends any pursuit honorably and absolutely; a creature that yields to the Hunter King is never pursued again. He is neither malicious nor truly safe, but the rules are real, consistently honored, and entirely without exception.</p>
+<body data-section="cosmology">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="cosmology.html">Cosmology</a><span aria-hidden="true">/</span><a href="cosmology.html#archfey">The Archfey</a></p>
+  <div class="deity-head">
+    <div class="deity-sigil" style="--sigil:var(--gold);--twin:var(--crimson)">
+      <span class="main" data-sigil="hunter_king" data-draw></span>
+      <div class="line"></div>
+      <a class="twin-link" href="stalking_king.html" aria-label="Cross to the twin: The Stalking King"><span class="twin" data-sigil="stalking_king"></span></a>
     </div>
-    <div class="deity-links">
-      <a href="stalking_king.html" class="deity-link-btn shadow-link">See the shadow twin: The Stalking King &rarr;</a>
-      <a href="statblock-hunter_king.html" class="deity-link-btn">View full stat block &rarr;</a>
+    <div>
+      <h1 class="title">The Hunter King</h1>
+      <p class="standfirst">The Fair Chase</p>
+      <dl class="facts">
+        <dt>Aspect</dt><dd>The bright aspect</dd>
+        <dt>Twin</dt><dd><a href="stalking_king.html">The Stalking King</a>, The Chase That Never Ends</dd>
+        <dt>Realm</dt><dd><a href="courts.html#evergreen-run">The Evergreen Run</a></dd>
+        <dt>Nature</dt><dd>Large archfey, neutral</dd>
+        <dt>Challenge</dt><dd>26</dd>
+      </dl>
     </div>
   </div>
 </div>
+<div class="layout has-rail">
+  <article class="prose">
+<p class="lede">The hunt, to the Hunter King, has never been about the kill — it is about the chase itself, conducted with total honesty on both sides, hunter and prey equally capable of winning. His horn, sounded at the right moment, ends any pursuit honorably and absolutely; a creature that yields to the Hunter King is never pursued again. He is neither malicious nor truly safe, but the rules are real, consistently honored, and entirely without exception.</p>
 
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
-
+    <div class="sealed-only">
+      <p class="btn-row"><a class="btn primary" href="sealed.html#statblock-hunter_king">Open the stat block</a></p>
+    </div>
+    <p class="public-only muted"><em>The full stat block is kept in the Sanctum.</em></p>
+    <div class="waterline"></div>
+    <nav class="btn-row" aria-label="Gods and Archfey"><a class="btn small" href="hollow_host.html">Previous: The Hollow Host</a><a class="btn small" href="stalking_king.html">Next: The Stalking King</a></nav>
+  </article>
+  <aside class="rail" aria-label="The gods and the Archfey">
+    <div class="rail-inner">
+      <div><h3>The two gods</h3><ul><li><a href="great_hope.html"><span class="mini-sigil top" data-sigil="great_hope"></span>The Great Hope</a></li><li><a href="great_despair.html"><span class="mini-sigil shadow" data-sigil="great_despair"></span>The Great Despair</a></li></ul></div>
+      <div><h3>The Archfey</h3><ul><li><a href="dawnward_king.html"><span class="mini-sigil top" data-sigil="dawnward_king"></span>The Dawnward King</a></li><li><a href="duskward_king.html"><span class="mini-sigil shadow" data-sigil="duskward_king"></span>The Duskward King</a></li><li><a href="verdant_lady.html"><span class="mini-sigil top" data-sigil="verdant_lady"></span>The Verdant Lady</a></li><li><a href="bloated_lady.html"><span class="mini-sigil shadow" data-sigil="bloated_lady"></span>The Bloated Lady</a></li><li><a href="revel_king.html"><span class="mini-sigil top" data-sigil="revel_king"></span>The Revel King</a></li><li><a href="mocking_king.html"><span class="mini-sigil shadow" data-sigil="mocking_king"></span>The Mocking King</a></li><li><a href="lady_of_dreaming.html"><span class="mini-sigil top" data-sigil="lady_of_dreaming"></span>The Lady of Dreaming</a></li><li><a href="lady_of_waking.html"><span class="mini-sigil shadow" data-sigil="lady_of_waking"></span>The Lady of Waking</a></li><li><a href="hearthkeeper.html"><span class="mini-sigil top" data-sigil="hearthkeeper"></span>The Hearthkeeper</a></li><li><a href="hollow_host.html"><span class="mini-sigil shadow" data-sigil="hollow_host"></span>The Hollow Host</a></li><li><a href="hunter_king.html" class="is-current" aria-current="page"><span class="mini-sigil top" data-sigil="hunter_king"></span>The Hunter King</a></li><li><a href="stalking_king.html"><span class="mini-sigil shadow" data-sigil="stalking_king"></span>The Stalking King</a></li></ul></div>
+      <div><h3>Their realms</h3><ul><li><a href="courts.html">Courts &amp; Realms</a></li><li><a href="cosmology.html#archfey">How the pairs were born</a></li></ul></div>
+    </div>
+  </aside>
+</div>
+</main>
 </body>
 </html>

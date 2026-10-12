@@ -1,0 +1,48 @@
+/* The mirror: the Dungeon Master's way in. */
+.mirror-scene { min-height: calc(100vh - var(--header-h) - 40px); display: grid; place-items: center; align-content: center; padding: 2.5rem var(--gutter) 3rem; position: relative; overflow: hidden; }
+.mirror { position: relative; width: min(360px, 86vw); aspect-ratio: 360 / 520; }
+.mirror .frame { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; filter: drop-shadow(0 10px 30px rgba(0,0,0,.5)); }
+.glass, .shard {
+  position: absolute; left: 6.1%; top: 2.3%; width: 87.8%; height: 69.3%; border-radius: 50%;
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(255,255,255,.18), transparent 45%),
+    radial-gradient(90% 70% at 70% 85%, rgba(207,74,88,.18), transparent 60%),
+    linear-gradient(160deg, #3a3347 0%, #1d1828 45%, #2b2236 100%);
+}
+html[data-theme="solance"] .glass, html[data-theme="solance"] .shard {
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(255,255,255,.9), transparent 50%),
+    radial-gradient(90% 70% at 70% 85%, rgba(217,169,91,.25), transparent 60%),
+    linear-gradient(160deg, #e9e6f2 0%, #cfc8dd 50%, #ddd7e8 100%);
+}
+.glass { z-index: 2; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,.55), inset 0 0 2px rgba(255,255,255,.4); display: grid; place-items: center; }
+html[data-theme="solance"] .glass { box-shadow: inset 0 0 40px rgba(60,40,90,.25), inset 0 0 2px rgba(255,255,255,.9); }
+.sheen { position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.13) 48%, transparent 56%); animation: sheen 7s ease-in-out infinite; pointer-events: none; }
+@keyframes sheen { 0%, 20% { transform: translateX(-40%); } 60%, 100% { transform: translateX(40%); } }
+.fog { position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 50%, rgba(235,232,245,.85), rgba(235,232,245,.35) 70%, transparent); opacity: 0; transition: opacity .5s ease; pointer-events: none; backdrop-filter: blur(0px); }
+.glass.fogged .fog { opacity: 1; backdrop-filter: blur(4px); }
+.glass.fogged .speak { animation: shiver .5s ease; }
+@keyframes shiver { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+.speak { position: relative; z-index: 2; width: 70%; text-align: center; display: grid; gap: .55rem; margin-top: -4%; }
+.speak h1 { font-size: clamp(1.6rem, 6vw, 2.05rem); line-height: 1.1; color: var(--ink); }
+.whisper { font-style: italic; color: var(--ink-2); font-size: .92rem; margin: 0 0 .2rem; min-height: 2.8em; line-height: 1.4; transition: color .3s; }
+.glass.fogged .whisper { color: #2a2238; }
+.speak input[type="password"] { text-align: center; background: rgba(0,0,0,.25); border-color: rgba(255,255,255,.25); font-size: 1.05rem; }
+html[data-theme="solance"] .speak input[type="password"] { background: rgba(255,255,255,.55); border-color: rgba(36,28,53,.25); }
+.remember { display: flex; justify-content: center; align-items: center; gap: .45rem; font-size: .9rem; color: var(--ink-2); margin: 0; }
+.remember input { accent-color: var(--crimson); }
+.speak .btn { justify-content: center; justify-self: center; padding: .5rem 1.1rem; }
+.speak .btn[disabled] { opacity: .6; cursor: progress; }
+.cracks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; overflow: visible; }
+.cracks path { fill: none; stroke: rgba(255,255,255,.85); stroke-width: .35; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.shards { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.shard { box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); will-change: transform, opacity; }
+.beyond { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; opacity: 0; transition: opacity .8s ease .3s; }
+.beyond p { font-family: var(--display); font-size: clamp(2.6rem, 9vw, 5rem); color: var(--crimson); text-shadow: 0 0 40px rgba(207,74,88,.5); margin: 0; }
+.mirror-scene.broken .beyond { opacity: 1; }
+.mirror-scene.broken .back { opacity: 0; }
+.back { margin-top: 1.6rem; font-style: italic; transition: opacity .3s; }
+.back a { color: var(--ink-2); }
+.signed-in { text-align: center; margin-top: 1.2rem; }
+.signed-in p { font-style: italic; color: var(--ink-2); }
+.signed-in .btn-row { justify-content: center; }

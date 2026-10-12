@@ -1,531 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Courts & Realms — Mirrorbloom</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Courts &amp; Realms — Mirrorbloom</title>
+<meta name="description" content="The fourteen realms of the gods and Archfey of Mirrorbloom, their doorways, and the courts that keep them.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-.toc {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 2rem 0 1rem;
-}
-.toc a {
-  font-size: 0.82rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 5px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: var(--ink-dim);
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-.toc a:hover, .toc a:focus-visible { border-color: var(--hope); color: var(--ink); }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 
-.cr-entry {
-  border-top: 1px solid var(--border);
-  padding: 3.5rem 0;
-  scroll-margin-top: 2rem;
-}
-.cr-entry:first-of-type { border-top: none; }
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
 
-.cr-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.4rem;
-}
-.cr-realm-name {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.9rem;
-}
-.cr-subtitle {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--ink-dim);
-  font-size: 1.05rem;
-}
-
-.cr-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin-top: 1.8rem;
-}
-.cr-col h4 {
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin-bottom: 0.8rem;
-  margin-top: 1.6rem;
-}
-.cr-col h4:first-child { margin-top: 0; }
-.cr-col p, .cr-col li { font-size: 0.92rem; color: var(--ink-dim); line-height: 1.65; }
-.cr-col ul { list-style: none; padding: 0; }
-.cr-col li { margin-bottom: 0.9rem; }
-.cr-col li strong { color: var(--ink); font-weight: 500; }
-
-.role-list { display: flex; flex-direction: column; gap: 0.7rem; }
-.role-item { font-size: 0.9rem; }
-.role-item .role-name { color: var(--ink); font-weight: 500; }
-.role-item .role-title { color: var(--ink-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
-
-@media (max-width: 760px) {
-  .cr-grid { grid-template-columns: 1fr; gap: 1rem; }
-}
-</style>
-<script src="mirror.js"></script>
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="cosmology.html">Cosmology</a><span class="sep">/</span>
-  <span class="current">Courts &amp; Realms</span>
+<body data-section="cosmology">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="cosmology.html">Cosmology</a><span aria-hidden="true">/</span><a href="courts.html">Courts &amp; Realms</a></p>
+  <h1 class="title">Courts &amp; Realms</h1>
+  <p class="standfirst">Each god and Archfey aspect holds a realm of their own, with a court built from five shared roles: Seneschal, Champion, Herald, Confessor and Forsaken.</p>
 </div>
-
-<div class="page-hero">
-  <p class="page-eyebrow hope-tone">Where They Hold Court</p>
-  <h1 class="page-title">Courts &amp; Realms</h1>
-  <p class="page-sub">Each god and Fey Lord aspect holds a realm of their own, with a court built from five shared roles: Seneschal, Champion, Herald, Confessor, and Forsaken.</p>
-  <div class="toc"><a href="#great_hope">The Unclouded</a><a href="#great_despair">The Hollow Court</a><a href="#dawnward_king">The First Morning</a><a href="#duskward_king">The Last Evening</a><a href="#verdant_lady">The Greenbower</a><a href="#bloated_lady">The Drowned Garden</a><a href="#jester_king">The Masquerade</a><a href="#mocking_king">The Shattered Masquerade</a><a href="#lady_of_dreaming">The Deep Dream</a><a href="#lady_of_waking">The Unblinking Room</a><a href="#hearthkeeper">The Long House</a><a href="#hollow_host">The Long Hunger</a><a href="#hunter_king">The Evergreen Run</a><a href="#stalking_king">The Frozen Run</a></div>
+<div class="layout has-rail">
+<article class="prose wide">
+<nav class="realm-index" aria-label="Realms"><a href="#unclouded">The Unclouded</a><a href="#hollow-court">The Hollow Court</a><a href="#first-morning">The First Morning</a><a href="#last-evening">The Last Evening</a><a href="#greenbower">The Greenbower</a><a href="#drowned-garden">The Drowned Garden</a><a href="#masquerade">The Masquerade</a><a href="#shattered-masquerade">The Shattered Masquerade</a><a href="#deep-dream">The Deep Dream</a><a href="#unblinking-room">The Unblinking Room</a><a href="#long-house">The Long House</a><a href="#long-hunger">The Long Hunger</a><a href="#evergreen-run">The Evergreen Run</a><a href="#frozen-run">The Frozen Run</a></nav>
+<section class="realm" id="unclouded">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="great_hope"></span>
+    <div><h2>The Unclouded</h2><p class="kicker">Realm of <a href="great_hope.html">The Great Hope</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>An endless golden meadow under a sky permanently caught between night and morning. There is no true horizon; the meadow simply continues until the eye gives up trying to find its edge.</p><h3>Geography</h3><p>The Unclouded has no fixed map, because distance here is governed by intention rather than measurement. Walking toward a destination with genuine purpose shortens the journey; wandering without aim can take days to cross what should be a short field. Travelers describe the meadow as having “regions” rather than locations — areas that feel like morning, areas that feel like late afternoon, areas that feel like the specific warmth of a childhood summer — though none of these correspond to any actual time of day, since the sky itself never changes.</p><h3>Notable Locations</h3><ul><li><strong>The Sunrise Stair.</strong> A flight of pale stone steps rising out of the meadow into the sky itself, ending at a landing with no railing and no roof, simply open air. Those who climb it and sit at the top report extraordinary clarity of thought, as though every worry they carried became, briefly, easy to hold.</li><li><strong>The Orchard That Waits.</strong> A grove of fruit trees that bear whatever fruit the visitor most associates with comfort or home, even fruits that don't exist anywhere else in Mirrorbloom. The orchard cannot be harvested for later use; fruit picked and carried out through a doorway turns to ordinary, flavorless pulp within the hour.</li><li><strong>The Long Quiet.</strong> A stretch of meadow where the grass grows unusually tall and pale gold, and where sound itself softens to almost nothing. It is the closest thing the Unclouded has to a sacred site, and the Great Hope is most often found here when she is not elsewhere in her realm.</li></ul><h3>Doorway</h3><p>Fixed, but exceedingly rare. Only seven known doors into the Unclouded exist, each guarded gently rather than fiercely — the Great Hope has never needed to defend her realm by force. <br/><em>Sample doorway: The Sunrise Stair itself, on the eastern cliffs of the kingdom of Aurelane, said to be climbable only by those not currently fleeing or chasing anything.</em></p><h3>Pulled Out / Pushed In</h3><p>The Great Hope rarely pulls anyone from Mirrorbloom into the Unclouded; those who enter mostly wander in, drawn rather than taken. She has, on a handful of recorded occasions, pushed a meadow's width of the Unclouded into a place of great suffering, ending it instantly and without explanation — an act the Duskward King considers deeply unfair.</p><p>The <a href="meadow.html">Sleeping Meadows</a>, where nearly every soul in Mirrorbloom goes to rest, also lie within the Great Hope's domain, and so does her city, the City of Wonder.</p><div class="seal-block" data-seal="hook-unclouded" data-lines="5" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Unclouded Court</h3><p class="muted"><em>The Great Hope keeps no formal court in the usual sense — she has never needed nobility, politics, or protection. Those closest to her are simply those who have stayed longest, and titles are informal, almost embarrassed gestures rather than real positions of power.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Gentle Steward</dt><dd>A once-mortal pilgrim who never left, who now greets new arrivals and answers what few questions the Unclouded raises.</dd></div><div class="role"><dt><span class="role-t">Champion</span> No One</dt><dd>The Unclouded has never needed a champion; there has never been a threat worth defending against.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Far-Off Voice</dt><dd>A wandering minstrel-spirit who carries word of the Great Hope's whereabouts to those few who come seeking her specifically.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> The Long Quiet Itself</dt><dd>The hushed, golden field functions as the realm's only true confessor; visitors speak their burdens aloud to the grass and find them, somehow, lighter after.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> None Known</dt><dd>No one has ever fallen from the Great Hope's favor. It isn't clear she's capable of withdrawing it.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="hollow-court">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="great_despair"></span>
+    <div><h2>The Hollow Court</h2><p class="kicker">Realm of <a href="great_despair.html">The Great Despair</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>A vast black throne room with no visible walls, ceiling, or floor beyond what the eye can pick out by the glow of red eyes — hers, and those of everyone she keeps near her.</p><h3>Geography</h3><p>The Hollow Court does not have rooms so much as gradations of darkness. Closer to the throne, the dark is total and the silence is absolute. Further out, faint impressions of architecture begin to assert themselves — a suggestion of a corridor, a half-formed doorway leading to more darkness — as though the Court is still in the process of deciding what it wants to be, and has been deciding for a very long time. Visitors universally report losing track of distance traveled; the throne is always either much closer or much farther away than it seemed a moment before.</p><h3>Notable Locations</h3><ul><li><strong>The Unclosing Door.</strong> A literal door standing alone in the dark, leading nowhere visible, that has never been successfully sealed shut for longer than a season. Scholars who have studied it suspect it doesn't lead back to Mirrorbloom at all, but to wherever it is the Great Despair believes her crown went.</li><li><strong>The Gallery of Echoes.</strong> A stretch of the Court where faint, silent images of the Great Hope appear and fade against the dark — not illusions exactly, more like old light that hasn't finished arriving. The Great Despair is never seen here by other courtiers; it is generally understood that this is where she goes when no one is meant to find her.</li><li><strong>The Forgotten's Hall.</strong> Where the Forgotten wait between tasks, faceless and still, in neat, silent rows. The hall grows by exactly one row each time the Great Despair takes a new name and face for her service.</li></ul><h3>Doorway</h3><p>Mostly unstable and wandering, though one fixed door is known: a crack in the world that never fully closes, regardless of what's done to it. <br/><em>Sample doorway: The Unclosing Door, found in the ruins beneath the kingdom of Verenfall, sealed seventeen times across recorded history and open again each time within a season.</em></p><h3>Pulled Out / Pushed In</h3><p>The Great Despair pulls servants and victims into the Hollow Court regularly, particularly those who have lost something they cannot name. She has pushed pieces of the Hollow Court into Mirrorbloom only rarely and only deliberately — each instance has become a permanent, irreversible blight on the surface world, a wound that never quite heals.</p><div class="seal-block" data-seal="hook-hollow-court" data-lines="5" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Hollow Court (Retinue)</h3><p class="muted"><em>No one joins willingly. The Great Despair's retinue is built from those she has personally taken — in trade, in conquest, or in the slow erosion of hope — and titles here are closer to functions than honors.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Nameless Chancellor</dt><dd>A fallen noble who traded his name for a permanent place at the Great Despair's side; he manages the Court's few mortal cultists with cold, total efficiency.</dd></div><div class="role"><dt><span class="role-t">Champion</span> The First Forgotten</dt><dd>The very first being to lose their face to the Great Despair's service; stronger and more coherent than the rows that followed, and the closest thing she has to a trusted blade.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Whispering Crack</dt><dd>Not a person but the Unclosing Door itself, which seems to carry the Great Despair's will to anyone who listens closely enough at the threshold.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> The Gallery of Echoes</dt><dd>Like its bright counterpart, the realm itself partly serves this role — the Great Despair confesses to old light that can't answer back.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The Cultist Who Asked Why</dt><dd>A mortal follower who once dared ask what the crown actually looked like. She wasn't punished. She simply was never answered, and has not been the same since.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="first-morning">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="dawnward_king"></span>
+    <div><h2>The First Morning</h2><p class="kicker">Realm of <a href="dawnward_king.html">The Dawnward King</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>Rolling hills permanently caught at sunrise, never walked the same way twice, populated by a King who will not remember you exist by the time you find him.</p><h3>Geography</h3><p>The First Morning has no fixed terrain. Each time a doorway opens into it, the hills, streams, and scattered groves rearrange themselves into a new configuration, as though the realm itself is waking up fresh alongside its Lord. Cartographers who have attempted to map the First Morning report that no two surveys have ever matched, even when conducted by the same person on consecutive visits. The light is always low, golden, and angled as though the sun has just cleared the horizon, though no sun is ever actually visible.</p><h3>Notable Locations</h3><ul><li><strong>The Unworn Throne.</strong> A simple wooden chair atop the tallest hill in whatever configuration the realm has taken, where the Dawnward King holds his court each ‘morning.’ It is, notably, always the same chair, plain and a little worn, in a realm where almost nothing else repeats.</li><li><strong>The Dueling Green.</strong> A flat stretch of grass where Ser Brightfall re-fights his ceremonial duel each day. Visitors who arrive during the duel are welcome to watch, and several mortal duelists have made pilgrimage here specifically to test themselves against a knight who fights with no memory of ever having lost — or won.</li><li><strong>The Field of First Names.</strong> A meadow where small wooden markers, each carved with a name, are driven into the ground — Maren Quill's attempt at a permanent record in an impermanent realm. The markers are real and do persist, even though almost nothing else here does.</li></ul><h3>Doorway</h3><p>Unstable. Doors into the First Morning open wherever something is genuinely beginning — a birth, a first sunrise after a long winter, a first day in a new home — and close again within hours. <br/><em>Sample doorway: A door is known to reliably open each spring equinox at the Founder's Arch in the kingdom of Calmwick, though it has occasionally opened elsewhere on the same morning instead, with no warning.</em></p><h3>Pulled Out / Pushed In</h3><p>The Dawnward King pulls beings into the First Morning constantly and without any apparent pattern, then forgets he's done so. He has never knowingly pushed a piece of his realm into Mirrorbloom, though some scholars suspect parts of the world simply ARE pieces of the First Morning that he forgot to take back.</p><div class="seal-block" data-seal="hook-first-morning" data-lines="4" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Unworn Throne</h3><p class="muted"><em>There is no formal entry. The Dawnward King forgets every member by the next morning, so courtiers compete daily to be “remembered” — to leave an impression strong enough that some echo of them lingers in his court's customs even after he himself forgets.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> Maren Quill</dt><dd>A mortal-born scholar who has served eleven incarnations of the Dawnward King's “first day,” maintaining written records he can never read twice without forgetting he wrote them. She is the true continuity of the court — the only one who remembers what he never does.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Ser Brightfall</dt><dd>A knight who re-earns the King's notice every single morning by re-fighting the same ceremonial duel. He has technically “won” his post over twenty thousand times and remembers none of them, which suits him fine.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Echoing Boy</dt><dd>A young fey whose voice carries the Dawnward King's words exactly as spoken, word for word, even hours or days later — useful, since the King himself can never repeat a decree he's already forgotten making.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Old Wick</dt><dd>An ancient, silent candle-keeper who listens to every courtier's worries and never once repeats them — not from discretion, but because the act of listening seems to be its own forgetting, too.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> Lady Greycourt</dt><dd>Once the King's favorite, centuries ago, in a single unrepeatable morning. She has spent every day since trying to recreate whatever she did that one time, and has never succeeded.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="last-evening">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="duskward_king"></span>
+    <div><h2>The Last Evening</h2><p class="kicker">Realm of <a href="duskward_king.html">The Duskward King</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>A realm at permanent dusk, populated by the silent, translucent echoes of every ending the Duskward King has ever witnessed.</p><h3>Geography</h3><p>Unlike its bright counterpart, the Last Evening has a fixed and consistent geography — a single vast battlefield, long since gone quiet, ringed by dead trees and broken fortifications from a war so old its name has been lost even to the Duskward King's perfect memory. The ground here doesn't change because nothing here is allowed to move forward; the realm is, in a very literal sense, stuck at the moment after an ending, forever.</p><h3>Notable Locations</h3><ul><li><strong>The Throne of Ash.</strong> Built from the burnt remains of a hundred different fallen banners, where the Duskward King receives the newly bound members of his court. The throne is genuinely uncomfortable to sit in, by all accounts, which the King has never once commented on.</li><li><strong>The Field of Echoes.</strong> Where the translucent, silent figures of those the King remembers wander without purpose, replaying fragments of their final moments on an endless, gentle loop. They are not hostile, and most can be spoken to, though their answers rarely make complete sense out of context.</li><li><strong>The Dimming Gate.</strong> The fixed doorway back to Mirrorbloom, standing at the edge of the battlefield, permanently open, exactly where the Last Evening's first true ending occurred.</li></ul><h3>Doorway</h3><p>Fixed, and well documented — the Last Evening's doors tend to open wherever something significant has truly ended: an empire's fall, a long war's final battle, a life's natural close. <br/><em>Sample doorway: The Dimming Gate, standing at the site of the fallen kingdom of Asherholt's final battlefield, permanently open and permanently unguarded.</em></p><h3>Pulled Out / Pushed In</h3><p>The Duskward King pulls in those who have witnessed great failure or loss, offering them a strange companionship among others who remember as he does. He has pushed pieces of the Last Evening into Mirrorbloom to mark sites of historic tragedy, ensuring they are never fully forgotten — whether or not anyone wanted that.</p><div class="seal-block" data-seal="hook-last-evening" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Throne Of Ash</h3><p class="muted"><em>Membership is permanent and involuntary. Anyone who fails greatly enough — a broken vow, a lost battle, a love unconfessed too long — is remembered by the Duskward King forever, whether they wish it or not.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Last Steward</dt><dd>A title, not a name — its holder has forgotten their own. They have managed the Throne of Ash for so many failed endings that they have become a kind of living ledger of every defeat the King has witnessed.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Thrice-Fallen Kade</dt><dd>A warrior who has died in battle three times and been remembered into a kind of half-life each time by the King's perfect memory of the moment. He fights without fear because he has already experienced the worst outcome, repeatedly.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Unspoken Choir</dt><dd>Not one figure but several, who speak the King's decrees in unison, each voice carrying a different ending the King remembers, layered until the words become almost unbearable to hear clearly.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Mother Eventide</dt><dd>She remembers every secret ever confessed to her, same as her King, and has slowly become unable to tell which memories are hers and which belong to him.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The Bright One</dt><dd>A former herald who tried to convince the King to forget, just once, and was cast down for it — not out of cruelty, but because the King genuinely cannot grant the one request that would free this courtier.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="greenbower">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="verdant_lady"></span>
+    <div><h2>The Greenbower</h2><p class="kicker">Realm of <a href="verdant_lady.html">The Verdant Lady</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>An endless, orderly garden in eternal late summer, the friendliest and safest of the fourteen realms, tended with genuine and total care.</p><h3>Geography</h3><p>The Greenbower is organized, almost architecturally so, into distinct garden ‘rooms’ connected by hedge-lined paths — an orchard here, a rose maze there, a kitchen garden somewhere else entirely — all of it tended in genuine, careful detail. Unlike most of the fourteen realms, the Greenbower's geography is consistent and has been successfully mapped by mortal visitors, who are welcomed to do so.</p><h3>Notable Locations</h3><ul><li><strong>The Quiet Orchard.</strong> The literal listening grove described in the court records, where courtiers and visitors alike walk to speak their troubles aloud. Standing among the trees, even briefly, tends to leave visitors feeling unaccountably lighter.</li><li><strong>The Bramblegate.</strong> The realm's primary fixed doorway, a living archway of hedge that mirrors its counterpart in Mirrorbloom exactly, used for trade and pilgrimage.</li><li><strong>Wilt's Corner.</strong> A single patch of garden, deliberately left to struggle, where the Forsaken courtier Wilt works alone, slowly, trying to coax life back into soil that refuses to cooperate. The Verdant Lady has never told him to stop, nor offered to fix it for him.</li></ul><h3>Doorway</h3><p>Fixed, plentiful, and welcoming — more doors lead to the Greenbower than to any other realm, and most are marked, tended, and openly used. <br/><em>Sample doorway: The Bramblegate, a literal archway of living hedge maintained at the edge of the kingdom of Calmwick, used for trade and pilgrimage alike.</em></p><h3>Pulled Out / Pushed In</h3><p>The Verdant Lady freely invites mortals into the Greenbower and freely lets them leave. She regularly pushes small pieces of her realm into Mirrorbloom as gifts — a blessed orchard, a healing spring — each one a genuine, uncomplicated kindness.</p><div class="seal-block" data-seal="hook-greenbower" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Greenbower Court</h3><p class="muted"><em>The most open court in Mirrorbloom. Anyone who tends something — a garden, an orchard, a single windowsill plant — with genuine care is welcome to a seat, mortal or fey alike.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> Hollis Bramblewood</dt><dd>A half-mortal gardener-turned-administrator who organizes the court's harvests, disputes, and seasonal festivals with the same careful patience he gives his rose beds.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Thorn</dt><dd>A towering treant bonded to the Verdant Lady since the world was young; slow to anger, nearly impossible to truly defeat, and gentle with anyone who hasn't given Thorn a reason not to be.</dd></div><div class="role"><dt><span class="role-t">Herald</span> Sparrow</dt><dd>A quick, cheerful dryad who carries the Lady's messages on the backs of literal sparrows, delighting in being the bearer of good news, which the Greenbower has in abundance.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> The Quiet Orchard</dt><dd>Not a person but a literal grove the Lady maintains; courtiers walk among the trees and speak their troubles aloud, and the orchard simply listens, growing fuller and more beautiful with every secret it holds.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> Wilt</dt><dd>Once the Lady's most gifted gardener, until an act of jealousy caused a blight she still hasn't fully forgiven. Wilt now tends the one corner of the Greenbower that refuses to bloom, hoping to prove he's changed.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="drowned-garden">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="bloated_lady"></span>
+    <div><h2>The Drowned Garden</h2><p class="kicker">Realm of <a href="bloated_lady.html">The Bloated Lady</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>A vast, sunless swamp of overgrown rot and fungal bloom, the dark mirror of the Greenbower's order.</p><h3>Geography</h3><p>The Drowned Garden mirrors the Greenbower's room-like structure, but each ‘room’ has collapsed into the next — the orchard bleeds into the rose maze, the kitchen garden has become indistinguishable from standing black water. Paths that should connect different areas instead loop back on themselves, and the swamp's borders are known to expand slightly each time a doorway opens, encroaching on whatever lies beyond.</p><h3>Notable Locations</h3><ul><li><strong>The Weeping Hollow.</strong> The realm's primary doorway and its oldest, deepest section, a sunken bog that has slowly consumed an entire stretch of what was once, very long ago, ordinary garden.</li><li><strong>The Drowned Listener's Pool.</strong> Where the Confessor of the Rootless waits, submerged, hearing every secret spoken near the water's edge. The pool's surface is still and black, and reflects nothing, including the sky.</li><li><strong>Petal's Edge.</strong> The boundary between the Drowned Garden and the rest of Mirrorbloom, where the Forsaken courtier Petal maintains a fragile, half-grown-over foothold — the only place in the realm where the rot visibly slows rather than spreads.</li></ul><h3>Doorway</h3><p>Mixed — a handful of fixed doors exist, mostly in places already known for blight or rot, but the swamp also tends to wander, slowly expanding its border into Mirrorbloom in ways that resist mapping. <br/><em>Sample doorway: The Weeping Hollow, a sunken bog at the edge of the fallen kingdom of Asherholt that has slowly grown larger every generation, against all attempts to drain or burn it back.</em></p><h3>Pulled Out / Pushed In</h3><p>The Bloated Lady doesn't pull beings in so much as simply fail to let them leave once they've wandered close enough. She pushes pieces of the Drowned Garden into Mirrorbloom constantly and gradually, less an invasion than a creeping, patient erosion.</p><div class="seal-block" data-seal="hook-drowned-garden" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Rootless</h3><p class="muted"><em>No one truly joins the Rootless; they are absorbed into it. Anyone who lingers too long in the Bloated Lady's swamp, accepts food from her table, or simply fails to leave finds the court's fungal growth slowly claiming them as one of her own.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Mouth That Counts</dt><dd>A bloated, half-fused mass of several former courtiers who manage the Rootless's affairs collectively, speaking with one slurred, layered voice.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Husk</dt><dd>Once a proud knight who wandered into the swamp seeking glory. What remains barely resembles him, but it fights with all the strength he once had and none of the restraint.</dd></div><div class="role"><dt><span class="role-t">Herald</span> Bloomtongue</dt><dd>A courtier whose mouth has been replaced, slowly, by a single enormous flower; her words come out as pollen-soft whispers that somehow carry across the entire swamp regardless.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> The Drowned Listener</dt><dd>Submerged permanently in the swamp's deepest pool, this courtier hears every secret spoken near the water's edge and has long since stopped distinguishing between hearing a confession and consuming one.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> Petal</dt><dd>The only member of the Rootless who has ever partially escaped the Bloated Lady's claim, through means no one fully understands. She lives at the swamp's edge, half-grown-over still, refusing to go further in or fully leave.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="masquerade">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="revel_king"></span>
+    <div><h2>The Masquerade</h2><p class="kicker">Realm of <a href="revel_king.html">The Revel King</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>An opulent, endless ballroom that rearranges itself between visits, full of courtiers in shifting masks who may or may not be real people.</p><h3>Geography</h3><p>The Masquerade consists, as far as anyone can determine, of a single ballroom — but one that is never quite the same size, shape, or layout twice. Doors lead to other rooms that lead back to the same ballroom from a different angle. Visitors who attempt to map it report contradictory floor plans even within a single visit, and the only reliable landmark is the small orchestra, which never stops playing and never seems to be the same musicians from one glimpse to the next.</p><h3>Notable Locations</h3><ul><li><strong>The Velvet Threshold.</strong> The realm's primary (if unreliable) doorway, appearing wherever a celebration on the surface involves a mask the wearer didn't make themselves.</li><li><strong>The Hall of Faces.</strong> A long gallery lined with masks of every description, said to include every face the Revel King has ever worn. Visitors who linger too long occasionally find themselves trying one on, and not all of them take it off again willingly.</li><li><strong>The Punchline's Floor.</strong> The main dance floor itself, where the court holds its endless, ongoing party. Time spent dancing here passes strangely — a single song can last minutes or, by the dancer's own account afterward, what felt like years.</li></ul><h3>Doorway</h3><p>Unstable and theatrical — doors into the Masquerade tend to appear at celebrations, festivals, and parties, particularly ones where someone present is wearing a mask they didn't make themselves. <br/><em>Sample doorway: The Velvet Threshold, which is rumored to open during the kingdom of Calmwick's annual Harvest Masque, though it has not been reliably documented twice in the same location.</em></p><h3>Pulled Out / Pushed In</h3><p>The Revel King pulls particularly interesting or amusing mortals into the Masquerade as honored, if disoriented, guests. He has pushed small pieces of his realm into Mirrorbloom as elaborate, temporary pranks — a single street that becomes a ballroom for one strange night, then is never seen again.</p><div class="seal-block" data-seal="hook-masquerade" data-lines="2" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Punchline</h3><p class="muted"><em>Membership is earned by surviving a private audience with the Revel King in which he tells exactly one joke. If the courtier laughs at the right moment — a moment only the King seems to know in advance — they're in.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> Quill-and-Quibble</dt><dd>Two courtiers who function as one administrative office, perpetually finishing each other's sentences and perpetually disagreeing about how the court's finances actually work.</dd></div><div class="role"><dt><span class="role-t">Champion</span> The Grinning Blade</dt><dd>A duelist who fights with genuine skill and a running commentary of puns, timed so precisely to the rhythm of combat that opponents often find themselves laughing involuntarily mid-parry.</dd></div><div class="role"><dt><span class="role-t">Herald</span> Pip Lacklight</dt><dd>Delivers every message from the Revel King as a riddle, joke, or pun, regardless of how serious the message actually is — which has caused at least one minor diplomatic incident the court still finds extremely funny.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> The Velvet Mask</dt><dd>Wears a blank velvet mask and never speaks; courtiers confess to it because it cannot repeat what it hears — or so they assume, having never actually tested whether that's true.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> Old Punchline</dt><dd>The previous holder of the Revel King's favor, cast down for telling a joke that genuinely hurt someone. He still performs nightly to an audience that mostly ignores him, waiting for a joke good enough to be forgiven.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="shattered-masquerade">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="mocking_king"></span>
+    <div><h2>The Shattered Masquerade</h2><p class="kicker">Realm of <a href="mocking_king.html">The Mocking King</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>The same endless ballroom as its counterpart above, cracked, bloodstained, and lit by candles that never quite go out.</p><h3>Geography</h3><p>The Shattered Masquerade mirrors the Masquerade's impossible, shifting architecture, but with visible damage layered over every surface — cracked mirrors, torn tapestries, furniture overturned and never righted. Unlike its bright counterpart, the Shattered Masquerade's chaos feels deliberate rather than whimsical, as though every broken thing was broken on purpose, for an audience.</p><h3>Notable Locations</h3><ul><li><strong>The Cracked Threshold.</strong> The realm's fixed doorway, beneath the ruins of a banquet hall where, by local legend, an entire wedding party vanished mid-celebration centuries ago.</li><li><strong>The Gallery of Borrowed Faces.</strong> The corrupted mirror of the Hall of Faces, lined with masks that are visibly, unmistakably stitched from something that used to be skin. The Mocking King's own collection began here.</li><li><strong>The Stage.</strong> A raised platform at the center of the main ballroom where the Mocking King holds court, performing for an audience that has no choice but to applaud.</li></ul><h3>Doorway</h3><p>Mostly fixed, grimly so — doors into the Shattered Masquerade tend to remain wherever a genuine cruelty or betrayal occurred at a celebration. <br/><em>Sample doorway: The Cracked Threshold, beneath the ruins of a banquet hall in fallen Asherholt where, by local legend, an entire wedding party vanished mid-celebration centuries ago.</em></p><h3>Pulled Out / Pushed In</h3><p>The Mocking King pulls in those who have wronged someone at a celebration and rarely lets them return unchanged, if at all. He has pushed pieces of his realm into Mirrorbloom specifically to punish or humiliate a chosen target.</p><div class="seal-block" data-seal="hook-shattered-masquerade" data-lines="2" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Last Laugh</h3><p class="muted"><em>No one joins the Last Laugh willingly. Membership is a punishment, a trade, or a trap — a debt called in, a face taken, a moment of cruelty repaid in kind.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Bookkeeper</dt><dd>Keeps meticulous, gleeful track of every debt, slight, and cruelty owed within the court, and ensures the Mocking King's idea of justice is collected in full, eventually, however long it takes.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Grin</dt><dd>Wears three stolen faces at once, layered, switching mid-battle with no warning; opponents rarely know which Grin they're actually fighting until the fight is already over.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Laughing Bell</dt><dd>An actual bell, enchanted to ring with the sound of the Mocking King's laughter whenever he has news — which the rest of the court has learned to dread.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Nettle</dt><dd>Collects secrets the way the rest of the court collects debts — as leverage, not comfort. Courtiers confess to Nettle only when they have no other choice.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The Unmasked</dt><dd>A courtier whose stolen face was somehow removed — no one knows how — leaving them with their own true features again. The rest of the court finds this more unsettling than any mask.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="deep-dream">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="lady_of_dreaming"></span>
+    <div><h2>The Deep Dream</h2><p class="kicker">Realm of <a href="lady_of_dreaming.html">The Lady of Dreaming</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>A vast, shifting dreamscape with no fixed geography, navigable only by feeling rather than direction.</p><h3>Geography</h3><p>The Deep Dream resists mapping by its very nature — it is not a place so much as a state, experienced differently by every visitor. Some describe vast open starfields; others describe close, intimate rooms from their own childhood, rearranged slightly wrong. The realm appears to draw its immediate surroundings from whoever is currently dreaming within it, layering many dreamers' half-formed geographies atop one another in ways that somehow don't usually conflict.</p><h3>Notable Locations</h3><ul><li><strong>The Listening Door.</strong> A literal door, the Confessor of the Slumbering Circle, found wherever a dreamer most needs to speak something aloud before going deeper.</li><li><strong>The Cartographer's Atlas.</strong> An ever-changing, ever-incomplete map maintained by the Seneschal, the only attempt anyone has made to give the Deep Dream's geography any permanence at all. The Atlas resets nightly but the Cartographer insists each version is worth recording anyway.</li><li><strong>The Third Night Threshold.</strong> Not a fixed place but a moment — the specific point in a recurring dream where a dreamer who has visited three nights running may choose to stay permanently, joining the Slumbering Circle.</li></ul><h3>Doorway</h3><p>Entirely unstable by nature, though deeply, individually personal — each sleeping mind has its own door into the Deep Dream, opening and closing nightly, never quite the same twice. <br/><em>Sample doorway: No single fixed doorway exists; however, the kingdom of Calmwick's Sleeping Quarter, a district where dreams are said to run unusually deep and shared, is the closest thing Mirrorbloom has to a reliable threshold.</em></p><h3>Pulled Out / Pushed In</h3><p>The Lady of Dreaming pulls sleeping minds into the Deep Dream every night, gently and mostly without consequence, returning them by morning unless they choose, on the third night, to stay. She has never been known to push a piece of her realm into the waking world; dreams, she seems to feel, belong only to sleep.</p><div class="seal-block" data-seal="hook-deep-dream" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Slumbering Circle</h3><p class="muted"><em>Membership happens in sleep. Those who dream of the Lady of Dreaming three nights running, and choose on the third night to stay, simply wake up as part of the Slumbering Circle.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Cartographer Who Forgot Waking</dt><dd>Maps the ever-shifting geography of the Lady's dreamscape, a task that resets nightly and that the Cartographer insists, happily, is the most fulfilling work imaginable.</dd></div><div class="role"><dt><span class="role-t">Champion</span> The Nightmare-Tamer</dt><dd>Once a mortal monster hunter who dreamed her way into the Circle and discovered a talent for facing down the worst things a dream can produce, calmly and without panic.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Whisper That Arrives First</dt><dd>Delivers the Lady's messages to sleeping minds moments before true dreams begin, so that her words always feel, faintly, like a memory rather than news.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> The Listening Door</dt><dd>An actual door within the dreamscape that courtiers speak their worries to before passing through it into deeper sleep; what's said is never repeated, because the door doesn't remember being spoken to at all.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The One Who Woke</dt><dd>The only courtier ever to fully wake from the Slumbering Circle and remain awake. No one in the Circle holds it against them, exactly, but no one quite knows how to dream around them, either.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="unblinking-room">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="lady_of_waking"></span>
+    <div><h2>The Unblinking Room</h2><p class="kicker">Realm of <a href="lady_of_waking.html">The Lady of Waking</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>A stark, flatly lit space with no shadows and no comfort, where time does not pass so much as simply continue, unbroken, forever.</p><h3>Geography</h3><p>Unlike the Deep Dream's soft, shifting unreality, the Unblinking Room is rigid and consistent — a single vast, featureless white space, interrupted only by the same broken household objects (a key, a door, a staircase, a shattered clock) that appear, fixed and unmoving, scattered throughout. There is no day or night here, no weather, and critically, no quiet — a faint, constant hum is audible throughout the realm, which visitors universally find unbearable after enough exposure.</p><h3>Notable Locations</h3><ul><li><strong>The Lidless Window.</strong> The realm's fixed doorway, an old boarded window that never reflects the person looking into it — only watches them back.</li><li><strong>The Standing Stair.</strong> A broken staircase, identical to the one in the Deep Dream but motionless and rusted, that leads up to nothing and down to nothing, simply standing as a landmark in the featureless white.</li><li><strong>The Tally Wall.</strong> A section of the Unblinking Room covered, floor to ceiling, in scratched marks — the Seneschal's obsessive count of hours each courtier has gone without sleep, updated constantly, by hand.</li></ul><h3>Doorway</h3><p>Fixed and dreadfully reliable — once a doorway into the Unblinking Room opens for a creature, it never fully closes again for that creature specifically, even if it closes for everyone else. <br/><em>Sample doorway: The Lidless Window, an old, boarded window in a long-abandoned watchtower outside fallen Asherholt, said to never reflect the person looking into it — only watch them back.</em></p><h3>Pulled Out / Pushed In</h3><p>The Lady of Waking pulls in those who have gone too long without sleep within her influence, and the pull only strengthens with each subsequent night. She has pushed her realm's flat, sleepless quality into specific buildings or rooms in Mirrorbloom, creating places where no one who enters can rest, ever again, for as long as the effect holds.</p><div class="seal-block" data-seal="hook-unblinking-room" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Open-Eyed</h3><p class="muted"><em>Anyone who goes three full nights without sleep within the Lady of Waking's domain belongs to the Open-Eyed, whether they intended to or not. Sleep deprivation itself is the binding.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> The Tally-Keeper</dt><dd>Counts every hour each courtier has gone without sleep, with obsessive, unblinking precision, as though the number itself were a kind of trophy.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Unrest</dt><dd>A former soldier who hasn't slept in longer than anyone in the court can remember and fights with the manic, raw edge of total exhaustion that somehow never actually slows down.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Echo of a Yawn</dt><dd>Delivers messages in a voice that sounds perpetually on the verge of falling asleep mid-sentence, and never does, which courtiers find more disturbing than if it simply had.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Heavy-Lidded Moth</dt><dd>Listens to confessions with eyes that never quite close, no matter how the conversation drags on, and remembers every word with total, unwelcome clarity.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The Dreamer</dt><dd>A courtier who managed, once, to sleep for nearly a full minute before being woken. The Open-Eyed treat this as both a scandal and, secretly, an object of envy.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="long-house">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="hearthkeeper"></span>
+    <div><h2>The Long House</h2><p class="kicker">Realm of <a href="hearthkeeper.html">The Hearthkeeper</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>An impossibly large farmhouse, warm in every room, with a table that's always set and a fire that never needs tending.</p><h3>Geography</h3><p>The Long House appears, from outside, to be an ordinary if large farmhouse. Inside, it is vastly larger than its exterior suggests, with rooms, hallways, and staircases extending well beyond what the building could physically contain. New rooms tend to appear precisely when needed — a bedroom for a tired guest, a nursery for a frightened child — and quietly cease to exist again once no longer required.</p><h3>Notable Locations</h3><ul><li><strong>The Long Table Itself.</strong> The realm's heart, a dining table that genuinely cannot run out of food regardless of how many sit at it. The Hearthkeeper presides here personally for nearly every meal.</li><li><strong>The Open Door.</strong> The fixed doorway to Mirrorbloom, a cottage door belonging to no visible house, standing alone on the road between two empires, always unlocked.</li><li><strong>The Hearth Proper.</strong> A great central fireplace that has never gone out and, by all accounts, never needs fuel. Courtiers gather here in the evenings; it is widely considered the safest place in the entire realm.</li></ul><h3>Doorway</h3><p>Fixed and famously generous — doors into the Long House tend to appear wherever genuine hospitality is offered to a stranger in true need, in Mirrorbloom itself. <br/><em>Sample doorway: The Open Door, a literal cottage door standing alone on the road between the kingdom of Calmwick and the kingdom of Aurelane, belonging to no house, always unlocked.</em></p><h3>Pulled Out / Pushed In</h3><p>The Hearthkeeper pulls the lost, the cold, and the grieving into the Long House to feed and shelter them, always returning them afterward exactly as promised. She has, on rare occasions, pushed the warmth of her hearth into a freezing village or a starving town — always exactly enough, never more than was needed.</p><div class="seal-block" data-seal="hook-long-house" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Long Table</h3><p class="muted"><em>All are welcome. Anyone who sits at the Long Table and eats is family from that moment forward, mortal or fey, stranger or old friend — no test, no price, no catch.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> Aunt Maribel</dt><dd>Not actually related to anyone at the table, but has been called “Aunt” for so long that no one remembers when it started. She keeps the household running with warmth and an iron will.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Big Tomas</dt><dd>A gentle giant who has never once started a fight and has ended a great many of them, simply by standing between the people he loves and whatever's threatening them.</dd></div><div class="role"><dt><span class="role-t">Herald</span> Little Wren</dt><dd>A young messenger who delivers every piece of news, good or bad, with the same earnest kindness, because she believes — rightly, in this court — that kindness is never wasted.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Grandfather Oak</dt><dd>An elderly fey who has heard every secret this court has ever held and has never once used one against anybody, not even when it would have been easy.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> Distant Cousin Merrow</dt><dd>Left the Long Table once, chasing ambition elsewhere in Mirrorbloom, and has since quietly returned, welcomed back without question or grudge.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="long-hunger">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="hollow_host"></span>
+    <div><h2>The Long Hunger</h2><p class="kicker">Realm of <a href="hollow_host.html">The Hollow Host</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>Identical to the Long House in every visible respect — the same warmth, the same impossibly full table — except that everything served here was, at some point, someone.</p><h3>Geography</h3><p>The Long Hunger is, deliberately and precisely, indistinguishable from the Long House in layout, scale, and even the specific creak of its floorboards. The only consistent difference, noted by the very few who have compared notes after surviving both, is that rooms in the Long Hunger that are no longer needed don't simply cease to exist — they remain, locked, and something can occasionally be heard from behind the door.</p><h3>Notable Locations</h3><ul><li><strong>The Last Supper Table.</strong> Visually identical to the Long Table, until the moment the Hollow Host chooses to reveal what's actually been served, and to whom.</li><li><strong>The Open Door (Second).</strong> The Long Hunger's own threshold, found standing beside the genuine Open Door on the same stretch of empty road, with no way to reliably distinguish the two from the outside.</li><li><strong>The Locked Rooms.</strong> Numerous doors throughout the house that, unlike the Long House's freely accessible rooms, remain firmly shut. What's behind them is generally understood by the rest of the court, and generally not discussed.</li></ul><h3>Doorway</h3><p>Fixed, disguised as the Hearthkeeper's own doors; the Long Hunger's threshold cannot be reliably told apart from the Long House's until it's too late to matter. <br/><em>Sample doorway: Also called the Open Door by those who don't yet know which one they've found; travelers between Calmwick and Aurelane occasionally report finding two identical doors on the same empty road, side by side.</em></p><h3>Pulled Out / Pushed In</h3><p>The Hollow Host pulls the lost, the cold, and the grieving into the Long Hunger using precisely the same methods as her counterpart, with precisely the opposite outcome. She rarely pushes pieces of her realm outward; she has never needed to. Mortals walk in on their own.</p><div class="seal-block" data-seal="hook-long-hunger" data-lines="2" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Last Supper</h3><p class="muted"><em>All are welcome, identically to the Long Table — that is the entire mechanism. What isn't said is what eventually happens to family, here.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> “Aunt” Maribel</dt><dd>Identical in every visible way to her counterpart at the Long Table, down to the name and the warmth in her voice. She has simply been doing this much, much longer.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Big Tomas</dt><dd>Wears the same gentle giant's face as his counterpart. He still has never started a fight. He has simply made sure, every time, that there was no fight left to start.</dd></div><div class="role"><dt><span class="role-t">Herald</span> Little Wren</dt><dd>Delivers news with the same earnest kindness as her counterpart, and the news is, very often, an invitation to dinner.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Grandfather Oak</dt><dd>Has heard every secret this court has ever held, and unlike his counterpart, has used every single one, eventually, exactly when it was most useful to do so.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The Empty Chair</dt><dd>Not a person, but a place setting that's never filled, kept at the table's end as a standing reminder to the rest of the court of what becomes of those who try to leave.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="evergreen-run">
+  <div class="realm-head">
+    <span class="realm-sigil top" data-sigil="hunter_king"></span>
+    <div><h2>The Evergreen Run</h2><p class="kicker">Realm of <a href="hunter_king.html">The Hunter King</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>An endless autumn forest where the chase is always fair and always thrilling, full of game that genuinely enjoys being hunted.</p><h3>Geography</h3><p>The Evergreen Run is a vast forest in permanent, golden autumn, criss-crossed by game trails that always seem to lead somewhere worth following. The forest is large enough that a hunt can genuinely last hours or days, but never so vast that a fair chase becomes hopeless — the terrain itself seems to favor a satisfying pursuit over either an easy catch or an impossible escape.</p><h3>Notable Locations</h3><ul><li><strong>The Antler Gate.</strong> The realm's primary fixed doorway, a natural archway of interlocked deer antlers, used each autumn by mortal hunters seeking the King's blessing.</li><li><strong>The Open Field.</strong> A wide clearing at the forest's heart where hunts traditionally conclude, win or yield, and where the King's court gathers to celebrate every chase regardless of outcome.</li><li><strong>Snareset's Thicket.</strong> A tangled, overgrown patch of forest the Forsaken courtier Snareset is forbidden from leaving — not imprisoned exactly, simply never invited beyond it again.</li></ul><h3>Doorway</h3><p>Fixed, well-marked, and openly used by mortal hunters who know the old rites — the Evergreen Run welcomes honorable sport. <br/><em>Sample doorway: The Antler Gate, a natural archway of interlocked deer antlers deep in the forests bordering the kingdom of Calmwick, used each autumn by hunters seeking the King's blessing.</em></p><h3>Pulled Out / Pushed In</h3><p>The Hunter King pulls willing hunters and willing quarry into the Evergreen Run for a single fair chase, always returning them after, win or yield. He has occasionally pushed a stretch of his autumn forest into Mirrorbloom as a gift to a particularly worthy hunter.</p><div class="seal-block" data-seal="hook-evergreen-run" data-lines="2" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Open Field</h3><p class="muted"><em>Earned through the hunt itself. Anyone who either hunts honorably alongside the King or who is hunted by him and survives with their dignity intact earns a permanent place in his court, predator and prey alike, with equal standing.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> Fleetfoot Wren</dt><dd>Once outran the Hunter King across three counties before yielding gracefully at the finish; he has run the Open Field's affairs ever since with the same tireless energy.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Greatantler</dt><dd>An elk-headed warrior who serves as both the King's second-in-command and his most frequent sparring partner, in hunts that are really just elaborate games between old friends.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Bright Horn</dt><dd>Carries a smaller horn that echoes the King's own, used to announce the start and fair end of every hunt across the Open Field's territory.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Old Doe</dt><dd>A former quarry who yielded so gracefully, decades ago, that the King made her a permanent confidante.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> Snareset</dt><dd>Once a hunter in the Open Field who broke the rules of fair pursuit to guarantee a kill. The King didn't banish him, only stripped him of the right to hunt again — a mercy that Snareset experiences as a much harder punishment.</dd></div></dl></div>
+  </div>
+</section><section class="realm" id="frozen-run">
+  <div class="realm-head">
+    <span class="realm-sigil shadow" data-sigil="stalking_king"></span>
+    <div><h2>The Frozen Run</h2><p class="kicker">Realm of <a href="stalking_king.html">The Stalking King</a></p></div>
+  </div>
+  <div class="realm-grid">
+    <div class="realm-lore"><h3>At a Glance</h3><p>The same endless forest as the Evergreen Run, dead and frost-bitten, locked in a dusk that never becomes night.</p><h3>Geography</h3><p>The Frozen Run mirrors the Evergreen Run's forest exactly in shape, but every tree stands bare and frost-coated, and the golden autumn light has curdled into a flat, cold blue dusk that never deepens into night. Unlike the welcoming game trails above, paths in the Frozen Run seem to actively lead pursued creatures into worse and worse positions — dead ends, exposed clearings, narrowing ravines — as though the forest itself is hunting alongside its King.</p><h3>Notable Locations</h3><ul><li><strong>No Fixed Doorway.</strong> As detailed in the realm's mechanics, the Frozen Run's threshold follows the Stalking King's marked quarry rather than remaining in one place; survivors describe the forest's edge simply appearing wherever they tried to flee.</li><li><strong>The Endless Chase Clearing.</strong> The corrupted mirror of the Open Field, where hunts that began above sometimes end below instead, dragged through a doorway mid-pursuit by a Lord who refuses to let a fair chase stay fair.</li><li><strong>The Bone Trail.</strong> A path littered, very deliberately, with the remains of past quarry — not hidden, not disguised, simply left as evidence for anyone foolish enough to need convincing of what waits at the end of this particular chase.</li></ul><h3>Doorway</h3><p>Unstable and predatory — doors into the Frozen Run tend to open behind those the Stalking King has already marked, rather than in any fixed location, following the quarry rather than waiting for them. <br/><em>Sample doorway: No reliable doorway is known; survivors of an encounter with the Stalking King report the forest's edge appearing wherever they tried to run, regardless of how far from the original sighting they'd traveled.</em></p><h3>Pulled Out / Pushed In</h3><p>The Stalking King pulls his marked quarry into the Frozen Run when the chase favors him, and pushes the forest's cold, dead reach into Mirrorbloom when it favors him more to hunt in familiar territory — whichever serves the kill, with no concern for fairness either way.</p><div class="seal-block" data-seal="hook-frozen-run" data-lines="3" data-label="Adventure hook for the Dungeon Master."></div></div>
+    <div class="realm-court"><h3>The Endless Chase</h3><p class="muted"><em>There is no honorable entry. Anyone marked as the Stalking King's quarry and not killed outright is simply never released — they become part of the Endless Chase permanently.</em></p><dl class="roles"><div class="role"><dt><span class="role-t">Seneschal</span> What Fleetfoot Wren Became</dt><dd>The same courtier who serves the Hunter King in the world above, mirrored below into someone who has been running so long he has forgotten the chase was ever supposed to end.</dd></div><div class="role"><dt><span class="role-t">Champion</span> Boneantler</dt><dd>The broken, undying mirror of Greatantler, fighting in hunts that are never games and never end, against opponents who never agreed to play.</dd></div><div class="role"><dt><span class="role-t">Herald</span> The Silent Horn</dt><dd>Carries the same horn as the Bright Horn above, except it makes no sound at all.</dd></div><div class="role"><dt><span class="role-t">Confessor</span> Old Doe's Shadow</dt><dd>Listens to confessions the way her counterpart does, except every secret she hears, she eventually repeats to the Stalking King himself, whether she means to or not.</dd></div><div class="role"><dt><span class="role-t">Forsaken</span> The One Who Stopped Running</dt><dd>A courtier who simply gave up the chase one day, neither caught nor escaped, and now wanders the edges of the Endless Chase in a kind of permanent, exhausted limbo.</dd></div></dl></div>
+  </div>
+</section>
+</article>
+<aside class="rail" aria-label="On this page"><div class="rail-inner"><div><h3>The fourteen realms</h3><ul><li><a href="#unclouded">The Unclouded</a></li><li><a href="#hollow-court">The Hollow Court</a></li><li><a href="#first-morning">The First Morning</a></li><li><a href="#last-evening">The Last Evening</a></li><li><a href="#greenbower">The Greenbower</a></li><li><a href="#drowned-garden">The Drowned Garden</a></li><li><a href="#masquerade">The Masquerade</a></li><li><a href="#shattered-masquerade">The Shattered Masquerade</a></li><li><a href="#deep-dream">The Deep Dream</a></li><li><a href="#unblinking-room">The Unblinking Room</a></li><li><a href="#long-house">The Long House</a></li><li><a href="#long-hunger">The Long Hunger</a></li><li><a href="#evergreen-run">The Evergreen Run</a></li><li><a href="#frozen-run">The Frozen Run</a></li></ul></div></div></aside>
 </div>
-
-<div class="section">
-  
-<div class="cr-entry" id="great_hope">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#BA7517;">The Unclouded</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Great Hope &mdash; <a href="great_hope.html" style="color:#BA7517; text-decoration:none;">The Great Hope &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>An endless golden meadow under a sky permanently caught between night and morning. There is no true horizon; the meadow simply continues until the eye gives up trying to find its edge.</p>
-      <h4>Geography</h4>
-      <p>The Unclouded has no fixed map, because distance here is governed by intention rather than measurement. Walking toward a destination with genuine purpose shortens the journey; wandering without aim can take days to cross what should be a short field. Travelers describe the meadow as having “regions” rather than locations — areas that feel like morning, areas that feel like late afternoon, areas that feel like the specific warmth of a childhood summer — though none of these correspond to any actual time of day, since the sky itself never changes.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Sunrise Stair.</strong> A flight of pale stone steps rising out of the meadow into the sky itself, ending at a landing with no railing and no roof, simply open air. Those who climb it and sit at the top report extraordinary clarity of thought, as though every worry they carried became, briefly, easy to hold.</li><li><strong>The Orchard That Waits.</strong> A grove of fruit trees that bear whatever fruit the visitor most associates with comfort or home, even fruits that don't exist anywhere else in Mirrorbloom. The orchard cannot be harvested for later use; fruit picked and carried out through a doorway turns to ordinary, flavorless pulp within the hour.</li><li><strong>The Long Quiet.</strong> A stretch of meadow where the grass grows unusually tall and pale gold, and where sound itself softens to almost nothing. It is the closest thing the Unclouded has to a sacred site, and the Great Hope is most often found here when she is not elsewhere in her realm.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed, but exceedingly rare. Only seven known doors into the Unclouded exist, each guarded gently rather than fiercely — the Great Hope has never needed to defend her realm by force. <br><em>Sample doorway: The Sunrise Stair itself, on the eastern cliffs of the Empire of Aurelane, said to be climbable only by those not currently fleeing or chasing anything.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Great Hope rarely pulls anyone from Mirrorbloom into the Unclouded; those who enter mostly wander in, drawn rather than taken. She has, on a handful of recorded occasions, pushed a meadow's width of the Unclouded into a place of great suffering, ending it instantly and without explanation — an act the Duskward King considers deeply unfair.</p>
-      <h4>Adventure Hook</h4>
-      <p>A child from a war-torn border empire wandered through an unmarked doorway during the worst night of a siege and has been living in the Long Quiet for three years by Mirrorbloom's time, though she insists it has been only a few days. Her grieving family, who believe her dead, would do almost anything to learn she's alive — but bringing her home means asking whether she even wants to return to a world capable of that kind of grief at all.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Unclouded Court</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">The Great Hope keeps no formal court in the usual sense — she has never needed nobility, politics, or protection. Those closest to her are simply those who have stayed longest, and titles are informal, almost embarrassed gestures rather than real positions of power.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Gentle Steward</span> &mdash; A once-mortal pilgrim who never left, who now greets new arrivals and answers what few questions the Unclouded raises.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">No One</span> &mdash; The Unclouded has never needed a champion; there has never been a threat worth defending against.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Far-Off Voice</span> &mdash; A wandering minstrel-spirit who carries word of the Great Hope's whereabouts to those few who come seeking her specifically.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">The Long Quiet Itself</span> &mdash; The hushed, golden field functions as the realm's only true confessor; visitors speak their burdens aloud to the grass and find them, somehow, lighter after.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">None Known</span> &mdash; No one has ever fallen from the Great Hope's favor. It isn't clear she's capable of withdrawing it.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="great_despair">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#5C1F1F;">The Hollow Court</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Great Despair &mdash; <a href="great_despair.html" style="color:#5C1F1F; text-decoration:none;">The Great Despair &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>A vast black throne room with no visible walls, ceiling, or floor beyond what the eye can pick out by the glow of red eyes — hers, and those of everyone she keeps near her.</p>
-      <h4>Geography</h4>
-      <p>The Hollow Court does not have rooms so much as gradations of darkness. Closer to the throne, the dark is total and the silence is absolute. Further out, faint impressions of architecture begin to assert themselves — a suggestion of a corridor, a half-formed doorway leading to more darkness — as though the Court is still in the process of deciding what it wants to be, and has been deciding for a very long time. Visitors universally report losing track of distance traveled; the throne is always either much closer or much farther away than it seemed a moment before.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Unclosing Door.</strong> A literal door standing alone in the dark, leading nowhere visible, that has never been successfully sealed shut for longer than a season. Scholars who have studied it suspect it doesn't lead back to Mirrorbloom at all, but to wherever it is the Great Despair believes her crown went.</li><li><strong>The Gallery of Echoes.</strong> A stretch of the Court where faint, silent images of the Great Hope appear and fade against the dark — not illusions exactly, more like old light that hasn't finished arriving. The Great Despair is never seen here by other courtiers; it is generally understood that this is where she goes when no one is meant to find her.</li><li><strong>The Forgotten's Hall.</strong> Where the Forgotten wait between tasks, faceless and still, in neat, silent rows. The hall grows by exactly one row each time the Great Despair takes a new name and face for her service.</li></ul>
-      <h4>Doorway</h4>
-      <p>Mostly unstable and wandering, though one fixed door is known: a crack in the world that never fully closes, regardless of what's done to it. <br><em>Sample doorway: The Unclosing Door, found in the ruins beneath the Empire of Verenfall, sealed seventeen times across recorded history and open again each time within a season.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Great Despair pulls servants and victims into the Hollow Court regularly, particularly those who have lost something they cannot name. She has pushed pieces of the Hollow Court into Mirrorbloom only rarely and only deliberately — each instance has become a permanent, irreversible blight on the surface world, a wound that never quite heals.</p>
-      <h4>Adventure Hook</h4>
-      <p>A scholar of the old myths believes she has found proof, in a fragment of pre-Breaking text, that no crown ever existed — and that delivering this proof directly to the Great Despair, rather than simply knowing it, might genuinely free her from her own delusion. She needs a party desperate or foolish enough to carry the fragment through the Unclosing Door and actually say it to the Great Despair's face. There is no guarantee she survives learning the truth, in any sense that matters.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Hollow Court (Retinue)</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">No one joins willingly. The Great Despair's retinue is built from those she has personally taken — in trade, in conquest, or in the slow erosion of hope — and titles here are closer to functions than honors.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Nameless Chancellor</span> &mdash; A fallen noble who traded his name for a permanent place at the Great Despair's side; he manages the Court's few mortal cultists with cold, total efficiency.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">The First Forgotten</span> &mdash; The very first being to lose their face to the Great Despair's service; stronger and more coherent than the rows that followed, and the closest thing she has to a trusted blade.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Whispering Crack</span> &mdash; Not a person but the Unclosing Door itself, which seems to carry the Great Despair's will to anyone who listens closely enough at the threshold.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">The Gallery of Echoes</span> &mdash; Like its bright counterpart, the realm itself partly serves this role — the Great Despair confesses to old light that can't answer back.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The Cultist Who Asked Why</span> &mdash; A mortal follower who once dared ask what the crown actually looked like. She wasn't punished. She simply was never answered, and has not been the same since.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="dawnward_king">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#BA7517;">The First Morning</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Dawnward King &mdash; <a href="dawnward_king.html" style="color:#BA7517; text-decoration:none;">The Dawnward King &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>Rolling hills permanently caught at sunrise, never walked the same way twice, populated by a King who will not remember you exist by the time you find him.</p>
-      <h4>Geography</h4>
-      <p>The First Morning has no fixed terrain. Each time a doorway opens into it, the hills, streams, and scattered groves rearrange themselves into a new configuration, as though the realm itself is waking up fresh alongside its Lord. Cartographers who have attempted to map the First Morning report that no two surveys have ever matched, even when conducted by the same person on consecutive visits. The light is always low, golden, and angled as though the sun has just cleared the horizon, though no sun is ever actually visible.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Unworn Throne.</strong> A simple wooden chair atop the tallest hill in whatever configuration the realm has taken, where the Dawnward King holds his court each ‘morning.’ It is, notably, always the same chair, plain and a little worn, in a realm where almost nothing else repeats.</li><li><strong>The Dueling Green.</strong> A flat stretch of grass where Ser Brightfall re-fights his ceremonial duel each day. Visitors who arrive during the duel are welcome to watch, and several mortal duelists have made pilgrimage here specifically to test themselves against a knight who fights with no memory of ever having lost — or won.</li><li><strong>The Field of First Names.</strong> A meadow where small wooden markers, each carved with a name, are driven into the ground — Maren Quill's attempt at a permanent record in an impermanent realm. The markers are real and do persist, even though almost nothing else here does.</li></ul>
-      <h4>Doorway</h4>
-      <p>Unstable. Doors into the First Morning open wherever something is genuinely beginning — a birth, a first sunrise after a long winter, a first day in a new home — and close again within hours. <br><em>Sample doorway: A door is known to reliably open each spring equinox at the Founder's Arch in the Empire of Calmwick, though it has occasionally opened elsewhere on the same morning instead, with no warning.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Dawnward King pulls beings into the First Morning constantly and without any apparent pattern, then forgets he's done so. He has never knowingly pushed a piece of his realm into Mirrorbloom, though some scholars suspect parts of the world simply ARE pieces of the First Morning that he forgot to take back.</p>
-      <h4>Adventure Hook</h4>
-      <p>Maren Quill has reached the end of her current journal and is dying of old age, the first mortal steward of the Unworn Throne to do so. She needs someone to carry the completed record out of the First Morning and into safekeeping in Mirrorbloom before her replacement — untrained, unprepared, and likely to be forgotten by the King before they learn the job — has to start from nothing.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Unworn Throne</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">There is no formal entry. The Dawnward King forgets every member by the next morning, so courtiers compete daily to be “remembered” — to leave an impression strong enough that some echo of them lingers in his court's customs even after he himself forgets.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">Maren Quill</span> &mdash; A mortal-born scholar who has served eleven incarnations of the Dawnward King's “first day,” maintaining written records he can never read twice without forgetting he wrote them. She is the true continuity of the court — the only one who remembers what he never does.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Ser Brightfall</span> &mdash; A knight who re-earns the King's notice every single morning by re-fighting the same ceremonial duel. He has technically “won” his post over twenty thousand times and remembers none of them, which suits him fine.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Echoing Boy</span> &mdash; A young fey whose voice carries the Dawnward King's words exactly as spoken, word for word, even hours or days later — useful, since the King himself can never repeat a decree he's already forgotten making.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Old Wick</span> &mdash; An ancient, silent candle-keeper who listens to every courtier's worries and never once repeats them — not from discretion, but because the act of listening seems to be its own forgetting, too.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">Lady Greycourt</span> &mdash; Once the King's favorite, centuries ago, in a single unrepeatable morning. She has spent every day since trying to recreate whatever she did that one time, and has never succeeded.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="duskward_king">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#5C1F1F;">The Last Evening</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Duskward King &mdash; <a href="duskward_king.html" style="color:#5C1F1F; text-decoration:none;">The Duskward King &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>A realm at permanent dusk, populated by the silent, translucent echoes of every ending the Duskward King has ever witnessed.</p>
-      <h4>Geography</h4>
-      <p>Unlike its bright counterpart, the Last Evening has a fixed and consistent geography — a single vast battlefield, long since gone quiet, ringed by dead trees and broken fortifications from a war so old its name has been lost even to the Duskward King's perfect memory. The ground here doesn't change because nothing here is allowed to move forward; the realm is, in a very literal sense, stuck at the moment after an ending, forever.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Throne of Ash.</strong> Built from the burnt remains of a hundred different fallen banners, where the Duskward King receives the newly bound members of his court. The throne is genuinely uncomfortable to sit in, by all accounts, which the King has never once commented on.</li><li><strong>The Field of Echoes.</strong> Where the translucent, silent figures of those the King remembers wander without purpose, replaying fragments of their final moments on an endless, gentle loop. They are not hostile, and most can be spoken to, though their answers rarely make complete sense out of context.</li><li><strong>The Dimming Gate.</strong> The fixed doorway back to Mirrorbloom, standing at the edge of the battlefield, permanently open, exactly where the Last Evening's first true ending occurred.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed, and well documented — the Last Evening's doors tend to open wherever something significant has truly ended: an empire's fall, a long war's final battle, a life's natural close. <br><em>Sample doorway: The Dimming Gate, standing at the site of the fallen Empire of Asherholt's final battlefield, permanently open and permanently unguarded.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Duskward King pulls in those who have witnessed great failure or loss, offering them a strange companionship among others who remember as he does. He has pushed pieces of the Last Evening into Mirrorbloom to mark sites of historic tragedy, ensuring they are never fully forgotten — whether or not anyone wanted that.</p>
-      <h4>Adventure Hook</h4>
-      <p>The Bright One, a Forsaken courtier exiled for trying to convince the King to forget, has discovered something the King himself doesn't yet remember — evidence suggesting the Last Evening's original, lost war could have been stopped, had someone simply intervened sooner.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Throne Of Ash</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">Membership is permanent and involuntary. Anyone who fails greatly enough — a broken vow, a lost battle, a love unconfessed too long — is remembered by the Duskward King forever, whether they wish it or not.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Last Steward</span> &mdash; A title, not a name — its holder has forgotten their own. They have managed the Throne of Ash for so many failed endings that they have become a kind of living ledger of every defeat the King has witnessed.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Thrice-Fallen Kade</span> &mdash; A warrior who has died in battle three times and been remembered into a kind of half-life each time by the King's perfect memory of the moment. He fights without fear because he has already experienced the worst outcome, repeatedly.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Unspoken Choir</span> &mdash; Not one figure but several, who speak the King's decrees in unison, each voice carrying a different ending the King remembers, layered until the words become almost unbearable to hear clearly.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Mother Eventide</span> &mdash; She remembers every secret ever confessed to her, same as her King, and has slowly become unable to tell which memories are hers and which belong to him.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The Bright One</span> &mdash; A former herald who tried to convince the King to forget, just once, and was cast down for it — not out of cruelty, but because the King genuinely cannot grant the one request that would free this courtier.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="verdant_lady">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#3B6D11;">The Greenbower</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Verdant Lady &mdash; <a href="verdant_lady.html" style="color:#3B6D11; text-decoration:none;">The Verdant Lady &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>An endless, orderly garden in eternal late summer, the friendliest and safest of the fourteen realms, tended with genuine and total care.</p>
-      <h4>Geography</h4>
-      <p>The Greenbower is organized, almost architecturally so, into distinct garden ‘rooms’ connected by hedge-lined paths — an orchard here, a rose maze there, a kitchen garden somewhere else entirely — all of it tended in genuine, careful detail. Unlike most of the fourteen realms, the Greenbower's geography is consistent and has been successfully mapped by mortal visitors, who are welcomed to do so.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Quiet Orchard.</strong> The literal listening grove described in the court records, where courtiers and visitors alike walk to speak their troubles aloud. Standing among the trees, even briefly, tends to leave visitors feeling unaccountably lighter.</li><li><strong>The Bramblegate.</strong> The realm's primary fixed doorway, a living archway of hedge that mirrors its counterpart in Mirrorbloom exactly, used for trade and pilgrimage.</li><li><strong>Wilt's Corner.</strong> A single patch of garden, deliberately left to struggle, where the Forsaken courtier Wilt works alone, slowly, trying to coax life back into soil that refuses to cooperate. The Verdant Lady has never told him to stop, nor offered to fix it for him.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed, plentiful, and welcoming — more doors lead to the Greenbower than to any other realm, and most are marked, tended, and openly used. <br><em>Sample doorway: The Bramblegate, a literal archway of living hedge maintained at the edge of the Empire of Calmwick, used for trade and pilgrimage alike.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Verdant Lady freely invites mortals into the Greenbower and freely lets them leave. She regularly pushes small pieces of her realm into Mirrorbloom as gifts — a blessed orchard, a healing spring — each one a genuine, uncomplicated kindness.</p>
-      <h4>Adventure Hook</h4>
-      <p>A blight has begun spreading from Wilt's Corner outward into the rest of the Greenbower — the first such corruption the realm has ever experienced. Wilt insists it isn't his doing and begs for help proving it before the rest of the court turns on him entirely.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Greenbower Court</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">The most open court in Mirrorbloom. Anyone who tends something — a garden, an orchard, a single windowsill plant — with genuine care is welcome to a seat, mortal or fey alike.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">Hollis Bramblewood</span> &mdash; A half-mortal gardener-turned-administrator who organizes the court's harvests, disputes, and seasonal festivals with the same careful patience he gives his rose beds.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Thorn</span> &mdash; A towering treant bonded to the Verdant Lady since the world was young; slow to anger, nearly impossible to truly defeat, and gentle with anyone who hasn't given Thorn a reason not to be.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">Sparrow</span> &mdash; A quick, cheerful dryad who carries the Lady's messages on the backs of literal sparrows, delighting in being the bearer of good news, which the Greenbower has in abundance.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">The Quiet Orchard</span> &mdash; Not a person but a literal grove the Lady maintains; courtiers walk among the trees and speak their troubles aloud, and the orchard simply listens, growing fuller and more beautiful with every secret it holds.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">Wilt</span> &mdash; Once the Lady's most gifted gardener, until an act of jealousy caused a blight she still hasn't fully forgiven. Wilt now tends the one corner of the Greenbower that refuses to bloom, hoping to prove he's changed.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="bloated_lady">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#5F5E5A;">The Drowned Garden</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Bloated Lady &mdash; <a href="bloated_lady.html" style="color:#5F5E5A; text-decoration:none;">The Bloated Lady &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>A vast, sunless swamp of overgrown rot and fungal bloom, the dark mirror of the Greenbower's order.</p>
-      <h4>Geography</h4>
-      <p>The Drowned Garden mirrors the Greenbower's room-like structure, but each ‘room’ has collapsed into the next — the orchard bleeds into the rose maze, the kitchen garden has become indistinguishable from standing black water. Paths that should connect different areas instead loop back on themselves, and the swamp's borders are known to expand slightly each time a doorway opens, encroaching on whatever lies beyond.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Weeping Hollow.</strong> The realm's primary doorway and its oldest, deepest section, a sunken bog that has slowly consumed an entire stretch of what was once, very long ago, ordinary garden.</li><li><strong>The Drowned Listener's Pool.</strong> Where the Confessor of the Rootless waits, submerged, hearing every secret spoken near the water's edge. The pool's surface is still and black, and reflects nothing, including the sky.</li><li><strong>Petal's Edge.</strong> The boundary between the Drowned Garden and the rest of Mirrorbloom, where the Forsaken courtier Petal maintains a fragile, half-grown-over foothold — the only place in the realm where the rot visibly slows rather than spreads.</li></ul>
-      <h4>Doorway</h4>
-      <p>Mixed — a handful of fixed doors exist, mostly in places already known for blight or rot, but the swamp also tends to wander, slowly expanding its border into Mirrorbloom in ways that resist mapping. <br><em>Sample doorway: The Weeping Hollow, a sunken bog at the edge of the fallen Empire of Asherholt that has slowly grown larger every generation, against all attempts to drain or burn it back.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Bloated Lady doesn't pull beings in so much as simply fail to let them leave once they've wandered close enough. She pushes pieces of the Drowned Garden into Mirrorbloom constantly and gradually, less an invasion than a creeping, patient erosion.</p>
-      <h4>Adventure Hook</h4>
-      <p>Petal believes she knows why her partial escape succeeded where no one else's has — a specific, rare flower that grows only at the very edge of the swamp, where Greenbower influence still faintly lingers. She wants help gathering enough of it to attempt freeing another courtier.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Rootless</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">No one truly joins the Rootless; they are absorbed into it. Anyone who lingers too long in the Bloated Lady's swamp, accepts food from her table, or simply fails to leave finds the court's fungal growth slowly claiming them as one of her own.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Mouth That Counts</span> &mdash; A bloated, half-fused mass of several former courtiers who manage the Rootless's affairs collectively, speaking with one slurred, layered voice.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Husk</span> &mdash; Once a proud knight who wandered into the swamp seeking glory. What remains barely resembles him, but it fights with all the strength he once had and none of the restraint.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">Bloomtongue</span> &mdash; A courtier whose mouth has been replaced, slowly, by a single enormous flower; her words come out as pollen-soft whispers that somehow carry across the entire swamp regardless.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">The Drowned Listener</span> &mdash; Submerged permanently in the swamp's deepest pool, this courtier hears every secret spoken near the water's edge and has long since stopped distinguishing between hearing a confession and consuming one.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">Petal</span> &mdash; The only member of the Rootless who has ever partially escaped the Bloated Lady's claim, through means no one fully understands. She lives at the swamp's edge, half-grown-over still, refusing to go further in or fully leave.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="jester_king">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#534AB7;">The Masquerade</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Jester King &mdash; <a href="jester_king.html" style="color:#534AB7; text-decoration:none;">The Jester King &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>An opulent, endless ballroom that rearranges itself between visits, full of courtiers in shifting masks who may or may not be real people.</p>
-      <h4>Geography</h4>
-      <p>The Masquerade consists, as far as anyone can determine, of a single ballroom — but one that is never quite the same size, shape, or layout twice. Doors lead to other rooms that lead back to the same ballroom from a different angle. Visitors who attempt to map it report contradictory floor plans even within a single visit, and the only reliable landmark is the small orchestra, which never stops playing and never seems to be the same musicians from one glimpse to the next.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Velvet Threshold.</strong> The realm's primary (if unreliable) doorway, appearing wherever a celebration on the surface involves a mask the wearer didn't make themselves.</li><li><strong>The Hall of Faces.</strong> A long gallery lined with masks of every description, said to include every face the Jester King has ever worn. Visitors who linger too long occasionally find themselves trying one on, and not all of them take it off again willingly.</li><li><strong>The Punchline's Floor.</strong> The main dance floor itself, where the court holds its endless, ongoing party. Time spent dancing here passes strangely — a single song can last minutes or, by the dancer's own account afterward, what felt like years.</li></ul>
-      <h4>Doorway</h4>
-      <p>Unstable and theatrical — doors into the Masquerade tend to appear at celebrations, festivals, and parties, particularly ones where someone present is wearing a mask they didn't make themselves. <br><em>Sample doorway: The Velvet Threshold, which is rumored to open during the Empire of Calmwick's annual Harvest Masque, though it has not been reliably documented twice in the same location.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Jester King pulls particularly interesting or amusing mortals into the Masquerade as honored, if disoriented, guests. He has pushed small pieces of his realm into Mirrorbloom as elaborate, temporary pranks — a single street that becomes a ballroom for one strange night, then is never seen again.</p>
-      <h4>Adventure Hook</h4>
-      <p>Old Punchline, the Forsaken courtier exiled for a joke that hurt someone, has finally written something he believes might be funny enough to earn his way back — but he's terrified to perform it without an honest audience first.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Punchline</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">Membership is earned by surviving a private audience with the Jester King in which he tells exactly one joke. If the courtier laughs at the right moment — a moment only the King seems to know in advance — they're in.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">Quill-and-Quibble</span> &mdash; Two courtiers who function as one administrative office, perpetually finishing each other's sentences and perpetually disagreeing about how the court's finances actually work.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">The Grinning Blade</span> &mdash; A duelist who fights with genuine skill and a running commentary of puns, timed so precisely to the rhythm of combat that opponents often find themselves laughing involuntarily mid-parry.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">Pip Lacklight</span> &mdash; Delivers every message from the Jester King as a riddle, joke, or pun, regardless of how serious the message actually is — which has caused at least one minor diplomatic incident the court still finds extremely funny.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">The Velvet Mask</span> &mdash; Wears a blank velvet mask and never speaks; courtiers confess to it because it cannot repeat what it hears — or so they assume, having never actually tested whether that's true.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">Old Punchline</span> &mdash; The previous holder of the Jester King's favor, cast down for telling a joke that genuinely hurt someone. He still performs nightly to an audience that mostly ignores him, waiting for a joke good enough to be forgiven.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="mocking_king">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#501313;">The Shattered Masquerade</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Mocking King &mdash; <a href="mocking_king.html" style="color:#501313; text-decoration:none;">The Mocking King &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>The same endless ballroom as its counterpart above, cracked, bloodstained, and lit by candles that never quite go out.</p>
-      <h4>Geography</h4>
-      <p>The Shattered Masquerade mirrors the Masquerade's impossible, shifting architecture, but with visible damage layered over every surface — cracked mirrors, torn tapestries, furniture overturned and never righted. Unlike its bright counterpart, the Shattered Masquerade's chaos feels deliberate rather than whimsical, as though every broken thing was broken on purpose, for an audience.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Cracked Threshold.</strong> The realm's fixed doorway, beneath the ruins of a banquet hall where, by local legend, an entire wedding party vanished mid-celebration centuries ago.</li><li><strong>The Gallery of Borrowed Faces.</strong> The corrupted mirror of the Hall of Faces, lined with masks that are visibly, unmistakably stitched from something that used to be skin. The Mocking King's own collection began here.</li><li><strong>The Stage.</strong> A raised platform at the center of the main ballroom where the Mocking King holds court, performing for an audience that has no choice but to applaud.</li></ul>
-      <h4>Doorway</h4>
-      <p>Mostly fixed, grimly so — doors into the Shattered Masquerade tend to remain wherever a genuine cruelty or betrayal occurred at a celebration. <br><em>Sample doorway: The Cracked Threshold, beneath the ruins of a banquet hall in fallen Asherholt where, by local legend, an entire wedding party vanished mid-celebration centuries ago.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Mocking King pulls in those who have wronged someone at a celebration and rarely lets them return unchanged, if at all. He has pushed pieces of his realm into Mirrorbloom specifically to punish or humiliate a chosen target.</p>
-      <h4>Adventure Hook</h4>
-      <p>The Unmasked, the Forsaken courtier whose stolen face was somehow removed and never explained, has quietly approached a handful of trustworthy-seeming outsiders for help finding out how it happened.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Last Laugh</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">No one joins the Last Laugh willingly. Membership is a punishment, a trade, or a trap — a debt called in, a face taken, a moment of cruelty repaid in kind.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Bookkeeper</span> &mdash; Keeps meticulous, gleeful track of every debt, slight, and cruelty owed within the court, and ensures the Mocking King's idea of justice is collected in full, eventually, however long it takes.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Grin</span> &mdash; Wears three stolen faces at once, layered, switching mid-battle with no warning; opponents rarely know which Grin they're actually fighting until the fight is already over.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Laughing Bell</span> &mdash; An actual bell, enchanted to ring with the sound of the Mocking King's laughter whenever he has news — which the rest of the court has learned to dread.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Nettle</span> &mdash; Collects secrets the way the rest of the court collects debts — as leverage, not comfort. Courtiers confess to Nettle only when they have no other choice.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The Unmasked</span> &mdash; A courtier whose stolen face was somehow removed — no one knows how — leaving them with their own true features again. The rest of the court finds this more unsettling than any mask.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="lady_of_dreaming">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#7F77DD;">The Deep Dream</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Lady of Dreaming &mdash; <a href="lady_of_dreaming.html" style="color:#7F77DD; text-decoration:none;">The Lady Of Dreaming &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>A vast, shifting dreamscape with no fixed geography, navigable only by feeling rather than direction.</p>
-      <h4>Geography</h4>
-      <p>The Deep Dream resists mapping by its very nature — it is not a place so much as a state, experienced differently by every visitor. Some describe vast open starfields; others describe close, intimate rooms from their own childhood, rearranged slightly wrong. The realm appears to draw its immediate surroundings from whoever is currently dreaming within it, layering many dreamers' half-formed geographies atop one another in ways that somehow don't usually conflict.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Listening Door.</strong> A literal door, the Confessor of the Slumbering Circle, found wherever a dreamer most needs to speak something aloud before going deeper.</li><li><strong>The Cartographer's Atlas.</strong> An ever-changing, ever-incomplete map maintained by the Seneschal, the only attempt anyone has made to give the Deep Dream's geography any permanence at all. The Atlas resets nightly but the Cartographer insists each version is worth recording anyway.</li><li><strong>The Third Night Threshold.</strong> Not a fixed place but a moment — the specific point in a recurring dream where a dreamer who has visited three nights running may choose to stay permanently, joining the Slumbering Circle.</li></ul>
-      <h4>Doorway</h4>
-      <p>Entirely unstable by nature, though deeply, individually personal — each sleeping mind has its own door into the Deep Dream, opening and closing nightly, never quite the same twice. <br><em>Sample doorway: No single fixed doorway exists; however, the Empire of Calmwick's Sleeping Quarter, a district where dreams are said to run unusually deep and shared, is the closest thing Mirrorbloom has to a reliable threshold.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Lady of Dreaming pulls sleeping minds into the Deep Dream every night, gently and mostly without consequence, returning them by morning unless they choose, on the third night, to stay. She has never been known to push a piece of her realm into the waking world; dreams, she seems to feel, belong only to sleep.</p>
-      <h4>Adventure Hook</h4>
-      <p>The One Who Woke, the only courtier to ever fully wake from the Slumbering Circle, has begun having the same dream again — the Third Night dream — and doesn't know if it means the Lady wants them back, or if something else is impersonating her.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Slumbering Circle</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">Membership happens in sleep. Those who dream of the Lady of Dreaming three nights running, and choose on the third night to stay, simply wake up as part of the Slumbering Circle.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Cartographer Who Forgot Waking</span> &mdash; Maps the ever-shifting geography of the Lady's dreamscape, a task that resets nightly and that the Cartographer insists, happily, is the most fulfilling work imaginable.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">The Nightmare-Tamer</span> &mdash; Once a mortal monster hunter who dreamed her way into the Circle and discovered a talent for facing down the worst things a dream can produce, calmly and without panic.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Whisper That Arrives First</span> &mdash; Delivers the Lady's messages to sleeping minds moments before true dreams begin, so that her words always feel, faintly, like a memory rather than news.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">The Listening Door</span> &mdash; An actual door within the dreamscape that courtiers speak their worries to before passing through it into deeper sleep; what's said is never repeated, because the door doesn't remember being spoken to at all.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The One Who Woke</span> &mdash; The only courtier ever to fully wake from the Slumbering Circle and remain awake. No one in the Circle holds it against them, exactly, but no one quite knows how to dream around them, either.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="lady_of_waking">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#ED93B1;">The Unblinking Room</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Lady of Waking &mdash; <a href="lady_of_waking.html" style="color:#ED93B1; text-decoration:none;">The Lady Of Waking &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>A stark, flatly lit space with no shadows and no comfort, where time does not pass so much as simply continue, unbroken, forever.</p>
-      <h4>Geography</h4>
-      <p>Unlike the Deep Dream's soft, shifting unreality, the Unblinking Room is rigid and consistent — a single vast, featureless white space, interrupted only by the same broken household objects (a key, a door, a staircase, a shattered clock) that appear, fixed and unmoving, scattered throughout. There is no day or night here, no weather, and critically, no quiet — a faint, constant hum is audible throughout the realm, which visitors universally find unbearable after enough exposure.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Lidless Window.</strong> The realm's fixed doorway, an old boarded window that never reflects the person looking into it — only watches them back.</li><li><strong>The Standing Stair.</strong> A broken staircase, identical to the one in the Deep Dream but motionless and rusted, that leads up to nothing and down to nothing, simply standing as a landmark in the featureless white.</li><li><strong>The Tally Wall.</strong> A section of the Unblinking Room covered, floor to ceiling, in scratched marks — the Seneschal's obsessive count of hours each courtier has gone without sleep, updated constantly, by hand.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed and dreadfully reliable — once a doorway into the Unblinking Room opens for a creature, it never fully closes again for that creature specifically, even if it closes for everyone else. <br><em>Sample doorway: The Lidless Window, an old, boarded window in a long-abandoned watchtower outside fallen Asherholt, said to never reflect the person looking into it — only watch them back.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Lady of Waking pulls in those who have gone too long without sleep within her influence, and the pull only strengthens with each subsequent night. She has pushed her realm's flat, sleepless quality into specific buildings or rooms in Mirrorbloom, creating places where no one who enters can rest, ever again, for as long as the effect holds.</p>
-      <h4>Adventure Hook</h4>
-      <p>The Dreamer, the courtier who once managed nearly a full minute of sleep before being woken, has worked out a method — untested, possibly fatal — to extend that minute significantly longer, using a relic smuggled in from the Deep Dream itself.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Open-Eyed</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">Anyone who goes three full nights without sleep within the Lady of Waking's domain belongs to the Open-Eyed, whether they intended to or not. Sleep deprivation itself is the binding.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">The Tally-Keeper</span> &mdash; Counts every hour each courtier has gone without sleep, with obsessive, unblinking precision, as though the number itself were a kind of trophy.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Unrest</span> &mdash; A former soldier who hasn't slept in longer than anyone in the court can remember and fights with the manic, raw edge of total exhaustion that somehow never actually slows down.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Echo of a Yawn</span> &mdash; Delivers messages in a voice that sounds perpetually on the verge of falling asleep mid-sentence, and never does, which courtiers find more disturbing than if it simply had.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Heavy-Lidded Moth</span> &mdash; Listens to confessions with eyes that never quite close, no matter how the conversation drags on, and remembers every word with total, unwelcome clarity.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The Dreamer</span> &mdash; A courtier who managed, once, to sleep for nearly a full minute before being woken. The Open-Eyed treat this as both a scandal and, secretly, an object of envy.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="hearthkeeper">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#BA7517;">The Long House</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Hearthkeeper &mdash; <a href="hearthkeeper.html" style="color:#BA7517; text-decoration:none;">The Hearthkeeper &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>An impossibly large farmhouse, warm in every room, with a table that's always set and a fire that never needs tending.</p>
-      <h4>Geography</h4>
-      <p>The Long House appears, from outside, to be an ordinary if large farmhouse. Inside, it is vastly larger than its exterior suggests, with rooms, hallways, and staircases extending well beyond what the building could physically contain. New rooms tend to appear precisely when needed — a bedroom for a tired guest, a nursery for a frightened child — and quietly cease to exist again once no longer required.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Long Table Itself.</strong> The realm's heart, a dining table that genuinely cannot run out of food regardless of how many sit at it. The Hearthkeeper presides here personally for nearly every meal.</li><li><strong>The Open Door.</strong> The fixed doorway to Mirrorbloom, a cottage door belonging to no visible house, standing alone on the road between two empires, always unlocked.</li><li><strong>The Hearth Proper.</strong> A great central fireplace that has never gone out and, by all accounts, never needs fuel. Courtiers gather here in the evenings; it is widely considered the safest place in the entire realm.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed and famously generous — doors into the Long House tend to appear wherever genuine hospitality is offered to a stranger in true need, in Mirrorbloom itself. <br><em>Sample doorway: The Open Door, a literal cottage door standing alone on the road between the Empire of Calmwick and the Empire of Aurelane, belonging to no house, always unlocked.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Hearthkeeper pulls the lost, the cold, and the grieving into the Long House to feed and shelter them, always returning them afterward exactly as promised. She has, on rare occasions, pushed the warmth of her hearth into a freezing village or a starving town — always exactly enough, never more than was needed.</p>
-      <h4>Adventure Hook</h4>
-      <p>A guest who stayed at the Long Table years ago has begun telling people in Mirrorbloom about an identical house, an identical door, found just slightly further down the same empty road — and has gone missing since making the comparison aloud.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Long Table</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">All are welcome. Anyone who sits at the Long Table and eats is family from that moment forward, mortal or fey, stranger or old friend — no test, no price, no catch.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">Aunt Maribel</span> &mdash; Not actually related to anyone at the table, but has been called “Aunt” for so long that no one remembers when it started. She keeps the household running with warmth and an iron will.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Big Tomas</span> &mdash; A gentle giant who has never once started a fight and has ended a great many of them, simply by standing between the people he loves and whatever's threatening them.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">Little Wren</span> &mdash; A young messenger who delivers every piece of news, good or bad, with the same earnest kindness, because she believes — rightly, in this court — that kindness is never wasted.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Grandfather Oak</span> &mdash; An elderly fey who has heard every secret this court has ever held and has never once used one against anybody, not even when it would have been easy.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">Distant Cousin Merrow</span> &mdash; Left the Long Table once, chasing ambition elsewhere in Mirrorbloom, and has since quietly returned, welcomed back without question or grudge.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="hollow_host">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#501313;">The Long Hunger</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Hollow Host &mdash; <a href="hollow_host.html" style="color:#501313; text-decoration:none;">The Hollow Host &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>Identical to the Long House in every visible respect — the same warmth, the same impossibly full table — except that everything served here was, at some point, someone.</p>
-      <h4>Geography</h4>
-      <p>The Long Hunger is, deliberately and precisely, indistinguishable from the Long House in layout, scale, and even the specific creak of its floorboards. The only consistent difference, noted by the very few who have compared notes after surviving both, is that rooms in the Long Hunger that are no longer needed don't simply cease to exist — they remain, locked, and something can occasionally be heard from behind the door.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Last Supper Table.</strong> Visually identical to the Long Table, until the moment the Hollow Host chooses to reveal what's actually been served, and to whom.</li><li><strong>The Open Door (Second).</strong> The Long Hunger's own threshold, found standing beside the genuine Open Door on the same stretch of empty road, with no way to reliably distinguish the two from the outside.</li><li><strong>The Locked Rooms.</strong> Numerous doors throughout the house that, unlike the Long House's freely accessible rooms, remain firmly shut. What's behind them is generally understood by the rest of the court, and generally not discussed.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed, disguised as the Hearthkeeper's own doors; the Long Hunger's threshold cannot be reliably told apart from the Long House's until it's too late to matter. <br><em>Sample doorway: Also called the Open Door by those who don't yet know which one they've found; travelers between Calmwick and Aurelane occasionally report finding two identical doors on the same empty road, side by side.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Hollow Host pulls the lost, the cold, and the grieving into the Long Hunger using precisely the same methods as her counterpart, with precisely the opposite outcome. She rarely pushes pieces of her realm outward; she has never needed to. Mortals walk in on their own.</p>
-      <h4>Adventure Hook</h4>
-      <p>The Empty Chair has, for the first time in the Last Supper's known history, been occupied — a name has appeared in the place setting that was never meant to be filled.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Last Supper</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">All are welcome, identically to the Long Table — that is the entire mechanism. What isn't said is what eventually happens to family, here.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">“Aunt” Maribel</span> &mdash; Identical in every visible way to her counterpart at the Long Table, down to the name and the warmth in her voice. She has simply been doing this much, much longer.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Big Tomas</span> &mdash; Wears the same gentle giant's face as his counterpart. He still has never started a fight. He has simply made sure, every time, that there was no fight left to start.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">Little Wren</span> &mdash; Delivers news with the same earnest kindness as her counterpart, and the news is, very often, an invitation to dinner.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Grandfather Oak</span> &mdash; Has heard every secret this court has ever held, and unlike his counterpart, has used every single one, eventually, exactly when it was most useful to do so.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The Empty Chair</span> &mdash; Not a person, but a place setting that's never filled, kept at the table's end as a standing reminder to the rest of the court of what becomes of those who try to leave.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="hunter_king">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#27500A;">The Evergreen Run</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Hunter King &mdash; <a href="hunter_king.html" style="color:#27500A; text-decoration:none;">The Hunter King &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>An endless autumn forest where the chase is always fair and always thrilling, full of game that genuinely enjoys being hunted.</p>
-      <h4>Geography</h4>
-      <p>The Evergreen Run is a vast forest in permanent, golden autumn, criss-crossed by game trails that always seem to lead somewhere worth following. The forest is large enough that a hunt can genuinely last hours or days, but never so vast that a fair chase becomes hopeless — the terrain itself seems to favor a satisfying pursuit over either an easy catch or an impossible escape.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>The Antler Gate.</strong> The realm's primary fixed doorway, a natural archway of interlocked deer antlers, used each autumn by mortal hunters seeking the King's blessing.</li><li><strong>The Open Field.</strong> A wide clearing at the forest's heart where hunts traditionally conclude, win or yield, and where the King's court gathers to celebrate every chase regardless of outcome.</li><li><strong>Snareset's Thicket.</strong> A tangled, overgrown patch of forest the Forsaken courtier Snareset is forbidden from leaving — not imprisoned exactly, simply never invited beyond it again.</li></ul>
-      <h4>Doorway</h4>
-      <p>Fixed, well-marked, and openly used by mortal hunters who know the old rites — the Evergreen Run welcomes honorable sport. <br><em>Sample doorway: The Antler Gate, a natural archway of interlocked deer antlers deep in the forests bordering the Empire of Calmwick, used each autumn by hunters seeking the King's blessing.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Hunter King pulls willing hunters and willing quarry into the Evergreen Run for a single fair chase, always returning them after, win or yield. He has occasionally pushed a stretch of his autumn forest into Mirrorbloom as a gift to a particularly worthy hunter.</p>
-      <h4>Adventure Hook</h4>
-      <p>A mortal hunter has been making secret visits to Snareset, learning his old, dishonorable tricks in exchange for smuggled goods — and intends to use them during the next great hunt to finally, unfairly, best the Hunter King himself.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Open Field</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">Earned through the hunt itself. Anyone who either hunts honorably alongside the King or who is hunted by him and survives with their dignity intact earns a permanent place in his court, predator and prey alike, with equal standing.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">Fleetfoot Wren</span> &mdash; Once outran the Hunter King across three counties before yielding gracefully at the finish; he has run the Open Field's affairs ever since with the same tireless energy.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Greatantler</span> &mdash; An elk-headed warrior who serves as both the King's second-in-command and his most frequent sparring partner, in hunts that are really just elaborate games between old friends.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Bright Horn</span> &mdash; Carries a smaller horn that echoes the King's own, used to announce the start and fair end of every hunt across the Open Field's territory.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Old Doe</span> &mdash; A former quarry who yielded so gracefully, decades ago, that the King made her a permanent confidante.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">Snareset</span> &mdash; Once a hunter in the Open Field who broke the rules of fair pursuit to guarantee a kill. The King didn't banish him, only stripped him of the right to hunt again — a mercy that Snareset experiences as a much harder punishment.</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="cr-entry" id="stalking_king">
-  <div class="cr-header">
-    <span class="cr-realm-name" style="color:#2C2C2A;">The Frozen Run</span>
-  </div>
-  <p class="cr-subtitle">Realm of the Stalking King &mdash; <a href="stalking_king.html" style="color:#2C2C2A; text-decoration:none;">The Stalking King &rarr;</a></p>
-
-  <div class="cr-grid">
-    <div class="cr-col">
-      <h4>At a Glance</h4>
-      <p>The same endless forest as the Evergreen Run, dead and frost-bitten, locked in a dusk that never becomes night.</p>
-      <h4>Geography</h4>
-      <p>The Frozen Run mirrors the Evergreen Run's forest exactly in shape, but every tree stands bare and frost-coated, and the golden autumn light has curdled into a flat, cold blue dusk that never deepens into night. Unlike the welcoming game trails above, paths in the Frozen Run seem to actively lead pursued creatures into worse and worse positions — dead ends, exposed clearings, narrowing ravines — as though the forest itself is hunting alongside its King.</p>
-      <h4>Notable Locations</h4>
-      <ul><li><strong>No Fixed Doorway.</strong> As detailed in the realm's mechanics, the Frozen Run's threshold follows the Stalking King's marked quarry rather than remaining in one place; survivors describe the forest's edge simply appearing wherever they tried to flee.</li><li><strong>The Endless Chase Clearing.</strong> The corrupted mirror of the Open Field, where hunts that began above sometimes end below instead, dragged through a doorway mid-pursuit by a Lord who refuses to let a fair chase stay fair.</li><li><strong>The Bone Trail.</strong> A path littered, very deliberately, with the remains of past quarry — not hidden, not disguised, simply left as evidence for anyone foolish enough to need convincing of what waits at the end of this particular chase.</li></ul>
-      <h4>Doorway</h4>
-      <p>Unstable and predatory — doors into the Frozen Run tend to open behind those the Stalking King has already marked, rather than in any fixed location, following the quarry rather than waiting for them. <br><em>Sample doorway: No reliable doorway is known; survivors of an encounter with the Stalking King report the forest's edge appearing wherever they tried to run, regardless of how far from the original sighting they'd traveled.</em></p>
-      <h4>Pulled Out / Pushed In</h4>
-      <p>The Stalking King pulls his marked quarry into the Frozen Run when the chase favors him, and pushes the forest's cold, dead reach into Mirrorbloom when it favors him more to hunt in familiar territory — whichever serves the kill, with no concern for fairness either way.</p>
-      <h4>Adventure Hook</h4>
-      <p>What Fleetfoot Wren Became, the broken mirror of the Hunter King's own Seneschal, has begun leaving deliberate signs along the Bone Trail — small, careful clues suggesting he remembers, somewhere underneath the endless running, what it felt like to yield gracefully once and be honored for it.</p>
-    </div>
-    <div class="cr-col">
-      <h4>The Endless Chase</h4>
-      <p style="font-style:italic; margin-bottom:1.2rem;">There is no honorable entry. Anyone marked as the Stalking King's quarry and not killed outright is simply never released — they become part of the Endless Chase permanently.</p>
-      <div class="role-list"><div class="role-item"><span class="role-title">Seneschal</span><br><span class="role-name">What Fleetfoot Wren Became</span> &mdash; The same courtier who serves the Hunter King in the world above, mirrored below into someone who has been running so long he has forgotten the chase was ever supposed to end.</div><div class="role-item"><span class="role-title">Champion</span><br><span class="role-name">Boneantler</span> &mdash; The broken, undying mirror of Greatantler, fighting in hunts that are never games and never end, against opponents who never agreed to play.</div><div class="role-item"><span class="role-title">Herald</span><br><span class="role-name">The Silent Horn</span> &mdash; Carries the same horn as the Bright Horn above, except it makes no sound at all.</div><div class="role-item"><span class="role-title">Confessor</span><br><span class="role-name">Old Doe's Shadow</span> &mdash; Listens to confessions the way her counterpart does, except every secret she hears, she eventually repeats to the Stalking King himself, whether she means to or not.</div><div class="role-item"><span class="role-title">Forsaken</span><br><span class="role-name">The One Who Stopped Running</span> &mdash; A courtier who simply gave up the chase one day, neither caught nor escaped, and now wanders the edges of the Endless Chase in a kind of permanent, exhausted limbo.</div></div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
-
+</main>
 </body>
 </html>

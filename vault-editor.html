@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vault editor — Mirrorbloom</title>
+<meta name="description" content="Edit the sealed vault.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/sanctum.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/editor.js" defer></script>
+</head>
+<body data-section="sanctum" data-sealed-page>
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="sanctum.html">The Sanctum</a></p>
+  <h1 class="title">Vault editor</h1>
+  <p class="standfirst">Change sealed lore here, then download the sealed vault and upload it to GitHub in place of the old <code>vault.enc</code>.</p>
+  <div class="btn-row">
+    <button class="btn primary" type="button" id="dlSealed">Download sealed vault</button>
+    <button class="btn" type="button" id="showImport">Import entries</button>
+    <button class="btn" type="button" id="showPass">Change passphrase</button>
+    <button class="btn" type="button" id="dlPlain">Download unsealed backup</button>
+  </div>
+  <p class="muted" id="edStatus" role="status">Loading the vault&hellip;</p>
+</div>
+<div class="layout editor">
+  <div class="ed-grid">
+    <nav class="ed-list" aria-label="Vault entries">
+      <div class="btn-row"><button class="btn small" type="button" id="newPage">New page</button><button class="btn small" type="button" id="newSnip">New snippet</button></div>
+      <input type="search" id="edFilter" placeholder="Filter entries" aria-label="Filter entries">
+      <div id="edEntries"></div>
+    </nav>
+    <section class="ed-form" aria-label="Edit entry">
+      <form id="edForm" class="hidden">
+        <p class="kicker" id="edKind"></p>
+        <div class="ed-row"><div><label for="edId">Key</label><input id="edId" type="text" required pattern="[a-z0-9\-_]+" title="Lowercase letters, numbers and dashes"></div>
+          <div class="page-only"><label for="edGroup">Group</label><select id="edGroup"><option value="secrets">Secret lore</option><option value="statblocks">Stat blocks</option><option value="bestiary">Bestiary</option><option value="adventures">Adventures</option><option value="archive">Archive</option><option value="guide">Guide</option></select></div></div>
+        <div class="page-only"><label for="edTitle">Title</label><input id="edTitle" type="text"></div>
+        <div class="page-only"><label for="edSummary">One-line summary</label><input id="edSummary" type="text"></div>
+        <div><label for="edHtml">Content (HTML: &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;strong&gt; and so on)</label><textarea id="edHtml" rows="16"></textarea></div>
+        <label class="page-only remember"><input type="checkbox" id="edComp" checked> Include in the Compendium</label>
+        <div class="btn-row"><button class="btn primary" type="submit">Save entry</button><button class="btn" type="button" id="edDelete">Delete entry</button><a class="btn" id="edOpen" href="#">Open page</a></div>
+        <p class="muted small-note">Saved entries stay in this browser tab until you download the sealed vault.</p>
+        <h3>Preview</h3>
+        <div class="ed-preview prose sealed-content" id="edPreview"></div>
+      </form>
+      <div id="edEmpty"><p class="muted">Choose an entry on the left, or make a new one.</p></div>
+    </section>
+  </div>
+</div>
+<dialog class="ed-dialog" id="importDlg">
+  <form method="dialog" id="importForm">
+    <h2>Import entries</h2>
+    <p class="muted">Paste JSON in this shape. Entries with the same key are replaced.</p>
+    <pre class="ed-pre">{ "pages": { "my-page": { "title": "...", "group": "secrets", "summary": "...", "html": "&lt;p&gt;...&lt;/p&gt;" } },
+  "snippets": { "my-secret": "&lt;p&gt;...&lt;/p&gt;" } }</pre>
+    <textarea id="importText" rows="10" aria-label="JSON to import"></textarea>
+    <p class="muted" id="importErr" role="alert"></p>
+    <div class="btn-row"><button class="btn primary" value="ok" id="importGo">Import</button><button class="btn" value="cancel" formnovalidate>Cancel</button></div>
+  </form>
+</dialog>
+<dialog class="ed-dialog" id="passDlg">
+  <form method="dialog" id="passForm">
+    <h2>Change passphrase</h2>
+    <p class="muted">You will get a new <code>vault.enc</code> sealed with the new passphrase. Upload it to replace the old one. Every remembered device will need to sign in again.</p>
+    <label for="pass1">New passphrase</label><input id="pass1" type="password" autocomplete="new-password" minlength="10">
+    <label for="pass2">Type it again</label><input id="pass2" type="password" autocomplete="new-password" minlength="10">
+    <p class="muted" id="passErr" role="alert"></p>
+    <div class="btn-row"><button class="btn primary" value="ok" id="passGo">Seal with new passphrase</button><button class="btn" value="cancel" formnovalidate>Cancel</button></div>
+  </form>
+</dialog>
+</main>
+</body>
+</html>

@@ -1,139 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Gilded Goose — Mirrorbloom</title>
+<meta name="description" content="The Gilded Goose: a top-five guild of the Shining Everlast, its divisions, its council, the Elite Four, and its catastrophic guildmaster Crockett.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html" class="active">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <span class="current">The Gilded Goose</span>
+<body data-section="guild">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="gilded-goose.html">The Guild</a></p>
+  <h1 class="title">The Gilded Goose</h1><span class="title-ref" aria-hidden="true">The Gilded Goose</span>
+  <p class="standfirst">Part research guild, part mercenary outfit, part organized disaster.</p>
 </div>
-
-<div class="page-hero">
-  <p class="page-eyebrow" style="color:#E8C060;">Guild &mdash; Top 5, The Shining Everlast</p>
-  <h1 class="page-title" style="color:#E8C060;">The Gilded Goose</h1>
-  <p class="page-sub">Part research guild, part mercenary outfit, part organized disaster.</p>
+<div class="layout has-rail">
+<article class="prose">
+<blockquote class="motto">Find it. Understand it. Share it. Break the rules that say you can't.<cite>The guild's motto</cite></blockquote>
+<section class="section" id="guild">
+<h2>The guild</h2>
+<p>One of the top five active guilds in the Shining Everlast. The public loves them: the free meals, the spectacles, the way they always pay for what they break. The Senate is split fifty-fifty on whether they are the empire's greatest asset or its most expensive liability, but every senator on both sides acknowledges their value. The Gilded Goose causes catastrophic, costly disasters with remarkable regularity. It has also, without exception, cleaned up every one.</p>
+<p>The guildhall stands in the heart of the capital and is significantly larger on the inside than the outside, a fact the guild has never explained and the city has stopped asking about.</p>
+<h3>Three divisions</h3>
+<dl class="facts">
+<dt>The Scroll</dt><dd>Research, the guild's founding purpose: find it, understand it, share it. It learned early that research does not fund itself.</dd>
+<dt>The Sword</dt><dd>Mercenary work. Research requires travel, travel requires protection, and protection done well pays for everything else.</dd>
+<dt>Administration</dt><dd>The quiet miracle that keeps the other two solvent, legal, and out of Senate hearings. Mostly.</dd>
+</dl>
+</section>
+<section class="section" id="guildmaster">
+<h2>The guildmaster</h2>
+<div class="people"><a class="person" href="crockett.html"><span class="mark">C</span><div><h3>Crockett</h3><span class="role">Founder and guildmaster</span><p>A small, very old goblin with chaotic time magic, catastrophic curiosity, and the most expensive line of credit in the empire.</p></div></a></div>
+</section>
+<section class="section" id="council">
+<h2>The council</h2>
+<div class="people">
+<div class="person"><span class="mark">A</span><div><h3>Anna Linfay</h3><span class="role">Head of Research</span><p>Stern, precise, black hair and glasses, and she can fly. A former professor at the Mages College, whose recorded lectures still circulate. She is the one who keeps Crockett in check.</p></div></div>
+<div class="person"><span class="mark">G</span><div><h3>Gerald</h3><span class="role">Swordmaster</span><p>An older, drunken gentleman with a heart of gold, constantly underestimated and a menace in actual combat. He believes freedom has a weight, and that the weight is accountability, not control.</p></div></div>
+<div class="person"><span class="mark">S</span><div><h3>Sandy</h3><span class="role">Head of Administration</span><p>Small, blonde, green-eyed and genuinely gentle. Not soft: there is a backbone in Sandy that shows the moment someone threatens her ledgers or her people.</p></div></div>
 </div>
-
-<div class="motto-strip">
-  <p>&ldquo;Find it. Understand it. Share it. Break the rules that say you can't.&rdquo;</p>
+</section>
+<section class="section" id="elite-four">
+<h2>The Elite Four</h2>
+<p>The guild's sharpest edge: its most powerful members in combat and capability, and the heart of its strangest family.</p>
+<div class="people">
+<a class="person" href="cherry.html"><span class="mark">&#10047;</span><div><h3>Cherry</h3><span class="role">The wild card</span><p>A human, transformed. Carnival magic, black tears, a mask she never takes off in public, and a heart bigger than the damage bill.</p></div></a>
+<a class="person" href="will.html"><span class="mark">&#9877;</span><div><h3>Will</h3><span class="role">The physician</span><p>Cleric and biomancer. Arcane lens eyes, pure white hair, and an amulet of the All Mother he has never taken off.</p></div></a>
+<a class="person" href="tom.html"><span class="mark">&#9670;</span><div><h3>Tom</h3><span class="role">The quiet one</span><p>The guild's top spy. Completely, deliberately unremarkable. You have already forgotten what he looks like.</p></div></a>
+<a class="person" href="sansa.html"><span class="mark">&#9876;</span><div><h3>Sansa</h3><span class="role">The iron shield</span><p>A warrior princess of Vaelgard with a giant axe, ice and lightning, and a complicated relationship with the word "duty."</p></div></a>
 </div>
-
-<div class="section">
-  <p class="section-label">The Guild</p>
-  <p>One of the top five active guilds in the Shining Everlast. The public loves them &mdash; the free meals, the spectacles, the way they always pay for what they break. The Senate is split fifty-fifty on whether they are the empire's greatest asset or its most expensive liability, but every senator on both sides of that line acknowledges their value. The Gilded Goose causes catastrophic, costly disasters with remarkable regularity. They have also, without exception, cleaned up every one.</p>
-  <p>The guildhall stands in the heart of the capital and is significantly larger on the inside than the outside &mdash; a fact the guild has never explained and the city has stopped asking about.</p>
+</section>
+<section class="section" id="friends">
+<h2>Friends of the guild</h2>
+<dl class="facts">
+<dt>Victor</dt><dd>A guild member and Hopelight and rune expert, as talented as any of the Elite Four and passed over because his ego made him a liability under pressure. He still wants the seat.</dd>
+<dt>Rog</dt><dd>The old orc who runs <a href="orders.html#foundry">the Foundry</a>, and an old friend of the guild.</dd>
+</dl>
+</section>
+<section class="section" id="serial">
+<h2>Read their story</h2>
+<p><a href="serial.html">Tales of the Gilded Goose</a> follows Crockett and the Elite Four on the expedition that broke through the floor of the world. A new chapter every Friday.</p>
+<p class="btn-row"><a class="btn primary" href="serial.html">About the serial</a><a class="btn" data-rr href="#">Read on Royal Road</a></p>
+</section>
+</article>
+<aside class="rail" aria-label="On this page"><div class="rail-inner"><div><h3>On this page</h3><ul><li><a href="#guild">The guild</a></li><li><a href="#guildmaster">The guildmaster</a></li><li><a href="#council">The council</a></li><li><a href="#elite-four">The Elite Four</a></li><li><a href="#friends">Friends of the guild</a></li></ul></div><div><h3>Characters</h3><ul><li><a href="crockett.html">Crockett</a></li><li><a href="cherry.html">Cherry</a></li><li><a href="will.html">Will</a></li><li><a href="tom.html">Tom</a></li><li><a href="sansa.html">Sansa</a></li></ul></div></div></aside>
 </div>
-
-<div class="section">
-  <p class="section-label">Three Divisions</p>
-  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;">
-    <div class="char-card" style="cursor:default;"><span class="char-name">The Scroll</span><span class="char-epithet" style="display:block;">Research</span><span class="char-line">The guild's founding purpose: find it, understand it, share it. A research institution that learned early that research doesn't fund itself.</span></div>
-    <div class="char-card" style="cursor:default;"><span class="char-name">The Sword</span><span class="char-epithet" style="display:block;">Mercenary work</span><span class="char-line">Research requires travel, travel requires protection, and protection &mdash; done well &mdash; pays for everything else.</span></div>
-    <div class="char-card" style="cursor:default;"><span class="char-name">Administration</span><span class="char-epithet" style="display:block;">The quiet miracle</span><span class="char-line">The division that keeps the other two solvent, legal, and out of Senate hearings. Mostly.</span></div>
-  </div>
-</div>
-
-<div class="section">
-  <p class="section-label">The Guildmaster</p>
-  <div class="char-grid" style="grid-template-columns:1fr;">
-    <a href="crockett.html" class="char-card">
-      <div class="sigil">C</div>
-      <span class="char-name">Crockett</span>
-      <span class="char-epithet" style="display:block;">Founder &amp; Guildmaster &mdash; The Oldest Goblin in the Everlast</span>
-      <span class="char-line">A small, very old goblin who wears his three hundred years the way a well-used tool wears its scratches. Chaotic time magic, catastrophic curiosity, and the single most expensive line of credit in the empire. Full character sheet &rarr;</span>
-    </a>
-  </div>
-</div>
-
-<div class="section">
-  <p class="section-label">The Council</p>
-  <div class="char-grid">
-    <div class="char-card" style="cursor:default;">
-      <div class="sigil">A</div>
-      <span class="char-name">Anna Linfay</span>
-      <span class="char-epithet" style="display:block;">Head of Research</span>
-      <span class="char-line">Stern, precise, black hair and glasses. A former professor of the Hopelight Institution, and the person closest to Crockett &mdash; which mostly means she is the one who keeps him in check.</span>
-    </div>
-    <div class="char-card" style="cursor:default;">
-      <div class="sigil">G</div>
-      <span class="char-name">Gerald</span>
-      <span class="char-epithet" style="display:block;">Swordmaster</span>
-      <span class="char-line">An older, drunken gentleman with a heart of gold. A fool by reputation and something close to it by choice &mdash; being underestimated is a weapon, and in actual combat he is a menace.</span>
-    </div>
-    <div class="char-card" style="cursor:default;">
-      <div class="sigil">S</div>
-      <span class="char-name">Sandy</span>
-      <span class="char-epithet" style="display:block;">Head of Administration</span>
-      <span class="char-line">Small, blonde, green-eyed, and genuinely gentle. Not soft &mdash; there is a backbone in Sandy that becomes visible the moment someone threatens her ledgers or her people.</span>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <p class="section-label">The Elite Four</p>
-  <p>The guild's sharpest edge &mdash; its most powerful members in combat and capability, and the heart of the guild's strangest family.</p>
-  <div class="char-grid">
-    <a href="cherry.html" class="char-card">
-      <div class="sigil" style="border-color:var(--despair-bright);color:var(--despair-bright);">&#10047;</div>
-      <span class="char-name">Cherry</span>
-      <span class="char-epithet" style="display:block;">The Wild Card</span>
-      <span class="char-line">Tiefling wild magic sorceress. Circus magic, black tears, a smile that opens a little too wide, and a heart bigger than the damage bill.</span>
-    </a>
-    <a href="will.html" class="char-card">
-      <div class="sigil">&#9877;</div>
-      <span class="char-name">Will</span>
-      <span class="char-epithet" style="display:block;">The Physician</span>
-      <span class="char-line">Cleric and biomancer. Mad scientist doctor with arcane lens eyes, pure white hair, and an amulet of the All Mother he has never once taken off.</span>
-    </a>
-    <a href="tom.html" class="char-card">
-      <div class="sigil">&#9670;</div>
-      <span class="char-name">Tom</span>
-      <span class="char-epithet" style="display:block;">The Quiet One</span>
-      <span class="char-line">The guild's top spy. Completely, deliberately, professionally unremarkable. You have already forgotten what he looks like.</span>
-    </a>
-    <a href="sansa.html" class="char-card">
-      <div class="sigil">&#9876;</div>
-      <span class="char-name">Sansa</span>
-      <span class="char-epithet" style="display:block;">The Iron Shield</span>
-      <span class="char-line">Half-giant warrior princess. Blonde braids, an honest laugh, and a very complicated relationship with the word &ldquo;duty.&rdquo;</span>
-    </a>
-  </div>
-</div>
-
-<div class="section">
-  <a class="serial-banner" href="chapters.html">
-    <p class="sb-eyebrow">Read their story &mdash; Updates Mon / Wed / Fri</p>
-    <p class="sb-title">Tales of the Gilded Goose</p>
-    <p class="sb-desc">The web serial follows Crockett and the Elite Four on the expedition that broke through the floor of the world. Read the chapters right here on the site, or follow along on Royal Road.</p>
-  </a>
-</div>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
+</main>
 </body>
 </html>

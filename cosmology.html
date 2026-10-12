@@ -1,232 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cosmology — Mirrorbloom</title>
+<meta name="description" content="The Law of Reflection, the Shackle, the Breaking, the two gods, the three tiers of the divine and the twelve Archfey of Mirrorbloom.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-  .law-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; margin:2.2rem 0; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
-  .law-half { padding:2rem; }
-  .law-half.above { background:rgba(212,162,86,0.05); border-right:1px solid var(--border); }
-  .law-half.below { background:rgba(138,43,43,0.06); }
-  .law-half h3 { font-family:var(--serif); font-size:1.3rem; margin-bottom:0.6rem; }
-  .law-half.above h3 { color:var(--hope-bright); }
-  .law-half.below h3 { color:var(--despair-bright); }
-  .law-half p { color:var(--ink-dim); font-size:0.92rem; line-height:1.7; }
-  .law-feed { text-align:center; padding:0.7rem; grid-column:1 / -1; border-top:1px solid var(--border); color:var(--ink-dim); font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; }
-  .myth-block { border-left:2px solid var(--hope-dim); padding-left:1.6rem; margin:2.2rem 0; font-family:var(--serif); font-style:italic; font-size:1.12rem; color:var(--ink); line-height:1.7; }
-  @media (max-width:640px){ .law-grid{grid-template-columns:1fr;} .law-half.above{border-right:none; border-bottom:1px solid var(--border);} }
-</style>
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html" class="active">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
+<body data-section="cosmology">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="cosmology.html">Cosmology</a></p>
+  <h1 class="title">Cosmology</h1><span class="title-ref" aria-hidden="true">Cosmology</span>
+  <p class="standfirst">One flat world, split top and bottom like a reflection on still water.</p>
+</div>
+<div class="layout has-rail">
+<article class="prose">
 
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <span class="current">Cosmology</span>
-</div>
+<section class="section" id="shape">
+<p class="lede dropcap">Mirrorbloom is a single world, not two. Picture a coin. The upper face, <strong>Solance</strong>, is whimsical, beautiful fantasy, a little Alice in Wonderland around the edges. The lower face, <strong>Umbrasol</strong>, is its exact dark mirror: pure horror. They are not separate planes so much as two sides of the same thing, held together by one law that governs everything else in the setting.</p>
+<p>Above, thirteen nations share three continents, a floating dominion and the deep kingdoms under the sea (see <a href="world.html">The Thirteen Nations</a>). Below, every one of them is cast again, with the same names and the same peoples, corrupted. Umbrasol's sky holds two red moons. Everyone below knows whose eyes they are.</p>
+<p>At the rim of Solance the land simply stops. Scholars call it the Boundary: a beautiful, unsettling edge where the ground gives way to open space and, somewhere beneath, Umbrasol. Gravity weakens the closer you get. People have tried again and again to explore that space and build colonies out in it, and every single attempt has been attacked and ruined by Umbrasol, even expeditions launched from the far side of the world. Nobody has explained how Umbrasol always knows. It has never stopped anyone from trying.</p>
+<div class="lecture"><p>Most worlds are spheres, and most have no Law of Reflection at all. The Sundering is what made ours what it is. Realm walkers, who cross between worlds as easily as you cross a street, avoid Mirrorbloom like the plague, and none of them will say why. I have a suspicion it is connected to the other thing we do not like to say in class: that Mirrorbloom's own people cannot leave.</p><p class="who">Paraphrased from Professor Linfay's recorded lectures at the Mages College</p></div>
+</section>
 
-<div class="page-hero">
-  <p class="page-eyebrow hope-tone">The Foundation</p>
-  <h1 class="page-title">Cosmology</h1>
-  <p class="page-sub">One flat world, split top and bottom like a reflection on still water.</p>
-</div>
+<section class="section" id="law">
+<h2>The Law of Reflection</h2>
+<p>Beauty and goodness generated above directly feed horror and evil below. It is not metaphorical and it is not optional. It is closer to a law of physics than a moral teaching. A kindness performed in Mirrorbloom is, somewhere beneath it, paid for.</p>
+<p>The law reads <em>intent</em>, not deeds. A kindness performed for show moves nothing; a genuine change of heart moves the whole scale. That is why the old saying holds that true goodness is never free. Even the dead are not exempt: each soul is judged on its own, but genuine goodness in one life quietly pushes its mirror self toward a darker fate.</p>
+<h3>The Shackle</h3>
+<p>Everyone born in Mirrorbloom is bound to a mirror self, a counterpart in the other half whose alignment runs opposite to their own and is inversely linked. Scholars of the Shining Everlast call this binding the Shackle. Most people live and die without ever meeting theirs. Some spend their whole lives trying to. A few, the unlucky ones, are found first.</p>
+<p>When one half of a shackled pair truly changes, in intent rather than in act, the other half shifts to keep the balance. Goodness earned above darkens something below. Cruelty below brightens something above. No one has ever broken a Shackle, and it is not known what would happen if someone did.</p>
+<p>Studying the Law of Reflection itself is outlawed. Most people never think about why. For the deeper layers of what is actually known, and by whom, see <a href="iceberg.html">the Knowledge Iceberg</a>.</p>
+<div class="seal-block" data-seal="law-enforcement" data-lines="4" data-label="How the Law actually enforces itself."></div>
+</section>
 
-<div class="section">
-  <p class="lead">Mirrorbloom is a single world, not two. Picture a disc, or a coin &mdash; the upper face, <strong>Solance</strong>, is whimsical, beautiful, Alice-coded fantasy. The lower face, <strong>Umbrasol</strong>, is its exact dark mirror: pure horror. They are not separate planes so much as two sides of the same thing, bound by a single law that governs everything else in this setting.</p>
-</div>
+<section class="section" id="breaking">
+<h2>The Breaking</h2>
+<p>Before any of this, there was no above and no below. There was only the Great Hope and the Great Despair, two halves of a single radiant whole, though no living thing remembers what that whole was called, or whether it had a name at all.</p>
+<blockquote>Once, there was one being, whole, or two who were as one. Something happened between them that no one now remembers, or no one was ever told. The world split in the breaking: above, joy, untouched and bright. Below, despair, sharp-toothed and starving. The one above does not know what became of the one below. The one below has convinced herself something was stolen, a crown, a right, a throne, because that is easier to survive believing than the truth: that she is simply, completely alone.<cite>The oldest telling, as the Archfey's courts repeat it</cite></blockquote>
+<p>The cause of the split is, even in the world, a genuine mystery. No scholar, court or scripture agrees on why it happened, and that uncertainty is part of the setting's design. What is known for certain: the Great Hope does not remember what became of the Great Despair, and does not know what her shadow now believes was taken from her. The Great Despair has built an entire identity, an entire crusade, around reclaiming a crown that never existed.</p>
+<p>Historians call the same event the Sundering and date everything from it. It happened roughly ten thousand years ago. Before it, some scholars argue, the world was round. See the <a href="timeline.html">Timeline</a>.</p>
+</section>
 
-<div class="section">
-  <p class="section-label">The Law of Reflection</p>
-  <p>Beauty and goodness generated above directly feeds horror and evil below. It is not metaphorical and it is not optional &mdash; it is closer to a law of physics than a moral teaching. A kindness performed in Mirrorbloom is, somewhere beneath it, paid for.</p>
-  <div class="law-grid">
-    <div class="law-half above"><h3>Above &mdash; Solance</h3><p>Fifteen empires, whimsical and Alice-coded. Joy, hope, beauty, and abundance, generated by mortal lives lived well.</p></div>
-    <div class="law-half below"><h3>Below &mdash; Umbrasol</h3><p>Fifteen corrupted twin empires &mdash; same names, same peoples, inverted. Every empire above casts an exact shadow below.</p></div>
-    <div class="law-feed">fed by &#8595;</div>
-  </div>
-  <p>The law cuts deeper than nations. <strong>Intent drives alignment</strong>: a genuine change of heart in one half of the world mirrors across to the other, whether either party wants it to or not.</p>
-</div>
+<section class="section" id="tiers">
+<h2>The three tiers of the divine</h2>
+<p>Mirrorbloom's divine order has three tiers, and the difference between them matters to anyone who prays, bargains or picks a fight.</p>
+<dl class="facts">
+<dt>First tier</dt><dd>The Great Hope and the Great Despair. They are creators, not expressions of the Mana Field, and nothing else in the world is their equal.</dd>
+<dt>Second tier</dt><dd>The twelve Archfey aspects. This is the everyday pantheon, the gods people actually pray to, swear by and leave offerings for.</dd>
+<dt>Third tier</dt><dd>The High Fey. Lesser divinities who hold the domains the twelve do not.</dd>
+</dl>
+<h3>The High Fey</h3>
+<p>A High Fey can come into being three ways. Some are born or spawned. Some are generated by strong belief or by ritual, sustained long enough to take shape. And some are made: a mortal of great power raised up by an Archfey, or one who climbs there by sheer power alone.</p>
+<p>High Fey normally sit well below the Archfey in strength, but not always. A rare, exceptional High Fey could in principle rival an Archfey, or even overthrow one. Nobody can say whether that has ever happened, and the question hangs over every ambitious mortal who has ever wondered how far up they could climb.</p>
+<p>New domains of worship land in this tier rather than among the twelve. Magic, knowledge and fate, trade and fortune, death and endings: these are all spoken of, but which High Fey hold them is not yet set down in this record.</p>
+<p class="muted">The <a href="kenanism.html">Kenanism Empire</a> follows a faith entirely its own and does not belong to this pantheon.</p>
+</section>
 
-<div class="section">
-  <p class="section-label">The Shackle System</p>
-  <p>Everyone born in Mirrorbloom is bound to a mirror self &mdash; a counterpart in the other half whose alignment runs opposite to their own and is inversely linked. Scholars of the Shining Everlast call this binding the <strong>Shackle</strong>. Most people live and die without ever meeting theirs. Some spend their whole lives trying to. A few, the unlucky ones, are found first.</p>
-  <p>When one half of a shackled pair changes &mdash; truly changes, in intent rather than in act &mdash; the other half shifts to keep the balance. Goodness earned above darkens something below. Cruelty below brightens something above. No one has ever broken a Shackle. It is not known what would happen if someone did.</p>
-</div>
+<section class="section" id="gods">
+<h2>The two gods</h2>
+<p>Hover over the coin, or cross the mirror with the button at the top of the page, and it turns.</p>
+<div class="pairs gods-pair"><div class="coin" tabindex="0" aria-label="The Great Hope above, The Great Despair below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="great_hope"></span></div><div class="coin-face shadow"><span data-sigil="great_despair"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Great Hope</span><span class="e">She Who Does Not Know</span></span><span class="nm-shadow"><span class="n">The Great Despair</span><span class="e">The Uncrowned Queen</span></span></div>
+  <div class="coin-links"><a href="great_hope.html">Above</a><a href="great_despair.html">Below</a></div>
+</div></div>
+<p><a href="great_hope.html">The Great Hope</a>, She Who Does Not Know, is the All Mother of Solance. <a href="great_despair.html">The Great Despair</a>, the Uncrowned Queen, is Mistress Despair to Umbrasol, and the red moons are her eyes.</p>
+</section>
 
-<div class="section">
-  <p class="section-label">The Three Layers of Magic</p>
-  <p><strong>The personal core.</strong> Every living thing carries its own reservoir of mana &mdash; small in most, vast in a few, shaped by temperament as much as training.</p>
-  <p><strong>The ambient field.</strong> Mana saturates the world itself, an ocean both halves swim in. Casters draw on the field to fuel workings their core alone could never sustain.</p>
-  <p><strong>Field influence.</strong> The rarest tier. Beings of sufficient power can inject their own magic <em>into</em> the field, bending ambient reality around them &mdash; weather that obeys a mood, ground that remembers a grudge. The gods and the Archfey live at this tier. A small number of mortals have touched it. Most regretted it.</p>
+<section class="section" id="archfey">
+<h2>The Archfey</h2>
+<p>The Six Great Fey Lords did not witness the Breaking. They were <em>born from it</em>, the way light scatters into a spectrum when it passes through broken glass. Each Lord exists as a mirrored pair: a bright aspect above and a corrupted shadow below, twelve aspects in all, each holding a named court. Only the Fey Lords know the truth of what happened during the Breaking, and the Great Hope has been sealed away from that knowledge.</p>
+<p>Below the glass, the shadow aspects face you. Above, the bright ones do. Hover over any coin to turn it.</p>
+<div class="pairs">
+<div class="coin" tabindex="0" aria-label="The Dawnward King above, The Duskward King below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="dawnward_king"></span></div><div class="coin-face shadow"><span data-sigil="duskward_king"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Dawnward King</span><span class="e">First Light</span></span><span class="nm-shadow"><span class="n">The Duskward King</span><span class="e">Last Light</span></span></div>
+  <div class="coin-links"><a href="dawnward_king.html">Above</a><a href="duskward_king.html">Below</a></div>
 </div>
+<div class="coin" tabindex="0" aria-label="The Verdant Lady above, The Bloated Lady below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="verdant_lady"></span></div><div class="coin-face shadow"><span data-sigil="bloated_lady"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Verdant Lady</span><span class="e">The Garden Unbroken</span></span><span class="nm-shadow"><span class="n">The Bloated Lady</span><span class="e">What Growth Becomes</span></span></div>
+  <div class="coin-links"><a href="verdant_lady.html">Above</a><a href="bloated_lady.html">Below</a></div>
+</div>
+<div class="coin" tabindex="0" aria-label="The Revel King above, The Mocking King below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="revel_king"></span></div><div class="coin-face shadow"><span data-sigil="mocking_king"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Revel King</span><span class="e">A Thousand Faces, Each One Borrowed</span></span><span class="nm-shadow"><span class="n">The Mocking King</span><span class="e">The Smile That Cannot Move</span></span></div>
+  <div class="coin-links"><a href="revel_king.html">Above</a><a href="mocking_king.html">Below</a></div>
+</div>
+<div class="coin" tabindex="0" aria-label="The Lady of Dreaming above, The Lady of Waking below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="lady_of_dreaming"></span></div><div class="coin-face shadow"><span data-sigil="lady_of_waking"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Lady of Dreaming</span><span class="e">The Shape Sleep Takes</span></span><span class="nm-shadow"><span class="n">The Lady of Waking</span><span class="e">The Eyes That Will Not Close</span></span></div>
+  <div class="coin-links"><a href="lady_of_dreaming.html">Above</a><a href="lady_of_waking.html">Below</a></div>
+</div>
+<div class="coin" tabindex="0" aria-label="The Hearthkeeper above, The Hollow Host below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="hearthkeeper"></span></div><div class="coin-face shadow"><span data-sigil="hollow_host"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Hearthkeeper</span><span class="e">The Open Door</span></span><span class="nm-shadow"><span class="n">The Hollow Host</span><span class="e">The Same Warm Welcome</span></span></div>
+  <div class="coin-links"><a href="hearthkeeper.html">Above</a><a href="hollow_host.html">Below</a></div>
+</div>
+<div class="coin" tabindex="0" aria-label="The Hunter King above, The Stalking King below">
+  <div class="coin-face-wrap"><div class="coin-face top"><span data-sigil="hunter_king"></span></div><div class="coin-face shadow"><span data-sigil="stalking_king"></span></div></div>
+  <div class="coin-names"><span class="nm-top"><span class="n">The Hunter King</span><span class="e">The Fair Chase</span></span><span class="nm-shadow"><span class="n">The Stalking King</span><span class="e">The Chase That Never Ends</span></span></div>
+  <div class="coin-links"><a href="hunter_king.html">Above</a><a href="stalking_king.html">Below</a></div>
+</div>
+</div>
+<p>Each Archfey keeps a smaller, personal afterlife for their most devoted followers, flavored by that Archfey's domain. None of them rivals the <a href="meadow.html">Sleeping Meadows</a> in size.</p>
+<p>The Archfey also do one thing that most mortals prefer not to think about. When an anomaly is born, a person with almost limitless potential who grows faster the more they use it, the Archfey or the empires kill it in the cradle. The reason is the last anomaly to survive into adulthood. He killed four Archfey before the All Mother struck him down herself.</p>
+</section>
 
-<div class="section">
-  <p class="section-label">The Breaking</p>
-  <p>Before any of this, there was no above and no below &mdash; there was only the Great Hope and the Great Despair, two halves of a single radiant whole, though no living thing remembers what that whole was called, or whether it had a name at all.</p>
-  <div class="myth-block">Once, there was one being, whole &mdash; or two who were as one. Something happened between them that no one now remembers, or no one was ever told. The world split in the breaking: above, joy, untouched and bright. Below, despair, sharp-toothed and starving. The one above does not know what became of the one below. The one below has convinced herself something was stolen &mdash; a crown, a right, a throne &mdash; because that is easier to survive believing than the truth: that she is simply, completely alone.</div>
-  <p>The cause of the split is, even in-world, a genuine mystery &mdash; no scholar, court, or scripture agrees on why it happened, and that uncertainty is itself part of the setting's design. What's known for certain: the Great Hope does not remember what became of the Great Despair, and does not know what her shadow now believes was taken from her. The Great Despair, for her part, has built an entire identity, an entire crusade, around reclaiming a crown that never existed.</p>
-</div>
+<section class="section" id="crossing">
+<h2>Crossing between halves</h2>
+<p>Each god and each Archfey aspect holds a realm of their own, fourteen in total, tied closely to Mirrorbloom but standing outside it and reachable only through doorways. Some doorways are fixed and well mapped, marked on old charts and guarded or worshipped accordingly. Others wander, opening and closing without warning, in places that held nothing the morning before.</p>
+<p>Through these doors, an Archfey may pull a being out into Mirrorbloom, or push a piece of their own realm into the world: a patch of ground that simply becomes, for a time or forever, somewhere else entirely. See <a href="courts.html">Courts &amp; Realms</a>.</p>
+<p>Crossing between Solance and Umbrasol themselves is another matter. The halves were not meant to touch, and the places where the boundary runs thin are the most dangerous ground in the world. Ancient ruins have a way of sitting on exactly that kind of ground.</p>
+</section>
 
-<div class="section">
-  <p class="section-label">The Two Gods</p>
-  <div class="deity-grid">
-    <a href="great_hope.html" class="deity-card tier-god">
-  <img src="great_hope.jpeg" alt="The Great Hope" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Great Hope</div>
-    <div class="epithet">She Who Does Not Know</div>
-  </div>
-</a><a href="great_despair.html" class="deity-card tier-god">
-  <img src="great_despair.jpeg" alt="The Great Despair" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Great Despair</div>
-    <div class="epithet">The Uncrowned Queen</div>
-  </div>
-</a>
-  </div>
+<div class="waterline"></div>
+<div class="tiles">
+<a class="tile" href="magic.html"><strong>Magic</strong><span>The three layers of magic, dead zones, Hopelight, and the law that logs every spell.</span></a>
+<a class="tile" href="courts.html"><strong>Courts &amp; Realms</strong><span>Fourteen realms, fourteen courts, and the doors between them.</span></a>
+<a class="tile" href="meadow.html"><strong>The Sleeping Meadows</strong><span>Where the souls of Mirrorbloom go to rest.</span></a>
+<a class="tile" href="iceberg.html"><strong>The Knowledge Iceberg</strong><span>How much of all this anyone actually understands.</span></a>
 </div>
-
-<div class="section">
-  <p class="section-label">The Archfey &mdash; The Six Great Fey Lords</p>
-  <p>The Six Great Fey Lords were not witnesses to the Breaking &mdash; they were <em>born from it</em>, the way light scatters into a spectrum when it passes through broken glass. Each Lord exists as a mirrored pair: a bright aspect above and a corrupted shadow below, twelve aspects in all, each holding a named court. Only the Fey Lords know the truth of what happened during the Breaking &mdash; and the Great Hope has been sealed away from that knowledge.</p>
-  <p style="margin-bottom:1.8rem;">Each pair below is shown as the world holds them: the bright aspect beside the shadow it feeds.</p>
-  <div class="pair-row">
-<a href="dawnward_king.html" class="deity-card ">
-  <img src="dawnward_king.jpeg" alt="The Dawnward King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Dawnward King</div>
-    <div class="epithet">First Light</div>
-  </div>
-</a>
-<div class="pair-glyph" aria-hidden="true">&#10022;</div>
-<a href="duskward_king.html" class="deity-card ">
-  <img src="duskward_king.jpeg" alt="The Duskward King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Duskward King</div>
-    <div class="epithet">Last Light</div>
-  </div>
-</a>
+</article>
+<aside class="rail" aria-label="On this page"><div class="rail-inner"><div><h3>On this page</h3><ul><li><a href="#shape">The shape of the world</a></li><li><a href="#law">The Law of Reflection</a></li><li><a href="#breaking">The Breaking</a></li><li><a href="#tiers">Three tiers of the divine</a></li><li><a href="#gods">The two gods</a></li><li><a href="#archfey">The Archfey</a></li><li><a href="#crossing">Crossing between halves</a></li></ul></div><div><h3>Read next</h3><ul><li><a href="magic.html">Magic</a></li><li><a href="courts.html">Courts & Realms</a></li><li><a href="timeline.html">Timeline</a></li></ul></div></div></aside>
 </div>
-<div class="pair-row">
-<a href="verdant_lady.html" class="deity-card ">
-  <img src="verdant_lady.jpeg" alt="The Verdant Lady" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Verdant Lady</div>
-    <div class="epithet">The Garden Unbroken</div>
-  </div>
-</a>
-<div class="pair-glyph" aria-hidden="true">&#10022;</div>
-<a href="bloated_lady.html" class="deity-card ">
-  <img src="bloated_lady.jpeg" alt="The Bloated Lady" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Bloated Lady</div>
-    <div class="epithet">What Growth Becomes</div>
-  </div>
-</a>
-</div>
-<div class="pair-row">
-<a href="jester_king.html" class="deity-card ">
-  <img src="jester_king.jpeg" alt="The Jester King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Jester King</div>
-    <div class="epithet">A Thousand Faces, Each One Borrowed</div>
-  </div>
-</a>
-<div class="pair-glyph" aria-hidden="true">&#10022;</div>
-<a href="mocking_king.html" class="deity-card ">
-  <img src="mocking_king.jpeg" alt="The Mocking King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Mocking King</div>
-    <div class="epithet">The Smile That Cannot Move</div>
-  </div>
-</a>
-</div>
-<div class="pair-row">
-<a href="lady_of_dreaming.html" class="deity-card ">
-  <img src="lady_of_dreaming.jpeg" alt="The Lady of Dreaming" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Lady of Dreaming</div>
-    <div class="epithet">The Shape Sleep Takes</div>
-  </div>
-</a>
-<div class="pair-glyph" aria-hidden="true">&#10022;</div>
-<a href="lady_of_waking.html" class="deity-card ">
-  <img src="lady_of_waking.jpeg" alt="The Lady of Waking" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Lady of Waking</div>
-    <div class="epithet">The Eyes That Will Not Close</div>
-  </div>
-</a>
-</div>
-<div class="pair-row">
-<a href="hearthkeeper.html" class="deity-card ">
-  <img src="hearthkeeper.jpeg" alt="The Hearthkeeper" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Hearthkeeper</div>
-    <div class="epithet">The Open Door</div>
-  </div>
-</a>
-<div class="pair-glyph" aria-hidden="true">&#10022;</div>
-<a href="hollow_host.html" class="deity-card ">
-  <img src="hollow_host.jpeg" alt="The Hollow Host" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Hollow Host</div>
-    <div class="epithet">The Same Warm Welcome</div>
-  </div>
-</a>
-</div>
-<div class="pair-row">
-<a href="hunter_king.html" class="deity-card ">
-  <img src="hunter_king.jpeg" alt="The Hunter King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Hunter King</div>
-    <div class="epithet">The Fair Chase</div>
-  </div>
-</a>
-<div class="pair-glyph" aria-hidden="true">&#10022;</div>
-<a href="stalking_king.html" class="deity-card ">
-  <img src="stalking_king.jpeg" alt="The Stalking King" loading="lazy">
-  <div class="overlay">
-    <div class="name">The Stalking King</div>
-    <div class="epithet">The Chase That Never Ends</div>
-  </div>
-</a>
-</div>
-</div>
-
-<div class="section">
-  <p class="section-label">Crossing Between Halves</p>
-  <p>Each god and each Fey Lord aspect holds a realm of their own &mdash; fourteen in total &mdash; tied closely to Mirrorbloom but standing outside it, reachable only through doorways. Some doorways are fixed and well-mapped, marked on old charts and guarded or worshipped accordingly. Others wander, opening and closing without warning, in places that held nothing the morning before.</p>
-  <p>Through these doors, a Fey Lord may pull a being out into Mirrorbloom, or push a piece of their own realm into the world &mdash; a patch of ground that simply becomes, for a time or forever, somewhere else entirely.</p>
-  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;">
-    <a href="magic.html" class="char-card"><span class="char-name">Magic &amp; the Law of Reflection</span><span class="char-epithet" style="display:block;">The systems in depth</span><span class="char-line">Intent and the Shackle, the three layers of magic, Hopelight, and the doorways.</span></a>
-    <a href="courts.html" class="char-card"><span class="char-name">Courts &amp; Realms</span><span class="char-epithet" style="display:block;">Fourteen realms, fourteen doors</span><span class="char-line">Where each Lord holds court, and the doorways that connect their realms to Mirrorbloom.</span></a>
-    <a href="timeline.html" class="char-card"><span class="char-name">The World Timeline</span><span class="char-epithet" style="display:block;">Five eras of history</span><span class="char-line">From the Primordial Era through the Sundering to the Fourth Age of fifteen empires.</span></a>
-    <a href="empires.html" class="char-card"><span class="char-name">The Shining Everlast</span><span class="char-epithet" style="display:block;">The greatest empire above</span><span class="char-line">The vertical empire of Hopelight &mdash; and the Last Shine, its corrupted mirror twin.</span></a>
-  </div>
-</div>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
+</main>
 </body>
 </html>

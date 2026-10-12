@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Hearthkeeper — Mirrorbloom</title>
+<meta name="description" content="The Hearthkeeper, The Open Door. The bright aspect of Mirrorbloom&#x27;s divine order.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="cosmology.html">Cosmology</a><span class="sep">/</span>
-  <span class="current">The Hearthkeeper</span>
-</div>
-
-<div class="deity-layout">
-  <div class="deity-portrait">
-    <img src="hearthkeeper.jpeg" alt="The Hearthkeeper">
-  </div>
-  <div class="deity-content">
-    <h1>The Hearthkeeper</h1>
-    <p class="epithet">The Open Door</p>
-    <p class="meta">Fey Lord &mdash; <span>Medium archfey, neutral good</span> &mdash; Challenge <span>15</span></p>
-    <div class="lore-text">
-      <p>Of every Fey Lord born from the Breaking, the Hearthkeeper is the one most genuinely, uncomplicatedly good — warmth and hospitality made into a person, the safest presence in all of Wonderland by a margin no scholar disputes. The Long Table feeds anyone who sits at it, asks nothing in return, and has never once, in any recorded instance, betrayed that promise. She knows what her kindness costs below. She continues setting the table anyway.</p>
+<body data-section="cosmology">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="cosmology.html">Cosmology</a><span aria-hidden="true">/</span><a href="cosmology.html#archfey">The Archfey</a></p>
+  <div class="deity-head">
+    <div class="deity-sigil" style="--sigil:var(--gold);--twin:var(--crimson)">
+      <span class="main" data-sigil="hearthkeeper" data-draw></span>
+      <div class="line"></div>
+      <a class="twin-link" href="hollow_host.html" aria-label="Cross to the twin: The Hollow Host"><span class="twin" data-sigil="hollow_host"></span></a>
     </div>
-    <div class="deity-links">
-      <a href="hollow_host.html" class="deity-link-btn shadow-link">See the shadow twin: The Hollow Host &rarr;</a>
-      <a href="statblock-hearthkeeper.html" class="deity-link-btn">View full stat block &rarr;</a>
+    <div>
+      <h1 class="title">The Hearthkeeper</h1>
+      <p class="standfirst">The Open Door</p>
+      <dl class="facts">
+        <dt>Aspect</dt><dd>The bright aspect</dd>
+        <dt>Twin</dt><dd><a href="hollow_host.html">The Hollow Host</a>, The Same Warm Welcome</dd>
+        <dt>Realm</dt><dd><a href="courts.html#long-house">The Long House</a></dd>
+        <dt>Nature</dt><dd>Medium archfey, neutral good</dd>
+        <dt>Challenge</dt><dd>26</dd>
+      </dl>
     </div>
   </div>
 </div>
+<div class="layout has-rail">
+  <article class="prose">
+<p class="lede">Of every Fey Lord born from the Breaking, the Hearthkeeper is the one most genuinely, uncomplicatedly good — warmth and hospitality made into a person, the safest presence in all of Mirrorbloom by a margin no scholar disputes. The Long Table feeds anyone who sits at it, asks nothing in return, and has never once, in any recorded instance, betrayed that promise. She knows what her kindness costs below. She continues setting the table anyway.</p>
 
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
-
+    <div class="sealed-only">
+      <p class="btn-row"><a class="btn primary" href="sealed.html#statblock-hearthkeeper">Open the stat block</a></p>
+    </div>
+    <p class="public-only muted"><em>The full stat block is kept in the Sanctum.</em></p>
+    <div class="waterline"></div>
+    <nav class="btn-row" aria-label="Gods and Archfey"><a class="btn small" href="lady_of_waking.html">Previous: The Lady of Waking</a><a class="btn small" href="hollow_host.html">Next: The Hollow Host</a></nav>
+  </article>
+  <aside class="rail" aria-label="The gods and the Archfey">
+    <div class="rail-inner">
+      <div><h3>The two gods</h3><ul><li><a href="great_hope.html"><span class="mini-sigil top" data-sigil="great_hope"></span>The Great Hope</a></li><li><a href="great_despair.html"><span class="mini-sigil shadow" data-sigil="great_despair"></span>The Great Despair</a></li></ul></div>
+      <div><h3>The Archfey</h3><ul><li><a href="dawnward_king.html"><span class="mini-sigil top" data-sigil="dawnward_king"></span>The Dawnward King</a></li><li><a href="duskward_king.html"><span class="mini-sigil shadow" data-sigil="duskward_king"></span>The Duskward King</a></li><li><a href="verdant_lady.html"><span class="mini-sigil top" data-sigil="verdant_lady"></span>The Verdant Lady</a></li><li><a href="bloated_lady.html"><span class="mini-sigil shadow" data-sigil="bloated_lady"></span>The Bloated Lady</a></li><li><a href="revel_king.html"><span class="mini-sigil top" data-sigil="revel_king"></span>The Revel King</a></li><li><a href="mocking_king.html"><span class="mini-sigil shadow" data-sigil="mocking_king"></span>The Mocking King</a></li><li><a href="lady_of_dreaming.html"><span class="mini-sigil top" data-sigil="lady_of_dreaming"></span>The Lady of Dreaming</a></li><li><a href="lady_of_waking.html"><span class="mini-sigil shadow" data-sigil="lady_of_waking"></span>The Lady of Waking</a></li><li><a href="hearthkeeper.html" class="is-current" aria-current="page"><span class="mini-sigil top" data-sigil="hearthkeeper"></span>The Hearthkeeper</a></li><li><a href="hollow_host.html"><span class="mini-sigil shadow" data-sigil="hollow_host"></span>The Hollow Host</a></li><li><a href="hunter_king.html"><span class="mini-sigil top" data-sigil="hunter_king"></span>The Hunter King</a></li><li><a href="stalking_king.html"><span class="mini-sigil shadow" data-sigil="stalking_king"></span>The Stalking King</a></li></ul></div>
+      <div><h3>Their realms</h3><ul><li><a href="courts.html">Courts &amp; Realms</a></li><li><a href="cosmology.html#archfey">How the pairs were born</a></li></ul></div>
+    </div>
+  </aside>
+</div>
+</main>
 </body>
 </html>

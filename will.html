@@ -1,71 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Will — Mirrorbloom</title>
+<meta name="description" content="Will, The physician of the Elite Four, of the Gilded Goose guild in Mirrorbloom.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html" class="active">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="gilded-goose.html">The Gilded Goose</a><span class="sep">/</span>
-  <span class="current">Will</span>
+<body data-section="guild">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="gilded-goose.html">The Guild</a><span aria-hidden="true">/</span><a href="will.html">Will</a></p>
+  <h1 class="title">Will</h1>
+  <p class="standfirst">The physician of the Elite Four</p>
 </div>
+<div class="layout has-rail">
+<article class="prose">
+<dl class="facts"><dt>Role</dt><dd>Elite Four</dd><dt>Craft</dt><dd>Cleric and biomancer</dd><dt>Faith</dt><dd>The All Mother</dd></dl>
+<section class="section" id="appearance"><h2>Appearance</h2><p>A lanky man with pure white hair and the distracted energy of someone whose mind is always three steps ahead of the conversation. His eyes are arcane lenses of his own design that whir faintly when he focuses. Around his neck, never removed, hangs an amulet of the All Mother.</p></section><section class="section" id="personality"><h2>Personality</h2><p>A mad scientist who happens to be a doctor, or a doctor who happens to be a mad scientist, depending on which experiment is currently on fire. He stores his own alchemical compounds in glands he grew for the purpose, which tells you most of what you need to know about his relationship with the phrase "acceptable risk."</p></section><section class="section" id="craft"><h2>Craft</h2><p>Biomancy: the meeting point of divine healing and arcane experiment. Will heals by stabbing a patient with a fingernail. His magic glows green, and when he uses his own blood to carry it, it mists out red shot through with green, the cost visible in the same breath as the cure. He is both a faithful cleric of the All Mother and a scientist who takes the body apart to see how the miracle works, and the tension between those two things is the axis his whole life turns on.</p></section><section class="section" id="serial"><h2>In the serial</h2><p>Will keeps the expedition alive, patched together, and occasionally mutated slightly for its own good. The journey below keeps handing him cases where faith and science give different answers, and one of these days he will have to decide which one he trusts when they disagree.</p></section>
 
-<div class="page-hero">
-  <p class="page-eyebrow" style="color:#E8C060;">The Gilded Goose</p>
-  <h1 class="page-title">Will</h1>
-  <p class="page-sub">The Physician of the Elite Four</p>
+<div class="waterline"></div>
+<p class="btn-row"><a class="btn" href="gilded-goose.html">Back to the guild</a><a class="btn" href="serial.html">Read the serial</a></p>
+</article>
+<aside class="rail" aria-label="On this page"><div class="rail-inner"><div><h3>The Gilded Goose</h3><ul><li><a href="gilded-goose.html">The Guild</a></li><li><a href="crockett.html">Crockett</a></li><li><a href="cherry.html">Cherry</a></li><li><a href="tom.html">Tom</a></li><li><a href="sansa.html">Sansa</a></li></ul></div><div><h3>On this page</h3><ul><li><a href="#appearance">Appearance</a></li><li><a href="#personality">Personality</a></li><li><a href="#craft">Craft</a></li><li><a href="#serial">In the serial</a></li></ul></div></div></aside>
 </div>
-
-<div class="section">
-  <p class="statline">Medium humanoid (human), chaotic neutral &mdash; Cleric 10 / Wizard 6 (Biomancy), CR 13 (10,000 XP)</p>
-  <div class="sheet-block">
-    <h2>Appearance</h2>
-    <p>A lanky man with pure white hair and the distracted energy of someone whose mind is always three steps ahead of the conversation. His eyes are arcane lenses &mdash; his own design &mdash; that whir faintly when he focuses. Around his neck, never removed, hangs an amulet of the All Mother.</p>
-  </div>
-  <div class="sheet-block">
-    <h2>Personality</h2>
-    <p>A mad scientist who happens to be a doctor, or a doctor who happens to be a mad scientist, depending on which of his experiments is currently on fire. He stores his own alchemical compounds in glands he grew for the purpose, which tells you most of what you need to know about his relationship with the phrase &ldquo;acceptable risk.&rdquo;</p>
-  </div>
-  <div class="sheet-block">
-    <h2>Craft</h2>
-    <p>Biomancy &mdash; the meeting point of divine healing and arcane experimentation. Will is both a faithful cleric of the All Mother and a scientist who takes the body apart to see how the miracle works. The tension between those two things is not lost on him. It is, in fact, the axis his whole life turns on.</p>
-  </div>
-  <div class="sheet-block">
-    <h2>In the Serial</h2>
-    <p>Will keeps the expedition alive, patched together, and occasionally mutated slightly for their own good. The journey below Solance keeps handing him cases where faith and science give different answers &mdash; and one of these days, he is going to have to decide which one he trusts when they disagree.</p>
-  </div>
-
-  <div class="explore-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:0.5rem;">
-    <a href="gilded-goose.html" class="char-card"><span class="char-name">&larr; The Gilded Goose</span><span class="char-line">Back to the guild.</span></a>
-    <a href="serial.html" class="char-card"><span class="char-name">Tales of the Gilded Goose</span><span class="char-line">Read the serial on Royal Road.</span></a>
-  </div>
-</div>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
+</main>
 </body>
 </html>

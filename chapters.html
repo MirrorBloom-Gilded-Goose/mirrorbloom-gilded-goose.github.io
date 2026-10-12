@@ -1,167 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapters — Tales of the Gilded Goose — Mirrorbloom</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapters — Mirrorbloom</title>
+<meta name="description" content="Read Tales of the Gilded Goose on the Mirrorbloom site.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-  .reader-wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; position: relative; z-index: 1; }
-  .ch-list { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
-  .ch-item {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-    padding: 1.1rem 1.4rem; border: 1px solid var(--border); border-radius: 8px;
-    background: var(--bg-card); text-decoration: none; transition: border-color 0.2s, transform 0.25s;
-  }
-  .ch-item:hover { border-color: var(--hope-dim); transform: translateX(4px); }
-  .ch-item .ch-t { font-family: var(--serif-sc); font-size: 1.05rem; font-weight: 600; color: var(--ink); }
-  .ch-item .ch-d { font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; }
-  .reader { display: none; }
-  .reader.open { display: block; }
-  .list-view.closed { display: none; }
-  .reader h1 { font-family: var(--serif-sc); font-size: clamp(1.6rem, 4vw, 2.3rem); color: var(--hope-bright); margin: 2rem 0 0.3rem; }
-  .reader .ch-date { font-size: 0.8rem; color: var(--ink-dim); margin-bottom: 2rem; }
-  .reader .prose p { font-family: var(--serif); font-size: 1.18rem; line-height: 1.85; color: var(--ink); margin-bottom: 1.15em; }
-  .reader .prose strong { color: var(--hope-bright); font-weight: 600; }
-  .reader .prose em { color: var(--ink-dim); }
-  .scene-break { text-align: center; color: var(--hope); font-size: 1.1rem; letter-spacing: 0.4em; margin: 2.2rem 0; }
-  .reader-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
-  .reader-nav a, .back-link { color: var(--hope); text-decoration: none; font-size: 0.9rem; }
-  .reader-nav a:hover, .back-link:hover { color: var(--hope-bright); }
-  .reader-nav .disabled { color: var(--ink-dim); pointer-events: none; opacity: 0.4; }
-  .back-link { display: inline-block; margin-top: 1.5rem; }
-</style>
-<script src="mirror.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="chapters.js" defer></script>
+<script src="assets/reader.js" defer></script>
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html" class="active">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="gilded-goose.html">The Gilded Goose</a><span class="sep">/</span>
-  <span class="current">Chapters</span>
+<body data-section="guild">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="gilded-goose.html">The Gilded Goose</a><span aria-hidden="true">/</span><a href="serial.html">The serial</a></p>
+  <h1 class="title">Tales of the Gilded Goose</h1>
+  <p class="standfirst">Read the chapters here, or on Royal Road. A new chapter every Friday.</p>
 </div>
-
-<div class="page-hero">
-  <p class="page-eyebrow" style="color:#E8C060;">The Web Serial</p>
-  <h1 class="page-title">Tales of the Gilded Goose</h1>
-  <p class="page-sub">Read the chapters here, or on Royal Road. New chapters Monday, Wednesday, and Friday.</p>
-</div>
-
-<div class="reader-wrap">
-  <div class="list-view" id="listView">
-    <!-- EDIT ME: paste your Royal Road fiction URL into the href below -->
-    <a href="https://www.royalroad.com/" class="download-btn" style="font-size:0.95rem;padding:0.8rem 1.5rem;">Follow on Royal Road &rarr;</a>
-    <div class="ch-list" id="chList"></div>
-  </div>
-
-  <div class="reader" id="reader">
-    <a class="back-link" href="#" id="backLink">&larr; All chapters</a>
-    <h1 id="chTitle"></h1>
-    <p class="ch-date" id="chDate"></p>
-    <div class="prose" id="chBody"></div>
-    <div class="reader-nav">
-      <a href="#" id="prevLink">&larr; Previous chapter</a>
-      <a href="#" id="nextLink">Next chapter &rarr;</a>
+<div class="layout">
+  <div class="prose">
+    <div id="listView">
+      <p class="btn-row"><a class="btn primary" data-rr href="#">Follow on Royal Road</a></p>
+      <ol class="ch-list" id="chList"></ol>
+      <p class="muted hidden" id="chEmpty">The chapters live on Royal Road for now. Follow the link above to start reading.</p>
     </div>
+    <article class="reader hidden" id="reader">
+      <p><a href="#" id="backLink">All chapters</a></p>
+      <h2 id="chTitle"></h2>
+      <p class="muted" id="chDate"></p>
+      <div id="chBody" class="chapter-text"></div>
+      <nav class="btn-row" aria-label="Chapters"><a class="btn small" href="#" id="prevLink">Previous chapter</a><a class="btn small" href="#" id="nextLink">Next chapter</a></nav>
+    </article>
   </div>
 </div>
-
-<script src="chapters.js"></script>
-<script>
-(function () {
-  var chapters = window.CHAPTERS || [];
-  var listView = document.getElementById('listView');
-  var reader = document.getElementById('reader');
-  var chList = document.getElementById('chList');
-
-  function esc(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-
-  function format(text) {
-    var paras = esc(text.trim()).split(/\n\s*\n/);
-    return paras.map(function (p) {
-      p = p.trim();
-      var flat = p.replace(/\s+/g, '');
-      if (/^[\u2014\u2013-]*[\u2726\u2727*][\u2014\u2013\u2726\u2727*-]*$/.test(flat)) {
-        return '<div class="scene-break">\u2014 \u2726 \u2014</div>';
-      }
-      p = p.replace(/"([^"\n]+)"/g, '<strong>"$1"</strong>');
-      p = p.replace(/(^|[\s(\u2014])'([^\n]+?)'(?![A-Za-z])/g, '$1<em>\u2018$2\u2019</em>');
-      p = p.replace(/\n/g, '<br>');
-      return '<p>' + p + '</p>';
-    }).join('\n');
-  }
-
-  function renderList() {
-    chList.innerHTML = '';
-    chapters.forEach(function (ch, i) {
-      var a = document.createElement('a');
-      a.className = 'ch-item';
-      a.href = '#ch-' + (i + 1);
-      a.innerHTML = '<span class="ch-t">' + esc(ch.title) + '</span><span class="ch-d">' + esc(ch.date || '') + '</span>';
-      chList.appendChild(a);
-    });
-  }
-
-  function show(i) {
-    if (i < 0 || i >= chapters.length) { showList(); return; }
-    var ch = chapters[i];
-    document.getElementById('chTitle').textContent = ch.title;
-    document.getElementById('chDate').textContent = ch.date || '';
-    document.getElementById('chBody').innerHTML = format(ch.text || '');
-    var prev = document.getElementById('prevLink');
-    var next = document.getElementById('nextLink');
-    prev.href = '#ch-' + i;
-    next.href = '#ch-' + (i + 2);
-    prev.className = i === 0 ? 'disabled' : '';
-    next.className = i === chapters.length - 1 ? 'disabled' : '';
-    listView.className = 'list-view closed';
-    reader.className = 'reader open';
-    window.scrollTo(0, 0);
-    document.title = ch.title + ' \u2014 Tales of the Gilded Goose';
-  }
-
-  function showList() {
-    listView.className = 'list-view';
-    reader.className = 'reader';
-    document.title = 'Chapters \u2014 Tales of the Gilded Goose \u2014 Mirrorbloom';
-  }
-
-  function route() {
-    var m = location.hash.match(/^#ch-(\d+)$/);
-    if (m) show(parseInt(m[1], 10) - 1); else showList();
-  }
-
-  document.getElementById('backLink').addEventListener('click', function (e) {
-    e.preventDefault(); location.hash = ''; showList();
-  });
-  window.addEventListener('hashchange', route);
-  renderList();
-  route();
-})();
-</script>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
+</main>
 </body>
 </html>

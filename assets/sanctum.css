@@ -1,0 +1,75 @@
+/* The Sanctum and sealed pages. Below the glass, crimson is the color of here. */
+body[data-section="sanctum"] { --here: var(--crimson); }
+.sanctum-coins { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.sb-coin { text-decoration: none; }
+.sb-coin .coin-face-wrap, html:not([data-theme="solance"]) .sb-coin .coin-face-wrap, .sb-coin:hover .coin-face-wrap, html:not([data-theme="solance"]) .sb-coin:hover .coin-face-wrap { transform: none; width: 104px; height: 104px; }
+.sb-coin .coin-face.shadow { transform: none; }
+.sb-coin:hover .coin-face { border-color: var(--here); }
+.sb-coin .coin-names { min-height: 0; }
+.sb-coin .coin-names .n { font-size: 1.08rem; }
+
+.tool { border: 1px solid var(--line); background: var(--bg-2); border-radius: var(--radius); padding: clamp(1.1rem, 3vw, 1.8rem); margin: 1.6rem 0 2.2rem; box-shadow: var(--shadow); }
+.tool h3 { font-size: 1.7rem; margin: 0 0 .2rem; }
+.tool-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .9rem 1rem; align-items: end; margin: 1rem 0; }
+.tool-actions { display: flex; align-items: end; }
+.mirror-card { border-top: 1px solid var(--line-strong); margin-top: 1rem; padding-top: 1rem; }
+.mirror-card h4 { font-family: var(--display); font-size: 2.2rem; color: var(--crimson); margin: 0 0 .5rem; transform-origin: center top; }
+.mirror-card.flip h4 { animation: glassflip .9s cubic-bezier(.3,.6,.15,1); }
+@keyframes glassflip { from { transform: scaleY(-1); opacity: 0; filter: blur(4px); } to { transform: none; opacity: 1; filter: none; } }
+.init-bar { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+.init-bar #roundLbl { font-family: var(--display); font-size: 1.3rem; margin-right: .5rem; }
+.init-table input.hp { width: 6rem; padding: .25rem .4rem; }
+.init-table tr.is-turn td { background: color-mix(in srgb, var(--here) 14%, transparent); }
+.init-table tr.is-turn td:first-child { box-shadow: inset 3px 0 0 var(--here); }
+.small-note { font-size: .9rem; }
+.enc-form { grid-template-columns: minmax(200px, 1fr) auto; }
+.enc-list { margin: .5rem 0 0; padding-left: 1.6em; }
+.enc-list li { padding: .35rem .5rem; border-radius: 2px; transition: background .3s; }
+.enc-list li.rolled { background: color-mix(in srgb, var(--here) 20%, transparent); animation: rolled .6s ease; }
+@keyframes rolled { 0% { transform: translateX(-6px); } 50% { transform: translateX(4px); } 100% { transform: none; } }
+.threads { list-style: none; padding: 0; margin: 1rem 0; }
+.thread { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; align-items: start; padding: .7rem 0; border-top: 1px solid var(--line); }
+.thread span { display: block; color: var(--ink-2); font-size: .95rem; }
+.thread .status { font: inherit; font-size: .85rem; font-style: italic; border: 1px solid var(--line-strong); background: transparent; color: var(--ink-2); border-radius: 20px; padding: .15rem .6rem; cursor: pointer; }
+.thread.is-open .status { color: var(--crimson); border-color: color-mix(in srgb, var(--crimson) 50%, transparent); }
+.thread.is-brewing .status { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 50%, transparent); }
+.thread.is-resolved { opacity: .55; }
+.thread.is-resolved strong { text-decoration: line-through; }
+.thread-form { grid-template-columns: minmax(200px, 1fr) auto; }
+
+/* older adventure markup inside sealed pages */
+.sealed-content .section { padding: 0; margin: 2.4rem 0; max-width: none; }
+.sealed-content .section-label { font-family: var(--display); font-size: 1.6rem; color: var(--ink); margin-bottom: .6rem; }
+.sealed-content .scene-block { border-top: 1px solid var(--line); padding: 1.6rem 0; }
+.sealed-content .scene-num { font-style: italic; color: var(--here); display: block; }
+.sealed-content .scene-title { font-family: var(--display); font-size: 1.7rem; display: block; }
+.sealed-content .scene-sub { color: var(--ink-2); font-style: italic; display: block; margin-bottom: .8rem; }
+.sealed-content .read-aloud { border-left: 2px solid var(--gold); background: var(--glass); padding: 1rem 1.2rem; font-style: italic; margin: 1rem 0; }
+.sealed-content .npc-card { border: 1px solid var(--line); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: var(--radius); background: var(--bg-2); }
+.sealed-content .npc-card .role { font-style: italic; color: var(--ink-3); }
+.sealed-content .warning-box { border: 1px solid color-mix(in srgb, var(--crimson) 50%, transparent); background: color-mix(in srgb, var(--crimson) 7%, transparent); padding: 1rem 1.2rem; margin: 1.4rem 0; border-radius: var(--radius); }
+.sealed-content .wb-label { font-family: var(--display); color: var(--crimson); display: block; font-size: 1.15rem; }
+.sealed-content .deity-link-btn { display: inline-block; margin: .3rem .5rem .3rem 0; }
+.sealed-content .statblock { margin: 1rem 0; }
+.sealed-content h4 { font-family: var(--display); font-size: 1.25rem; margin: 1.2rem 0 .3rem; }
+.sealed-content code { font-size: .9em; background: var(--bg-3); padding: .05em .3em; border-radius: 2px; }
+.rescale-note { font-size: .95rem; margin-top: 1rem; }
+
+/* vault editor */
+.ed-grid { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 2.5rem; }
+@media (max-width: 860px) { .ed-grid { grid-template-columns: 1fr; } }
+.ed-list { font-size: .98rem; }
+.ed-list h3 { font-family: var(--text-sc); font-size: 1rem; color: var(--ink-3); margin: 1.2rem 0 .3rem; }
+.ed-list ul { list-style: none; padding: 0; margin: 0; }
+.ed-list li a { display: block; padding: .2rem .4rem; text-decoration: none; color: var(--ink-2); border-radius: 2px; }
+.ed-list li a:hover, .ed-list li a.on { color: var(--ink); background: var(--glass); }
+.ed-list li a.on { box-shadow: inset 2px 0 0 var(--here); }
+.ed-list input[type="search"] { margin: .3rem 0 .6rem; }
+.ed-form form > div, .ed-row > div { margin-bottom: .9rem; }
+.ed-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.ed-preview { border: 1px dashed var(--line-strong); padding: 1rem 1.2rem; border-radius: var(--radius); min-height: 6rem; max-width: none; }
+.ed-dialog { background: var(--bg-2); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 1.5rem; width: min(640px, 92vw); }
+.ed-dialog::backdrop { background: rgba(10, 6, 16, .7); }
+.ed-dialog h2 { font-size: 1.8rem; margin-bottom: .5rem; }
+.ed-dialog label { margin-top: .6rem; }
+.ed-pre { font-size: .8rem; white-space: pre-wrap; background: var(--bg-3); padding: .7rem; border-radius: 2px; }

@@ -1,326 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Empires — Mirrorbloom</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shining Everlast — Mirrorbloom</title>
+<meta name="description" content="The Shining Everlast, the vertical empire of Hopelight, its zones, species and Senate, and the Last Shine, its corrupted twin below.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-.empire-hero-img {
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 2rem 0;
-  border: 1px solid var(--border);
-}
-.empire-hero-img img { width: 100%; display: block; }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 
-.empire-toggle {
-  display: flex;
-  gap: 0.6rem;
-  margin: 2rem 0;
-}
-.empire-toggle button {
-  font-family: var(--sans);
-  font-size: 0.88rem;
-  padding: 0.6rem 1.3rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--ink-dim);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.empire-toggle button.active.everlast { border-color: var(--hope); color: var(--hope-bright); background: rgba(212,162,86,0.08); }
-.empire-toggle button.active.lastshine { border-color: var(--despair-bright); color: var(--despair-bright); background: rgba(138,43,43,0.1); }
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
 
-.empire-panel { display: none; }
-.empire-panel.visible { display: block; }
-
-.zone-list { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; }
-.zone-item { padding: 1.1rem 1.3rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); }
-.zone-item .zone-name { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.15rem; }
-.zone-item .zone-alt { font-size: 0.78rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-.zone-item p { font-size: 0.9rem; color: var(--ink-dim); margin: 0; }
-
-.species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
-.species-card { padding: 1.3rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); }
-.species-card h4 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 0.5rem; }
-.species-card p { font-size: 0.85rem; color: var(--ink-dim); margin-bottom: 0.5rem; }
-.species-card p:last-child { margin-bottom: 0; }
-.species-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim); opacity: 0.7; }
-
-.senator-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
-.senator-card { padding: 1.3rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); }
-.senator-card h4 { font-family: var(--serif); font-size: 1.15rem; }
-.senator-card .role { font-size: 0.8rem; color: var(--ink-dim); margin-bottom: 0.6rem; }
-.senator-card .faction-tag { display: inline-block; font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: var(--ink-dim); margin-bottom: 0.7rem; }
-.senator-card p { font-size: 0.85rem; color: var(--ink-dim); margin-bottom: 0.5rem; }
-</style>
-<script src="mirror.js"></script>
 </head>
-<body>
-<div class="ambient lore-tint" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
-  </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="index.html">Home</a><span class="sep">/</span>
-  <a href="cosmology.html">Cosmology</a><span class="sep">/</span>
-  <span class="current">The Empires</span>
+<body data-section="world">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="world.html">The World</a><span aria-hidden="true">/</span><a href="empires.html">The Shining Everlast</a></p>
+  <h1 class="title">The Shining Everlast</h1><span class="title-ref" aria-hidden="true">The Shining Everlast</span>
+  <p class="standfirst">The largest, most powerful nation in Mirrorbloom, and the Last Shine, its corrupted twin below the glass.</p>
 </div>
+<div class="layout has-rail">
+<article class="prose wide">
+<figure class="city-fig"><img src="shining_everlast.jpeg" alt="The towers of the Shining Everlast" loading="lazy"></figure>
+<section class="section" id="overview"><h2>The Shining Everlast</h2><p style="color:var(--ink-dim);">The Shining Everlast is not a city with surrounding farmland and villages; it is, in its entirety, one unbroken urban mass, home to some fifty million people across ten major species and hundreds of minor ones. Its towers, some rivaling the tallest structures any mortal civilization has ever raised, are not merely architecture — they are the empire's central act of faith, a literal, physical reaching toward the Great Hope's domain, built by a people who have never stopped believing that if they build high enough, something up there might notice.</p><p style="color:var(--ink-dim);">The empire runs on Hopelight: magic drawn from a dense convergence of ley lines beneath the city, refined into crystal that powers everything from streetlamps to the vast transit lifts connecting the city's vertical tiers, and present in lesser form as a baseline magical aptitude nearly every citizen carries from birth. For generations this system has made the Shining Everlast the wealthiest, most technologically dazzling empire in Mirrorbloom — and for the first time in living memory, it is beginning to fail. Hopelight crystal forms slowly, fed by genuine, sustained collective hope, and the city's hunger for expansion has begun to outpace what new hope the population can generate. The Senate, representative body of the empire's major species, has spent three years failing to agree on what to do about it.</p>
+<p>For how the city lives, eats and celebrates, see <a href="everlast.html">Life in the Everlast</a>.</p></section>
+<section class="section" id="government"><h2>Government</h2><p style="color:var(--ink-dim);">The Shining Everlast is governed by a Senate, with seats allocated proportionally by species rather than geography. Five major factions currently dominate the chamber, each holding a fundamentally different theory of how to address the Hopelight crisis, and none commanding anything close to a working majority. The Senate is presided over by a Speaker, elected to chair rather than vote, theoretically standing above factional politics.</p>
+<p>The Senate is young. The elves who founded the Everlast nine thousand years ago ruled it directly until the Great Umbrasol Siege, a hundred and twenty years ago, when they handed governance to the Senate. See <a href="everlast.html#founding">How the Everlast began</a>.</p></section>
+<section class="section" id="zones"><h2>Eight vertical zones</h2><div class="entries"><div class="entry"><h3>The Underlevels<span class="sub">Below street level</span></h3><div><p>Canals, water systems, old foundations, and the deepest Hopelight conduit infrastructure run through here, predominantly tended by Tidewalkers. The least glamorous tier and the most essential — the rest of the city would stop running within days without it. The Underlevels feel the Hopelight shortage last, since infrastructure receives rationing priority, but would be hit hardest of all tiers if the system ever truly failed.</p></div></div><div class="entry"><h3>The Ground Bazaar<span class="sub">Street level</span></h3><div><p>Dense, chaotic, multi-species marketplaces and transit hubs, where Rabbitfolk courier networks crisscross a working-class population drawn from every major species and dozens of minor ones. This is the city's most visibly cosmopolitan tier, and the one that feels day-to-day Hopelight rationing most directly — dimming lamps, slowed transit lifts, the small daily inconveniences of a system running short.</p></div></div><div class="entry"><h3>The Foundry Tiers<span class="sub">Lower-mid towers</span></h3><div><p>Emberforged and Orc engineering guild territory: manufacturing floors, Hopelight refineries, and the structural heart of the city's construction trade. Industrial, loud, and lit by working forges even when the rest of the city dims. The Deepwright faction's political power is strongest here, among workers proud of their craft and increasingly anxious about what they're being asked to dig for.</p></div></div><div class="entry"><h3>The Greenbelt Spires<span class="sub">Mid towers</span></h3><div><p>Rootkin-tended vertical gardens and residential terraces, surprisingly quiet and lush for a tier hundreds of stories up. Genuine parks, orchards, and tended green space wind through this level, maintained with the patient, generational care Rootkin culture is known for. The Verdant Accord's stronghold, and the site of the city's most beloved public festivals.</p></div></div><div class="entry"><h3>The Lamplight Quarter<span class="sub">Mid-upper towers</span></h3><div><p>Mixed residential and commercial space where most of the city's multi-species middle class actually lives. Duskborn-run nightlife and after-hours trade dominate once the sun goes down, and the district stays genuinely alive around the clock. A natural home base for visitors who need a foothold in the city without the extremes of the Underlevels or the Crownspires.</p></div></div><div class="entry"><h3>The Glass Courts<span class="sub">Upper towers</span></h3><div><p>Senate chambers, judiciary, and the Glasswright community's heart, architecturally the most overtly magical-looking tier in the city — translucent walkways, light-refracting halls, and the chamber where Speaker Hale and the five senators conduct (or fail to conduct) the empire's business.</p></div></div><div class="entry"><h3>The Stormreach<span class="sub">Highest inhabited towers</span></h3><div><p>Stormling territory and the domain of the city's highest-altitude tower maintenance crews, alongside the wealthiest non-institutional residential spires below the very top. Genuinely dangerous to live in if a tower destabilizes — height carries real risk here, a fact the Stormreach's wealthy residents mostly choose not to think about.</p></div></div><div class="entry"><h3>The Crownspires<span class="sub">The literal tower-tops</span></h3><div><p>The oldest elf-built towers' peaks alongside the newest ultra-luxury construction, smallest in population by far and closest, both symbolically and literally, to the Great Hope's domain. Minor, mostly unconfirmed shrine-doors to the Unclouded are rumored to exist somewhere up here, tended by a small and very private community of true believers.</p></div></div></div></section>
+<section class="section" id="species"><h2>Ten major species</h2><p class="muted">These are the ten largest peoples of the Everlast, not the ten original races of the world.</p><div class="entries"><div class="entry"><h3>Humans</h3><div><p>As varied as any human population anywhere in Mirrorbloom — no single build, skin tone, or feature set dominates. What marks an Everlast-born human, more than anything physical, is posture: a habit of looking up, toward the towers, that visitors from other empires find distinctive within a generation or two of settling here.</p><p class="muted"><em>Role:</em> Everywhere. Senate seats, guild leadership, street vendors, tower engineers — humans fill every economic and social niche the city offers, which is precisely the point; they're the empire's connective tissue.</p></div></div><div class="entry"><h3>Elves</h3><div><p>Tall, long-limbed, and unmistakably patient in their movements — Everlast elves favor severe, architectural fashion that echoes the towers themselves, sharp vertical lines and minimal ornamentation. Many carry faint, old burn-scars from the early, less stable days of Hopelight refinement, worn without embarrassment as a mark of lineage.</p><p class="muted"><em>Role:</em> Architecture, old-guard senate seats, long-horizon magical research — elves are disproportionately represented wherever patience is the actual asset being sold.</p></div></div><div class="entry"><h3>Orcs</h3><div><p>Powerfully built, with the practical calluses and burn-resistant skin of generations spent in close proximity to forges and load-bearing stonework. Orc fashion in the Everlast favors functional reinforced clothing over decoration — though guild colors and clan-markings are worn proudly, often dyed directly into work leathers.</p><p class="muted"><em>Role:</em> Structural engineering, construction guilds, heavy industry — the literal builders of the skyline, including the Foundry Tiers' backbone workforce.</p></div></div><div class="entry"><h3>Rabbitfolk</h3><div><p>Small, quick, long-eared humanoids with an enormous range of fur coloration and pattern — no two rabbitfolk families look quite alike, which they consider a point of pride rather than oddity. Built for speed and tight spaces, equally at home darting through Ground Bazaar crowds or scrambling along tower exterior maintenance lines.</p><p class="muted"><em>Role:</em> Courier networks, transit systems, message-running between districts and altitudes — if something needs to move fast across the Shining Everlast, a rabbitfolk clan is usually involved.</p></div></div><div class="entry"><h3>Glasswrights</h3><div><p>Humanoids with translucent, faintly luminous skin that shifts subtly with genuine emotion — most noticeably, traces of actual Hopelight glow through when a Glasswright feels real joy, a trait no amount of practice fully suppresses.</p><p class="muted"><em>Role:</em> Diplomacy, judiciary, public records — anywhere institutional trust matters more than persuasive flexibility. The Glasswright Compact's entire platform stems directly from this cultural trait.</p></div></div><div class="entry"><h3>Stormlings</h3><div><p>Winged humanoids descended from creatures who once lived among the high clouds the towers now physically pierce; feathered or membrane-winged depending on lineage, with keen distance vision and a restless, wind-tested look about them even indoors.</p><p class="muted"><em>Role:</em> Tower maintenance at extreme height, message-running between the Stormreach and Crownspires, scouting and exploration — the empire's literal eyes on the horizon.</p></div></div><div class="entry"><h3>Rootkin</h3><div><p>Plant-adjacent humanoids with bark-textured or leaf-flecked skin, growing visibly slower than most other species — a Rootkin in their first century of life might still be physically maturing, a fact that shapes nearly everything about how their families function.</p><p class="muted"><em>Role:</em> Tower gardens, the city's few true green spaces, slow-cultivation magic — almost the entirety of the Greenbelt Spires' upkeep runs through Rootkin hands.</p></div></div><div class="entry"><h3>Emberforged</h3><div><p>Humanoids with warm, stone-and-metal-flecked skin that genuinely radiates low heat, born near (by tradition, if not always literal fact) the city's old forges. Their skin often carries faint mineral seams that catch the light, especially Hopelight, in ways other species' skin doesn't.</p><p class="muted"><em>Role:</em> Artisans, engineers, Hopelight infrastructure — much of the actual refinement process that turns raw crystal into usable power runs through Emberforged hands and workshops.</p></div></div><div class="entry"><h3>Tidewalkers</h3><div><p>Amphibious humanoids with smooth, faintly damp-looking skin and webbed extremities, equally capable below the city's canals and on its streets, though most prefer the Underlevels' humidity to the drier air above.</p><p class="muted"><em>Role:</em> Underlevel infrastructure, water systems, canal transit — the unglamorous, essential machinery that keeps the rest of the city's glamour running.</p></div></div><div class="entry"><h3>Duskborn</h3><div><p>Pale, quiet humanoids who are visibly more comfortable and alert after dark, with large, light-sensitive eyes and a calm, unhurried way of moving through crowds even at the city's busiest hours.</p><p class="muted"><em>Role:</em> After-hours economy, night markets, the Lamplight Quarter's entertainment district — anything the city needs running while most of it sleeps.</p></div></div></div></section>
+<section class="section" id="senate"><h2>The Senate</h2><div class="entries"><div class="entry"><h3>Toravin Hale<span class="sub">Speaker of the Senate, Human</span><span class="sub faction">Neutral Chair</span></h3><div><p>Presides over the senate without a vote, theoretically above the five factions' infighting. In practice, decades in the chair have taught him exactly how to use procedure as leverage — which motions get tabled, whose petitions get fast-tracked, which crises get an emergency session and which quietly wait their turn.</p><p><span class="seal" data-seal="hook-ev-toravin-hale" data-len="197"></span></p></div></div><div class="entry"><h3>Voss Kael<span class="sub">Speaker-Senator, Emberforged</span><span class="sub faction">The Deepwrights</span></h3><div><p>Believes the Hopelight crisis is a supply problem with a supply solution: dig further into the ley convergence, accept the structural risk, push past old safety boundaries. Heavily backed by Emberforged and Orc engineering guilds who profit from expanded mining contracts.</p><p><span class="seal" data-seal="hook-ev-voss-kael" data-len="157"></span></p></div></div><div class="entry"><h3>Ilyenne Wovenbark<span class="sub">First-Root Senator, Rootkin</span><span class="sub faction">The Verdant Accord</span></h3><div><p>Argues the crisis isn't about mining, it's about cultivating genuine civic joy and purpose at scale — festivals, public works, reducing despair-driving poverty — since Hopelight crystal forms from sustained collective hope.</p><p><span class="seal" data-seal="hook-ev-ilyenne-wovenbark" data-len="192"></span></p></div></div><div class="entry"><h3>Coris Brask<span class="sub">Senator-Marshal, Tidewalker</span><span class="sub faction">The Ration Compact</span></h3><div><p>The cautious middle: freeze new tower construction, ration Hopelight to essential infrastructure, buy time rather than gamble on a fix. Popular with working-class districts who'd bear the brunt of either a mining collapse or an economic boom-bust.</p><p><span class="seal" data-seal="hook-ev-coris-brask" data-len="181"></span></p></div></div><div class="entry"><h3>Thess Aurelin<span class="sub">Windcaller Senator, Stormling</span><span class="sub faction">The Stormcall Expansionists</span></h3><div><p>Wants to send expeditions beyond the Shining Everlast's borders to locate and claim new ley convergence points elsewhere in Mirrorbloom, founding new tower-colonies.</p><p><span class="seal" data-seal="hook-ev-thess-aurelin" data-len="178"></span></p></div></div><div class="entry"><h3>Mira Glasswright<span class="sub">Senator, Glasswright</span><span class="sub faction">The Glasswright Compact</span></h3><div><p>Pushes for radical public transparency about how dire the crisis actually is, rather than the senate's habit of quiet reassurance. Doesn't have a fix — believes the gridlock is partly caused by nobody being honest about how bad things have gotten.</p><p><span class="seal" data-seal="hook-ev-mira-glasswright" data-len="179"></span></p></div></div></div></section>
 
-<div class="page-hero">
-  <p class="page-eyebrow hope-tone">Empire I of Fifteen</p>
-  <h1 class="page-title">The Shining Everlast &amp; the Last Shine</h1>
-  <p class="page-sub">The largest, most powerful empire in Mirrorbloom &mdash; and its corrupted mirror twin.</p>
+<div class="waterline"></div>
 
-  <div class="empire-toggle">
-    <button id="btn-everlast" class="active everlast" onclick="showEmpire('everlast')">The Shining Everlast</button>
-    <button id="btn-lastshine" class="lastshine" onclick="showEmpire('lastshine')">The Last Shine</button>
-  </div>
+<div class="below-glass" id="last-shine">
+<figure class="city-fig"><img src="last_shine.jpeg" alt="The sinking towers of the Last Shine" loading="lazy"></figure>
+<section class="section"><h2>The Last Shine</h2><p class="kicker">The corrupted mirror of the Shining Everlast: towers that were built to reach the sky, now sinking slowly back into the dark.</p><p style="color:var(--ink-dim);">Where the Shining Everlast's towers reach upward, the Last Shine's identical towers are folding inward — not collapsing all at once, but compacting, floor by floor, year by year, in a slow, structural implosion that has become simply a fact of life for the fifty million mirrored souls who live there. The same ten major species populate the Last Shine, mirrored and corrupted, and the same vast urban sprawl extends in every direction with no countryside, no horizon, nowhere that isn't city.</p><p style="color:var(--ink-dim);">The Last Shine runs on Hollowlight: crystal fed not by scarcity but by overflow — the Law of Reflection's spillover from everything genuinely good that happens in the Shining Everlast above. Hollowlight is not scarce. It is abundant, and growing more so every year the city above keeps hoping. The tragedy of the Last Shine is not a shortage of light; it is that five ruthless factions have turned its abundance into an active, low-grade civil war over who gets to control it, leaving ordinary citizens to suffer rolling blackouts caused not by scarcity but by sabotage.</p></section>
+<section class="section" id="ls-government"><h2>Government</h2><p style="color:var(--ink-dim);">The Last Shine maintains the same Senate structure as its bright twin — species-allocated seats, five major factions, a presiding Speaker — but where the Shining Everlast's gridlock comes from genuine, good-faith disagreement, the Last Shine's factions actively sabotage one another, and its presiding Speaker has no interest whatsoever in resolving anything that pays him so well to remain unresolved.</p></section>
+<section class="section" id="ls-zones"><h2>Eight vertical zones</h2><div class="entries"><div class="entry"><h3>The Drowned Levels<span class="sub">Below street level (mirrors the Underlevels)</span></h3><div><p>What were once canals have become flooded, half-collapsed tunnels, with Hollowlight conduits running through standing black water rather than clean channels. Tidewalker-mirrored inhabitants here live closest to the city's actual structural failure, and are the first to feel it when a Hoard Court sabotage cuts power to an entire tier.</p></div></div><div class="entry"><h3>The Starved Market<span class="sub">Street level (mirrors the Ground Bazaar)</span></h3><div><p>The same dense, multi-species marketplace footprint as its bright counterpart, now picked over and tense — goods are plentiful in theory, since Hollowlight is abundant, but supply lines are constantly disrupted by factional sabotage, leaving genuine scarcity in the middle of genuine abundance.</p></div></div><div class="entry"><h3>The Grinding Tiers<span class="sub">Lower-mid towers (mirrors the Foundry Tiers)</span></h3><div><p>Industrial floors run not by proud guild lineage but by the Hoard Court's private militia enforcers, who treat the refineries as a resource to be controlled rather than a craft to be practiced. Workers here have no equivalent of the Deepwrights' genuine, if anxious, pride.</p></div></div><div class="entry"><h3>The Rootrot Gardens<span class="sub">Mid towers (mirrors the Greenbelt Spires)</span></h3><div><p>What were vertical gardens above are now the Rootrot Assembly's territory — still green, still tended, but cultivating engineered grief and staged tragedy rather than festivals. The gardens are, by some accounts, still genuinely beautiful, which several visitors have found more disturbing than outright decay would be.</p></div></div><div class="entry"><h3>The Gaslight Quarter<span class="sub">Mid-upper towers (mirrors the Lamplight Quarter)</span></h3><div><p>Nightlife here never stopped, but it curdled — a permanent after-hours economy run less by Duskborn pride and more by desperation, since the Starvation Guild's rationing hits the middle tiers hardest and night work has become one of the few reliable ways to get by.</p></div></div><div class="entry"><h3>The Cracked Courts<span class="sub">Upper towers (mirrors the Glass Courts)</span></h3><div><p>The Last Shine's Senate chamber, its translucent Glasswright-mirrored architecture visibly fractured in places that have never been repaired — a standing, literal monument to a government that has stopped trying to fix anything, including its own building.</p></div></div><div class="entry"><h3>The Fallreach<span class="sub">Highest inhabited towers (mirrors the Stormreach)</span></h3><div><p>The Expansion Cult's stronghold, home to Brexx Talonreach's raiders and the launch point for their border incursions. Genuinely the most dangerous tier in the Last Shine to live in — not from structural risk alone, but from the raiders themselves.</p></div></div><div class="entry"><h3>The Sunken Crown<span class="sub">The literal tower-tops, now sinking (mirrors the Crownspires)</span></h3><div><p>The corrupted mirror of the Crownspires, where the oldest towers' peaks are slowly, visibly compacting downward rather than reaching up. The very few who still live here are the city's last true believers in something resembling its bright counterpart's faith — the Last Honest Voice's quiet stronghold.</p></div></div></div></section>
+<section class="section" id="ls-senate"><h2>The Senate below</h2><div class="entries"><div class="entry"><h3>Vantrel Oss<span class="sub">Presiding Chair, Human (mirrors Toravin Hale)</span><span class="sub faction">Neutral Chair (in name only)</span></h3><div><p>Holds the same procedurally neutral chair as his counterpart above — and uses it for the opposite purpose. Vantrel has no interest in resolving the Hollowlight conflict, because the conflict is the entire source of his relevance and income.</p><p><span class="seal" data-seal="hook-ls-vantrel-oss" data-len="221"></span></p></div></div><div class="entry"><h3>Hesk Varrin<span class="sub">Conduit-Lord, Emberforged (mirrors Voss Kael)</span><span class="sub faction">The Hoard Court</span></h3><div><p>Controls physical access to the deepest Hollowlight veins through a private militia of guild enforcers. Doesn't want to grow supply — supply is already abundant. Wants to be the only one who can turn the taps on or off.</p><p><span class="seal" data-seal="hook-ls-hesk-varrin" data-len="161"></span></p></div></div><div class="entry"><h3>Prella Ashcourt<span class="sub">Tier-Warden, Elf</span><span class="sub faction">The Starvation Guild</span></h3><div><p>Believes Hollowlight should be hoarded by the upper towers and old families, rationing the underlevels into literal darkness. Frames this openly as deserved hierarchy rather than necessity.</p><p><span class="seal" data-seal="hook-ls-prella-ashcourt" data-len="226"></span></p></div></div><div class="entry"><h3>Moldreth Wane<span class="sub">First-Rot, Rootkin (mirrors Ilyenne Wovenbark)</span><span class="sub faction">The Rootrot Assembly</span></h3><div><p>The dark mirror of the Verdant Accord: instead of cultivating genuine hope to grow more crystal, deliberately manufactures despair — staged tragedies, engineered grief, orchestrated loss — to farm Hollowlight faster.</p><p><span class="seal" data-seal="hook-ls-moldreth-wane" data-len="203"></span></p></div></div><div class="entry"><h3>Brexx Talonreach<span class="sub">Raid-Caller, Stormling (mirrors Thess Aurelin)</span><span class="sub faction">The Expansion Cult</span></h3><div><p>Mirrors the Stormcall Expansionists' ambition without any of the idealism — openly, violently colonial, raiding neighboring territory for resources rather than negotiating or exploring in good faith.</p><p><span class="seal" data-seal="hook-ls-brexx-talonreach" data-len="148"></span></p></div></div><div class="entry"><h3>Grael Vess<span class="sub">Senator, Glasswright (mirrors Mira Glasswright)</span><span class="sub faction">The Last Honest Voice</span></h3><div><p>The one faction that isn't purely venal: a small, mostly powerless bloc who believe the Last Shine cannot be saved, and that the only moral act left is making the collapse as humane as possible.</p><p><span class="seal" data-seal="hook-ls-grael-vess" data-len="201"></span></p></div></div></div></section>
 </div>
-
-<div class="section">
-  <div class="empire-panel visible" id="panel-everlast">
-  <div class="empire-hero-img"><img src="shining_everlast.jpeg" alt="The Shining Everlast"></div>
-  <p style="font-style:italic; color:var(--ink-dim); font-size:1.05rem;">The largest, most powerful empire in Mirrorbloom — a single continuous sprawl of towers reaching for a sky they can never quite touch.</p>
-  <h3 style="font-family:var(--serif); margin-top:2rem; margin-bottom:0.8rem;">Overview</h3>
-  <p style="color:var(--ink-dim);">The Shining Everlast is not a city with surrounding farmland and villages; it is, in its entirety, one unbroken urban mass, home to some fifty million people across ten major species and hundreds of minor ones. Its towers, some rivaling the tallest structures any mortal civilization has ever raised, are not merely architecture — they are the empire's central act of faith, a literal, physical reaching toward the Great Hope's domain, built by a people who have never stopped believing that if they build high enough, something up there might notice.</p><p style="color:var(--ink-dim);">The empire runs on Hopelight: magic drawn from a dense convergence of ley lines beneath the city, refined into crystal that powers everything from streetlamps to the vast transit lifts connecting the city's vertical tiers, and present in lesser form as a baseline magical aptitude nearly every citizen carries from birth. For generations this system has made the Shining Everlast the wealthiest, most technologically dazzling empire in Mirrorbloom — and for the first time in living memory, it is beginning to fail. Hopelight crystal forms slowly, fed by genuine, sustained collective hope, and the city's hunger for expansion has begun to outpace what new hope the population can generate. The Senate, representative body of the empire's major species, has spent three years failing to agree on what to do about it.</p>
-  <h3 style="font-family:var(--serif); margin-top:2rem; margin-bottom:0.8rem;">Government</h3>
-  <p style="color:var(--ink-dim);">The Shining Everlast is governed by a Senate, with seats allocated proportionally by species rather than geography. Five major factions currently dominate the chamber, each holding a fundamentally different theory of how to address the Hopelight crisis, and none commanding anything close to a working majority. The Senate is presided over by a Speaker, elected to chair rather than vote, theoretically standing above factional politics.</p>
-
-  <h3 style="font-family:var(--serif); margin-top:2.5rem; margin-bottom:0.4rem;">Geography &mdash; Eight Vertical Zones</h3>
-  <div class="zone-list"><div class="zone-item">
-  <div class="zone-name" style="color:#378ADD;">The Underlevels</div>
-  <div class="zone-alt">Below street level</div>
-  <p>Canals, water systems, old foundations, and the deepest Hopelight conduit infrastructure run through here, predominantly tended by Tidewalkers. The least glamorous tier and the most essential — the rest of the city would stop running within days without it. The Underlevels feel the Hopelight shortage last, since infrastructure receives rationing priority, but would be hit hardest of all tiers if the system ever truly failed.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#EF9F27;">The Ground Bazaar</div>
-  <div class="zone-alt">Street level</div>
-  <p>Dense, chaotic, multi-species marketplaces and transit hubs, where Rabbitfolk courier networks crisscross a working-class population drawn from every major species and dozens of minor ones. This is the city's most visibly cosmopolitan tier, and the one that feels day-to-day Hopelight rationing most directly — dimming lamps, slowed transit lifts, the small daily inconveniences of a system running short.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#5F5E5A;">The Foundry Tiers</div>
-  <div class="zone-alt">Lower-mid towers</div>
-  <p>Emberforged and Orc engineering guild territory: manufacturing floors, Hopelight refineries, and the structural heart of the city's construction trade. Industrial, loud, and lit by working forges even when the rest of the city dims. The Deepwright faction's political power is strongest here, among workers proud of their craft and increasingly anxious about what they're being asked to dig for.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#639922;">The Greenbelt Spires</div>
-  <div class="zone-alt">Mid towers</div>
-  <p>Rootkin-tended vertical gardens and residential terraces, surprisingly quiet and lush for a tier hundreds of stories up. Genuine parks, orchards, and tended green space wind through this level, maintained with the patient, generational care Rootkin culture is known for. The Verdant Accord's stronghold, and the site of the city's most beloved public festivals.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#AFA9EC;">The Lamplight Quarter</div>
-  <div class="zone-alt">Mid-upper towers</div>
-  <p>Mixed residential and commercial space where most of the city's multi-species middle class actually lives. Duskborn-run nightlife and after-hours trade dominate once the sun goes down, and the district stays genuinely alive around the clock. A natural home base for visitors who need a foothold in the city without the extremes of the Underlevels or the Crownspires.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#7F77DD;">The Glass Courts</div>
-  <div class="zone-alt">Upper towers</div>
-  <p>Senate chambers, judiciary, and the Glasswright community's heart, architecturally the most overtly magical-looking tier in the city — translucent walkways, light-refracting halls, and the chamber where Speaker Hale and the five senators conduct (or fail to conduct) the empire's business.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#85B7EB;">The Stormreach</div>
-  <div class="zone-alt">Highest inhabited towers</div>
-  <p>Stormling territory and the domain of the city's highest-altitude tower maintenance crews, alongside the wealthiest non-institutional residential spires below the very top. Genuinely dangerous to live in if a tower destabilizes — height carries real risk here, a fact the Stormreach's wealthy residents mostly choose not to think about.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#BA7517;">The Crownspires</div>
-  <div class="zone-alt">The literal tower-tops</div>
-  <p>The oldest elf-built towers' peaks alongside the newest ultra-luxury construction, smallest in population by far and closest, both symbolically and literally, to the Great Hope's domain. Minor, mostly unconfirmed shrine-doors to the Unclouded are rumored to exist somewhere up here, tended by a small and very private community of true believers.</p>
-</div></div>
-
-  <h3 style="font-family:var(--serif); margin-top:2.5rem; margin-bottom:0.4rem;">Ten Major Species</h3>
-  <div class="species-grid"><div class="species-card">
-  <h4 style="color:#BA7517;">Humans</h4>
-  <p class="label">Appearance</p><p>As varied as any human population anywhere in Mirrorbloom — no single build, skin tone, or feature set dominates. What marks an Everlast-born human, more than anything physical, is posture: a habit of looking up, toward the towers, that visitors from other empires find distinctive within a generation or two of settling here.</p>
-  <p class="label">Role</p><p>Everywhere. Senate seats, guild leadership, street vendors, tower engineers — humans fill every economic and social niche the city offers, which is precisely the point; they're the empire's connective tissue.</p>
-</div><div class="species-card">
-  <h4 style="color:#3B6D11;">Elves</h4>
-  <p class="label">Appearance</p><p>Tall, long-limbed, and unmistakably patient in their movements — Everlast elves favor severe, architectural fashion that echoes the towers themselves, sharp vertical lines and minimal ornamentation. Many carry faint, old burn-scars from the early, less stable days of Hopelight refinement, worn without embarrassment as a mark of lineage.</p>
-  <p class="label">Role</p><p>Architecture, old-guard senate seats, long-horizon magical research — elves are disproportionately represented wherever patience is the actual asset being sold.</p>
-</div><div class="species-card">
-  <h4 style="color:#5F5E5A;">Orcs</h4>
-  <p class="label">Appearance</p><p>Powerfully built, with the practical calluses and burn-resistant skin of generations spent in close proximity to forges and load-bearing stonework. Orc fashion in the Everlast favors functional reinforced clothing over decoration — though guild colors and clan-markings are worn proudly, often dyed directly into work leathers.</p>
-  <p class="label">Role</p><p>Structural engineering, construction guilds, heavy industry — the literal builders of the skyline, including the Foundry Tiers' backbone workforce.</p>
-</div><div class="species-card">
-  <h4 style="color:#ED93B1;">Rabbitfolk</h4>
-  <p class="label">Appearance</p><p>Small, quick, long-eared humanoids with an enormous range of fur coloration and pattern — no two rabbitfolk families look quite alike, which they consider a point of pride rather than oddity. Built for speed and tight spaces, equally at home darting through Ground Bazaar crowds or scrambling along tower exterior maintenance lines.</p>
-  <p class="label">Role</p><p>Courier networks, transit systems, message-running between districts and altitudes — if something needs to move fast across the Shining Everlast, a rabbitfolk clan is usually involved.</p>
-</div><div class="species-card">
-  <h4 style="color:#7F77DD;">Glasswrights</h4>
-  <p class="label">Appearance</p><p>Humanoids with translucent, faintly luminous skin that shifts subtly with genuine emotion — most noticeably, traces of actual Hopelight glow through when a Glasswright feels real joy, a trait no amount of practice fully suppresses.</p>
-  <p class="label">Role</p><p>Diplomacy, judiciary, public records — anywhere institutional trust matters more than persuasive flexibility. The Glasswright Compact's entire platform stems directly from this cultural trait.</p>
-</div><div class="species-card">
-  <h4 style="color:#85B7EB;">Stormlings</h4>
-  <p class="label">Appearance</p><p>Winged humanoids descended from creatures who once lived among the high clouds the towers now physically pierce; feathered or membrane-winged depending on lineage, with keen distance vision and a restless, wind-tested look about them even indoors.</p>
-  <p class="label">Role</p><p>Tower maintenance at extreme height, message-running between the Stormreach and Crownspires, scouting and exploration — the empire's literal eyes on the horizon.</p>
-</div><div class="species-card">
-  <h4 style="color:#639922;">Rootkin</h4>
-  <p class="label">Appearance</p><p>Plant-adjacent humanoids with bark-textured or leaf-flecked skin, growing visibly slower than most other species — a Rootkin in their first century of life might still be physically maturing, a fact that shapes nearly everything about how their families function.</p>
-  <p class="label">Role</p><p>Tower gardens, the city's few true green spaces, slow-cultivation magic — almost the entirety of the Greenbelt Spires' upkeep runs through Rootkin hands.</p>
-</div><div class="species-card">
-  <h4 style="color:#EF9F27;">Emberforged</h4>
-  <p class="label">Appearance</p><p>Humanoids with warm, stone-and-metal-flecked skin that genuinely radiates low heat, born near (by tradition, if not always literal fact) the city's old forges. Their skin often carries faint mineral seams that catch the light, especially Hopelight, in ways other species' skin doesn't.</p>
-  <p class="label">Role</p><p>Artisans, engineers, Hopelight infrastructure — much of the actual refinement process that turns raw crystal into usable power runs through Emberforged hands and workshops.</p>
-</div><div class="species-card">
-  <h4 style="color:#378ADD;">Tidewalkers</h4>
-  <p class="label">Appearance</p><p>Amphibious humanoids with smooth, faintly damp-looking skin and webbed extremities, equally capable below the city's canals and on its streets, though most prefer the Underlevels' humidity to the drier air above.</p>
-  <p class="label">Role</p><p>Underlevel infrastructure, water systems, canal transit — the unglamorous, essential machinery that keeps the rest of the city's glamour running.</p>
-</div><div class="species-card">
-  <h4 style="color:#AFA9EC;">Duskborn</h4>
-  <p class="label">Appearance</p><p>Pale, quiet humanoids who are visibly more comfortable and alert after dark, with large, light-sensitive eyes and a calm, unhurried way of moving through crowds even at the city's busiest hours.</p>
-  <p class="label">Role</p><p>After-hours economy, night markets, the Lamplight Quarter's entertainment district — anything the city needs running while most of it sleeps.</p>
-</div></div>
-
-  <h3 style="font-family:var(--serif); margin-top:2.5rem; margin-bottom:0.4rem;">The Senate</h3>
-  <div class="senator-grid"><div class="senator-card">
-  <h4 style="color:#2C2C2A;">Toravin Hale</h4>
-  <p class="role">Speaker of the Senate &mdash; Human</p>
-  <span class="faction-tag">Neutral Chair</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Presides over the senate without a vote, theoretically above the five factions' infighting. In practice, decades in the chair have taught him exactly how to use procedure as leverage — which motions get tabled, whose petitions get fast-tracked, which crises get an emergency session and which quietly wait their turn.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> A party that earns Toravin's trust may be the only people he'd ever consider telling the truth to — and the only ones positioned to act on it without triggering the senate's collective panic.</p>
-</div><div class="senator-card">
-  <h4 style="color:#BA7517;">Voss Kael</h4>
-  <p class="role">Speaker-Senator &mdash; Emberforged</p>
-  <span class="faction-tag">The Deepwrights</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Believes the Hopelight crisis is a supply problem with a supply solution: dig further into the ley convergence, accept the structural risk, push past old safety boundaries. Heavily backed by Emberforged and Orc engineering guilds who profit from expanded mining contracts.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> The suppressed report still exists, filed somewhere it shouldn't be. Whoever finds it holds real leverage over the most powerful faction in the senate.</p>
-</div><div class="senator-card">
-  <h4 style="color:#3B6D11;">Ilyenne Wovenbark</h4>
-  <p class="role">First-Root Senator &mdash; Rootkin</p>
-  <span class="faction-tag">The Verdant Accord</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Argues the crisis isn't about mining, it's about cultivating genuine civic joy and purpose at scale — festivals, public works, reducing despair-driving poverty — since Hopelight crystal forms from sustained collective hope.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> A party that can show Ilyenne hard evidence of the actual timeline might be the only ones capable of shaking her glacial patience into something resembling urgency — for better or worse.</p>
-</div><div class="senator-card">
-  <h4 style="color:#378ADD;">Coris Brask</h4>
-  <p class="role">Senator-Marshal &mdash; Tidewalker</p>
-  <span class="faction-tag">The Ration Compact</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> The cautious middle: freeze new tower construction, ration Hopelight to essential infrastructure, buy time rather than gamble on a fix. Popular with working-class districts who'd bear the brunt of either a mining collapse or an economic boom-bust.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Coris's private ledger is the single most accurate piece of intelligence in the entire senate. She'd share it with outsiders before she'd share it with most of her colleagues.</p>
-</div><div class="senator-card">
-  <h4 style="color:#85B7EB;">Thess Aurelin</h4>
-  <p class="role">Windcaller Senator &mdash; Stormling</p>
-  <span class="faction-tag">The Stormcall Expansionists</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Wants to send expeditions beyond the Shining Everlast's borders to locate and claim new ley convergence points elsewhere in Mirrorbloom, founding new tower-colonies.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Finding out what happened to the missing expedition — and what or who they actually encountered out there — is an open adventure hook with real stakes for the whole senate.</p>
-</div><div class="senator-card">
-  <h4 style="color:#B7A9DE;">Mira Glasswright</h4>
-  <p class="role">Senator &mdash; Glasswright</p>
-  <span class="faction-tag">The Glasswright Compact</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Pushes for radical public transparency about how dire the crisis actually is, rather than the senate's habit of quiet reassurance. Doesn't have a fix — believes the gridlock is partly caused by nobody being honest about how bad things have gotten.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Mira physically cannot lie to a party that asks her a direct question. She's an extremely efficient source of ground truth, if anyone bothers to ask her the right questions.</p>
-</div></div>
+</article>
+<aside class="rail" aria-label="On this page"><div class="rail-inner"><div><h3>The Shining Everlast</h3><ul><li><a href="#overview">Overview</a></li><li><a href="#government">Government</a></li><li><a href="#zones">Eight vertical zones</a></li><li><a href="#species">Ten major species</a></li><li><a href="#senate">The Senate</a></li></ul></div><div><h3>The Last Shine</h3><ul><li><a href="#last-shine">Overview</a></li><li><a href="#ls-government">Government</a></li><li><a href="#ls-zones">Eight vertical zones</a></li><li><a href="#ls-senate">The Senate below</a></li></ul></div><div><h3>Related</h3><ul><li><a href="everlast.html">Life in the Everlast</a></li><li><a href="magic.html#hopelight">Hopelight</a></li></ul></div></div></aside>
 </div>
-  <div class="empire-panel" id="panel-lastshine">
-  <div class="empire-hero-img"><img src="last_shine.jpeg" alt="The Last Shine"></div>
-  <p style="font-style:italic; color:var(--ink-dim); font-size:1.05rem;">The corrupted mirror of the Shining Everlast — towers that were built to reach the sky, now sinking slowly back into the dark.</p>
-  <h3 style="font-family:var(--serif); margin-top:2rem; margin-bottom:0.8rem;">Overview</h3>
-  <p style="color:var(--ink-dim);">Where the Shining Everlast's towers reach upward, the Last Shine's identical towers are folding inward — not collapsing all at once, but compacting, floor by floor, year by year, in a slow, structural implosion that has become simply a fact of life for the fifty million mirrored souls who live there. The same ten major species populate the Last Shine, mirrored and corrupted, and the same vast urban sprawl extends in every direction with no countryside, no horizon, nowhere that isn't city.</p><p style="color:var(--ink-dim);">The Last Shine runs on Hollowlight: crystal fed not by scarcity but by overflow — the Law of Reflection's spillover from everything genuinely good that happens in the Shining Everlast above. Hollowlight is not scarce. It is abundant, and growing more so every year the city above keeps hoping. The tragedy of the Last Shine is not a shortage of light; it is that five ruthless factions have turned its abundance into an active, low-grade civil war over who gets to control it, leaving ordinary citizens to suffer rolling blackouts caused not by scarcity but by sabotage.</p>
-  <h3 style="font-family:var(--serif); margin-top:2rem; margin-bottom:0.8rem;">Government</h3>
-  <p style="color:var(--ink-dim);">The Last Shine maintains the same Senate structure as its bright twin — species-allocated seats, five major factions, a presiding Speaker — but where the Shining Everlast's gridlock comes from genuine, good-faith disagreement, the Last Shine's factions actively sabotage one another, and its presiding Speaker has no interest whatsoever in resolving anything that pays him so well to remain unresolved.</p>
-
-  <h3 style="font-family:var(--serif); margin-top:2.5rem; margin-bottom:0.4rem;">Geography &mdash; Eight Vertical Zones</h3>
-  <div class="zone-list"><div class="zone-item">
-  <div class="zone-name" style="color:#042C53;">The Drowned Levels</div>
-  <div class="zone-alt">Below street level (mirrors the Underlevels)</div>
-  <p>What were once canals have become flooded, half-collapsed tunnels, with Hollowlight conduits running through standing black water rather than clean channels. Tidewalker-mirrored inhabitants here live closest to the city's actual structural failure, and are the first to feel it when a Hoard Court sabotage cuts power to an entire tier.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#2C2C2A;">The Starved Market</div>
-  <div class="zone-alt">Street level (mirrors the Ground Bazaar)</div>
-  <p>The same dense, multi-species marketplace footprint as its bright counterpart, now picked over and tense — goods are plentiful in theory, since Hollowlight is abundant, but supply lines are constantly disrupted by factional sabotage, leaving genuine scarcity in the middle of genuine abundance.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#501313;">The Grinding Tiers</div>
-  <div class="zone-alt">Lower-mid towers (mirrors the Foundry Tiers)</div>
-  <p>Industrial floors run not by proud guild lineage but by the Hoard Court's private militia enforcers, who treat the refineries as a resource to be controlled rather than a craft to be practiced. Workers here have no equivalent of the Deepwrights' genuine, if anxious, pride.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#27500A;">The Rootrot Gardens</div>
-  <div class="zone-alt">Mid towers (mirrors the Greenbelt Spires)</div>
-  <p>What were vertical gardens above are now the Rootrot Assembly's territory — still green, still tended, but cultivating engineered grief and staged tragedy rather than festivals. The gardens are, by some accounts, still genuinely beautiful, which several visitors have found more disturbing than outright decay would be.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#26215C;">The Gaslight Quarter</div>
-  <div class="zone-alt">Mid-upper towers (mirrors the Lamplight Quarter)</div>
-  <p>Nightlife here never stopped, but it curdled — a permanent after-hours economy run less by Duskborn pride and more by desperation, since the Starvation Guild's rationing hits the middle tiers hardest and night work has become one of the few reliable ways to get by.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#72243E;">The Cracked Courts</div>
-  <div class="zone-alt">Upper towers (mirrors the Glass Courts)</div>
-  <p>The Last Shine's Senate chamber, its translucent Glasswright-mirrored architecture visibly fractured in places that have never been repaired — a standing, literal monument to a government that has stopped trying to fix anything, including its own building.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#0C447C;">The Fallreach</div>
-  <div class="zone-alt">Highest inhabited towers (mirrors the Stormreach)</div>
-  <p>The Expansion Cult's stronghold, home to Brexx Talonreach's raiders and the launch point for their border incursions. Genuinely the most dangerous tier in the Last Shine to live in — not from structural risk alone, but from the raiders themselves.</p>
-</div><div class="zone-item">
-  <div class="zone-name" style="color:#171717;">The Sunken Crown</div>
-  <div class="zone-alt">The literal tower-tops, now sinking (mirrors the Crownspires)</div>
-  <p>The corrupted mirror of the Crownspires, where the oldest towers' peaks are slowly, visibly compacting downward rather than reaching up. The very few who still live here are the city's last true believers in something resembling its bright counterpart's faith — the Last Honest Voice's quiet stronghold.</p>
-</div></div>
-
-  
-
-  <h3 style="font-family:var(--serif); margin-top:2.5rem; margin-bottom:0.4rem;">The Senate</h3>
-  <div class="senator-grid"><div class="senator-card">
-  <h4 style="color:#2C2C2A;">Vantrel Oss</h4>
-  <p class="role">Presiding Chair &mdash; Human (mirrors Toravin Hale)</p>
-  <span class="faction-tag">Neutral Chair (in name only)</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Holds the same procedurally neutral chair as his counterpart above — and uses it for the opposite purpose. Vantrel has no interest in resolving the Hollowlight conflict, because the conflict is the entire source of his relevance and income.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> A party that exposes Vantrel's actual position — that he serves no faction but himself — could collapse the deadlock overnight, or could make all five factions briefly, dangerously unified against the party instead.</p>
-</div><div class="senator-card">
-  <h4 style="color:#5C1F1F;">Hesk Varrin</h4>
-  <p class="role">Conduit-Lord &mdash; Emberforged (mirrors Voss Kael)</p>
-  <span class="faction-tag">The Hoard Court</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Controls physical access to the deepest Hollowlight veins through a private militia of guild enforcers. Doesn't want to grow supply — supply is already abundant. Wants to be the only one who can turn the taps on or off.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Proof of Hesk's sabotage campaigns would be enough to turn even the other four factions against him — if anyone could get it without him finding out first.</p>
-</div><div class="senator-card">
-  <h4 style="color:#5F5E5A;">Prella Ashcourt</h4>
-  <p class="role">Tier-Warden &mdash; Elf</p>
-  <span class="faction-tag">The Starvation Guild</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Believes Hollowlight should be hoarded by the upper towers and old families, rationing the underlevels into literal darkness. Frames this openly as deserved hierarchy rather than necessity.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Proof of Prella's origins, if surfaced publicly, would devastate her standing with the old families she's spent a lifetime impressing — and might, just possibly, crack something open in her that she's buried for decades.</p>
-</div><div class="senator-card">
-  <h4 style="color:#27500A;">Moldreth Wane</h4>
-  <p class="role">First-Rot &mdash; Rootkin (mirrors Ilyenne Wovenbark)</p>
-  <span class="faction-tag">The Rootrot Assembly</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> The dark mirror of the Verdant Accord: instead of cultivating genuine hope to grow more crystal, deliberately manufactures despair — staged tragedies, engineered grief, orchestrated loss — to farm Hollowlight faster.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Uncovering and stopping Moldreth's long-game plot could be a campaign-spanning thread in its own right — the kind of slow-burn horror that rewards a party paying close attention over many sessions.</p>
-</div><div class="senator-card">
-  <h4 style="color:#042C53;">Brexx Talonreach</h4>
-  <p class="role">Raid-Caller &mdash; Stormling (mirrors Thess Aurelin)</p>
-  <span class="faction-tag">The Expansion Cult</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> Mirrors the Stormcall Expansionists' ambition without any of the idealism — openly, violently colonial, raiding neighboring territory for resources rather than negotiating or exploring in good faith.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Whatever Brexx's raiders found could be the seed of a much larger regional plot — possibly tied to another empire's mirror-territory entirely.</p>
-</div><div class="senator-card">
-  <h4 style="color:#534AB7;">Grael Vess</h4>
-  <p class="role">Senator &mdash; Glasswright (mirrors Mira Glasswright)</p>
-  <span class="faction-tag">The Last Honest Voice</span>
-  <p><strong style="color:var(--ink);">Stance:</strong> The one faction that isn't purely venal: a small, mostly powerless bloc who believe the Last Shine cannot be saved, and that the only moral act left is making the collapse as humane as possible.</p>
-  <p><strong style="color:var(--ink);">Hook:</strong> Grael may be the only senator in the Last Shine an outside party can actually trust at face value — and possibly the only one who would genuinely welcome outside help, if he believed it was real.</p>
-</div></div>
-</div>
-</div>
-
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
-
-
-<script>
-function showEmpire(which) {
-  document.querySelectorAll('.empire-panel').forEach(p => p.classList.remove('visible'));
-  document.getElementById('panel-' + which).classList.add('visible');
-  document.querySelectorAll('.empire-toggle button').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-' + which).classList.add('active');
-}
-</script>
-
+</main>
 </body>
 </html>

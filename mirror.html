@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mirror — Mirrorbloom</title>
+<meta name="description" content="The Dungeon Master&#x27;s way into the Sanctum.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/mirror.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/mirror.js" defer></script>
+</head>
+<body data-section="sanctum">
+<header id="site-header"></header>
+<main id="main" class="page">
+<section class="mirror-scene" aria-labelledby="mirror-title">
+  <div class="mirror" id="mirror">
+    <svg class="frame" viewBox="0 0 360 520" aria-hidden="true">
+      <defs>
+        <linearGradient id="gilt" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#F3D9A0"/><stop offset=".35" stop-color="#B9832E"/><stop offset=".6" stop-color="#E9C37A"/><stop offset="1" stop-color="#7A531A"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="180" cy="200" rx="166" ry="190" fill="none" stroke="url(#gilt)" stroke-width="12"/>
+      <ellipse cx="180" cy="200" rx="176" ry="200" fill="none" stroke="url(#gilt)" stroke-width="2" opacity=".7"/>
+      <ellipse cx="180" cy="200" rx="156" ry="180" fill="none" stroke="url(#gilt)" stroke-width="1.5" opacity=".6"/>
+      <g fill="url(#gilt)">
+        <circle cx="180" cy="4" r="7"/><circle cx="8" cy="200" r="6"/><circle cx="352" cy="200" r="6"/>
+        <path d="M168 392 h24 l6 22 h-36z"/>
+        <rect x="171" y="414" width="18" height="84" rx="6"/>
+        <circle cx="180" cy="506" r="11"/>
+      </g>
+      <path d="M150 12 Q180 -6 210 12" fill="none" stroke="url(#gilt)" stroke-width="3"/>
+    </svg>
+    <div class="glass" id="glass">
+      <div class="sheen" aria-hidden="true"></div>
+      <div class="fog" aria-hidden="true"></div>
+      <form class="speak" id="speak" autocomplete="off">
+        <h1 id="mirror-title">Speak your reflection.</h1>
+        <p class="whisper" id="whisper" role="status" aria-live="polite">The Sanctum is for the one who keeps this world.</p>
+        <label class="visually-hidden" for="pass">Passphrase</label>
+        <input id="pass" name="pass" type="password" autocomplete="current-password" placeholder="Passphrase" required>
+        <label class="remember"><input type="checkbox" id="remember" checked> Remember this device</label>
+        <button class="btn primary" type="submit">Open the Sanctum</button>
+      </form>
+      <svg class="cracks" id="cracks" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+    </div>
+    <div class="shards" id="shards" aria-hidden="true"></div>
+  </div>
+  <div class="beyond" aria-hidden="true"><p>The Sanctum</p></div>
+  <p class="back"><a href="index.html">Return to the surface</a></p>
+  <div class="signed-in hidden" id="signedIn">
+    <p>The glass already knows you.</p>
+    <div class="btn-row"><a class="btn primary" href="sanctum.html">Go to the Sanctum</a><button class="btn" type="button" id="forget">Lock this device</button></div>
+  </div>
+</section>
+</main>
+</body>
+</html>

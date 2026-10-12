@@ -1,0 +1,30 @@
+/* The Knowledge Iceberg: the page sinks as you scroll. */
+.ice-top { position: relative; overflow: hidden; }
+.ice-tip { display: block; width: min(600px, 90%); height: auto; margin: 1rem auto 0; position: relative; z-index: 1; }
+.ice-tip path { fill: #DCE9F2; stroke: #A9C3D6; stroke-width: 1.5; stroke-linejoin: round; }
+html:not([data-theme="solance"]) .ice-tip path { fill: #C9DAE6; filter: drop-shadow(0 0 30px rgba(170, 210, 240, .25)); }
+.ice-water { height: 2px; background: linear-gradient(90deg, transparent, #8FB8D6 15%, #8FB8D6 85%, transparent); box-shadow: 0 0 24px 2px rgba(143,184,214,.5); }
+.descent { position: relative; isolation: isolate; background: linear-gradient(to bottom, transparent 0%, transparent 30%, #0c1a2b 45%, #03060c 100%); }
+.ice-body { position: absolute; left: 50%; top: 0; width: min(760px, 120%); height: 100%; transform: translateX(-50%); z-index: -1; opacity: .16; pointer-events: none; }
+.ice-body path { fill: #BFD8EA; }
+.layer { --d: 1; position: relative; padding: clamp(3.5rem, 10vh, 6rem) var(--gutter); }
+.layer[data-depth="1"] { background: linear-gradient(to bottom, rgba(110,160,200,.14), rgba(60,110,160,.16)); }
+.layer[data-depth="2"] { background: rgba(40, 80, 130, .22); }
+.layer[data-depth="3"] { background: rgba(16,36,58,.86); }
+.layer[data-depth="4"] { background: rgba(12,27,46,.88); }
+.layer[data-depth="5"] { background: rgba(8,19,34,.9); }
+.layer[data-depth="6"] { background: rgba(4,8,15,.93); }
+.layer.deep { --ink: #E3ECF5; --ink-2: #A9BCD0; --ink-3: #7B90A8; --line: rgba(227,236,245,.13); --line-strong: rgba(227,236,245,.24); --bg-2: #0d1f33; --glass: rgba(255,255,255,.035); --here: #8FB8D6; color: var(--ink); }
+.layer-inner { max-width: 700px; margin: 0 auto; }
+.layer h2 { font-size: clamp(2rem, 4.5vw, 2.9rem); margin: .2rem 0 .4rem; }
+.layer .depth { font-style: italic; color: var(--ink-3); margin: 0; }
+.layer .who { color: var(--ink-2); font-style: italic; margin-bottom: 1.2rem; }
+.layer ul { padding-left: 1.2em; } .layer li { margin-bottom: .45em; } .layer li::marker { color: #8FB8D6; }
+.gauge { position: fixed; left: max(12px, calc(50vw - 640px)); top: 50%; transform: translateY(-50%); z-index: 5; opacity: 0; transition: opacity .4s; }
+.gauge.show { opacity: 1; }
+.gauge ol { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 1px solid rgba(143,184,214,.35); }
+.gauge li a { display: block; font-size: .88rem; padding: .3rem 0; color: var(--ink-3); text-decoration: none; position: relative; }
+.gauge li a::before { content: ''; position: absolute; left: -18px; top: 50%; width: 7px; height: 7px; border-radius: 50%; transform: translateY(-50%); background: var(--bg); border: 1px solid rgba(143,184,214,.6); }
+.gauge li a.on { color: #8FB8D6; }
+.gauge li a.on::before { background: #8FB8D6; box-shadow: 0 0 10px #8FB8D6; }
+@media (max-width: 1100px) { .gauge { display: none; } }

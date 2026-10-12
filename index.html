@@ -1,135 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mirrorbloom</title>
-<meta name="description" content="Mirrorbloom — a flat world split between Solance above and Umbrasol below, bound by the Law of Reflection. Home of the Gilded Goose.">
+<meta name="description" content="Mirrorbloom is a flat world split between Solance above and Umbrasol below, bound by the Law of Reflection. A homebrew D&amp;D 5e setting and the home of Tales of the Gilded Goose.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-.hero {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 62vh; text-align: center; padding: 4rem 2rem 3rem;
-}
-.hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--hope-dim); margin-bottom: 1.2rem; }
-.hero-title { font-family: var(--serif-sc); font-size: clamp(2.6rem, 8vw, 6.4rem); font-weight: 600; line-height: 1; letter-spacing: 0.05em; margin-bottom: 0.8rem; }
-.hero-title .top { color: var(--hope-bright); }
-.hero-title .divider { display: block; font-size: 0.28em; letter-spacing: 0.34em; color: var(--ink-dim); margin: 0.55em 0; }
-.hero-title .bottom { color: var(--despair-bright); }
-.hero-sub { font-family: var(--serif); font-style: italic; font-size: clamp(1rem, 2vw, 1.25rem); color: var(--ink-dim); max-width: 46em; margin-bottom: 3rem; line-height: 1.65; }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/home.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
 
-.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.1rem; max-width: 1050px; width: 100%; position: relative; z-index: 1; }
-.nav-card {
-  display: block; text-decoration: none; padding: 1.6rem 1.2rem;
-  border: 1px solid var(--border); border-radius: 8px;
-  background: var(--bg-card); text-align: center;
-  transition: transform 0.3s cubic-bezier(.2,.8,.2,1), border-color 0.2s, background 0.2s;
-}
-.nav-card:hover, .nav-card:focus-visible { transform: translateY(-5px); }
-.nav-card.cosmology:hover { border-color: #6A4ABA; }
-.nav-card.timeline:hover  { border-color: #4A7A3A; }
-.nav-card.everlast:hover  { border-color: #4A7ABA; }
-.nav-card.guild:hover     { border-color: #C8922A; }
-.nav-card.library:hover   { border-color: var(--hope); }
-.nav-card .icon { font-size: 1.7rem; margin-bottom: 0.7rem; display: block; }
-.nav-card .label { font-family: var(--serif-sc); font-size: 1.02rem; font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.35rem; }
-.nav-card.cosmology .label { color: #A89ADA; }
-.nav-card.timeline .label  { color: #8ABA7A; }
-.nav-card.everlast .label  { color: #7AA5DA; }
-.nav-card.guild .label     { color: #E8C060; }
-.nav-card.library .label   { color: var(--hope-bright); }
-.nav-card .desc { font-size: 0.76rem; color: var(--ink-dim); line-height: 1.5; }
-html[data-theme="solance"] .nav-card.cosmology .label { color: #5A3EA8; }
-html[data-theme="solance"] .nav-card.timeline .label  { color: #3E6E30; }
-html[data-theme="solance"] .nav-card.everlast .label  { color: #2F5E96; }
-html[data-theme="solance"] .nav-card.guild .label     { color: #96690E; }
-
-.home-wrap { display: flex; flex-direction: column; align-items: center; padding: 0 2rem; position: relative; z-index: 1; }
-.home-serial { max-width: 1050px; width: 100%; margin-bottom: 3rem; }
-.law-strip { position: relative; z-index: 1; text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); margin-top: 3rem; }
-.law-strip p { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--ink-dim); max-width: 60ch; margin: 0 auto; line-height: 1.7; }
-.law-strip .law-name { color: var(--hope); }
-.mirror-hint { margin-top: 1.4rem; font-size: 0.78rem; color: var(--ink-dim); letter-spacing: 0.06em; }
-.mirror-hint span { color: var(--hope); }
-
-@media (max-width: 900px) { .nav-grid { grid-template-columns: repeat(2, 1fr); } .nav-card.library { grid-column: 1 / -1; } }
-</style>
-<script src="mirror.js"></script>
 </head>
-<body>
-<div class="ambient" aria-hidden="true"></div>
-<header>
-  <a href="index.html" class="wordmark">MIRROR<span>BLOOM</span></a>
-  <nav>
-    <a href="cosmology.html">Cosmology</a>
-    <a href="timeline.html">Timeline</a>
-    <a href="empires.html">The Everlast</a>
-    <a href="gilded-goose.html">Gilded Goose</a>
-    <a href="lore.html">Library</a>
-  </nav>
-  <div class="header-actions">
-    <button class="mirror-toggle" id="mirrorToggle" type="button" aria-label="Flip between Solance and Umbrasol">&#9789;</button>
-    <a href="mirrorbloom_compendium.pdf" download class="download-btn">&#8659; Compendium</a>
+<body data-section="home">
+<header id="site-header"></header>
+<main id="main" class="page">
+<section class="mirror-hero" aria-labelledby="hero-title">
+  <svg class="defs" aria-hidden="true" width="0" height="0">
+    <filter id="water" x="-5%" y="-20%" width="110%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="7" result="n">
+        <animate class="water-anim" attributeName="baseFrequency" dur="14s" values="0.012 0.09;0.016 0.12;0.012 0.09" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <p class="world-name above">Solance</p>
+  <h1 id="hero-title" class="hero-word">Mirrorbloom</h1>
+  <div class="hero-line" aria-hidden="true"></div>
+  <p class="hero-word hero-reflection" aria-hidden="true">Mirrorbloom</p>
+  <p class="world-name below">Umbrasol</p>
+  <p class="hero-sub">One flat world, split top and bottom like a reflection on still water. Everything beautiful above feeds something hungry below, and everyone born here is shackled to the self on the other side of the glass.</p>
+  <div class="btn-row hero-actions">
+    <a class="btn primary" href="cosmology.html">Start with the cosmology</a>
+    <a class="btn" href="serial.html">Read the serial</a>
   </div>
-</header>
+  <p class="hero-hint">The <span class="hint-glyph">&#9788;</span> at the top crosses the mirror. You are reading this from <span class="where-below">Umbrasol</span><span class="where-above">Solance</span>.</p>
+</section>
 
-<div class="hero">
-  <p class="hero-eyebrow">A homebrew world for D&amp;D 5e &amp; the Tales of the Gilded Goose serial</p>
-  <h1 class="hero-title">
-    <span class="top">Solance</span>
-    <span class="divider">&mdash; MIRRORBLOOM &mdash;</span>
-    <span class="bottom">Umbrasol</span>
-  </h1>
-  <p class="hero-sub">One flat world, split top and bottom like a reflection on still water. Everything beautiful above feeds something hungry below &mdash; and everyone born here is shackled to the self on the other side of the glass.</p>
-
-  <div class="nav-grid">
-    <a href="cosmology.html" class="nav-card cosmology">
-      <span class="icon">&#9737;</span>
-      <span class="label">Cosmology</span>
-      <span class="desc">The Law of Reflection, the Breaking, the two gods, and the Archfey courts.</span>
-    </a>
-    <a href="timeline.html" class="nav-card timeline">
-      <span class="icon">&#10022;</span>
-      <span class="label">Timeline</span>
-      <span class="desc">Five eras of history, from the Primordial round world to the Fourth Age.</span>
-    </a>
-    <a href="empires.html" class="nav-card everlast">
-      <span class="icon">&#9820;</span>
-      <span class="label">The Everlast</span>
-      <span class="desc">The vertical empire of Hopelight &mdash; and the Last Shine, its mirror below.</span>
-    </a>
-    <a href="gilded-goose.html" class="nav-card guild">
-      <span class="icon">&#129727;</span>
-      <span class="label">Gilded Goose</span>
-      <span class="desc">The guild, the council, the Elite Four, and their catastrophic guildmaster.</span>
-    </a>
-    <a href="lore.html" class="nav-card library">
-      <span class="icon">&#128218;</span>
-      <span class="label">Library</span>
-      <span class="desc">The serial, the bestiary, adventures, and DM tools.</span>
-    </a>
+<section class="wrap home-contents" aria-labelledby="contents-title">
+  <h2 id="contents-title" class="home-h">Contents</h2>
+  <div class="book">
+    <div class="part">
+      <h3>The Mirror</h3>
+      <ol>
+        <li><a href="cosmology.html">Cosmology</a><span>The Law of Reflection, the Breaking, the two gods and the three tiers of the divine.</span></li>
+        <li><a href="cosmology.html#archfey">The Archfey</a><span>Six Great Fey Lords, twelve aspects, every one with a twin.</span></li>
+        <li><a href="courts.html">Courts &amp; Realms</a><span>Fourteen realms and the courts that keep them.</span></li>
+        <li><a href="magic.html">Magic</a><span>Cores, the Mana Field, dead zones, Hopelight and Harrow's Law.</span></li>
+        <li><a href="meadow.html">The Sleeping Meadows</a><span>Where nearly every soul goes to rest, and where the rest go.</span></li>
+        <li><a href="iceberg.html">The Knowledge Iceberg</a><span>How deep the truth about the Law goes, layer by layer.</span></li>
+        <li><a href="timeline.html">Timeline</a><span>Ten thousand years, from the round world to the Fourth Age.</span></li>
+      </ol>
+    </div>
+    <div class="part">
+      <h3>The World</h3>
+      <ol>
+        <li><a href="world.html">The Thirteen Nations</a><span>Three continents, a floating dominion and the kingdoms beneath the sea.</span></li>
+        <li><a href="map.html">The Map</a><span>Nations, sky currents, tunnels and ley wells on one chart.</span></li>
+        <li><a href="empires.html">The Shining Everlast</a><span>The vertical empire of Hopelight, and the Last Shine below it.</span></li>
+        <li><a href="everlast.html">Life in the Everlast</a><span>Leaving your mark, the Manamelt, and the four great festivals.</span></li>
+        <li><a href="kenanism.html">The Kenanism Empire</a><span>Where mutation is sacred and the hundred races came from.</span></li>
+        <li><a href="yenfin.html">The Yenfin Empire</a><span>The first empire, its faded golden age and its boy emperor.</span></li>
+        <li><a href="travel.html">Roads, Skies &amp; Tunnels</a><span>Trade guilds, sky guilds, the deep tunnels and the air currents.</span></li>
+        <li><a href="orders.html">Orders &amp; Institutions</a><span>The Knights of Hope, the Marauders, the Mages College and more.</span></li>
+      </ol>
+    </div>
+    <div class="part">
+      <h3>The Gilded Goose</h3>
+      <ol>
+        <li><a href="gilded-goose.html">The Guild</a><span>Find it. Understand it. Share it. Break the rules that say you can't.</span></li>
+        <li><a href="crockett.html">Crockett</a><span>Founder, guildmaster, and the empire's most expensive line of credit.</span></li>
+        <li><a href="gilded-goose.html#elite-four">The Elite Four</a><span>Cherry, Will, Tom and Sansa.</span></li>
+        <li><a href="serial.html">Tales of the Gilded Goose</a><span>The web serial. A new chapter every Friday.</span></li>
+      </ol>
+      <h3 class="part-gap">The Library</h3>
+      <ol>
+        <li><a href="lore.html">The Library</a><span>Every page in one place.</span></li>
+        <li><a href="compendium.html">The Compendium</a><span>The whole world gathered into one printable book.</span></li>
+      </ol>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="home-wrap">
-  <a class="serial-banner home-serial" href="chapters.html">
-    <p class="sb-eyebrow">The Web Serial &mdash; New chapters Mon / Wed / Fri</p>
-    <p class="sb-title">Tales of the Gilded Goose</p>
-    <p class="sb-desc">Crockett has run the guild for three hundred years. Their latest job should be simple: dig into the ruins beneath the Yenfin Empire, find what's down there, write it up over drinks. Getting in was an accident. Getting out will cost them everything.</p>
-  </a>
-</div>
+<section class="wrap law" aria-label="The Law of Reflection">
+  <p class="law-text">A kindness performed in Mirrorbloom is, somewhere beneath it, paid for.</p>
+  <p class="law-cite">The Law of Reflection, as every child above and below is taught it</p>
+</section>
 
-<div class="law-strip">
-  <p><span class="law-name">The Law of Reflection:</span> beauty and goodness generated above directly feeds horror and evil below. It is not metaphorical, and it is not optional. A kindness performed in Mirrorbloom is, somewhere beneath it, paid for.</p>
-  <p class="mirror-hint">Use the <span>&#9788;/&#9789;</span> button above to cross the mirror &mdash; view this site from Solance or from Umbrasol.</p>
-</div>
+<section class="wrap serial-band" aria-labelledby="serial-title">
+  <div class="serial-copy">
+    <p class="kicker">The web serial, new chapters every Friday</p>
+    <h2 id="serial-title">Tales of the Gilded Goose</h2>
+    <p>Crockett has run the Gilded Goose for centuries. Their latest job should be simple: dig into the ruins beneath the Yenfin Empire, find what's down there, write it up over drinks. Getting in was an accident. Getting out will cost them everything.</p>
+    <div class="btn-row"><a class="btn primary" href="serial.html">About the serial</a><a class="btn" data-rr href="#">Read on Royal Road</a></div>
+  </div>
+  <div class="serial-sigils" aria-hidden="true">
+    <span data-sigil="great_hope"></span>
+    <span data-sigil="great_despair"></span>
+  </div>
+</section>
 
-<footer>
-  Mirrorbloom is a living homebrew setting &mdash; this site updates as the world grows.
-</footer>
+<section class="wrap new-in" aria-labelledby="new-title">
+  <h2 id="new-title" class="home-h">New in the record</h2>
+  <ul class="new-list">
+    <li><a href="world.html">The Thirteen Nations</a>, with Ironpeak, Skyhold and the three kingdoms under the sea</li>
+    <li><a href="kenanism.html">The Kenanism Empire</a> and the pilgrimage that made the hundred races</li>
+    <li><a href="meadow.html">The Sleeping Meadows</a>, the Gorge, and the lost lambs</li>
+    <li><a href="iceberg.html">The Knowledge Iceberg</a></li>
+    <li><a href="everlast.html">Life in the Everlast</a>: the Manamelt and the four festivals</li>
+    <li><a href="map.html">The Map</a></li>
+  </ul>
+</section>
+</main>
 </body>
 </html>
