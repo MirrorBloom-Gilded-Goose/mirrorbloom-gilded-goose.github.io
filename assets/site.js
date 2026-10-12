@@ -67,7 +67,7 @@
     host.innerHTML =
       '<a class="skip" href="#main">Skip to content</a>' +
       '<div class="bar">' +
-        '<a class="wordmark" href="index.html" aria-label="Mirrorbloom, home"><span class="w-top">Mirrorbloom</span><span class="w-ref" aria-hidden="true"><span>Mirrorbloom</span></span></a>' +
+        '<a class="wordmark" href="index.html" aria-label="MirrorBloom, home"><span class="w-top">MirrorBloom</span><span class="w-ref" aria-hidden="true"><span>MirrorBloom</span></span></a>' +
         '<nav class="nav" aria-label="Main">' + nav + '</nav>' +
         '<div class="tools">' +
           '<button class="icon-btn mirror-btn" type="button"></button>' +
@@ -147,7 +147,7 @@
   function buildFooter() {
     var f = document.createElement('footer');
     f.className = 'site-foot';
-    f.innerHTML = '<div class="wrap"><p>Mirrorbloom is a living homebrew world for D&amp;D 5e and the home of <a href="serial.html">Tales of the Gilded Goose</a>.</p>' +
+    f.innerHTML = '<div class="wrap"><p>MirrorBloom is a living homebrew world for D&amp;D 5e and the home of <a href="serial.html">Tales of the Gilded Goose</a>.</p>' +
       '<p><a data-rr href="' + CONFIG.royalRoad + '">Read on Royal Road</a></p></div>';
     document.body.appendChild(f);
     document.querySelectorAll('[data-rr]').forEach(function (a) { a.href = CONFIG.royalRoad; });

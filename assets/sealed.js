@@ -11,7 +11,7 @@
     }
     var g = GROUPS[p.group] || ['Sealed', 'sanctum.html'];
     var crumb = document.getElementById('groupCrumb'); crumb.textContent = g[0]; crumb.href = g[1];
-    title.textContent = p.title; document.title = p.title + ' — Sanctum — Mirrorbloom';
+    title.textContent = p.title; document.title = p.title + ' — Sanctum — MirrorBloom';
     document.getElementById('sSummary').textContent = p.group === 'statblocks' ? '' : (p.summary || '');
     body.innerHTML = p.html;
     MBSite.renderSeals(); MBSite.unseal(v);

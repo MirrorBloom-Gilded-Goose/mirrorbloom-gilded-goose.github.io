@@ -31,7 +31,7 @@
       scrollTo(0, 0);
       document.title = ch.title + ' — Tales of the Gilded Goose';
     }
-    function showList() { listView.classList.remove('hidden'); reader.classList.add('hidden'); document.title = 'Chapters — Mirrorbloom'; }
+    function showList() { listView.classList.remove('hidden'); reader.classList.add('hidden'); document.title = 'Chapters — MirrorBloom'; }
     function route() { var m = location.hash.match(/^#ch-(\d+)$/); if (m) show(parseInt(m[1], 10) - 1); else showList(); }
     document.getElementById('backLink').addEventListener('click', function (e) { e.preventDefault(); history.pushState('', '', location.pathname); showList(); });
     addEventListener('hashchange', route); route();
