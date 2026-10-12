@@ -51,7 +51,8 @@
   }
 
   async function open(envelope, key) {
-    var plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(envelope.iv) }, key, unb64(envelope.data));
+    var data = Array.isArray(envelope.data) ? envelope.data.join('') : envelope.data; /* long files are stored in short lines */
+    var plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(envelope.iv) }, key, unb64(data));
     var bytes = new Uint8Array(plain);
     if (envelope.z) bytes = await pipe(bytes, DecompressionStream, 'gzip');
     return JSON.parse(dec.decode(bytes));
@@ -63,7 +64,8 @@
     if (canZip) { bytes = await pipe(bytes, CompressionStream, 'gzip'); z = 1; }
     var iv = crypto.getRandomValues(new Uint8Array(12));
     var ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, bytes);
-    return JSON.stringify({ v: 1, kdf: 'PBKDF2-SHA256', iter: iter || ITER, salt: saltB64, iv: b64(iv), z: z, data: b64(ct) });
+    var b = b64(ct), lines = []; for (var i = 0; i < b.length; i += 96) lines.push(b.slice(i, i + 96));
+    return JSON.stringify({ v: 1, kdf: 'PBKDF2-SHA256', iter: iter || ITER, salt: saltB64, iv: b64(iv), z: z, data: lines }, null, 0).replace(/","/g, '",\n"');
   }
 
   var MBVault = {
