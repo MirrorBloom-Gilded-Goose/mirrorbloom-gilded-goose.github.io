@@ -1,7 +1,7 @@
 # MirrorBloom
 
 The site for the MirrorBloom homebrew world and *Tales of the Gilded Goose*, published at
-https://natedog9928-png.github.io/MirrorBloom/
+https://mirrorbloom-gilded-goose.github.io/
 
 ## How the site is put together
 
