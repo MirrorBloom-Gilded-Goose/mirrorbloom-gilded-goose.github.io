@@ -6,7 +6,7 @@
   function ll(x, y) { return [H - y, x]; }
   var map = L.map('worldmap', { crs: L.CRS.Simple, minZoom: -1.4, maxZoom: 1.5, zoomSnap: 0.25, attributionControl: false });
   var bounds = [[0, 0], [H, W]];
-  var img = L.imageOverlay(above() ? 'assets/map-solance.svg' : 'assets/map-umbrasol.svg', bounds).addTo(map);
+  var img = L.imageOverlay(above() ? 'assets/map-solance.svg?v=4' : 'assets/map-umbrasol.svg?v=4', bounds).addTo(map);
   map.fitBounds(bounds);
   map.setMaxBounds([[-200, -200], [H + 200, W + 200]]);
 
@@ -32,7 +32,7 @@
   });
   document.getElementById('labelsToggle').addEventListener('change', function (e) { document.getElementById('worldmap').classList.toggle('no-labels', !e.target.checked); });
 
-  root.addEventListener('mb:crossed', function () { img.setUrl(above() ? 'assets/map-solance.svg' : 'assets/map-umbrasol.svg'); map.closePopup(); });
+  root.addEventListener('mb:crossed', function () { img.setUrl(above() ? 'assets/map-solance.svg?v=4' : 'assets/map-umbrasol.svg?v=4'); map.closePopup(); });
 
   /* pin mode: click to read a position for map-data.js */
   var pinOn = false, out = document.getElementById('pinOut');
