@@ -516,3 +516,4 @@ html[data-theme="solance"] body .moons { opacity: 0; }
   .moons, body:not([data-section="home"]) .moons { transform: scale(.42); transform-origin: top right; right: 4px; top: 62px; opacity: .7; }
   html[data-theme="solance"] body .moons { opacity: 0; }
 }
+.site-foot .foot-note { flex-basis: 100%; font-size: .88rem; color: var(--ink-3); }

@@ -9,6 +9,9 @@
 (function () {
   var CONFIG = {
     royalRoad: 'https://www.royalroad.com/fictions/search?title=Tales+of+the+Gilded+Goose',
+    /* Reader counter: your GoatCounter code (the part before .goatcounter.com).
+       Leave it empty and nothing is counted. */
+    counter: '',
     nav: [
       { key: 'cosmology', label: 'Cosmology', href: 'cosmology.html' },
       { key: 'magic', label: 'Magic', href: 'magic.html' },
@@ -148,7 +151,8 @@
     var f = document.createElement('footer');
     f.className = 'site-foot';
     f.innerHTML = '<div class="wrap"><p>MirrorBloom is a living homebrew world for D&amp;D 5e and the home of <a href="serial.html">Tales of the Gilded Goose</a>.</p>' +
-      '<p><a data-rr href="' + CONFIG.royalRoad + '">Read on Royal Road</a></p></div>';
+      '<p><a data-rr href="' + CONFIG.royalRoad + '">Read on Royal Road</a></p>' +
+      (CONFIG.counter ? '<p class="foot-note">Visits are counted anonymously, without cookies or stored IP addresses.</p>' : '') + '</div>';
     document.body.appendChild(f);
     document.querySelectorAll('[data-rr]').forEach(function (a) { a.href = CONFIG.royalRoad; });
   }
@@ -273,6 +277,26 @@
     return false;
   }
 
+  /* ---------- reader counter ----------
+     Counts each visitor once a day as "/readers" on GoatCounter, which never stores IP
+     addresses. Nothing is counted on a device signed in to the Sanctum. */
+  function countReader() {
+    if (!CONFIG.counter || document.body.hasAttribute('data-sealed-page') || here === 'mirror.html') return;
+    if (window.MBVault && MBVault.hasKey()) return;
+    var d = new Date(), today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    try { if (localStorage.getItem('mb-counted') === today) return; } catch (e) {}
+    window.goatcounter = { no_onload: true };
+    var sc = document.createElement('script');
+    sc.async = true; sc.src = 'https://gc.zgo.at/count.js';
+    sc.setAttribute('data-goatcounter', 'https://' + CONFIG.counter + '.goatcounter.com/count');
+    sc.onload = function () {
+      if (!window.goatcounter || !window.goatcounter.count) return;
+      window.goatcounter.count({ path: '/readers', title: 'A reader' });
+      try { localStorage.setItem('mb-counted', today); } catch (e) {}
+    };
+    document.head.appendChild(sc);
+  }
+
   function init() {
     if (guard()) return;
     if (reduce) document.querySelectorAll('animate').forEach(function (a) { a.remove(); });
@@ -292,6 +316,7 @@
     } else ready = Promise.resolve(null);
     resolveReady(ready);
     ready.then(function (v) { root.dispatchEvent(new CustomEvent('mb:vault', { detail: v })); });
+    countReader();
   }
 
   /* MBSite.vaultReady resolves with the opened vault, or null when locked. Use it instead of listening for events. */

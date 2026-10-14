@@ -73,3 +73,33 @@ body[data-section="sanctum"] { --here: var(--crimson); }
 .ed-dialog h2 { font-size: 1.8rem; margin-bottom: .5rem; }
 .ed-dialog label { margin-top: .6rem; }
 .ed-pre { font-size: .8rem; white-space: pre-wrap; background: var(--bg-3); padding: .7rem; border-radius: 2px; }
+
+/* readers */
+.readers { border: 1px solid var(--line); background: var(--bg-2); border-radius: var(--radius); padding: clamp(1.1rem, 3vw, 1.8rem); box-shadow: var(--shadow); }
+.rd-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 0 0 1.6rem; }
+@media (max-width: 640px) { .rd-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rd-tile { border-left: 2px solid var(--line-strong); padding-left: .8rem; }
+.rd-tile:first-child { border-left-color: var(--here); }
+.rd-tile dt { font-size: .95rem; color: var(--ink-2); }
+.rd-tile dd { margin: .1rem 0 0; font-family: var(--text); font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.1; color: var(--ink); }
+.rd-chart { margin: 0; }
+.rd-chart figcaption { font-size: .95rem; color: var(--ink-2); margin-bottom: .4rem; }
+.rd-plot { position: relative; }
+.rd-plot svg { width: 100%; height: 190px; display: block; overflow: visible; }
+.rd-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rd-base { stroke: var(--line-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rd-tick { fill: var(--ink-3); font-size: 11px; font-family: var(--text); font-variant-numeric: tabular-nums; }
+.rd-bar { fill: var(--here); transition: opacity .15s; }
+.rd-hit { fill: transparent; }
+.rd-col { outline: none; cursor: default; }
+.rd-col.on .rd-hit { fill: var(--glass); }
+.rd-plot svg:hover .rd-col:not(.on) .rd-bar { opacity: .55; }
+.rd-col:focus-visible .rd-hit { stroke: var(--here); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.rd-tip { position: absolute; top: 4px; background: var(--bg); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: .35rem .65rem; font-size: .95rem; white-space: nowrap; pointer-events: none; box-shadow: var(--shadow); }
+.rd-tip strong { font-weight: 600; color: var(--ink); }
+.rd-tip span { display: block; font-size: .85rem; color: var(--ink-3); }
+.rd-note { font-size: .95rem; color: var(--ink-2); margin: 1.2rem 0 .6rem; max-width: 70ch; }
+.rd-table summary { cursor: pointer; color: var(--ink-2); font-size: .95rem; }
+.rd-table table { max-width: 320px; margin-top: .6rem; font-variant-numeric: tabular-nums; }
+.readers-setup ol { padding-left: 1.3em; } .readers-setup li { margin-bottom: .4rem; }
+.readers-setup code, .rd-error code { font-size: .9em; background: var(--bg-3); padding: .05em .3em; border-radius: 2px; }
