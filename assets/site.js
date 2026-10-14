@@ -17,7 +17,7 @@
     /* When a new chapter goes up, for the countdown. weekday: 0 = Sunday ... 5 = Friday.
        hour is 24-hour time in your own time zone. To take a break, write a message in
        paused, e.g. paused: 'Back on November 6th', and the countdown shows that instead. */
-    release: { weekday: 5, hour: 12, minute: 0, timeZone: 'America/New_York', paused: '' },
+    release: { weekday: 5, hour: 8, minute: 0, timeZone: 'America/New_York', paused: '' },
     /* Comments ("Leave your mark") through giscus, stored as GitHub Discussions on the site's repo.
        Stays off until all four are filled in. */
     comments: { repo: 'MirrorBloom-Gilded-Goose/mirrorbloom-gilded-goose.github.io', repoId: 'R_kgDOTBEM7Q', category: '', categoryId: '' },
