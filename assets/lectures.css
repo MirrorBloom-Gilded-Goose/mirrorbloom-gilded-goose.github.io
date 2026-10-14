@@ -1,0 +1,15 @@
+/* Linfay's Lecture Hall */
+.shield-hint { color: var(--ink-2); display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+.hall { margin-top: 2rem; border-top: 1px solid var(--line); }
+.rec { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 1.8rem; padding: 1.6rem 0; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--header-h) + 16px); }
+@media (max-width: 640px) { .rec { grid-template-columns: 1fr; gap: .5rem; } }
+.rec-meta { display: grid; align-content: start; gap: .15rem; }
+.rec-n { font-family: var(--display); font-size: 1.15rem; color: var(--ink); display: flex; align-items: center; gap: .5rem; }
+.rec-n::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--crimson); box-shadow: 0 0 0 3px color-mix(in srgb, var(--crimson) 22%, transparent); }
+.rec-ch { font-style: italic; color: var(--ink-3); font-size: .95rem; }
+.rec h2 { font-size: 1.7rem; margin: 0 0 .4rem; }
+.rec-sum { color: var(--ink-2); margin-bottom: .6rem; }
+.rec-text { border-left: 2px solid var(--line-strong); padding-left: 1rem; margin-bottom: .7rem; }
+.rec-text p { font-style: italic; color: var(--ink); margin-bottom: .7rem; }
+.rec-more { display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; font-size: .95rem; margin: 0; }
+.rec-more a { color: var(--ink-2); }

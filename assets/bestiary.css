@@ -1,0 +1,75 @@
+/* The Bestiary */
+.bestiary-wrap { max-width: 1100px; }
+.beast-key { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: .8rem; font-style: italic; color: var(--ink-3); text-align: center; }
+.beast-key .k-above { color: var(--gold); } .beast-key .k-below { color: var(--crimson); }
+.beast-pair { display: grid; grid-template-columns: 1fr 2px 1fr; gap: 0 1.5rem; padding: 2.4rem 0; border-top: 1px solid var(--line); }
+.beast-pair:first-child { border-top: 0; padding-top: 1rem; }
+.beast-glass { background: linear-gradient(transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent); position: relative; }
+.beast-glass::after { content: ''; position: absolute; left: -3px; top: 50%; width: 8px; height: 8px; margin-top: -4px; transform: rotate(45deg); border: 1px solid var(--line-strong); background: var(--bg); }
+.beast { display: grid; justify-items: center; text-align: center; align-content: start; }
+.beast-art { width: min(220px, 70%); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; position: relative; margin-bottom: 1rem;
+  background: radial-gradient(circle, color-mix(in srgb, var(--c) 16%, transparent), transparent 68%); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 28%, transparent); }
+.art-echo .e1 { transform: translateX(-12px); } .art-echo .e2 { transform: translateX(-24px); }
+.beast-art svg { width: 82%; height: 82%; color: var(--c); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c) 45%, transparent)); overflow: visible; }
+.beast.above { --c: var(--gold); }
+.beast.below { --c: var(--crimson); }
+.beast h3 { font-size: 1.5rem; margin: 0 0 .25rem; }
+.beast-serves { display: inline-flex; align-items: center; gap: .45rem; margin: 0 0 .8rem; font-size: .92rem; color: var(--ink-3); font-style: italic; }
+.beast-serves span { width: 22px; height: 22px; color: var(--c); }
+.beast-rumor { max-width: 40ch; margin: 0 0 1rem; color: var(--ink-2); line-height: 1.55; }
+.beast-stat { display: none; }
+html.unlocked .beast-stat { display: inline-flex; }
+.beast-foot { margin-top: 2rem; text-align: center; }
+@media (max-width: 720px) {
+  .beast-key { display: none; }
+  .beast-pair { grid-template-columns: 1fr; gap: 1.6rem; }
+  .beast-glass { height: 2px; background: linear-gradient(90deg, transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent); }
+  .beast-glass::after { left: 50%; top: -3px; margin: 0 0 0 -4px; }
+}
+
+/* motion */
+@media (prefers-reduced-motion: no-preference) {
+  .art-butterfly .wing-l, .art-butterfly .wing-r { transform-origin: 100px 104px; animation: flap 2.6s ease-in-out infinite; }
+  .art-butterfly .wing-r { animation-name: flap-r; }
+  .art-butterfly .glow { animation: breathe 4s ease-in-out infinite; transform-origin: 100px 100px; }
+  .art-forgotten .blank { animation: blank 6s ease-in-out infinite; }
+  .art-forgotten { animation: sway 7s ease-in-out infinite; transform-origin: 100px 186px; }
+  .art-sprite .bob { animation: bob 3s ease-in-out infinite; }
+  .art-sprite .wings { animation: shimmer .5s ease-in-out infinite alternate; }
+  .art-sprite .trail { animation: trail 3s ease-in-out infinite; }
+  .art-sprite .twinkle { animation: twinkle 2s ease-in-out infinite; transform-origin: 100px 38px; transform-box: view-box; }
+  .art-echo .e1 { animation: echo1 5s ease-in-out infinite; } .art-echo .e2 { animation: echo2 5s ease-in-out infinite; }
+  .art-thorn .blooms > g > * { animation: bloom 4s ease-in-out infinite; }
+  .art-crawler .spores circle { animation: spore 4s ease-in infinite; } .art-crawler .spores circle:nth-child(2) { animation-delay: 1s; } .art-crawler .spores circle:nth-child(3) { animation-delay: 2s; } .art-crawler .spores circle:nth-child(4) { animation-delay: 3s; }
+  .art-courtier .mask-hand { animation: tilt 5s ease-in-out infinite; transform-origin: 114px 96px; }
+  .art-jester .bells circle { animation: jingle 2.4s ease-in-out infinite; } .art-jester .bells circle:nth-child(2) { animation-delay: .3s; } .art-jester .bells circle:nth-child(3) { animation-delay: .6s; }
+  .art-notion .drift { animation: drift 8s ease-in-out infinite; }
+  .art-watcher .pupil { animation: dart 6s steps(1) infinite; }
+  .art-setter .tray { animation: wobble 3.2s ease-in-out infinite; transform-origin: 100px 66px; }
+  .art-setter .steam { animation: steam 2.4s ease-in-out infinite; }
+  .art-guest .flame { animation: flicker 1.4s ease-in-out infinite; transform-origin: 159.5px 108px; }
+  .art-hound .run { animation: gallop .6s ease-in-out infinite; } .art-hound .lines { animation: trail 1.2s linear infinite; }
+  .art-bonehound .ember { animation: ember 3s ease-in-out infinite; }
+}
+@keyframes flap { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.55); } }
+@keyframes flap-r { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.55); } }
+@keyframes breathe { 0%, 100% { opacity: .08; transform: scale(.94); } 50% { opacity: .16; transform: scale(1.04); } }
+@keyframes blank { 0%, 100% { opacity: .3; } 50% { opacity: .5; } }
+@keyframes sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+@keyframes bob { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(4px, -8px); } }
+@keyframes shimmer { from { opacity: .35; } to { opacity: .7; } }
+@keyframes trail { 0%, 100% { opacity: .2; } 50% { opacity: .8; } }
+@keyframes twinkle { 0%, 100% { opacity: .2; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.1); } }
+@keyframes echo1 { 0%, 100% { transform: translateX(-12px); } 50% { transform: translateX(-20px); } }
+@keyframes echo2 { 0%, 100% { transform: translateX(-24px); } 50% { transform: translateX(-40px); } }
+@keyframes bloom { 0%, 100% { transform: scale(.85); } 50% { transform: scale(1.1); } }
+@keyframes spore { 0% { transform: translateY(14px); opacity: 0; } 30% { opacity: .9; } 100% { transform: translateY(-26px); opacity: 0; } }
+@keyframes tilt { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-5deg); } }
+@keyframes jingle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+@keyframes drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, -6px); } }
+@keyframes dart { 0% { transform: translate(0, 0); } 30% { transform: translate(-4px, 1px); } 55% { transform: translate(4px, 0); } 80% { transform: translate(0, 3px); } }
+@keyframes wobble { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+@keyframes steam { 0% { opacity: 0; transform: translateY(4px); } 50% { opacity: .7; } 100% { opacity: 0; transform: translateY(-6px); } }
+@keyframes flicker { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(.85, 1.15); } 60% { transform: scale(1.1, .9); } }
+@keyframes gallop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ember { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }

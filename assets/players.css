@@ -1,0 +1,37 @@
+/* Player's Guide */
+.pg-shield { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: .9rem 1.1rem; margin: 1.6rem 0 0; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--glass); }
+.pg-shield p { margin: 0; max-width: 46ch; font-size: .98rem; }
+
+.pg-layers { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.4rem; }
+@media (max-width: 640px) { .pg-layers { grid-template-columns: 1fr; } }
+.pg-layer { padding: 1.1rem 1.2rem .6rem; border: 1px solid var(--line-strong); border-radius: var(--radius); background: linear-gradient(color-mix(in srgb, var(--here) 9%, transparent), transparent 70%); }
+.pg-layer.deeper { background: linear-gradient(color-mix(in srgb, var(--there) 12%, transparent), transparent 80%); }
+.pg-layer h3 { margin: 0; }
+.pg-who { margin: .1rem 0 .7rem; font-style: italic; color: var(--ink-3); font-size: .92rem; }
+.pg-layer ul { padding-left: 1.1rem; margin: 0 0 .6rem; }
+.pg-layer li { margin-bottom: .35rem; }
+.pg-aside { font-size: .92rem; color: var(--ink-3); font-style: italic; }
+
+.pg-regions { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .8rem; margin: 1.4rem 0 2.2rem; }
+.pg-region { display: grid; gap: .3rem; align-content: start; padding: 1rem 1.1rem; border: 1px solid var(--line-strong); border-radius: var(--radius); text-decoration: none; color: var(--ink-2); background: var(--glass); transition: border-color .2s, transform .2s; }
+.pg-region:hover { border-color: var(--here); transform: translateY(-2px); color: var(--ink-2); }
+.pg-region strong { font-family: var(--display); font-weight: 400; font-size: 1.3rem; color: var(--ink); }
+.pg-region .pg-n { font-size: .85rem; color: var(--here); }
+.pg-region span:last-child { font-size: .95rem; line-height: 1.45; }
+
+.pg-tiers { list-style: none; padding: 0; margin: 1rem 0 0; border-left: 2px solid var(--line-strong); }
+.pg-tiers li { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 0 .45rem 1rem; border-bottom: 1px dashed var(--line); position: relative; }
+.pg-tiers li::before { content: ''; position: absolute; left: -6px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--bg); border: 2px solid var(--here); }
+.pg-tiers li:first-child::before { background: var(--here); }
+.pg-tiers b { font-weight: 400; color: var(--ink); }
+.pg-tiers span { color: var(--ink-3); font-style: italic; font-size: .92rem; text-align: right; }
+
+.pg-fey { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .6rem; margin: 1.2rem 0 1.4rem; }
+.pg-fey a { display: flex; align-items: center; gap: .7rem; padding: .55rem .8rem; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); transition: border-color .2s; }
+.pg-fey a:hover { border-color: var(--gold); color: var(--ink); }
+.pg-fey span { width: 34px; height: 34px; flex: none; color: var(--gold); }
+
+.pg-rules { list-style: none; padding: 0; }
+.pg-rules li { position: relative; padding-left: 1.5rem; margin-bottom: .75rem; }
+.pg-rules li::before { content: '\25C7'; position: absolute; left: 0; top: 0; color: var(--here); }
+.pg-rules strong { color: var(--ink); }

@@ -12,6 +12,15 @@
     /* Reader counter: your GoatCounter code (the part before .goatcounter.com).
        Leave it empty and nothing is counted. */
     counter: 'thesloppytimewizard',
+    /* The newest chapter number on Royal Road. The spoiler shield offers chapters up to this. */
+    latestChapter: 28,
+    /* When a new chapter goes up, for the countdown. weekday: 0 = Sunday ... 5 = Friday.
+       hour is 24-hour time in your own time zone. To take a break, write a message in
+       paused, e.g. paused: 'Back on November 6th', and the countdown shows that instead. */
+    release: { weekday: 5, hour: 12, minute: 0, timeZone: 'America/New_York', paused: '' },
+    /* Comments ("Leave your mark") through giscus, stored as GitHub Discussions on the site's repo.
+       Stays off until all four are filled in. */
+    comments: { repo: 'MirrorBloom-Gilded-Goose/mirrorbloom-gilded-goose.github.io', repoId: 'R_kgDOTBEM7Q', category: '', categoryId: '' },
     nav: [
       { key: 'cosmology', label: 'Cosmology', href: 'cosmology.html' },
       { key: 'magic', label: 'Magic', href: 'magic.html' },
@@ -31,9 +40,11 @@
         ['Roads, Skies & Tunnels', 'travel.html'], ['Orders & Institutions', 'orders.html'] ] },
       { part: 'The Gilded Goose', note: 'The guild and the serial', items: [
         ['The Guild', 'gilded-goose.html'], ['Crockett', 'crockett.html'], ['Cherry', 'cherry.html'], ['Will', 'will.html'],
-        ['Tom', 'tom.html'], ['Sansa', 'sansa.html'], ['Tales of the Gilded Goose', 'serial.html'], ['Read the chapters', 'chapters.html'] ] },
+        ['Tom', 'tom.html'], ['Sansa', 'sansa.html'], ['Tales of the Gilded Goose', 'serial.html'], ['Read the chapters', 'chapters.html'],
+        ["Linfay's Lecture Hall", 'lectures.html'] ] },
       { part: 'The Library', note: 'Everything gathered', items: [
-        ['The Library', 'lore.html'], ['The Compendium', 'compendium.html'] ] },
+        ['The Library', 'lore.html'], ["Player's Guide", 'players.html'], ["Who's your reflection?", 'reflection.html'], ['The Bestiary', 'bestiary.html'],
+        ['The Compendium', 'compendium.html'] ] },
       { part: 'The Sanctum', note: 'Sealed — for the Dungeon Master', sealed: true, items: [
         ['Sanctum', 'sanctum.html'], ['Stat blocks', 'sanctum.html#statblocks'], ['Bestiary', 'sanctum.html#bestiary'],
         ['Adventures', 'sanctum.html#adventures'], ['Secret lore', 'sanctum.html#secrets'], ['Table tools', 'sanctum.html#tools'],
@@ -297,6 +308,59 @@
     document.head.appendChild(sc);
   }
 
+  /* ---------- next-chapter countdown: any element with data-countdown ---------- */
+  function zoned(date, tz) {
+    var o = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
+      .formatToParts(date).forEach(function (p) { o[p.type] = p.value; });
+    return { y: +o.year, m: +o.month, d: +o.day, h: +o.hour % 24, mi: +o.minute, s: +o.second, wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(o.weekday) };
+  }
+  function offset(date, tz) { var z = zoned(date, tz); return Date.UTC(z.y, z.m - 1, z.d, z.h, z.mi, z.s) - Math.floor(date.getTime() / 1000) * 1000; }
+  function nextRelease(now) {
+    var r = CONFIG.release, z = zoned(now, r.timeZone);
+    var ahead = (r.weekday - z.wd + 7) % 7;
+    if (ahead === 0 && z.h * 60 + z.mi >= r.hour * 60 + r.minute) ahead = 7;
+    var wall = Date.UTC(z.y, z.m - 1, z.d + ahead, r.hour, r.minute);
+    var guess = wall - offset(now, r.timeZone);
+    return new Date(wall - offset(new Date(guess), r.timeZone));
+  }
+  function countdowns() {
+    var els = document.querySelectorAll('[data-countdown]'); if (!els.length || !CONFIG.release) return;
+    var r = CONFIG.release, units = [['d', 'days', 'day'], ['h', 'hours', 'hour'], ['m', 'minutes', 'minute'], ['s', 'seconds', 'second']];
+    var DAYS = ['Sundays', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays'];
+    els.forEach(function (el) {
+      if (r.paused) { el.innerHTML = '<p class="cd-paused">' + esc(r.paused) + '</p>'; el.classList.add('is-paused'); return; }
+      var at = nextRelease(new Date());
+      var home = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', timeZone: r.timeZone, timeZoneName: 'short' }).format(at);
+      var mine = new Intl.DateTimeFormat(undefined, { weekday: 'long', hour: 'numeric', minute: '2-digit' }).format(at);
+      var same = mine === new Intl.DateTimeFormat(undefined, { weekday: 'long', hour: 'numeric', minute: '2-digit', timeZone: r.timeZone }).format(at);
+      el.innerHTML = '<p class="cd-label">The next chapter is due in</p><div class="cd-units" role="timer" aria-live="off">' +
+        units.map(function (u) { return '<span class="cd-u"><b data-u="' + u[0] + '">00</b><small>' + u[1] + '</small></span>'; }).join('') +
+        '</div><p class="cd-when">' + DAYS[r.weekday] + ' at ' + esc(home) + (same ? '' : ' <span>(' + esc(mine) + ' for you)</span>') + '</p>';
+      var cells = {}; el.querySelectorAll('b[data-u]').forEach(function (b) { cells[b.dataset.u] = b; });
+      function tick() {
+        var left = Math.max(0, at - Date.now());
+        if (left <= 0) { at = nextRelease(new Date(Date.now() + 1000)); left = at - Date.now(); }
+        var t = Math.floor(left / 1000), v = { d: Math.floor(t / 86400), h: Math.floor(t / 3600) % 24, m: Math.floor(t / 60) % 60, s: t % 60 };
+        units.forEach(function (u) {
+          var b = cells[u[0]], txt = String(v[u[0]]).padStart(2, '0');
+          if (b.textContent !== txt) { b.textContent = txt; if (!reduce) { b.classList.remove('tick'); void b.offsetWidth; b.classList.add('tick'); } }
+          b.nextElementSibling.textContent = v[u[0]] === 1 ? u[2] : u[1];
+        });
+        el.setAttribute('aria-label', 'The next chapter is due in ' + v.d + ' days, ' + v.h + ' hours and ' + v.m + ' minutes');
+      }
+      tick(); setInterval(tick, 1000);
+    });
+  }
+
+  /* ---------- comments: loads assets/comments.js only when switched on in CONFIG ---------- */
+  function comments() {
+    var c = CONFIG.comments, b = document.body;
+    if (!c || !c.repo || !c.repoId || !c.category || !c.categoryId) return;
+    if (b.hasAttribute('data-sealed-page') || b.hasAttribute('data-no-comments')) return;
+    if (['sanctum', 'home', 'map', ''].indexOf(b.getAttribute('data-section') || '') > -1 || here === 'mirror.html') return;
+    var sc = document.createElement('script'); sc.src = 'assets/comments.js'; sc.async = true; document.head.appendChild(sc);
+  }
+
   function init() {
     if (guard()) return;
     if (reduce) document.querySelectorAll('animate').forEach(function (a) { a.remove(); });
@@ -316,6 +380,8 @@
     } else ready = Promise.resolve(null);
     resolveReady(ready);
     ready.then(function (v) { root.dispatchEvent(new CustomEvent('mb:vault', { detail: v })); });
+    countdowns();
+    comments();
     countReader();
   }
 

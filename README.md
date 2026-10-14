@@ -16,6 +16,11 @@ Every page is a plain `.html` file in this folder. The header, the Contents menu
 | Map pins, currents, tunnels and wells | `assets/map-data.js` (use Pin mode on the map page to read positions) |
 | The Archfey sigils | `assets/sigils.js` |
 | What goes in the printable Compendium | `PARTS` at the top of `assets/compendium.js` |
+| The newest chapter (the spoiler shield offers chapters up to it) | `latestChapter` in `CONFIG` |
+| The countdown's release day and time, or a break message | `release` in `CONFIG` (`paused: 'Back on ...'` shows a message instead) |
+| What is blurred as a spoiler, and from which chapter | `MAP` at the top of `assets/spoilers.js`, or `data-ch="12"` on any element |
+| Linfay's lecture texts | `assets/lectures.js` (paste each snippet between the backticks) |
+| Comments ("Leave your mark") | `comments` in `CONFIG` (needs Discussions and the giscus app on this repository) |
 
 ## Adding a page
 

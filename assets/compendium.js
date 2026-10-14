@@ -5,11 +5,12 @@
     { name: 'The Mirror', pages: ['cosmology.html', 'magic.html', 'magic-types.html', 'meadow.html', 'iceberg.html', 'courts.html', 'timeline.html'] },
     { name: 'The Gods and the Archfey', pages: ['great_hope.html', 'great_despair.html', 'dawnward_king.html', 'duskward_king.html', 'verdant_lady.html', 'bloated_lady.html', 'revel_king.html', 'mocking_king.html', 'lady_of_dreaming.html', 'lady_of_waking.html', 'hearthkeeper.html', 'hollow_host.html', 'hunter_king.html', 'stalking_king.html'] },
     { name: 'The World', pages: ['world.html', 'empires.html', 'everlast.html', 'kenanism.html', 'yenfin.html', 'travel.html', 'orders.html'] },
-    { name: 'The Gilded Goose', pages: ['gilded-goose.html', 'crockett.html', 'cherry.html', 'will.html', 'tom.html', 'sansa.html', 'serial.html'] }
+    { name: 'The Gilded Goose', pages: ['gilded-goose.html', 'crockett.html', 'cherry.html', 'will.html', 'tom.html', 'sansa.html', 'serial.html'] },
+    { name: 'For Players', pages: ['players.html'] }
   ];
   var status = document.getElementById('compStatus');
   function clean(node) {
-    node.querySelectorAll('script, .rail, .btn-row, .tiles, .waterline, .realm-index, .gauge, canvas, .meadow-grass, .ice-tip, .ice-water, .ice-body, .public-only, .crumbs, .title-ref, .sealed-only .btn').forEach(function (n) { n.remove(); });
+    node.querySelectorAll('script, .rail, .btn-row, .tiles, .waterline, .realm-index, .gauge, canvas, .meadow-grass, .ice-tip, .ice-water, .ice-body, .public-only, .crumbs, .title-ref, .sealed-only .btn, .pg-shield').forEach(function (n) { n.remove(); });
     node.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
     node.querySelectorAll('[data-sigil-done]').forEach(function (n) { n.removeAttribute('data-sigil-done'); n.innerHTML = ''; });
     node.querySelectorAll('.draw').forEach(function (n) { n.classList.remove('draw'); });

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who&#x27;s Your Reflection? — MirrorBloom</title>
+<meta name="description" content="Everyone born in MirrorBloom has a mirror self in Umbrasol. Answer five questions and meet yours.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/reflection.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/spoilers.js" defer></script>
+<script src="assets/reflection.js" defer></script>
+</head>
+<body data-section="library">
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="page-head">
+  <p class="crumbs"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="lore.html">The Library</a>
+</p>
+  <h1 class="title">Who's your reflection?</h1><span class="title-ref" aria-hidden="true">Who's your reflection?</span>
+  <p class="standfirst">Everyone born in MirrorBloom is shackled to a mirror self in Umbrasol, whose heart runs opposite to their own. Answer five questions and meet yours.</p>
+</div>
+<div class="wrap reflect">
+  <form class="quiz" id="quiz" autocomplete="off">
+    <fieldset class="q">
+      <legend><span class="q-n">1</span>What do people call you?</legend>
+      <input type="text" id="qName" maxlength="24" placeholder="Your name, or your character's" required>
+    </fieldset>
+    <fieldset class="q">
+      <legend><span class="q-n">2</span>Which Archfey do you pray to?</legend>
+      <div class="choices fey" id="qFey">
+</div>
+    </fieldset>
+    <fieldset class="q">
+      <legend><span class="q-n">3</span>What are you proudest of in yourself?</legend>
+      <div class="choices" id="qVirtue">
+</div>
+    </fieldset>
+    <fieldset class="q">
+      <legend><span class="q-n">4</span>How will you leave your mark?</legend>
+      <div class="choices" id="qCall">
+</div>
+    </fieldset>
+    <fieldset class="q">
+      <legend><span class="q-n">5</span>Where do you live?</legend>
+      <div class="choices" id="qHome">
+</div>
+    </fieldset>
+    <p class="quiz-error" id="quizError" role="alert">
+</p>
+    <div class="btn-row"><button class="btn primary" type="submit">Look into the glass</button>
+</div>
+  </form>
+
+  <section class="result hidden" id="result" aria-live="polite">
+    <div class="card" id="card">
+</div>
+    <div class="result-side">
+      <p class="lede" id="resultLine">
+</p>
+      <div class="btn-row">
+        <button class="btn primary" type="button" id="saveCard">Save the card</button>
+        <button class="btn" type="button" id="again">Change my answers</button>
+      </div>
+      <p class="muted">Your reflection doesn't know you exist. Probably. Read about <a href="cosmology.html#law">the Law of Reflection and the Shackle</a>, or meet the people living with theirs in <a href="serial.html">Tales of the Gilded Goose</a>.</p>
+    </div>
+  </section>
+</div>
+</main>
+</body>
+</html>
