@@ -11,7 +11,7 @@
     royalRoad: 'https://www.royalroad.com/fictions/search?title=Tales+of+the+Gilded+Goose',
     /* Reader counter: your GoatCounter code (the part before .goatcounter.com).
        Leave it empty and nothing is counted. */
-    counter: '',
+    counter: 'thesloppytimewizard',
     nav: [
       { key: 'cosmology', label: 'Cosmology', href: 'cosmology.html' },
       { key: 'magic', label: 'Magic', href: 'magic.html' },

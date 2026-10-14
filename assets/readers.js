@@ -116,6 +116,6 @@
 
   host.innerHTML = '<p class="muted">Counting readers…</p>';
   gather().then(render).catch(function () {
-    host.innerHTML = '<p class="rd-error">The counter didn’t answer. Check that <strong>Allow adding visitor counts on your website</strong> is turned on in GoatCounter’s settings, and that the code <code>' + esc(code) + '</code> is right. If it is, try again in a few minutes.</p>';
+    host.innerHTML = '<p class="rd-error">The counter didn’t answer. In GoatCounter’s <strong>Settings</strong>, turn on the visitor counter setting (<strong>Allow adding visitor counts on your website</strong>) and save, then reload this page. If it’s already on, check that the code <code>' + esc(code) + '</code> is right, or try again in a few minutes.</p>';
   });
 })();
