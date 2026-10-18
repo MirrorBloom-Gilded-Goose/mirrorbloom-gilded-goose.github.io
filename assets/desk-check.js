@@ -324,7 +324,7 @@
 
   window.DeskCheck = {
     scan: scan, echoes: echoes, chapterChecks: chapterChecks, autofix: autofix, countWords: countWords, setCanon: setCanon,
-    ltIssues: ltIssues, ltWanted: ltWanted,
+    ltIssues: ltIssues, ltWanted: ltWanted, ltHas: function (para) { return para.trim().length <= 3 || LT.cache.has(para); },
     lt: { get on() { return LT.on; }, set on(v) { LT.on = !!v; save('desk-lt', LT.on); if (v) setStatus('checking'); else { LT.queue = []; setStatus('off'); } },
       get status() { return LT.status; }, onStatus: function (f) { LT.listeners.push(f); } },
     ignore: function (key) { IGNORE[key] = 1; save('desk-ignore', IGNORE); },

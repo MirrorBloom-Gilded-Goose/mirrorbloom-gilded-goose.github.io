@@ -19,6 +19,7 @@
 <script src="assets/spoilers.js" defer></script>
 <script src="assets/desk-check.js" defer></script>
 <script src="assets/desk.js" defer></script>
+<script src="assets/desk-music.js" defer></script>
 </head>
 <body data-section="sanctum" data-sealed-page data-desk>
 <header id="site-header"></header>
@@ -63,6 +64,7 @@
           <label>Voice <select id="readVoice"></select></label>
         </div>
       </div>
+      <button class="db-btn voice-btn mu-btn" type="button" id="muBtn" title="Music"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18.5V6l10-2v12"/><circle cx="6.5" cy="18.5" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Music</span></button>
       <div class="timer" id="timer">
         <button class="tm-main" type="button" id="tmMain" title="Start writing sprint">
           <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="tm-track" cx="18" cy="18" r="15.5"/><circle class="tm-ring" id="tmRing" cx="18" cy="18" r="15.5"/></svg>
@@ -102,6 +104,7 @@
         <button role="tab" type="button" data-tab="check" aria-selected="false">Check <span class="p-badge" id="checkBadge"></span></button>
         <button role="tab" type="button" data-tab="ask" aria-selected="false">Ask</button>
         <button role="tab" type="button" data-tab="notes" aria-selected="false">Notes</button>
+        <button role="tab" type="button" data-tab="music" aria-selected="false">Music</button>
       </div>
 
       <section class="p-view" data-view="lore">
@@ -195,6 +198,34 @@
         <p><button class="linklike" type="button" id="resetIgnored">Bring back suggestions I ignored</button>
 </p>
         <p class="muted small">Drafts live in this browser, on this device. Use More, then Back up every draft, now and then.</p>
+      </section>
+      <section class="p-view" data-view="music" hidden>
+        <div class="mu-now">
+          <button class="mu-play" type="button" id="muPlay" aria-label="Play"></button>
+          <div class="mu-what">
+<p class="mu-title" id="muTitle">Quiet desk</p>
+<p class="mu-sub" id="muSub">Paused</p>
+</div>
+        </div>
+        <label class="mu-vol"><span>Volume</span> <input type="range" id="muVol" min="0" max="1" step="0.01"></label>
+        <div class="mu-moods" id="muMoods">
+</div>
+        <label class="chk"><input type="checkbox" id="muBrk"> Pause the music on breaks</label>
+        <p class="muted small">It also goes quiet while you dictate or the Desk reads aloud. These are made by your browser as they play, so they never repeat exactly and don't need the internet.</p>
+        <h3>Your own music</h3>
+        <p class="muted small">Paste a YouTube or Spotify link: a song, an album or a whole playlist.</p>
+        <form class="mu-add" id="muAdd" autocomplete="off">
+          <input id="muUrl" type="url" placeholder="https://www.youtube.com/…" aria-label="YouTube or Spotify link" required>
+          <input id="muName" placeholder="Name it, like Boss fight" aria-label="Name" maxlength="40">
+          <button class="btn small" type="submit">Add</button>
+        </form>
+        <p class="mu-err" id="muErr" role="alert">
+</p>
+        <ul class="mu-links" id="muLinks">
+</ul>
+        <div class="mu-embed" id="muEmbed" hidden>
+</div>
+        <p class="muted small">Spotify plays 30 second previews unless you're signed in to Spotify in this browser. Breaks pause YouTube links, but Spotify keeps playing.</p>
       </section>
     </aside>
   </div>

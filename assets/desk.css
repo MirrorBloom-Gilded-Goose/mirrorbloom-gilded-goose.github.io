@@ -238,7 +238,7 @@ html.desk-focus .db-left, html.desk-focus .db-mid .goal, html.desk-focus #panelB
 
 /* voice */
 .voice-btn { display: inline-flex; align-items: center; gap: .35rem; }
-.voice-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.voice-btn svg { flex: none; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .voice-btn.on { color: var(--bg); background: var(--here); border-color: var(--here); }
 #dictBtn.on svg { animation: mic-pulse 1.2s ease-in-out infinite; }
 @keyframes mic-pulse { 50% { opacity: .5; } }
@@ -253,3 +253,52 @@ html.desk-focus .db-left, html.desk-focus .db-mid .goal, html.desk-focus #panelB
 .dict-pill button { font: inherit; font-size: .85rem; background: none; border: 1px solid var(--line-strong); border-radius: 14px; padding: .2rem .7rem; color: var(--ink); cursor: pointer; }
 @media (max-width: 560px) { .voice-btn span { display: none; } }
 code { font-size: .85em; background: var(--glass); padding: 0 .25em; border-radius: 2px; }
+
+/* ---------- music (assets/desk-music.js) ---------- */
+.p-tabs button { min-width: 0; padding-left: .15rem; padding-right: .15rem; }
+.mu-btn.on svg { animation: mu-bob 1.2s ease-in-out infinite; }
+@keyframes mu-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+.mu-now { display: flex; align-items: center; gap: .8rem; margin-bottom: .9rem; }
+.mu-play { flex: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--glass); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+.mu-play svg { width: 20px; height: 20px; fill: currentColor; }
+.mu-play:hover { border-color: var(--ink-3); }
+.mu-play.on { background: var(--here); border-color: var(--here); color: var(--bg); }
+.mu-what { min-width: 0; }
+.mu-title { margin: 0; font-family: var(--display); font-size: 1.2rem; line-height: 1.2; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mu-sub { margin: .1rem 0 0; font-size: .82rem; color: var(--ink-3); }
+.mu-vol { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; font-size: .88rem; color: var(--ink-2); }
+.mu-vol input { flex: 1; accent-color: var(--here); }
+.mu-moods { display: grid; gap: .45rem; margin-bottom: 1rem; }
+.mu-mood { position: relative; text-align: left; font: inherit; background: none; color: var(--ink-2); border: 1px solid var(--line); border-left: 3px solid var(--mc, var(--line-strong)); border-radius: 3px; padding: .55rem .7rem .55rem .8rem; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+.mu-mood:hover { background: var(--glass); border-color: var(--line-strong); border-left-color: var(--mc); }
+.mu-mood b { display: block; font-weight: 500; color: var(--ink); font-size: .98rem; }
+.mu-mood > span:not(.mu-eq) { display: block; font-size: .82rem; line-height: 1.35; margin-top: .1rem; padding-right: 1.6rem; }
+.mu-mood.on { background: color-mix(in srgb, var(--mc) 13%, transparent); border-color: color-mix(in srgb, var(--mc) 45%, transparent); }
+.m-quiet { --mc: #8FA6D6; } .m-road { --mc: #8DB27A; } .m-battle { --mc: #CF4A58; } .m-tavern { --mc: #D9A95B; } .m-below { --mc: #9A6BC4; } .m-rain { --mc: #6FA3A8; }
+html[data-theme="solance"] .m-quiet { --mc: #3D5F99; } html[data-theme="solance"] .m-road { --mc: #3F6B30; } html[data-theme="solance"] .m-battle { --mc: #A3324A; }
+html[data-theme="solance"] .m-tavern { --mc: #8E600C; } html[data-theme="solance"] .m-below { --mc: #6A3F94; } html[data-theme="solance"] .m-rain { --mc: #2F6B70; }
+.mu-eq { position: absolute; right: .7rem; top: .7rem; display: none; gap: 2px; align-items: flex-end; height: 14px; }
+.mu-eq i { display: block; width: 3px; height: 100%; background: var(--mc); border-radius: 1px; transform-origin: bottom; animation: mu-eq 1s ease-in-out infinite; }
+.mu-eq i:nth-child(2) { animation-delay: -.4s; animation-duration: .8s; } .mu-eq i:nth-child(3) { animation-delay: -.7s; animation-duration: 1.15s; }
+.mu-mood.on .mu-eq { display: flex; }
+@keyframes mu-eq { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+.mu-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .4rem; }
+.mu-add input { min-width: 0; grid-column: 1 / -1; }
+.mu-add input + input { grid-column: 1; }
+.mu-err { color: var(--crimson); font-size: .85rem; margin: .3rem 0 0; min-height: 0; }
+.mu-err:empty { display: none; }
+.mu-links { list-style: none; margin: .7rem 0; padding: 0; display: grid; gap: .3rem; }
+.mu-links li { display: flex; gap: .3rem; align-items: stretch; }
+.mu-link { flex: 1; min-width: 0; text-align: left; font: inherit; font-size: .92rem; color: var(--ink); background: none; border: 1px solid var(--line); border-radius: 3px; padding: .4rem .6rem; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mu-link:hover, .mu-link.on { background: var(--glass); border-color: var(--line-strong); }
+.mu-link.on { border-left: 3px solid var(--here); }
+.mu-src { display: inline-block; font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; padding: .05rem .35rem; margin-right: .45rem; border-radius: 2px; vertical-align: .1em; background: rgba(205, 50, 50, .18); color: var(--ink-2); }
+.mu-src.sp { background: rgba(30, 185, 84, .2); }
+.mu-x { flex: none; width: 30px; font: inherit; font-size: 1.1rem; color: var(--ink-3); background: none; border: 1px solid transparent; border-radius: 3px; cursor: pointer; }
+.mu-x:hover { color: var(--ink); border-color: var(--line); }
+.mu-embed { margin: .4rem 0 .8rem; border-radius: 6px; overflow: hidden; background: #000; }
+.mu-embed iframe { display: block; width: 100%; border: 0; }
+.mu-embed.yt iframe { aspect-ratio: 16 / 9; height: auto; }
+.mu-embed.sp { background: none; }
+.mu-embed.sp iframe { height: 152px; border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { .mu-eq i, .mu-btn.on svg { animation: none; } }

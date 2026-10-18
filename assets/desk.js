@@ -130,7 +130,7 @@
     return taken;
   }
   function renderBack() {
-    renderQueued = false;
+    renderQueued = false; syncMarks();
     var text = ta.value, caret = ta.selectionStart, html = '', pos = 0;
     merged = mergeAll(text);
     function piece(a, b) {
@@ -148,14 +148,49 @@
   }
   function queueRender() { if (!renderQueued) { renderQueued = true; requestAnimationFrame(renderBack); } }
 
+  /* Keep underlines in place while the text changes: everything before and after the
+     edit slides along with it, and only marks touching the edit are dropped. So fixing
+     one word never makes the rest of the paragraph's underlines blink out while the
+     grammar check catches up. */
+  var lastText = '';
+  function shiftIssues(list, a, b) {
+    if (a === b || !list.length) return list;
+    var n = Math.min(a.length, b.length), p = 0, q = 0;
+    while (p < n && a.charCodeAt(p) === b.charCodeAt(p)) p++;
+    while (q < n - p && a.charCodeAt(a.length - 1 - q) === b.charCodeAt(b.length - 1 - q)) q++;
+    var aEnd = a.length - q, d = b.length - a.length, word = /[A-Za-z’'0-9]/;
+    return list.filter(function (it) {
+      if (it.e <= p) return !(it.e === p && word.test(b.charAt(p)) && word.test(b.charAt(p - 1)));
+      if (it.s >= aEnd) return !(it.s === aEnd && word.test(b.charAt(aEnd + d - 1)) && word.test(b.charAt(aEnd + d)));
+      return false;
+    }).map(function (it) {
+      if (it.s < aEnd) return it;
+      var c = Object.assign({}, it); c.s += d; c.e += d; return c;
+    });
+  }
+  function syncMarks() {
+    var t = ta.value; if (t === lastText) return;
+    houseIssues = shiftIssues(houseIssues, lastText, t); ltList = shiftIssues(ltList, lastText, t); lastText = t;
+  }
+  /* fresh grammar results where a paragraph has been checked; the carried-over marks elsewhere */
+  function ltNow() {
+    syncMarks();
+    if (!C.lt.on) return [];
+    var t = ta.value, fresh = C.ltIssues(t), done = [], pos = 0;
+    t.split('\n').forEach(function (para) { if (C.ltHas(para)) done.push([pos, pos + para.length]); pos += para.length + 1; });
+    var kept = ltList.filter(function (it) { return !done.some(function (r) { return it.s >= r[0] && it.e <= r[1]; }); });
+    return fresh.concat(kept);
+  }
+
   var scanT = 0, ltT = 0, sideT = 0;
   function refresh(now) {
-    houseIssues = C.scan(ta.value).concat(SET.echo ? C.echoes(ta.value) : []); ltList = C.ltIssues(ta.value);
+    syncMarks(); houseIssues = C.scan(ta.value).concat(SET.echo ? C.echoes(ta.value) : []); ltList = ltNow();
     renderBack(); counts();
     clearTimeout(ltT); ltT = setTimeout(function () { C.ltWanted(ta.value); }, now ? 300 : 2200);
     clearTimeout(sideT); sideT = setTimeout(renderCheckTab, now ? 0 : 600);
   }
   function afterEdit() {
+    syncMarks();
     grow(); queueSave();
     clearTimeout(scanT); scanT = setTimeout(function () { refresh(false); }, 120);
     queueRender(); counts(); keepCaretInView();
@@ -177,7 +212,7 @@
   $('docTitle').addEventListener('input', function () { queueSave(); clearTimeout(this._t); this._t = setTimeout(function () { flushSave(); fillPicker(); }, 800); });
   $('docNotes').addEventListener('input', queueSave);
   window.addEventListener('resize', function () { grow(); queueRender(); });
-  document.addEventListener('desk:lt', function () { ltList = C.ltIssues(ta.value); queueRender(); clearTimeout(sideT); sideT = setTimeout(renderCheckTab, 200); });
+  document.addEventListener('desk:lt', function () { ltList = ltNow(); queueRender(); clearTimeout(sideT); sideT = setTimeout(renderCheckTab, 200); });
 
   function keepCaretInView() {
     requestAnimationFrame(function () {
@@ -235,7 +270,7 @@
   pop.addEventListener('click', function (e) {
     var it = popFor; if (!it) return;
     var r = e.target.closest('[data-rep]'), a = e.target.closest('[data-pop]');
-    if (r) { replaceRange(it.s, it.e, it.reps[+r.dataset.rep]); hidePop(); afterEdit(); refresh(false); return; }
+    if (r) { replaceRange(it.s, it.e, it.reps[+r.dataset.rep]); hidePop(); afterEdit(); refresh(true); return; }
     if (!a) return;
     if (a.dataset.pop === 'ignore') { C.ignore(it.key); hidePop(); refresh(false); }
     else if (a.dataset.pop === 'dict') { C.addWord(ta.value.slice(it.s, it.e)); hidePop(); refresh(false); renderDict(); toast('Added to your dictionary.'); }
@@ -248,6 +283,7 @@
     SET.panel = true; root.classList.remove('panel-off'); $('panelBtn').setAttribute('aria-expanded', 'true');
     if (tab) selectTab(tab); saveSet();
   }
+  window.DeskPanel = function (tab) { openPanel(tab); };
   function selectTab(tab) {
     SET.tab = tab; saveSet();
     document.querySelectorAll('.p-tabs [data-tab]').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false'); });
@@ -360,6 +396,7 @@
   }
   function showBreak(on) {
     var b = $('brk');
+    document.dispatchEvent(new CustomEvent('desk:break', { detail: { on: !!on } }));
     if (on) { $('brkTip').textContent = TIPS[Math.floor(Math.random() * TIPS.length)]; flushSave(); b.hidden = false; requestAnimationFrame(function () { b.classList.add('in'); }); $('brkSkip').focus(); }
     else { b.classList.remove('in'); setTimeout(function () { b.hidden = true; }, 350); if (TM.phase !== 'break') document.title = title0; }
   }
