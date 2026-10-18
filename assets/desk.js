@@ -14,7 +14,7 @@
   function fmtN(n) { return n.toLocaleString(); }
 
   var root = $('desk'), ta = $('edTa'), back = $('edBack'), scroller = $('edScroll');
-  var SET = Object.assign({ autofix: true, names: true, panel: true, tab: 'lore', loreCat: 'cast', work: 5, brk: 3, sound: true, model: 'claude-haiku-5-5', askDraft: true }, load('desk-settings', {}));
+  var SET = Object.assign({ autofix: true, names: true, panel: true, tab: 'lore', loreCat: 'cast', work: 5, brk: 3, sound: true, model: 'claude-haiku-5-5', askDraft: true, echo: true, readRate: 1, voice: '' }, load('desk-settings', {}));
   function saveSet() { save('desk-settings', SET); }
   var CANON = null;
 
@@ -115,9 +115,10 @@
     }
     return out;
   }
-  var PRI = { house: 0, grammar: 1, spelling: 1, style: 2, name: 3 };
+  var PRI = { read: -1, house: 0, grammar: 1, spelling: 1, style: 2, name: 3 };
+  var readMark = null;
   function mergeAll(text) {
-    var all = houseIssues.concat(ltList, nameMarks(text));
+    var all = houseIssues.concat(ltList, nameMarks(text), readMark ? [readMark] : []);
     all.sort(function (a, b) { return PRI[a.kind] - PRI[b.kind] || a.s - b.s; });
     var taken = [];
     all.forEach(function (it) {
@@ -149,7 +150,7 @@
 
   var scanT = 0, ltT = 0, sideT = 0;
   function refresh(now) {
-    houseIssues = C.scan(ta.value); ltList = C.ltIssues(ta.value);
+    houseIssues = C.scan(ta.value).concat(SET.echo ? C.echoes(ta.value) : []); ltList = C.ltIssues(ta.value);
     renderBack(); counts();
     clearTimeout(ltT); ltT = setTimeout(function () { C.ltWanted(ta.value); }, now ? 300 : 2200);
     clearTimeout(sideT); sideT = setTimeout(renderCheckTab, now ? 0 : 600);
@@ -273,7 +274,7 @@
   function menuToggle(btn, menu) {
     btn.addEventListener('click', function (e) { e.stopPropagation(); var open = menu.hidden; closeMenus(); menu.hidden = !open; btn.setAttribute('aria-expanded', open ? 'true' : 'false'); });
   }
-  function closeMenus() { document.querySelectorAll('.desk .menu').forEach(function (m) { m.hidden = true; }); document.querySelectorAll('[aria-controls="menu"],[aria-controls="tmSet"]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); }
+  function closeMenus() { document.querySelectorAll('.desk .menu').forEach(function (m) { m.hidden = true; }); document.querySelectorAll('[aria-controls="menu"],[aria-controls="tmSet"],[aria-controls="readMenu"]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); }
   menuToggle($('menuBtn'), $('menu')); menuToggle($('tmSetBtn'), $('tmSet'));
   document.addEventListener('click', function (e) { if (!e.target.closest('.menu')) closeMenus(); });
   $('docPick').addEventListener('change', function () { openDoc(this.value); });
@@ -289,7 +290,8 @@
       if (navigator.clipboard && window.ClipboardItem) navigator.clipboard.write([new ClipboardItem({ 'text/plain': new Blob([text], { type: 'text/plain' }), 'text/html': new Blob([html], { type: 'text/html' }) })]).then(done, function () { navigator.clipboard.writeText(text).then(done); });
       else if (navigator.clipboard) navigator.clipboard.writeText(text).then(done);
       else { ta.select(); document.execCommand('copy'); done(); }
-    } else if (what === 'txt') download(safeName(doc.title) + '.txt', ta.value, 'text/plain');
+    } else if (what === 'note') copyNote();
+    else if (what === 'txt') download(safeName(doc.title) + '.txt', ta.value, 'text/plain');
     else if (what === 'rename') { var t = prompt('Name this draft', doc.title || ''); if (t != null) { $('docTitle').value = t; dirty = true; flushSave(); fillPicker(); } }
     else if (what === 'delete') {
       if (!confirm('Delete "' + (doc.title || 'Untitled chapter') + '" from this browser? This cannot be undone.')) return;
@@ -497,16 +499,21 @@
 
   /* ======================= check tab ======================= */
   function updateCheckBadge() {
-    var n = merged.filter(function (it) { return it.kind !== 'name'; }).length;
+    var n = merged.filter(function (it) { return it.kind !== 'name' && it.kind !== 'read' && it.rule !== 'echo'; }).length;
     $('checkBadge').textContent = n ? n : '';
   }
   var KIND_ORDER = ['house', 'grammar', 'spelling', 'style'];
   function flat(t) { return t.replace(/\s*\n+\s*/g, ' / '); }
   function renderCheckTab() {
     if (SET.tab !== 'check' || !doc) return;
-    $('optLt').checked = C.lt.on; $('optFix').checked = SET.autofix; $('optNames').checked = SET.names;
+    $('optLt').checked = C.lt.on; $('optFix').checked = SET.autofix; $('optNames').checked = SET.names; $('optEcho').checked = SET.echo;
     $('ckChapter').innerHTML = '<h3>This chapter</h3><ul>' + C.chapterChecks(ta.value, doc.goal).map(function (c) { return '<li class="cc-' + c[0] + '">' + esc(c[1]) + '</li>'; }).join('') + '</ul>';
-    var items = merged.map(function (it, k) { return { it: it, k: k }; }).filter(function (x) { return x.it.kind !== 'name'; });
+    var seenEcho = {};
+    var items = merged.map(function (it, k) { return { it: it, k: k }; }).filter(function (x) {
+      if (x.it.kind === 'name' || x.it.kind === 'read') return false;
+      if (x.it.rule === 'echo') { var pk = x.it.key + '@' + ta.value.lastIndexOf('\n', x.it.s); if (seenEcho[pk]) return false; seenEcho[pk] = 1; }
+      return true;
+    });
     items.sort(function (a, b) { return KIND_ORDER.indexOf(a.it.kind) - KIND_ORDER.indexOf(b.it.kind) || a.it.s - b.it.s; });
     $('ckList').innerHTML = items.length ? items.slice(0, 200).map(function (x) {
       var it = x.it, text = ta.value, ctxS = Math.max(0, it.s - 25), ctxE = Math.min(text.length, it.e + 25);
@@ -535,6 +542,7 @@
   $('optLt').addEventListener('change', function () { C.lt.on = this.checked; refresh(true); });
   $('optFix').addEventListener('change', function () { SET.autofix = this.checked; saveSet(); });
   $('optNames').addEventListener('change', function () { SET.names = this.checked; saveSet(); queueRender(); });
+  $('optEcho').addEventListener('change', function () { SET.echo = this.checked; saveSet(); refresh(true); });
 
   /* ======================= notes tab ======================= */
   function renderChecklist() {
@@ -656,6 +664,133 @@
       $('polishNo').onclick = function () { box.hidden = true; };
     }, function (err) { box.innerHTML = '<p class="err">' + esc(err.message) + '</p>'; });
   });
+
+  /* ======================= author's note ======================= */
+  function nextFriday() {
+    var now = new Date(), z = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hourCycle: 'h23' }).formatToParts(now), o = {};
+    z.forEach(function (p) { o[p.type] = p.value; });
+    var wd = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(o.weekday), ahead = (5 - wd + 7) % 7; if (ahead === 0 && +o.hour >= 8) ahead = 7;
+    var d = new Date(now.getTime() + ahead * 86400000);
+    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York' });
+  }
+  function fillNote(tpl) {
+    var title = $('docTitle').value.trim(), num = (title.match(/(?:chapter|ch\.?)\s*(\d+)/i) || [])[1] || '';
+    return tpl.replace(/\{chapter\}/g, num).replace(/\{title\}/g, title.replace(/^(chapter|ch\.?)\s*\d+\s*[:.\-–—]?\s*/i, '')).replace(/\{next\}/g, nextFriday())
+      .replace(/\{words\}/g, fmtN(C.countWords(ta.value))).replace(/\{site\}/g, 'https://mirrorbloom-gilded-goose.github.io/');
+  }
+  function copyNote() {
+    var tpl = load('desk-note-tpl', '');
+    if (!tpl.trim()) { openPanel('notes'); $('noteTpl').focus(); toast('Paste your author\'s note template first. It is saved for every chapter.'); return; }
+    var text = fillNote(tpl);
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { toast('Author\'s note copied, filled in for this chapter.'); }, function () { prompt('Copy your author\'s note:', text); });
+  }
+  $('noteTpl').value = load('desk-note-tpl', '');
+  $('noteTpl').addEventListener('input', function () { save('desk-note-tpl', this.value); });
+  $('noteCopy').addEventListener('click', copyNote);
+
+  /* ======================= dictation ======================= */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition, rec = null, dictating = false;
+  var SPOKEN = [
+    [/\b(new|next) paragraph\b/gi, '\n\n'], [/\bnew line\b/gi, '\n'], [/\bscene break\b/gi, '\n\n— ✦ —\n\n'],
+    [/\b(full stop|period)\b/gi, '.'], [/\bcomma\b/gi, ','], [/\bquestion mark\b/gi, '?'], [/\bexclamation (mark|point)\b/gi, '!'],
+    [/\bsemi ?colon\b/gi, ';'], [/\bcolon\b/gi, ':'], [/\b(ellipsis|dot dot dot)\b/gi, '...'],
+    [/\b(open|begin) quote\b/gi, ' "'], [/\b(close|end) quote\b|\bunquote\b/gi, '"'], [/\b(open|begin) thought\b/gi, " '"], [/\b(close|end) thought\b/gi, "'"]
+  ];
+  function spoken(t) {
+    SPOKEN.forEach(function (r) { t = t.replace(r[0], '\u0001' + r[1] + '\u0001'); });
+    return t.replace(/\s*\u0001([.,?!;:"'”]+|\.\.\.)\u0001/g, '$1').replace(/\s*\u0001(\s*["'])\u0001\s*/g, '$1').replace(/\s*\u0001([\s\S]*?)\u0001\s*/g, '$1');
+  }
+  function insertDictated(raw) {
+    var t = spoken(raw.trim()); if (!t) return;
+    t = t.replace(/(\.["'”’]?\s+|[!?]\s+|\n\s*)(["'“‘]?)([a-z])/g, function (m, a, q, c) { return a + q + c.toUpperCase(); });
+    var p = ta.selectionStart, before = ta.value.slice(0, p), prev = before.slice(-1);
+    var startOfSentence = !before.trim() || /[.!?…]["'”’]?\s*$|\n\s*$/.test(before) || /["“'‘]$/.test(before) && /[.!?]\s*["“'‘]$|^\s*["“'‘]$|\n\s*["“'‘]$/.test(before);
+    if (startOfSentence) t = t.replace(/^(\s*["'“‘]?)([a-z])/, function (m, a, b) { return a + b.toUpperCase(); });
+    if (prev && !/[\s\n"“'‘(]/.test(prev) && /^[A-Za-z0-9"'“‘]/.test(t)) t = ' ' + t;
+    if (/^ ?["']/.test(t) && (!prev || /\s/.test(prev))) t = t.replace(/^ /, '');
+    replaceRange(p, ta.selectionEnd, t); afterEdit();
+  }
+  function setDict(on) {
+    dictating = on; $('dictBtn').setAttribute('aria-pressed', on ? 'true' : 'false'); $('dictBtn').classList.toggle('on', on);
+    $('dictPill').hidden = !on; $('dictText').textContent = 'Listening…';
+  }
+  function startDict() {
+    if (!SR) { toast('Dictation works in Chrome, Edge and Safari. This browser does not support it.'); return; }
+    if (readOn) stopRead();
+    rec = new SR(); rec.lang = 'en-US'; rec.continuous = true; rec.interimResults = true;
+    rec.onresult = function (e) {
+      var interim = '';
+      for (var i = e.resultIndex; i < e.results.length; i++) {
+        var r = e.results[i];
+        if (r.isFinal) insertDictated(r[0].transcript); else interim += r[0].transcript;
+      }
+      $('dictText').textContent = interim ? interim : 'Listening…';
+    };
+    rec.onerror = function (e) {
+      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { toast('The microphone is blocked. Allow it for this site in the address bar, then try again.'); setDict(false); }
+      else if (e.error === 'network') { toast('Dictation needs the internet (your browser sends speech to its own service).'); setDict(false); }
+    };
+    rec.onend = function () { if (dictating) { try { rec.start(); } catch (x) { setDict(false); } } };
+    try { rec.start(); setDict(true); ta.focus(); } catch (x) { toast('Could not start dictation.'); }
+  }
+  function stopDict() { setDict(false); if (rec) { try { rec.stop(); } catch (x) {} } }
+  $('dictBtn').addEventListener('click', function () { if (dictating) stopDict(); else startDict(); });
+  $('dictStop').addEventListener('click', stopDict);
+  if (!SR) { $('dictBtn').title = 'Dictation works in Chrome, Edge and Safari'; $('dictBtn').classList.add('off'); }
+
+  /* ======================= read aloud ======================= */
+  var synth = window.speechSynthesis, readOn = false, readQueue = [];
+  function voices() { return synth ? synth.getVoices().filter(function (v) { return /^en/i.test(v.lang); }) : []; }
+  function fillVoices() {
+    var vs = voices(); if (!vs.length) return;
+    $('readVoice').innerHTML = vs.map(function (v) { return '<option value="' + esc(v.name) + '"' + (v.name === SET.voice ? ' selected' : '') + '>' + esc(v.name.replace(/^(Microsoft|Google) /, '')) + '</option>'; }).join('');
+    if (!SET.voice) { var good = vs.filter(function (v) { return /natural|neural|samantha|google us|aria|jenny|guy/i.test(v.name); })[0]; if (good) $('readVoice').value = good.name; }
+  }
+  if (synth) { fillVoices(); synth.onvoiceschanged = fillVoices; }
+  $('readRate').value = SET.readRate;
+  $('readRate').addEventListener('input', function () { SET.readRate = +this.value; saveSet(); });
+  $('readVoice').addEventListener('change', function () { SET.voice = this.value; saveSet(); });
+  menuToggle($('readBtn'), $('readMenu'));
+  function stopRead() { readOn = false; readQueue = []; if (synth) synth.cancel(); readMark = null; queueRender(); $('readBtn').classList.remove('on'); }
+  function readFrom(start, end) {
+    if (!synth) { toast('Reading aloud is not supported in this browser.'); return; }
+    if (dictating) stopDict();
+    stopRead(); readOn = true; $('readBtn').classList.add('on');
+    var t = ta.value, pos = start; readQueue = [];
+    while (pos < end) {
+      var nl = t.indexOf('\n', pos); if (nl < 0 || nl > end) nl = end;
+      if (t.slice(pos, nl).trim()) readQueue.push([pos, nl]);
+      pos = nl + 1;
+    }
+    speakNext();
+  }
+  function speakNext() {
+    if (!readOn) return;
+    var seg = readQueue.shift(); if (!seg) { stopRead(); return; }
+    var text = ta.value.slice(seg[0], seg[1]).replace(/— ✦ —/g, ' ');
+    var u = new SpeechSynthesisUtterance(text); u.rate = SET.readRate || 1;
+    var v = voices().filter(function (x) { return x.name === ($('readVoice').value || SET.voice); })[0]; if (v) u.voice = v;
+    u.onboundary = function (e) {
+      if (e.name && e.name !== 'word') return;
+      var s0 = seg[0] + e.charIndex, len = e.charLength || ((ta.value.slice(s0).match(/^[^\s]+/) || [''])[0].length);
+      readMark = { s: s0, e: s0 + Math.max(1, len), kind: 'read' }; renderBack();
+      var m = back.querySelector('mark.k-read'); if (m) { var r = m.getBoundingClientRect(), sr = scroller.getBoundingClientRect(); if (r.bottom > sr.bottom - 80 || r.top < sr.top + 40) scroller.scrollTop += r.top - sr.top - sr.height / 3; }
+    };
+    u.onend = function () { readMark = null; speakNext(); };
+    u.onerror = function () { stopRead(); };
+    synth.speak(u);
+  }
+  $('readMenu').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-read]'); if (!b) return; closeMenus();
+    var t = ta.value, p = ta.selectionStart, what = b.dataset.read;
+    if (what === 'stop') return stopRead();
+    if (ta.selectionEnd > ta.selectionStart && what !== 'all') return readFrom(ta.selectionStart, ta.selectionEnd);
+    if (what === 'all') return readFrom(0, t.length);
+    var ps = t.lastIndexOf('\n', p - 1) + 1, pe = t.indexOf('\n', p); if (pe < 0) pe = t.length;
+    if (what === 'para') return readFrom(ps, pe);
+    var sStart = Math.max(ps, t.slice(0, p).search(/[^.!?]*$/)); readFrom(Math.max(ps, sStart), t.length);
+  });
+  ta.addEventListener('keydown', function (e) { if (readOn && e.key === 'Escape') stopRead(); });
 
   /* ======================= start ======================= */
   function start(vault) {

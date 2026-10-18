@@ -164,6 +164,41 @@
     return out;
   }
 
+  /* ---------- echoes: the same distinctive word too often in one paragraph, or twice within a breath ---------- */
+  var STOP = {};
+  ('about above after again against almost along also although always among another anything around away back because been before being below between both came cannot could does doing done down during each either else even ever every from further gets give goes going gone good gotta great have having here hers herself himself into itself just know like little look looks made make many more most much must myself near need never next nothing once only other others ours over own really right said same says seem seems shall should since some something still such sure take than that their theirs them themselves then there these they thing things think this those though through thus till time today together too toward under until upon very want wants well were what when where whether which while whole whom whose will with within without would your yours yourself yeah okay just even back down still eyes face hand hands head voice turn turns turned look looking looks smile smiles feel feels felt know knows going come comes',
+   'one two three four five first last long ever away again').split(/\s+/).forEach(function (w) { STOP[w] = 1; });
+  function stem(w) { return w.toLowerCase().replace(/['’]s$/, '').replace(/(ing|ed|es|s|ly)$/, '').replace(/(.)\1$/, '$1'); }
+  function echoes(text) {
+    var out = [], pos = 0;
+    text.split('\n').forEach(function (para) {
+      var base = pos; pos += para.length + 1;
+      if (para.trim().length < 40) return;
+      var re = /[A-Za-z][A-Za-z’']+/g, m, byStem = {}, words = [];
+      while ((m = re.exec(para))) {
+        var w = m[0], lw = w.toLowerCase().replace(/['’]s$/, '');
+        if (lw.length < 4 || STOP[lw] || CANON.names[w] || CANON.names[w.replace(/['’]s$/, '')]) continue;
+        var st = stem(w); if (st.length < 3) continue;
+        var item = { s: base + m.index, e: base + m.index + w.length, w: w, i: words.length };
+        words.push(item); (byStem[st] = byStem[st] || []).push(item);
+      }
+      Object.keys(byStem).forEach(function (st) {
+        var list = byStem[st], flag = [];
+        if (list.length >= 3) flag = list;
+        else if (list.length === 2 && list[0].w.length >= 6) {
+          var gap = para.slice(list[0].e - base, list[1].s - base).split(/\s+/).length;
+          if (gap <= 22) flag = list;
+        }
+        flag.forEach(function (it, k) {
+          var key = 'echo:' + st;
+          if (IGNORE[key]) return;
+          out.push({ s: it.s, e: it.e, kind: 'style', title: 'Echo', msg: '"' + list[0].w + '" appears ' + (list.length === 2 ? 'twice close together' : list.length + ' times') + ' in this paragraph. Fine if it is on purpose.', reps: [], rule: 'echo', key: key, src: 'house' });
+        });
+      });
+    });
+    return out;
+  }
+
   /* chapter level checks for the Check tab */
   function chapterChecks(text, goal) {
     var res = [], trimmed = text.replace(/^\s+/, ''), words = countWords(text);
@@ -288,7 +323,7 @@
   }
 
   window.DeskCheck = {
-    scan: scan, chapterChecks: chapterChecks, autofix: autofix, countWords: countWords, setCanon: setCanon,
+    scan: scan, echoes: echoes, chapterChecks: chapterChecks, autofix: autofix, countWords: countWords, setCanon: setCanon,
     ltIssues: ltIssues, ltWanted: ltWanted,
     lt: { get on() { return LT.on; }, set on(v) { LT.on = !!v; save('desk-lt', LT.on); if (v) setStatus('checking'); else { LT.queue = []; setStatus('off'); } },
       get status() { return LT.status; }, onStatus: function (f) { LT.listeners.push(f); } },

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join the Table — MirrorBloom</title>
+<meta name="description" content="Join your Dungeon Master&#x27;s game of MirrorBloom with a code: see the battle map, move your character and cast your spells.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/table.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js" defer></script>
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/spoilers.js" defer></script>
+<script src="assets/table-core.js" defer></script>
+<script src="assets/table-net.js" defer></script>
+<script src="assets/table-player.js" defer></script>
+</head>
+<body data-section="library" data-table data-player>
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="tbl player" id="tbl">
+  <section class="join" id="join">
+    <div class="join-card">
+      <p class="kicker">MirrorBloom</p>
+      <h1>Join the table</h1>
+      <p class="muted">Your Dungeon Master has a five letter code. Type it in with your name.</p>
+      <form id="joinForm" autocomplete="off">
+        <label>Game code <input id="jCode" maxlength="5" autocapitalize="characters" spellcheck="false" required></label>
+        <label>Your name <input id="jName" maxlength="30" required></label>
+        <button class="btn primary" type="submit">Join</button>
+      </form>
+      <p class="j-status" id="jStatus" role="status">
+</p>
+    </div>
+  </section>
+
+  <section class="play" id="play" hidden>
+    <div class="pl-top">
+      <button type="button" class="pl-me" id="me"></button>
+      <div class="pl-init" id="initStrip" aria-label="Turn order">
+</div>
+      <div class="pl-btns">
+        <button type="button" class="tb-btn" data-drawer="spells" id="btnSpells">Spells</button>
+        <button type="button" class="tb-btn" data-drawer="dice">Dice</button>
+        <button type="button" class="tb-btn" data-drawer="sheet" id="btnSheet">Sheet</button>
+        <button type="button" class="tb-btn" id="btnMeasure" aria-pressed="false">Measure</button>
+        <button type="button" class="tb-btn" id="btnPing" aria-pressed="false" title="Then tap the map to point something out">Point</button>
+        <button type="button" class="tb-btn" id="btnFind">Find me</button>
+      </div>
+    </div>
+    <div class="tb-stage" id="stage">
+      <canvas id="cv" aria-label="Battle map"></canvas>
+      <div class="tb-hint" id="hint" hidden>
+</div>
+      <div class="tb-zoom"><button type="button" id="zIn" title="Zoom in">+</button><button type="button" id="zOut" title="Zoom out">&minus;</button><button type="button" id="zFit" title="Fit the map">Fit</button><button type="button" id="zFull" title="Full screen">&#x26F6;</button>
+</div>
+      <div class="pl-conn" id="conn">
+</div>
+      <div class="roll-pop" id="rollPop" hidden>
+</div>
+    </div>
+
+    <aside class="drawer" id="drawer" hidden>
+      <div class="dr-head">
+<h2 id="drTitle">
+</h2><button type="button" class="tb-btn" id="drClose">Close</button>
+</div>
+      <div class="dr-body" data-d="choose">
+        <p class="muted small">Pick the character you're playing.</p>
+        <div id="partyList" class="char-list">
+</div>
+      </div>
+      <div class="dr-body" data-d="spells">
+        <p class="muted small" id="spellNote">
+</p>
+        <div class="spell-grid" id="spellGrid">
+</div>
+      </div>
+      <div class="dr-body" data-d="dice">
+        <div class="dice-row" id="diceRow">
+</div>
+        <form class="dice-form" id="diceForm"><input id="diceExpr" placeholder="1d20+5" aria-label="Dice to roll" autocomplete="off"><button class="btn small primary" type="submit">Roll</button>
+</form>
+        <div class="dice-opts">
+          <label class="chk"><input type="radio" name="dmode" value="" checked> Normal</label>
+          <label class="chk"><input type="radio" name="dmode" value="adv"> Advantage</label>
+          <label class="chk"><input type="radio" name="dmode" value="dis"> Disadvantage</label>
+        </div>
+        <ol class="log" id="log">
+</ol>
+      </div>
+      <div class="dr-body" data-d="sheet">
+<div id="sheet" class="sheet">
+</div>
+</div>
+    </aside>
+  </section>
+  <div class="toast" id="toast" hidden>
+</div>
+</div>
+</main>
+</body>
+</html>

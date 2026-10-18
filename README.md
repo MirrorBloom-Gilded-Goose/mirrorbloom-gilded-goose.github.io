@@ -21,6 +21,15 @@ Every page is a plain `.html` file in this folder. The header, the Contents menu
 | What is blurred as a spoiler, and from which chapter | `MAP` at the top of `assets/spoilers.js`, or `data-ch="12"` on any element |
 | Linfay's lecture texts | `assets/lectures.js` (paste each snippet between the backticks) |
 | Comments ("Leave your mark") | `comments` in `CONFIG` (needs Discussions and the giscus app on this repository) |
+| Spells on the battle map | `SPELLS` in `assets/table-core.js` |
+
+## The Table (D&D battle map)
+
+`dm-table.html` is the Dungeon Master's side, sealed in the Sanctum. Maps, characters and logs are saved in that browser; use Map settings, Download map to keep a copy. Players join at `table.html` with the five letter code from Invite players. The DM's browser hosts the game, so keep that tab open while you play. Player screen opens a window for a TV that shows what the players see.
+
+## The Writer's Desk
+
+`desk.html`, sealed in the Sanctum. Drafts are saved in the browser on that device only; use More, Back up every draft. The story notes in the lore tabs are sealed inside `vault.enc`.
 
 ## Adding a page
 

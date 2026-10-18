@@ -33,6 +33,7 @@
         <button class="db-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu" title="More">More</button>
         <div class="menu" id="menu" hidden>
           <button type="button" data-do="copy">Copy all, for Google Docs</button>
+          <button type="button" data-do="note">Copy the Royal Road author's note</button>
           <button type="button" data-do="txt">Download as .txt</button>
           <button type="button" data-do="rename">Rename this draft</button>
           <button type="button" data-do="delete">Delete this draft</button>
@@ -49,6 +50,19 @@
       <span class="goal" id="goalBar" title="Chapter target"><span class="goal-fill" id="goalFill"></span></span>
     </div>
     <div class="db-right">
+      <button class="db-btn voice-btn" type="button" id="dictBtn" title="Dictate: speak and it types at your cursor" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg><span>Dictate</span></button>
+      <div class="db-menu">
+        <button class="db-btn voice-btn" type="button" id="readBtn" aria-expanded="false" aria-controls="readMenu" title="Read aloud"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg><span>Listen</span></button>
+        <div class="menu read-menu" id="readMenu" hidden>
+          <button type="button" data-read="cursor">Read from my cursor</button>
+          <button type="button" data-read="para">Read this paragraph</button>
+          <button type="button" data-read="all">Read the whole chapter</button>
+          <button type="button" data-read="stop">Stop</button>
+          <hr>
+          <label>Speed <input type="range" id="readRate" min="0.6" max="1.6" step="0.1"></label>
+          <label>Voice <select id="readVoice"></select></label>
+        </div>
+      </div>
       <div class="timer" id="timer">
         <button class="tm-main" type="button" id="tmMain" title="Start writing sprint">
           <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="tm-track" cx="18" cy="18" r="15.5"/><circle class="tm-ring" id="tmRing" cx="18" cy="18" r="15.5"/></svg>
@@ -104,6 +118,7 @@
           <label class="chk"><input type="checkbox" id="optLt"> Grammar check <span class="lt-status" id="ltStatus"></span></label>
           <label class="chk"><input type="checkbox" id="optFix"> Fix small things as I type</label>
           <label class="chk"><input type="checkbox" id="optNames"> Underline names from my canon</label>
+          <label class="chk"><input type="checkbox" id="optEcho"> Find echoes (the same word too often)</label>
         </div>
         <div class="ck-chapter" id="ckChapter">
 </div>
@@ -163,6 +178,12 @@
         <textarea id="docNotes" class="notes-ta" rows="7" placeholder="Beats, reminders, things to check…"></textarea>
         <h3>Chapter target</h3>
         <label class="goal-set"><input type="number" id="goalIn" min="100" step="100"> words</label>
+        <h3>Royal Road author's note</h3>
+        <p class="muted small">Paste your end of chapter note once. These fill themselves in when you copy it: <code>{chapter}</code> <code>{title}</code> <code>{next}</code> <code>{words}</code> <code>{site}</code>
+</p>
+        <textarea id="noteTpl" class="notes-ta" rows="6" placeholder="Paste your author's note template here."></textarea>
+        <p><button class="btn small" type="button" id="noteCopy">Copy it for this chapter</button>
+</p>
         <h3>Saved versions</h3>
         <p class="muted small">The desk keeps a copy every ten minutes you write, up to twelve per draft.</p>
         <ul class="snaps" id="snaps">
@@ -191,6 +212,8 @@
       </div>
     </div>
   </div>
+  <div class="dict-pill" id="dictPill" hidden><span class="dict-dot"></span><span id="dictText">Listening…</span><button type="button" id="dictStop">Stop</button>
+</div>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden>
 </div>
 </div>

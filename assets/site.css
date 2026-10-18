@@ -162,6 +162,8 @@ html.unlocked .nav .nav-sanctum { display: inline; }
 .menu-btn { width: auto; padding: 0 .9rem; border-radius: 20px; gap: .45rem; display: inline-flex; align-items: center; font-size: .95rem; }
 
 @media (max-width: 960px) { .nav { display: none; } .tools { margin-left: auto; } }
+@media (max-width: 1180px) { .bar { gap: 1rem; } .nav { gap: 1rem; } }
+@media (max-width: 1080px) { html.unlocked .nav { display: none; } html.unlocked .tools { margin-left: auto; } }
 @media (max-width: 480px) {
   .bar { gap: .5rem; }
   .tools { gap: .3rem; }

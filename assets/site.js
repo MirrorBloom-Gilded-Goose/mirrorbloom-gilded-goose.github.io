@@ -46,7 +46,7 @@
         ['The Library', 'lore.html'], ["Player's Guide", 'players.html'], ["Who's your reflection?", 'reflection.html'], ['The Bestiary', 'bestiary.html'],
         ['The Compendium', 'compendium.html'] ] },
       { part: 'The Sanctum', note: 'Sealed — for the Dungeon Master', sealed: true, items: [
-        ['Sanctum', 'sanctum.html'], ["Writer's Desk", 'desk.html'], ['Stat blocks', 'sanctum.html#statblocks'], ['Bestiary', 'sanctum.html#bestiary'],
+        ['Sanctum', 'sanctum.html'], ["Writer's Desk", 'desk.html'], ['The Table (D&D)', 'dm-table.html'], ['Stat blocks', 'sanctum.html#statblocks'], ['Bestiary', 'sanctum.html#bestiary'],
         ['Adventures', 'sanctum.html#adventures'], ['Secret lore', 'sanctum.html#secrets'], ['Table tools', 'sanctum.html#tools'],
         ['Vault editor', 'vault-editor.html'] ] }
     ]

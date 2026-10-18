@@ -235,3 +235,21 @@ html.desk-focus .db-left, html.desk-focus .db-mid .goal, html.desk-focus #panelB
   .tm-label { display: none; }
   .ed-back, .ed-ta { font-size: 1.05rem; }
 }
+
+/* voice */
+.voice-btn { display: inline-flex; align-items: center; gap: .35rem; }
+.voice-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.voice-btn.on { color: var(--bg); background: var(--here); border-color: var(--here); }
+#dictBtn.on svg { animation: mic-pulse 1.2s ease-in-out infinite; }
+@keyframes mic-pulse { 50% { opacity: .5; } }
+.voice-btn.off { opacity: .5; }
+.read-menu { left: auto; right: 0; }
+.read-menu input[type="range"] { flex: 1; accent-color: var(--here); }
+.read-menu select { width: auto; max-width: 170px; padding: .2rem .3rem; font-size: .85rem; }
+.ed-back .k-read { background: color-mix(in srgb, var(--meadow) 34%, transparent); text-decoration: none; }
+.dict-pill { position: fixed; left: 50%; bottom: 70px; transform: translateX(-50%); z-index: 70; display: flex; align-items: center; gap: .7rem; max-width: min(640px, calc(100vw - 32px)); padding: .5rem .6rem .5rem .9rem; border-radius: 22px; background: var(--bg-2); border: 1px solid var(--here); box-shadow: 0 14px 34px -14px rgba(0,0,0,.6); }
+.dict-pill #dictText { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); font-style: italic; }
+.dict-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--here); flex: none; animation: mic-pulse 1s ease-in-out infinite; }
+.dict-pill button { font: inherit; font-size: .85rem; background: none; border: 1px solid var(--line-strong); border-radius: 14px; padding: .2rem .7rem; color: var(--ink); cursor: pointer; }
+@media (max-width: 560px) { .voice-btn span { display: none; } }
+code { font-size: .85em; background: var(--glass); padding: 0 .25em; border-radius: 2px; }
