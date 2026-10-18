@@ -302,3 +302,10 @@ html[data-theme="solance"] .m-tavern { --mc: #8E600C; } html[data-theme="solance
 .mu-embed.sp { background: none; }
 .mu-embed.sp iframe { height: 152px; border-radius: 12px; }
 @media (prefers-reduced-motion: reduce) { .mu-eq i, .mu-btn.on svg { animation: none; } }
+.mu-mood.wait { border-color: color-mix(in srgb, var(--mc) 60%, transparent); animation: mu-wait 1.1s ease-in-out infinite; }
+@keyframes mu-wait { 0%, 100% { background: transparent; } 50% { background: color-mix(in srgb, var(--mc) 12%, transparent); } }
+.m-festival { --mc: #E58BB4; } .m-boss { --mc: #E0703A; }
+html[data-theme="solance"] .m-festival { --mc: #A2457A; } html[data-theme="solance"] .m-boss { --mc: #A84A16; }
+.mu-credit { font-size: .78rem; color: var(--ink-3); margin-top: 1rem; }
+.mu-credit a { color: inherit; }
+@media (prefers-reduced-motion: reduce) { .mu-mood.wait { animation: none; } }

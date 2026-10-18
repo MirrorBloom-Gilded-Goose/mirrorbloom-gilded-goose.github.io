@@ -17,7 +17,7 @@
   function chance(p) { return Math.random() < p; }
   function mtof(m) { return 440 * Math.pow(2, (m - 69) / 12); }
 
-  var ST = Object.assign({ mood: 'quiet', vol: 0.6, brk: true, links: [] }, load('desk-music', {}));
+  var ST = Object.assign({ mood: 'quiet', vol: 0.6, brk: true, real: true, links: [] }, load('desk-music', {}));
   function saveST() { save('desk-music', ST); }
 
   /* ======================= the sound engine ======================= */
@@ -41,7 +41,9 @@
     comp.threshold.value = -16; comp.knee.value = 8; comp.ratio.value = 3; comp.attack.value = 0.008; comp.release.value = 0.3;
     master = ac.createGain(); master.gain.value = 0;
     duck = ac.createGain(); duck.gain.value = 1;
-    master.connect(duck); duck.connect(comp); comp.connect(ac.destination);
+    var lim = ac.createDynamicsCompressor();
+    lim.threshold.value = -3; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = 0.002; lim.release.value = 0.12;
+    master.connect(duck); duck.connect(comp); comp.connect(lim); lim.connect(ac.destination);
     var verb = ac.createConvolver(); verb.buffer = impulse(3.4, 2.8);
     verbIn = ac.createGain(); verbIn.gain.value = 0.9; verbIn.connect(verb); verb.connect(master);
     NOISE = noiseBuf('white', 2); BROWN = noiseBuf('brown', 4);
@@ -159,6 +161,73 @@
     }
   };
 
+  /* ======================= real instruments =======================
+     Recorded notes from the FluidR3 GM soundfont by Frank Wen (CC BY 3.0), every
+     third note, in assets/music/<instrument>/<midi note>.mp3. A note between two
+     recordings is the nearest one, played a little faster or slower.
+     [lowest, highest, step, seconds kept, loudness trim, holds a long note] */
+  var INST = {
+    piano: [38, 89, 3, 3.1, 2.07, 0], strings: [33, 84, 3, 3.1, 1.78, 1], harp: [40, 88, 3, 2.6, 1.22, 0], horn: [45, 78, 3, 3.1, 0.81, 1],
+    flute: [60, 93, 3, 3.1, 0.83, 1], timpani: [36, 57, 3, 2.4, 1.51, 0], taiko: [36, 54, 6, 1.3, 1.01, 0], brass: [38, 77, 3, 3.1, 1.11, 1],
+    trumpet: [57, 84, 3, 3.1, 1.07, 1], trombone: [36, 66, 3, 3.1, 0.64, 1], bass: [28, 55, 3, 3.1, 1.05, 1], cello: [36, 69, 3, 3.1, 1.29, 1],
+    fiddle: [55, 93, 3, 3.1, 1.1, 1], lute: [40, 79, 3, 2.4, 0.97, 0], recorder: [60, 93, 3, 3.1, 0.76, 1], musicbox: [60, 96, 3, 3.1, 0.95, 0],
+    bells: [55, 84, 3, 3.1, 0.97, 0], choir: [41, 80, 3, 3.1, 1.35, 1], organ: [29, 77, 3, 3.1, 0.86, 1], glock: [72, 99, 3, 2.4, 1.24, 0],
+    pizz: [36, 75, 3, 1.6, 0.88, 0]
+  };
+  var RAW = {};
+  function fetchNote(name, m) {
+    var u = 'assets/music/' + name + '/' + m + '.mp3';
+    return RAW[u] || (RAW[u] = fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).catch(function (e) { delete RAW[u]; throw e; }));
+  }
+  function eachNote(name, f) { var I = INST[name]; for (var m = I[0]; m <= I[1]; m += I[2]) f(m); }
+  function prefetch(names) { names.forEach(function (n) { eachNote(n, function (m) { fetchNote(n, m).catch(function () {}); }); }); }
+  function loadInst(name) {
+    var bank = ac.__bank || (ac.__bank = {}); if (bank[name]) return bank[name].ready;
+    var ctx = ac, B = bank[name] = { buf: {}, notes: [] }, jobs = [];
+    eachNote(name, function (m) {
+      jobs.push(fetchNote(name, m).then(function (ab) {
+        return new Promise(function (ok, no) { ctx.decodeAudioData(ab.slice(0), ok, no); });
+      }).then(function (b) { B.buf[m] = b; B.notes.push(m); }, function () {}));
+    });
+    B.ready = Promise.all(jobs).then(function () { B.notes.sort(function (a, b) { return a - b; }); B.ok = B.notes.length > 0; B.done = true; if (!B.ok) delete bank[name]; });
+    return B.ready;
+  }
+  function has(name) { var b = ST.real && ac.__bank && ac.__bank[name]; return !!(b && b.ok); }
+  /* o: v volume, dur how long it is held (leave out to let it ring), a attack, r release, wet reverb */
+  function samp(V, name, m, t, o) {
+    if (!has(name)) return false;
+    var B = ac.__bank[name], I = INST[name], near = B.notes[0];
+    for (var k = 1; k < B.notes.length; k++) if (Math.abs(B.notes[k] - m) < Math.abs(near - m)) near = B.notes[k];
+    var buf = B.buf[near], rate = Math.pow(2, (m - near) / 12), v = (o.v == null ? 0.5 : o.v) * I[4];
+    var a = o.a || 0.004, r = o.r || 0.25, dur = o.dur, g = ac.createGain();
+    var natural = (buf.duration - 0.1) / rate, endT = dur ? t + dur + r : t + natural;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + a);
+    if (dur) { var hold = t + Math.max(a, dur); g.gain.setValueAtTime(v, hold); g.gain.setTargetAtTime(0, hold, r / 3); }
+    if (I[5] && dur && endT > t + natural) {
+      /* a long held note: overlap fresh copies of the sustained middle of the recording */
+      var cursor = t, off = 0, X = 0.3;
+      while (cursor < endT) {
+        var seg = (buf.duration - 0.1 - off) / rate, s = ac.createBufferSource(), sg = ac.createGain(), segEnd = cursor + seg;
+        s.buffer = buf; s.playbackRate.value = rate; s.connect(sg); sg.connect(g);
+        if (off) { sg.gain.setValueAtTime(0, cursor); sg.gain.linearRampToValueAtTime(1, cursor + X); }
+        if (segEnd < endT) { sg.gain.setValueAtTime(1, segEnd - X); sg.gain.linearRampToValueAtTime(0, segEnd); }
+        s.start(cursor, off); s.stop(Math.min(segEnd, endT + 0.05));
+        cursor = segEnd - X; off = 0.9;
+      }
+    } else {
+      var src = ac.createBufferSource(); src.buffer = buf; src.playbackRate.value = rate; src.connect(g);
+      src.start(t); src.stop(Math.min(endT + 0.05, t + natural + 0.05));
+    }
+    out(V, g, o.wet == null ? 0.35 : o.wet);
+    return true;
+  }
+  /* a recorded note if the instrument is ready, otherwise the synth stand-in */
+  function N(V, name, m, t, o, fb) { if (!samp(V, name, m, t, o) && fb) fb(); }
+  function NC(V, name, ms, t, o, fb) {
+    if (!has(name)) { if (fb) fb(); return; }
+    ms.forEach(function (m, k) { samp(V, name, m, t + (o.strum || 0) * k, o); });
+  }
+
   /* scales and chords */
   var MAJOR = [0, 2, 4, 5, 7, 9, 11], MINOR = [0, 2, 3, 5, 7, 8, 10], MIXO = [0, 2, 4, 5, 7, 9, 10], PHRYG = [0, 1, 3, 5, 7, 8, 10];
   function deg(root, sc, d) { var n = sc.length, o = Math.floor(d / n); return root + 12 * o + sc[((d % n) + n) % n]; }
@@ -172,47 +241,117 @@
 
   /* ======================= the moods ======================= */
   var MOODS = {
-    quiet: { name: 'Quiet desk', note: 'Slow piano over warm pads. For most writing.', level: 1.25, beat: 60 / 64 / 2, make: function () {
+    quiet: { name: 'Quiet desk', note: 'Slow piano over soft strings. For most writing.', level: 1.9, synth: 1.25, beat: 60 / 64 / 2, uses: ['piano', 'strings', 'bass'], make: function () {
       var R = 50, sc = MAJOR, P = [[0, 5, 3, 4], [0, 4, 5, 3], [5, 3, 0, 4], [3, 4, 2, 5], [0, 2, 3, 4]], prog = P[0], p = 7, c = 0;
       return { step: function (V, i, t, dt) {
         var s = i % 8, bar = Math.floor(i / 8), ph = bar % 8;
         if (s === 0) {
           if (bar % 4 === 0) prog = pick(P);
           c = prog[bar % 4];
-          VOICE.pad(V, chord(R, sc, c, 4), t, dt * 8 + 0.4, 0.07, 1000);
-          VOICE.bass(V, deg(R - 12, sc, c), t, dt * 7, 0.07);
+          var ch = chord(R, sc, c, 4), lo = deg(R - 12, sc, c);
+          NC(V, 'strings', ch, t, { v: 0.26, dur: dt * 8 + 0.3, a: 0.9, r: 1.4, wet: 0.6 }, function () { VOICE.pad(V, ch, t, dt * 8 + 0.4, 0.07, 1000); });
+          N(V, 'bass', lo, t, { v: 0.3, dur: dt * 7.5, a: 0.4, r: 1, wet: 0.3 }, function () { VOICE.bass(V, lo, t, dt * 7, 0.07); });
+          N(V, 'piano', lo, t + 0.01, { v: 0.32, wet: 0.5 });
         }
         var prob = s === 0 ? 0.75 : s % 2 === 0 ? 0.4 : 0.14;
         if (ph >= 6) prob *= 0.55; if (ph === 7 && s > 2) prob = 0;
-        if (chance(prob)) { p = walk(p, 2, 13); if (s % 4 === 0) p = snap(p, c); VOICE.piano(V, deg(R + 12, sc, p), t + rnd(0, 0.012), rnd(0.07, 0.11)); }
-        if (s === 4 && chance(0.35)) VOICE.piano(V, deg(R, sc, c + 4), t + 0.01, 0.045);
+        if (chance(prob)) {
+          p = walk(p, 2, 13); if (s % 4 === 0) p = snap(p, c);
+          var m = deg(R + 12, sc, p), tt = t + rnd(0, 0.012), vv = rnd(0.45, 0.7);
+          N(V, 'piano', m, tt, { v: vv, wet: 0.5 }, function () { VOICE.piano(V, m, tt, vv * 0.16); });
+        }
+        if (s === 4 && chance(0.35)) { var l = deg(R, sc, c + 4); N(V, 'piano', l, t + 0.01, { v: 0.28, wet: 0.5 }, function () { VOICE.piano(V, l, t + 0.01, 0.045); }); }
       } };
     } },
 
-    road: { name: 'On the road', note: 'Walking pace, harp and horns. Travel and discovery.', level: 1.05, beat: 60 / 96 / 2, make: function () {
+    road: { name: 'On the road', note: 'Walking pace: harp, horns and flute. Travel and discovery.', level: 1.45, synth: 1.05, beat: 60 / 96 / 2, uses: ['harp', 'strings', 'horn', 'flute', 'pizz', 'timpani'], make: function () {
       var R = 55, sc = MAJOR, P = [[0, 4, 5, 3], [0, 3, 4, 0], [5, 3, 0, 4], [0, 4, 3, 4], [3, 0, 4, 5]], prog = P[0], p = 0, c = 0, arp = [0, 2, 4, 7, 4, 2, 4, 2];
       return { step: function (V, i, t, dt) {
-        var s = i % 8, bar = Math.floor(i / 8), ph = bar % 8;
+        var s = i % 8, bar = Math.floor(i / 8), ph = bar % 8, lo;
         if (s === 0) {
           if (bar % 4 === 0) prog = pick(P);
           c = prog[bar % 4];
-          VOICE.pad(V, chord(R - 12, sc, c), t, dt * 8 + 0.2, 0.045, 1300);
-          VOICE.kick(V, t, 0.32, 120, 50, 0.4);
+          var ch = chord(R - 12, sc, c);
+          NC(V, 'strings', ch, t, { v: 0.2, dur: dt * 8, a: 0.5, r: 0.8, wet: 0.5 }, function () { VOICE.pad(V, ch, t, dt * 8 + 0.2, 0.045, 1300); });
+          N(V, 'timpani', deg(R - 12, sc, c), t, { v: 0.45, wet: 0.3 }, function () { VOICE.kick(V, t, 0.32, 120, 50, 0.4); });
         }
-        if (s === 0 || s === 4) VOICE.bass(V, deg(R - 12, sc, c), t, dt * 3.6, 0.09);
-        if (s === 4) VOICE.frame(V, t, 0.14);
-        if (s % 2 === 1) VOICE.hat(V, t, 0.018, 0.03);
-        VOICE.pluck(V, deg(R, sc, c + arp[s]), t, s % 4 === 0 ? 0.05 : 0.035, 0.9);
+        lo = deg(R - 12, sc, c);
+        if (s === 0 || s === 4) N(V, 'pizz', lo, t, { v: 0.7, wet: 0.2 }, function () { VOICE.bass(V, lo, t, dt * 3.6, 0.09); });
+        if (s === 4) VOICE.frame(V, t, 0.12);
+        if (s % 2 === 1) VOICE.hat(V, t, 0.015, 0.03);
+        var h = deg(R, sc, c + arp[s]), hv = s % 4 === 0 ? 0.6 : 0.42;
+        N(V, 'harp', h, t, { v: hv, wet: 0.4 }, function () { VOICE.pluck(V, h, t, hv * 0.08, 0.9); });
         if (ph < 4 || (ph >= 4 && bar % 16 >= 8)) {
           if ((s === 0 || s === 3 || s === 4 || s === 6) && chance(s === 0 ? 0.9 : 0.45)) {
             p = walk(p, -3, 6); if (s === 0 || s === 4) p = snap(p, c);
-            VOICE.brass(V, [deg(R + 12, sc, p)], t, dt * (s === 3 || s === 6 ? 1.6 : 2.6), 0.075, 1700);
+            var m = deg(R + 12, sc, p), d = dt * (s === 3 || s === 6 ? 1.6 : 2.6);
+            N(V, 'horn', m, t, { v: 0.5, dur: d, a: 0.05, r: 0.3, wet: 0.4 }, function () { VOICE.brass(V, [m], t, d, 0.075, 1700); });
+            if (bar % 16 >= 8) N(V, 'flute', m + 12, t, { v: 0.3, dur: d, a: 0.06, r: 0.3, wet: 0.4 });
           }
         }
       } };
     } },
 
-    battle: { name: 'Battle', note: 'Fast drums, driving strings, brass. For fights and chases.', level: 0.62, beat: 60 / 150 / 4, make: function () {
+    festival: { name: 'Festival', note: 'Bright and warm: flutes, bells, a trumpet fanfare. Celebrations and the Illuminance.', level: 1.45, synth: 1, beat: 60 / 116 / 2, uses: ['lute', 'pizz', 'flute', 'glock', 'trumpet', 'bells', 'strings'], make: function () {
+      var R = 55, sc = MAJOR, P = [[0, 3, 4, 0], [0, 5, 3, 4], [3, 4, 0, 0], [0, 4, 5, 3], [0, 3, 0, 4]], prog = P[0], c = 0, p = 4, tune = true, FAN = [0, 2, 4, 7];
+      return { step: function (V, i, t, dt) {
+        var s = i % 8, bar = Math.floor(i / 8), ph = bar % 8, fanfare = ph === 0 && s < 4;
+        if (s === 0) {
+          if (bar % 4 === 0) prog = pick(P);
+          if (ph === 0) tune = chance(0.85);
+          c = prog[bar % 4];
+          var ch = chord(R, sc, c);
+          NC(V, 'strings', ch, t, { v: 0.13, dur: dt * 8, a: 0.3, r: 0.5, wet: 0.5 }, function () { VOICE.pad(V, ch, t, dt * 8, 0.03, 1600); });
+          if (ph === 0) N(V, 'bells', deg(R + 12, sc, 0), t, { v: 0.45, wet: 0.6 }, function () { VOICE.bell(V, deg(R + 12, sc, 0), t, 0.05, 3); });
+        }
+        var lo = deg(R - 12, sc, c), up = deg(R, sc, c + (s === 2 ? 2 : 4));
+        if (s === 0 || s === 4) N(V, 'pizz', s === 0 ? lo : lo + 7, t, { v: 0.75, wet: 0.2 }, function () { VOICE.bass(V, lo, t, dt * 1.5, 0.09); });
+        if (s === 2 || s === 6) N(V, 'pizz', up, t, { v: 0.42, wet: 0.2 }, function () { VOICE.pluck(V, up, t, 0.03, 0.4); });
+        if (s === 0 || s === 3 || s === 4 || s === 6) {
+          var sv = s === 0 ? 0.45 : s === 4 ? 0.38 : 0.28, ch2 = chord(R, sc, c);
+          NC(V, 'lute', ch2, t, { v: sv, wet: 0.3, strum: 0.012 }, function () { ch2.forEach(function (m, k) { VOICE.pluck(V, m, t + k * 0.012, sv * 0.09, 0.6); }); });
+        }
+        if (s === 0) VOICE.frame(V, t, 0.22); else if (s === 4) VOICE.frame(V, t, 0.16);
+        if (s === 2 || s === 6) VOICE.hat(V, t, 0.03, 0.09); else VOICE.hat(V, t, 0.012, 0.03);
+        if (fanfare) {
+          var fm = deg(R + 12, sc, c + FAN[s]), fd = s === 3 ? dt * 3 : dt * 0.9;
+          N(V, 'trumpet', fm, t, { v: 0.45, dur: fd, a: 0.02, r: 0.15, wet: 0.4 }, function () { VOICE.brass(V, [fm], t, fd, 0.08, 2600); });
+        } else if (tune && chance(s % 2 === 0 ? 0.85 : 0.55)) {
+          p = walk(p, 0, 9); if (s === 0 || s === 4) p = snap(p, c);
+          var m = deg(R + 12, sc, p), d = dt * (chance(0.25) ? 2 : 1) * 0.95;
+          N(V, 'flute', m, t, { v: 0.42, dur: d, a: 0.02, r: 0.1, wet: 0.3 }, function () { VOICE.fiddle(V, m, t, d, 0.045); });
+          if ((s === 0 || s === 4) && chance(0.5)) N(V, 'glock', m + 12, t, { v: 0.3, wet: 0.4 });
+        }
+      } };
+    } },
+
+    tavern: { name: 'Tavern', note: 'A lively jig on fiddle, recorder and lute. Banter and downtime.', level: 1.08, synth: 1.15, beat: 0.2, uses: ['lute', 'fiddle', 'recorder', 'cello'], make: function () {
+      var R = 50, sc = MIXO, P = [[0, 6, 0, 4], [0, 3, 0, 4], [0, 6, 3, 4], [3, 0, 6, 0]], prog = P[0], c = 0, p = 7, tune = true;
+      return { step: function (V, i, t, dt) {
+        var s = i % 6, bar = Math.floor(i / 6), ph = bar % 12;
+        if (s === 0) {
+          if (bar % 4 === 0) prog = pick(P);
+          if (bar % 12 === 0) tune = true; else if (bar % 12 === 8) tune = chance(0.6);
+          c = prog[bar % 4];
+          if (bar % 2 === 0) {
+            N(V, 'cello', R, t, { v: 0.24, dur: dt * 11.5, a: 0.3, r: 0.6, wet: 0.3 }, function () { VOICE.bass(V, R - 12, t, dt * 11, 0.05); });
+            N(V, 'cello', R + 7, t, { v: 0.16, dur: dt * 11.5, a: 0.3, r: 0.6, wet: 0.3 });
+          }
+        }
+        if (s === 0 || s === 3) {
+          var ch = chord(R, sc, c);
+          NC(V, 'lute', ch, t, { v: s === 0 ? 0.5 : 0.4, wet: 0.3, strum: 0.016 }, function () { ch.forEach(function (m, k) { VOICE.pluck(V, m - (k ? 0 : 12), t + k * 0.014, 0.045, 0.7); }); });
+        } else if (chance(0.7)) { var l = deg(R, sc, c + pick([0, 2, 4])); N(V, 'lute', l, t, { v: 0.3, wet: 0.3 }, function () { VOICE.pluck(V, l, t, 0.028, 0.45); }); }
+        if (s === 0) VOICE.frame(V, t, 0.26); else if (s === 3) VOICE.frame(V, t, 0.18); else VOICE.tap(V, t, s === 2 || s === 5 ? 0.05 : 0.025);
+        if (tune && chance(s === 0 || s === 3 ? 0.95 : 0.78)) {
+          p = walk(p, 3, 12); if (s === 0 || s === 3) p = snap(p, c);
+          var m = deg(R + 12, sc, p), d = dt * (chance(0.2) ? 2 : 1) * 0.95;
+          N(V, ph < 8 ? 'fiddle' : 'recorder', m, t, { v: 0.45, dur: d, a: 0.015, r: 0.08, wet: 0.3 }, function () { VOICE.fiddle(V, m, t, d, 0.05); });
+        }
+      } };
+    } },
+
+    battle: { name: 'Battle', note: 'Fast drums, driving strings, brass. For fights and chases.', level: 1.35, synth: 0.62, beat: 60 / 150 / 4, uses: ['strings', 'cello', 'bass', 'taiko', 'timpani', 'brass', 'horn', 'trumpet'], make: function () {
       var R = 50, sc = MINOR, P = [[0, 5, 6, 0], [0, 5, 3, 4], [0, 3, 5, 6], [5, 6, 0, 0], [0, 6, 5, 4]], prog = P[0], c = 0, p = 4, hero = false;
       var OST = [0, 0, 12, 0, 7, 0, 12, 0, 0, 0, 12, 0, 7, 12, 10, 7];
       var ACC = { 0: 1, 3: 1, 6: 1, 10: 1, 12: 1 };
@@ -222,54 +361,77 @@
         if (s === 0) {
           if (bar % 4 === 0) { prog = pick(P); hero = chance(0.55); }
           c = prog[bar % 4];
-          VOICE.pad(V, ch(c).map(function (m) { return m - 12; }), t, dt * 16, 0.04, 1500);
+          var low = ch(c).map(function (m) { return m - 12; });
+          NC(V, 'strings', low, t, { v: 0.16, dur: dt * 16, a: 0.2, r: 0.4, wet: 0.4 }, function () { VOICE.pad(V, low, t, dt * 16, 0.04, 1500); });
+          N(V, 'timpani', ch(c)[0] - 12, t, { v: 0.8, wet: 0.3 });
           if (ph === 0) VOICE.crash(V, t, 0.09);
         }
         root = ch(c)[0] - 12;
-        VOICE.stac(V, root + 12 + OST[s], t, dt * 0.9, ACC[s] ? 0.06 : 0.038);
-        if (s % 2 === 0) VOICE.bass(V, root, t, dt * 1.6, 0.11, true);
-        if (s === 0 || s === 8) VOICE.taiko(V, t, 0.5);
-        else if (s === 3 || s === 6 || s === 11 || s === 14) VOICE.taiko(V, t, 0.22);
-        if (s === 4 || s === 12) VOICE.snare(V, t, 0.22);
-        if (s % 2 === 0) VOICE.hat(V, t, s % 4 === 0 ? 0.03 : 0.018);
-        if (ph === 7 && s >= 12) VOICE.kick(V, t, 0.35, 220 - (s - 12) * 25, 90, 0.3, 0.3);
-        if (s === 0) VOICE.brass(V, ch(c), t, dt * 3, 0.1);
-        if (s === 10 && chance(0.6)) VOICE.brass(V, ch(c), t, dt * 2, 0.07);
+        var o = root + 12 + OST[s], ov = ACC[s] ? 0.5 : 0.32;
+        N(V, 'strings', o, t, { v: ov, dur: dt * 0.85, a: 0.004, r: 0.06, wet: 0.2 }, function () { VOICE.stac(V, o, t, dt * 0.9, ACC[s] ? 0.06 : 0.038); });
+        if (ACC[s]) N(V, 'cello', root + OST[s], t, { v: 0.4, dur: dt * 0.9, a: 0.004, r: 0.06, wet: 0.15 });
+        if (s % 2 === 0) N(V, 'bass', root, t, { v: 0.5, dur: dt * 1.5, a: 0.004, r: 0.06, wet: 0.05 }, function () { VOICE.bass(V, root, t, dt * 1.6, 0.11, true); });
+        if (s === 0 || s === 8) N(V, 'taiko', 36, t, { v: 1, wet: 0.3 }, function () { VOICE.taiko(V, t, 0.5); });
+        else if (s === 3 || s === 6 || s === 11 || s === 14) N(V, 'taiko', 48, t, { v: 0.55, wet: 0.25 }, function () { VOICE.taiko(V, t, 0.22); });
+        if (s === 4 || s === 12) VOICE.snare(V, t, 0.2);
+        if (s % 2 === 0) VOICE.hat(V, t, s % 4 === 0 ? 0.028 : 0.016);
+        if (ph === 7 && s >= 12) N(V, 'timpani', root + (s - 12) * 2, t, { v: 0.5 + (s - 12) * 0.12, wet: 0.3 }, function () { VOICE.kick(V, t, 0.35, 220 - (s - 12) * 25, 90, 0.3, 0.3); });
+        if (s === 0) NC(V, 'brass', ch(c), t, { v: 0.5, dur: dt * 3, a: 0.01, r: 0.12, wet: 0.3 }, function () { VOICE.brass(V, ch(c), t, dt * 3, 0.1); });
+        if (s === 10 && chance(0.6)) NC(V, 'brass', ch(c), t, { v: 0.38, dur: dt * 2, a: 0.01, r: 0.1, wet: 0.3 }, function () { VOICE.brass(V, ch(c), t, dt * 2, 0.07); });
         if (hero && (s === 0 || s === 6 || s === 12) && bar % 8 >= 4) {
           p = walk(p, 0, 9, true); if (s === 0) p = snap(p, c);
-          VOICE.brass(V, [deg(R + 12, sc, p), deg(R, sc, p)], t + 0.005, dt * (s === 12 ? 3.5 : 5.5), 0.09, 2800);
+          var hi = deg(R + 12, sc, p), d = dt * (s === 12 ? 3.5 : 5.5);
+          N(V, 'trumpet', hi, t + 0.005, { v: 0.45, dur: d, a: 0.03, r: 0.2, wet: 0.35 }, function () { VOICE.brass(V, [hi, hi - 12], t + 0.005, d, 0.09, 2800); });
+          N(V, 'horn', hi - 12, t + 0.005, { v: 0.45, dur: d, a: 0.04, r: 0.2, wet: 0.35 });
         }
       } };
     } },
 
-    tavern: { name: 'Tavern', note: 'A lively jig with fiddle and lute. Banter and downtime.', level: 1.15, beat: 0.2, make: function () {
-      var R = 50, sc = MIXO, P = [[0, 6, 0, 4], [0, 3, 0, 4], [0, 6, 3, 4], [3, 0, 6, 0]], prog = P[0], c = 0, p = 7, tune = true;
+    boss: { name: 'Boss fight', note: 'Bigger and darker than Battle: choir, organ, pounding drums.', level: 1.36, synth: 0.6, beat: 60 / 132 / 4, uses: ['choir', 'organ', 'trombone', 'strings', 'taiko', 'timpani', 'horn', 'trumpet', 'bass'], make: function () {
+      var R = 50, CH = { i: [0, 3, 7], VI: [-4, 0, 3], II: [1, 5, 8], V: [7, 11, 14], iv: [5, 8, 12], VII: [-2, 2, 5] };
+      var P = [['i', 'VI', 'II', 'V'], ['i', 'iv', 'VI', 'V'], ['i', 'II', 'i', 'V'], ['VI', 'VII', 'i', 'i'], ['i', 'VI', 'iv', 'V']];
+      var MOT = [[7, 0, 1, 0], [12, 10, 8, 7], [0, 3, 1, 0], [7, 8, 7, 1], [3, 2, 0, 1]];
+      var TB = [1, 0, 1, 1, 0, 1, 1, 0];
+      var prog = P[0], c = 'i', organ = false, motif = false, mot = MOT[0];
+      function at(k, base) { return CH[k].map(function (x) { return base + x; }); }
       return { step: function (V, i, t, dt) {
-        var s = i % 6, bar = Math.floor(i / 6), ph = bar % 12;
+        var s = i % 16, bar = Math.floor(i / 16), ph = bar % 8, rt;
         if (s === 0) {
-          if (bar % 4 === 0) prog = pick(P);
-          if (bar % 12 === 0) tune = true; else if (bar % 12 === 8) tune = chance(0.4);
+          if (bar % 4 === 0) { prog = pick(P); organ = chance(0.5); motif = chance(0.65); mot = pick(MOT); }
           c = prog[bar % 4];
-          if (bar % 2 === 0) VOICE.bass(V, R - 12, t, dt * 11, 0.05);
+          var vox = at(c, R).concat([R + 12 + CH[c][0]]);
+          NC(V, 'choir', vox, t, { v: 0.3, dur: dt * 16, a: 0.15, r: 0.5, wet: 0.6 }, function () { VOICE.pad(V, at(c, R), t, dt * 16, 0.06, 1100); });
+          if (organ) NC(V, 'organ', at(c, R - 12), t, { v: 0.2, dur: dt * 16, a: 0.05, r: 0.4, wet: 0.5 });
+          rt = R - 12 + CH[c][0];
+          N(V, 'bass', rt, t, { v: 0.45, dur: dt * 15, a: 0.05, r: 0.3, wet: 0.1 }, function () { VOICE.bass(V, rt, t, dt * 15, 0.09, true); });
+          N(V, 'timpani', rt, t, { v: 0.9, wet: 0.35 });
+          if (ph === 0) VOICE.crash(V, t, 0.1);
         }
-        if (s === 0 || s === 3) chord(R, sc, c).forEach(function (m, k) { VOICE.pluck(V, m - (k ? 0 : 12), t + k * 0.014, 0.045, 0.7); });
-        else if (chance(0.7)) VOICE.pluck(V, deg(R, sc, c + pick([0, 2, 4])), t, 0.028, 0.45);
-        if (s === 0) VOICE.frame(V, t, 0.26); else if (s === 3) VOICE.frame(V, t, 0.18); else VOICE.tap(V, t, s === 2 || s === 5 ? 0.05 : 0.025);
-        if (tune && chance(s === 0 || s === 3 ? 0.95 : 0.78)) {
-          p = walk(p, 3, 12); if (s === 0 || s === 3) p = snap(p, c);
-          VOICE.fiddle(V, deg(R + 12, sc, p), t, dt * (chance(0.2) ? 2 : 1), 0.05);
+        rt = R - 12 + CH[c][0];
+        if (s === 0 || s === 10) N(V, 'taiko', 36, t, { v: 1, wet: 0.35 }, function () { VOICE.taiko(V, t, 0.55); });
+        if (s === 3 || s === 6 || s === 14) N(V, 'taiko', 42, t, { v: 0.6, wet: 0.3 }, function () { VOICE.taiko(V, t, 0.25); });
+        if (s === 8) { VOICE.snare(V, t, 0.3); N(V, 'taiko', 54, t, { v: 0.6, wet: 0.3 }); }
+        if (s % 2 === 0) VOICE.hat(V, t, 0.018);
+        if (ph === 7 && s >= 8) N(V, 'taiko', s % 2 ? 48 : 54, t, { v: 0.45 + (s - 8) * 0.07, wet: 0.3 }, function () { VOICE.kick(V, t, 0.3, 200, 80, 0.25, 0.3); });
+        if (s % 2 === 0 && TB[s / 2]) N(V, 'trombone', rt, t, { v: 0.45, dur: dt * 1.6, a: 0.01, r: 0.08, wet: 0.2 }, function () { VOICE.brass(V, [rt], t, dt * 1.6, 0.07, 1400); });
+        var tr = at(c, R + 12)[s % 3];
+        N(V, 'strings', tr, t, { v: 0.17, dur: dt * 0.9, a: 0.004, r: 0.05, wet: 0.3 }, function () { VOICE.stac(V, tr, t, dt * 0.9, 0.025); });
+        if (motif && bar % 8 >= 4 && (s === 0 || s === 8)) {
+          var k = ((bar % 2) * 2 + s / 8) % 4, mm = R + mot[k], d = dt * 7;
+          N(V, 'horn', mm, t, { v: 0.5, dur: d, a: 0.04, r: 0.25, wet: 0.4 }, function () { VOICE.brass(V, [mm + 12, mm], t, d, 0.09, 2400); });
+          N(V, 'trumpet', mm + 12, t, { v: 0.32, dur: d, a: 0.04, r: 0.25, wet: 0.4 });
         }
       } };
     } },
 
-    below: { name: 'Below the glass', note: 'Drones, cold bells, a slow heartbeat. Dread and Umbrasol.', level: 1.2, beat: 0.25, make: function () {
+    below: { name: 'Below the glass', note: 'Drones, a cold music box, distant choir, a slow heartbeat. Dread and Umbrasol.', level: 1.3, synth: 1.2, beat: 0.25, uses: ['choir', 'musicbox', 'bells', 'timpani'], make: function () {
       var R = 38, sc = PHRYG, nodes = [];
       return {
         start: function (V, t) {
           var lp = ac.createBiquadFilter(), g = ac.createGain(), lfo = osc('sine', 0.05, t, t + 36000), lg = ac.createGain();
           lp.type = 'lowpass'; lp.frequency.value = 240; lg.gain.value = 120; lfo.connect(lg); lg.connect(lp.frequency);
           [[R - 12, -6], [R, 5], [R + 7, -3]].forEach(function (d) { nodes.push(osc('sawtooth', mtof(d[0]), t, t + 36000, d[1])); nodes[nodes.length - 1].connect(lp); });
-          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.07, t + 4); lp.connect(g); out(V, g, 0.4);
+          g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.055, t + 4); lp.connect(g); out(V, g, 0.4);
           var n = ac.createBufferSource(); n.buffer = BROWN; n.loop = true; n.start(t);
           var bp = ac.createBiquadFilter(), wl = osc('sine', 0.03, t, t + 36000), wg = ac.createGain(), ng = ac.createGain();
           bp.type = 'bandpass'; bp.frequency.value = 500; bp.Q.value = 3; wg.gain.value = 300; wl.connect(wg); wg.connect(bp.frequency);
@@ -280,17 +442,18 @@
         step: function (V, i, t, dt) {
           var s = i % 16, bar = Math.floor(i / 16);
           if (s === 0 && bar % 2 === 0) {
-            var c = pick([0, 0, 1, 5, 3]);
-            VOICE.pad(V, chord(R, sc, c), t, dt * 30, 0.045, 520);
-            if (chance(0.2)) VOICE.pad(V, [R + 12, R + 13, R + 18], t + dt * 8, dt * 20, 0.025, 700);
+            var c = pick([0, 0, 1, 5, 3]), ch = chord(R + 12, sc, c);
+            NC(V, 'choir', ch, t, { v: 0.2, dur: dt * 28, a: 2.5, r: 2.5, wet: 0.7 }, function () { VOICE.pad(V, chord(R, sc, c), t, dt * 30, 0.045, 520); });
+            if (chance(0.2)) { var cl = [R + 24, R + 25, R + 30]; NC(V, 'choir', cl, t + dt * 8, { v: 0.12, dur: dt * 18, a: 3, r: 3, wet: 0.8 }, function () { VOICE.pad(V, [R + 12, R + 13, R + 18], t + dt * 8, dt * 20, 0.025, 700); }); }
           }
-          if (chance(0.055)) VOICE.bell(V, deg(R + 24, sc, Math.floor(rnd(0, 9))), t, rnd(0.03, 0.06), rnd(3, 6));
-          if (bar % 4 === 2 && (s === 8 || s === 9)) VOICE.kick(V, t, s === 8 ? 0.35 : 0.24, 70, 38, 0.4, 0.3);
+          if (chance(0.05)) { var b = deg(R + 36, sc, Math.floor(rnd(0, 9))), bv = rnd(0.3, 0.5); N(V, 'musicbox', b, t, { v: bv, wet: 0.75 }, function () { VOICE.bell(V, b, t, bv * 0.12, rnd(3, 6)); }); }
+          if (chance(0.008)) N(V, 'bells', deg(R + 24, sc, pick([0, 4])), t, { v: 0.4, wet: 0.7 });
+          if (bar % 4 === 2 && (s === 8 || s === 9)) N(V, 'timpani', R, t, { v: s === 8 ? 0.7 : 0.5, wet: 0.3 }, function () { VOICE.kick(V, t, s === 8 ? 0.35 : 0.24, 70, 38, 0.4, 0.3); });
         }
       };
     } },
 
-    rain: { name: 'Rain and fire', note: 'No music. Rain on the window and a crackling fire.', level: 1.1, beat: 0.05, make: function () {
+    rain: { name: 'Rain and fire', note: 'No music. Rain on the window and a crackling fire.', level: 1.1, beat: 0.05, uses: [], make: function () {
       var nodes = [];
       return {
         start: function (V, t) {
@@ -317,14 +480,15 @@
       };
     } }
   };
-  var ORDER = ['quiet', 'road', 'battle', 'tavern', 'below', 'rain'];
+  var ORDER = ['quiet', 'road', 'festival', 'tavern', 'battle', 'boss', 'below', 'rain'];
 
   /* ======================= playing ======================= */
-  var cur = null, playing = false, timer = 0, pausedForBreak = false;
+  var cur = null, playing = false, timer = 0, pausedForBreak = false, loading = null;
   function begin(id, at) {
     var M = MOODS[id], t = at != null ? at : ac.currentTime + 0.08, bus = ac.createGain(), wet = ac.createGain();
-    bus.gain.setValueAtTime(0, t); bus.gain.linearRampToValueAtTime(M.level, t + 1.2);
-    wet.gain.setValueAtTime(0, t); wet.gain.linearRampToValueAtTime(M.level, t + 1.2);
+    var lv = needs(id).length && needs(id).every(has) ? M.level : (M.synth || M.level);
+    bus.gain.setValueAtTime(0, t); bus.gain.linearRampToValueAtTime(lv, t + 1.2);
+    wet.gain.setValueAtTime(0, t); wet.gain.linearRampToValueAtTime(lv, t + 1.2);
     bus.connect(master); wet.connect(verbIn);
     var V = { dry: bus, wet: wet }, inst = M.make();
     if (inst.start) inst.start(V, t);
@@ -351,26 +515,46 @@
   }
   function vol() { return Math.pow(ST.vol, 1.6) * 0.9; }
 
+  function needs(id) { return ST.real ? (MOODS[id].uses || []) : []; }
+  function ready(id) { var b = ac.__bank || {}; return needs(id).every(function (n) { return b[n] && b[n].done; }); }
   function play(id) {
     stopLink();
-    if (!ac) build(new (window.AudioContext || window.webkitAudioContext)());
+    if (!ac) {
+      var AC = window.AudioContext || window.webkitAudioContext, ctx;
+      try { ctx = new AC({ sampleRate: 32000 }); } catch (e) { ctx = new AC(); }   /* 32 kHz is plenty for these recordings and halves the memory */
+      build(ctx);
+    }
     if (ac.state === 'suspended') ac.resume();
-    id = MOODS[id] ? id : ST.mood;
+    id = MOODS[id] ? id : ST.mood; ST.mood = id; saveST(); pausedForBreak = false;
+    if (ready(id)) { loading = null; return start(id); }
+    /* first time for this mood: fetch its instruments, keep the old mood going meanwhile */
+    loading = id; paint();
+    var go = function () { if (loading === id) { loading = null; start(id); } };
+    Promise.all(needs(id).map(loadInst)).then(go, go); setTimeout(go, 9000);
+  }
+  function start(id) {
+    if (ac.state === 'suspended') ac.resume();
     var now = ac.currentTime;
     master.gain.cancelScheduledValues(now); master.gain.setValueAtTime(master.gain.value, now); master.gain.linearRampToValueAtTime(vol(), now + 0.4);
-    if (!cur || cur.id !== id) { end(cur, now); cur = begin(id); }
-    ST.mood = id; saveST(); playing = true; pausedForBreak = false;
-    clearInterval(timer); timer = setInterval(tick, 60); tick();
+    if (!cur || cur.id !== id) {
+      end(cur, now); cur = begin(id);
+      /* only the playing mood's instruments stay unpacked in memory; the downloads stay cached */
+      var keep = needs(id), bank = ac.__bank || {};
+      Object.keys(bank).forEach(function (n) { if (keep.indexOf(n) < 0 && bank[n].done) delete bank[n]; });
+    }
+    playing = true; clearInterval(timer); timer = setInterval(tick, 60); tick();
     paint();
   }
   function pause() {
-    if (!ac || !playing) return;
+    if (!ac) return;
+    loading = null;
+    if (!playing) { paint(); return; }
     playing = false; clearInterval(timer);
     var now = ac.currentTime; master.gain.cancelScheduledValues(now); master.gain.setValueAtTime(master.gain.value, now); master.gain.linearRampToValueAtTime(0, now + 0.5);
     setTimeout(function () { if (!playing && ac.state === 'running') { ac.suspend(); } }, 650);
     paint();
   }
-  function toggle() { if (playing) pause(); else if (linkOn) pauseLink(!linkPaused); else play(ST.mood); }
+  function toggle() { if (playing || loading) pause(); else if (linkOn != null) pauseLink(!linkPaused); else play(ST.mood); }
 
   /* ======================= your own music: YouTube and Spotify ======================= */
   var linkOn = null, linkPaused = false;
@@ -402,13 +586,13 @@
   /* ======================= the tab ======================= */
   function paint() {
     var moods = $('muMoods'); if (!moods) return;
-    var on = playing ? ST.mood : null;
-    moods.querySelectorAll('[data-mood]').forEach(function (b) { b.classList.toggle('on', b.dataset.mood === on); b.setAttribute('aria-pressed', b.dataset.mood === on ? 'true' : 'false'); });
+    var on = playing && cur ? cur.id : null;
+    moods.querySelectorAll('[data-mood]').forEach(function (b) { b.classList.toggle('on', b.dataset.mood === on); b.classList.toggle('wait', b.dataset.mood === loading); b.setAttribute('aria-pressed', b.dataset.mood === on ? 'true' : 'false'); });
     $('muLinks').querySelectorAll('[data-link]').forEach(function (b) { b.classList.toggle('on', +b.dataset.link === linkOn); });
-    var M = MOODS[ST.mood], L = linkOn != null ? ST.links[linkOn] : null;
+    var M = MOODS[loading || ST.mood], L = linkOn != null ? ST.links[linkOn] : null;
     $('muTitle').textContent = L ? (L.name || 'Your music') : M.name;
-    $('muSub').textContent = L ? (linkPaused ? 'Paused' : 'Playing your link') : playing ? 'Playing' : pausedForBreak ? 'Paused for your break' : 'Paused';
-    var isOn = playing || (linkOn != null && !linkPaused);
+    $('muSub').textContent = L ? (linkPaused ? 'Paused' : 'Playing your link') : loading ? 'Tuning the instruments…' : playing ? 'Playing' : pausedForBreak ? 'Paused for your break' : 'Paused';
+    var isOn = playing || !!loading || (linkOn != null && !linkPaused);
     $('muPlay').classList.toggle('on', isOn); $('muPlay').setAttribute('aria-label', isOn ? 'Pause' : 'Play');
     $('muPlay').innerHTML = isOn ? '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
     var btn = $('muBtn'); btn.classList.toggle('on', isOn); btn.title = isOn ? 'Music: ' + (L ? L.name || 'your link' : M.name) + ' (click to pause)' : 'Music';
@@ -431,7 +615,15 @@
   function init() {
     if (!$('muMoods')) return;
     renderMoods(); renderLinks();
-    $('muVol').value = ST.vol; $('muBrk').checked = ST.brk;
+    $('muVol').value = ST.vol; $('muBrk').checked = ST.brk; $('muReal').checked = ST.real;
+    $('muReal').addEventListener('change', function () {
+      ST.real = this.checked; saveST();
+      if (ST.real && ac && cur) needs(cur.id).forEach(loadInst);
+    });
+    /* start fetching a mood's instruments as soon as you point at it */
+    $('muMoods').addEventListener('pointerover', function (e) { var b = e.target.closest('[data-mood]'); if (b && ST.real) prefetch(MOODS[b.dataset.mood].uses || []); });
+    var tabBtn = document.querySelector('.p-tabs [data-tab="music"]');
+    if (tabBtn) tabBtn.addEventListener('click', function () { if (ST.real) prefetch(MOODS[ST.mood].uses || []); });
     $('muMoods').addEventListener('click', function (e) {
       var b = e.target.closest('[data-mood]'); if (!b) return;
       if (playing && ST.mood === b.dataset.mood) pause(); else play(b.dataset.mood);
@@ -473,18 +665,21 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
   /* for testing: render a mood offline and return its loudness */
+  function swap(v) { var was = [ac, master, duck, verbIn, NOISE, BROWN]; if (v) { ac = v[0]; master = v[1]; duck = v[2]; verbIn = v[3]; NOISE = v[4]; BROWN = v[5]; } return was; }
   window.DeskMusic = {
-    moods: MOODS, play: play, pause: pause, get playing() { return playing; }, get mood() { return ST.mood; },
+    moods: MOODS, play: play, pause: pause, get playing() { return playing; }, get mood() { return cur ? cur.id : ST.mood; }, get loading() { return loading; },
     render: function (id, secs) {
-      var sr = 22050, ctx = new OfflineAudioContext(2, sr * secs, sr), keep = [ac, master, duck, verbIn, NOISE, BROWN];
+      var sr = 22050, ctx = new OfflineAudioContext(1, sr * secs, sr), keep = swap();
       build(ctx); master.gain.value = 0.9 * Math.pow(0.6, 1.6);
-      var c = begin(id, 0); schedule(c, secs);
-      var res = ctx.startRendering();
-      ac = keep[0]; master = keep[1]; duck = keep[2]; verbIn = keep[3]; NOISE = keep[4]; BROWN = keep[5];
-      return res.then(function (buf) {
+      var mine = swap(keep);
+      var prev = swap(mine), wait = Promise.all(needs(id).map(loadInst)); swap(prev);
+      return wait.then(function () {
+        var p2 = swap(mine), c = begin(id, 0); schedule(c, secs); swap(p2);
+        return ctx.startRendering();
+      }).then(function (buf) {
         var d = buf.getChannelData(0), sum = 0, peak = 0, from = Math.floor(sr * 2), silent = 0, win = Math.floor(sr * 0.5), wsum = 0;
         for (var i = from; i < d.length; i++) { var x = d[i]; sum += x * x; if (Math.abs(x) > peak) peak = Math.abs(x); wsum += x * x; if ((i - from) % win === win - 1) { if (Math.sqrt(wsum / win) < 0.002) silent++; wsum = 0; } }
-        return { rms: Math.sqrt(sum / (d.length - from)), peak: peak, silentHalfSeconds: silent, wav: null };
+        return { rms: Math.sqrt(sum / (d.length - from)), peak: peak, silentHalfSeconds: silent, real: needs(id).length };
       });
     }
   };

@@ -32,7 +32,7 @@ Every page is a plain `.html` file in this folder. The header, the Contents menu
 
 ## The Writer's Desk
 
-`desk.html`, sealed in the Sanctum. Drafts are saved in the browser on that device only; use More, Back up every draft. The story notes in the lore tabs are sealed inside `vault.enc`. The Music tab's moods are composed live in the browser by `assets/desk-music.js` (each mood's name, tempo and loudness are in `MOODS` there); YouTube and Spotify links you add are saved on that device.
+`desk.html`, sealed in the Sanctum. Drafts are saved in the browser on that device only; use More, Back up every draft. The story notes in the lore tabs are sealed inside `vault.enc`. The Music tab's moods are composed live in the browser by `assets/desk-music.js` (each mood's name, tempo and loudness are in `MOODS` there); YouTube and Spotify links you add are saved on that device. The instrument recordings in `assets/music/` are from the FluidR3 GM soundfont by Frank Wen (CC BY 3.0), via [midi-js-soundfonts](https://github.com/gleitz/midi-js-soundfonts); keep the credit on the Music tab if you reuse them.
 
 ## Adding a page
 
