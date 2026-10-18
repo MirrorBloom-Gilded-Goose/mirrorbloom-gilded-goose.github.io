@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writer&#x27;s Desk — MirrorBloom</title>
+<meta name="description" content="Nathan&#x27;s writing desk.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="assets/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spectral+SC:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/desk.css">
+<script src="assets/vault.js" defer></script>
+<script src="assets/sigils.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/spoilers.js" defer></script>
+<script src="assets/desk-check.js" defer></script>
+<script src="assets/desk.js" defer></script>
+</head>
+<body data-section="sanctum" data-sealed-page data-desk>
+<header id="site-header"></header>
+<main id="main" class="page">
+<div class="desk is-loading" id="desk">
+  <div class="desk-bar" role="toolbar" aria-label="Writer's Desk">
+    <div class="db-left">
+      <label class="sr-only" for="docPick">Draft</label>
+      <select id="docPick" class="doc-pick" title="Your drafts"></select>
+      <button class="db-btn" type="button" id="newDoc" title="New draft">New</button>
+      <div class="db-menu">
+        <button class="db-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu" title="More">More</button>
+        <div class="menu" id="menu" hidden>
+          <button type="button" data-do="copy">Copy all, for Google Docs</button>
+          <button type="button" data-do="txt">Download as .txt</button>
+          <button type="button" data-do="rename">Rename this draft</button>
+          <button type="button" data-do="delete">Delete this draft</button>
+          <hr>
+          <button type="button" data-do="backup">Back up every draft</button>
+          <button type="button" data-do="restore">Restore a backup</button>
+          <input type="file" id="restoreFile" accept=".json,application/json" hidden>
+        </div>
+      </div>
+      <span class="saved" id="saved" aria-live="polite"></span>
+    </div>
+    <div class="db-mid">
+      <span class="wc"><b id="wcNum">0</b> words <span class="wc-today" id="wcToday"></span></span>
+      <span class="goal" id="goalBar" title="Chapter target"><span class="goal-fill" id="goalFill"></span></span>
+    </div>
+    <div class="db-right">
+      <div class="timer" id="timer">
+        <button class="tm-main" type="button" id="tmMain" title="Start writing sprint">
+          <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="tm-track" cx="18" cy="18" r="15.5"/><circle class="tm-ring" id="tmRing" cx="18" cy="18" r="15.5"/></svg>
+          <span class="tm-time" id="tmTime">5:00</span>
+          <span class="tm-label" id="tmLabel">Start</span>
+        </button>
+        <button class="db-btn tm-set" type="button" id="tmSetBtn" aria-expanded="false" aria-controls="tmSet" title="Timer settings">&#9881;</button>
+        <div class="menu tm-menu" id="tmSet" hidden>
+          <label>Write for <input type="number" id="tmWork" min="1" max="120" step="1"> min</label>
+          <label>Break for <input type="number" id="tmBrk" min="1" max="60" step="1"> min</label>
+          <label class="chk"><input type="checkbox" id="tmSound"> Soft chime</label>
+          <button type="button" id="tmReset">Reset the timer</button>
+        </div>
+      </div>
+      <button class="db-btn" type="button" id="focusBtn" title="Focus mode (Esc to leave)">Focus</button>
+      <button class="db-btn" type="button" id="panelBtn" aria-expanded="true" aria-controls="panel" title="Show or hide the side panel">Panel</button>
+    </div>
+  </div>
+
+  <div class="desk-main">
+    <div class="ed-scroll" id="edScroll">
+      <div class="ed-inner">
+        <input class="doc-title" id="docTitle" aria-label="Draft title" placeholder="Untitled chapter" maxlength="120">
+        <div class="ed-box">
+          <div class="ed-back" id="edBack" aria-hidden="true">
+</div>
+          <textarea class="ed-ta" id="edTa" spellcheck="false" aria-label="Your chapter" placeholder="Start writing, or paste a chapter from Google Docs to check it."></textarea>
+        </div>
+      </div>
+      <div class="pop" id="pop" hidden role="dialog" aria-label="Suggestion">
+</div>
+    </div>
+
+    <aside class="panel" id="panel" aria-label="Side panel">
+      <div class="p-tabs" role="tablist">
+        <button role="tab" type="button" data-tab="lore" aria-selected="true">Lore</button>
+        <button role="tab" type="button" data-tab="check" aria-selected="false">Check <span class="p-badge" id="checkBadge"></span></button>
+        <button role="tab" type="button" data-tab="ask" aria-selected="false">Ask</button>
+        <button role="tab" type="button" data-tab="notes" aria-selected="false">Notes</button>
+      </div>
+
+      <section class="p-view" data-view="lore">
+        <div class="lore-search"><input type="search" id="loreQ" placeholder="Search names, places, chapters…  (Ctrl K)" aria-label="Search your lore">
+</div>
+        <div class="lore-chips" id="loreChips" role="tablist">
+</div>
+        <div class="lore-list" id="loreList">
+</div>
+      </section>
+
+      <section class="p-view" data-view="check" hidden>
+        <div class="ck-toggles">
+          <label class="chk"><input type="checkbox" id="optLt"> Grammar check <span class="lt-status" id="ltStatus"></span></label>
+          <label class="chk"><input type="checkbox" id="optFix"> Fix small things as I type</label>
+          <label class="chk"><input type="checkbox" id="optNames"> Underline names from my canon</label>
+        </div>
+        <div class="ck-chapter" id="ckChapter">
+</div>
+        <div class="ck-head">
+<h3>Suggestions</h3><button class="btn small" type="button" id="fixAll">Fix the safe ones</button>
+</div>
+        <div class="ck-list" id="ckList">
+</div>
+        <div class="ck-polish">
+          <h3>Clean up a paragraph</h3>
+          <p class="muted">Claude fixes grammar, spelling and dropped letters in the paragraph your cursor is in, keeping your words and your house rules. You approve every change.</p>
+          <button class="btn small" type="button" id="polishBtn">Clean up this paragraph</button>
+          <div class="polish-out" id="polishOut" hidden>
+</div>
+        </div>
+        <p class="ck-credit">Grammar by <a href="https://languagetool.org" target="_blank">LanguageTool</a>. With grammar check on, each paragraph you write is sent to LanguageTool to be checked. House rules and fixes as you type stay on this device.</p>
+      </section>
+
+      <section class="p-view" data-view="ask" hidden>
+        <div id="askSetup" class="ask-setup" hidden>
+          <h3>Ask Claude about your canon</h3>
+          <p>Questions like "what color is Will's magic?" or "which chapter did Sansa meet Rob?" answered from your story notes and this draft. Claude won't write prose for you.</p>
+          <ol>
+            <li>Open <a href="https://platform.claude.com/settings/billing" target="_blank">the Claude Console</a>, sign in, and add a few dollars of credit.</li>
+            <li>Set a monthly spending limit under <a href="https://platform.claude.com/settings/limits" target="_blank">Limits</a> so it can never surprise you.</li>
+            <li>Create a key under <a href="https://platform.claude.com/settings/keys" target="_blank">API keys</a> and paste it here.</li>
+          </ol>
+          <label class="sr-only" for="keyIn">API key</label>
+          <input type="password" id="keyIn" placeholder="sk-ant-…" autocomplete="off" spellcheck="false">
+          <button class="btn small primary" type="button" id="keySave">Save on this device</button>
+          <p class="muted small">The key is kept only in this browser, never on GitHub. On Haiku, a question costs around half a cent.</p>
+        </div>
+        <div id="askMain" class="ask-main" hidden>
+          <div class="ask-log" id="askLog" aria-live="polite">
+</div>
+          <form class="ask-form" id="askForm">
+            <textarea id="askIn" rows="2" placeholder="Ask about your canon…" aria-label="Your question"></textarea>
+            <button class="btn small primary" type="submit">Ask</button>
+          </form>
+          <div class="ask-opts">
+            <label class="chk"><input type="checkbox" id="askDraft" checked> Include this draft</label>
+            <select id="askModel" aria-label="Model">
+              <option value="claude-haiku-5-5">Haiku 5.5 (cheapest)</option>
+              <option value="claude-sonnet-5-5">Sonnet 5.5 (smarter)</option>
+            </select>
+          </div>
+          <p class="ask-cost muted small"><span id="askCost"></span> <button class="linklike" type="button" id="askClear">Clear chat</button> · <button class="linklike" type="button" id="keyForget">Remove key</button>
+</p>
+        </div>
+      </section>
+
+      <section class="p-view" data-view="notes" hidden>
+        <h3>Before you start</h3>
+        <ul class="checklist" id="checklist">
+</ul>
+        <h3>Notes for this chapter</h3>
+        <textarea id="docNotes" class="notes-ta" rows="7" placeholder="Beats, reminders, things to check…"></textarea>
+        <h3>Chapter target</h3>
+        <label class="goal-set"><input type="number" id="goalIn" min="100" step="100"> words</label>
+        <h3>Saved versions</h3>
+        <p class="muted small">The desk keeps a copy every ten minutes you write, up to twelve per draft.</p>
+        <ul class="snaps" id="snaps">
+</ul>
+        <h3>Your dictionary</h3>
+        <p class="muted small">Words you told the checker to leave alone.</p>
+        <div class="dict" id="dict">
+</div>
+        <p><button class="linklike" type="button" id="resetIgnored">Bring back suggestions I ignored</button>
+</p>
+        <p class="muted small">Drafts live in this browser, on this device. Use More, then Back up every draft, now and then.</p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="brk" id="brk" hidden role="dialog" aria-modal="true" aria-labelledby="brkTitle">
+    <div class="brk-card">
+      <p class="brk-kicker" id="brkKicker">Break</p>
+      <h2 id="brkTitle">Step away from the page</h2>
+      <p class="brk-time" id="brkTime">3:00</p>
+      <p class="brk-tip" id="brkTip">
+</p>
+      <div class="btn-row">
+        <button class="btn" type="button" id="brkMore">Let me finish this sentence</button>
+        <button class="btn" type="button" id="brkSkip">Skip the break</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+</div>
+</div>
+</main>
+</body>
+</html>
