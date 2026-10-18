@@ -22,6 +22,9 @@ Every page is a plain `.html` file in this folder. The header, the Contents menu
 | Linfay's lecture texts | `assets/lectures.js` (paste each snippet between the backticks) |
 | Comments ("Leave your mark") | `comments` in `CONFIG` (needs Discussions and the giscus app on this repository) |
 | Spells on the battle map | `SPELLS` in `assets/table-core.js` |
+| Where each character is, chapter by chapter, on the map | `CAST` and `PLACES` at the top of `assets/story-map.js` |
+| The hover definitions (underlined lore words) | `TERMS` at the top of `assets/glossary.js`; put `data-no-glossary` on a page's `<body>` to switch them off there |
+| Festivals (dates, wording, and the look) | `seasons` in `CONFIG`; preview one any day with `?season=veil` (or `illuminance`, `founding`, `marking`, `unity`) on the end of a page address |
 
 ## The Table (D&D battle map)
 

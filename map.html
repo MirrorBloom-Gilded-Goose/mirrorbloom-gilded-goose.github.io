@@ -20,6 +20,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
 <script src="assets/map-data.js" defer></script>
 <script src="assets/map.js" defer></script>
+<script src="assets/story-map.js" defer></script>
 </head>
 <body data-section="map">
 <header id="site-header"></header>
@@ -35,6 +36,18 @@
 <div id="worldmap" role="region" aria-label="Interactive map of Solance">
 </div>
 </div>
+  <section class="story-panel" id="storyPanel" aria-labelledby="storyTitle">
+    <div class="sp-head">
+      <h2 id="storyTitle">The story so far</h2>
+      <label class="sp-toggle"><input type="checkbox" id="storyOn" checked> Show the cast on the map</label>
+    </div>
+    <p class="muted">Where everyone in <a href="serial.html">Tales of the Gilded Goose</a> is, chapter by chapter. <span id="storyCap"></span> <button type="button" class="linklike" data-open-shield>Set your chapter</button>
+</p>
+    <div class="sp-slider"><input type="range" id="storyCh" min="1" max="28" step="1" aria-label="Chapter"><output id="storyChOut" for="storyCh"></output>
+</div>
+    <ul class="sp-cast" id="storyCast">
+</ul>
+  </section>
   <div class="map-controls">
     <fieldset><legend>Show</legend>
       <label><input type="checkbox" data-layer="nations" checked> Nations and places</label>

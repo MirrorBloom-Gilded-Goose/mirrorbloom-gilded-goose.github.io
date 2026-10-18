@@ -576,3 +576,15 @@ html.shield-on.js main { visibility: hidden; }
 .marks .giscus { min-height: 160px; }
 .linklike { background: none; border: 0; padding: 0; font: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--here); text-underline-offset: 3px; cursor: pointer; }
 .linklike:hover { color: var(--here); }
+
+/* ---------- hover definitions (assets/glossary.js) ---------- */
+.gl { text-decoration: underline dotted; text-decoration-color: color-mix(in srgb, var(--there) 70%, transparent); text-underline-offset: .22em; text-decoration-thickness: 1px; cursor: help; border-radius: 2px; }
+.gl:hover, .gl:focus-visible { text-decoration-color: var(--there); text-decoration-style: solid; outline: none; background: color-mix(in srgb, var(--there) 10%, transparent); }
+.gl-tip { position: fixed; z-index: 80; max-width: min(320px, calc(100vw - 16px)); background: var(--bg-2); color: var(--ink); border: 1px solid var(--line-strong); border-top: 2px solid var(--there); border-radius: var(--radius); box-shadow: 0 18px 40px -18px rgba(0,0,0,.55); padding: .7rem .9rem .65rem; font: 400 .95rem/1.45 var(--text); opacity: 0; transform: translateY(4px); transition: opacity .14s ease, transform .14s ease; }
+.gl-tip.below { transform: translateY(-4px); }
+.gl-tip.in { opacity: 1; transform: none; }
+.gl-tip b { display: block; font: 400 1.02rem/1.2 var(--display); color: var(--there); margin-bottom: .25rem; }
+.gl-tip span { display: block; }
+.gl-tip a { display: inline-block; margin-top: .45rem; font-family: var(--text-sc); font-size: .85rem; letter-spacing: .04em; }
+@media (prefers-reduced-motion: reduce) { .gl-tip { transition: none; transform: none; } }
+@media print { .gl { text-decoration: none; } .gl-tip { display: none; } }

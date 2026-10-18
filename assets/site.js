@@ -21,6 +21,25 @@
     /* Comments ("Leave your mark") through giscus, stored as GitHub Discussions on the site's repo.
        Stays off until all four are filled in. */
     comments: { repo: 'MirrorBloom-Gilded-Goose/mirrorbloom-gilded-goose.github.io', repoId: 'R_kgDOTBEM7Q', category: '', categoryId: '' },
+    /* Festivals. While one is on, the site dresses up for it and shows a small banner.
+       from / to are month-day ('12-10' is December 10th); a festival can wrap past New Year.
+       Set on: false to skip one this year. Preview any of them, any day, by adding
+       ?season=<id> to a page address (e.g. index.html?season=veil), or ?season=off.
+       effect is the look: 'lights', 'fireworks', 'marks', 'unity' or 'veil'.
+       A festival with no name or no dates stays off. */
+    seasons: [
+      { id: 'illuminance', on: true, name: 'The Illuminance', from: '12-10', to: '12-26', effect: 'lights',
+        note: 'The festival of lights is on. Give something away today.', link: 'everlast.html#festivals' },
+      { id: 'founding', on: true, name: 'Founding Day', from: '12-31', to: '01-01', effect: 'fireworks',
+        note: 'Fireworks over the towers, and the elves have come down to speak.', link: 'everlast.html#festivals' },
+      { id: 'marking', on: true, name: 'Marking Day', from: '', to: '', effect: 'marks',
+        note: 'Show the world what you made this year.', link: 'everlast.html#festivals' },
+      { id: 'unity', on: true, name: 'Unity Week', from: '', to: '', effect: 'unity',
+        note: 'The factions have traded places for the week.', link: 'everlast.html#festivals' },
+      /* Your autumn festival. Give it a name (and a note and link) and it switches on. */
+      { id: 'veil', on: true, name: '', from: '10-24', to: '11-01', effect: 'veil',
+        note: 'Umbrasol is close to the glass tonight.', link: 'cosmology.html' }
+    ],
     nav: [
       { key: 'cosmology', label: 'Cosmology', href: 'cosmology.html' },
       { key: 'magic', label: 'Magic', href: 'magic.html' },
@@ -361,6 +380,32 @@
     var sc = document.createElement('script'); sc.src = 'assets/comments.js'; sc.async = true; document.head.appendChild(sc);
   }
 
+  /* ---------- hover definitions: assets/glossary.js underlines lore words on public pages ---------- */
+  function glossary() {
+    var b = document.body;
+    if (b.hasAttribute('data-sealed-page') || b.hasAttribute('data-table') || b.hasAttribute('data-desk') || b.hasAttribute('data-no-glossary') || here === 'mirror.html') return;
+    var sc = document.createElement('script'); sc.src = 'assets/glossary.js'; sc.async = true; document.head.appendChild(sc);
+  }
+
+  /* ---------- festivals: the site dresses up when one is on (dates in CONFIG.seasons) ---------- */
+  function mmdd(d) { return ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function activeSeason() {
+    var list = CONFIG.seasons || [], q = (location.search.match(/[?&]season=([\w-]+)/) || [])[1];
+    if (q) { if (q === 'off') return null; for (var i = 0; i < list.length; i++) if (list[i].id === q) return Object.assign({ preview: true }, list[i]); return null; }
+    var t = mmdd(new Date());
+    for (var j = 0; j < list.length; j++) {
+      var s = list[j]; if (!s.on || !s.name || !s.from || !s.to) continue;
+      if (s.from <= s.to ? (t >= s.from && t <= s.to) : (t >= s.from || t <= s.to)) return s;
+    }
+    return null;
+  }
+  function seasons() {
+    var b = document.body; if (b.hasAttribute('data-table') || b.hasAttribute('data-desk')) return;
+    var s = activeSeason(); if (!s) return;
+    window.MB_SEASON = s; root.setAttribute('data-season', s.id);
+    var sc = document.createElement('script'); sc.src = 'assets/seasons.js'; sc.async = true; document.head.appendChild(sc);
+  }
+
   function init() {
     if (guard()) return;
     if (reduce) document.querySelectorAll('animate').forEach(function (a) { a.remove(); });
@@ -381,6 +426,8 @@
     resolveReady(ready);
     ready.then(function (v) { root.dispatchEvent(new CustomEvent('mb:vault', { detail: v })); });
     countdowns();
+    seasons();
+    glossary();
     comments();
     countReader();
   }

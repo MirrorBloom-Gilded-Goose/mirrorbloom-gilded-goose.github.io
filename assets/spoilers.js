@@ -202,7 +202,7 @@
     document.querySelector('#site-header .bar').appendChild(pop);
     btn.addEventListener('click', function (e) { e.stopPropagation(); openPop(pop.hidden); });
     pop.addEventListener('click', function (e) { e.stopPropagation(); });
-    pop.querySelector('select').addEventListener('change', function (e) { setProgress(e.target.value); apply(); });
+    pop.querySelector('select').addEventListener('change', function (e) { setProgress(e.target.value); apply(); root.dispatchEvent(new CustomEvent('mb:progress')); });
     document.addEventListener('click', function () { if (!pop.hidden) openPop(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pop.hidden) { openPop(false); btn.focus(); } });
     document.querySelectorAll('[data-open-shield]').forEach(function (b) {
@@ -210,7 +210,7 @@
     });
   }
 
-  window.MBSpoilers = { apply: apply, open: function () { openPop(true); }, progress: getProgress, label: label };
+  window.MBSpoilers = { apply: apply, open: function () { openPop(true); }, progress: getProgress, label: label, isHidden: function (ch) { return isHidden(ch, getProgress()); }, latest: latest };
   function init() { buildControl(); tagAll(); apply(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

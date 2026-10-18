@@ -32,6 +32,7 @@
   });
   document.getElementById('labelsToggle').addEventListener('change', function (e) { document.getElementById('worldmap').classList.toggle('no-labels', !e.target.checked); });
 
+  window.MBWorldMap = { map: map, ll: ll };
   root.addEventListener('mb:crossed', function () { img.setUrl(above() ? 'assets/map-solance.svg?v=4' : 'assets/map-umbrasol.svg?v=4'); map.closePopup(); });
 
   /* pin mode: click to read a position for map-data.js */

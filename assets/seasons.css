@@ -1,0 +1,71 @@
+/* Festivals (assets/seasons.js). Everything here is decoration: it sits behind
+   the page or hangs off the header, and never catches a click. */
+
+.season-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.season-cv { position: absolute; inset: 0; }
+
+/* ---------- garlands under the header ---------- */
+.season-garland { position: absolute; left: 0; right: 0; top: 100%; height: 34px; margin-top: -2px; pointer-events: none; overflow: hidden; }
+.season-garland svg { display: block; }
+.g-wire { stroke: color-mix(in srgb, var(--ink-3) 70%, transparent); stroke-width: 1.2; }
+.bulb ellipse { filter: drop-shadow(0 0 4px var(--c)) drop-shadow(0 0 9px var(--c)); animation: twinkle 3s ease-in-out infinite; animation-delay: var(--d); transform-box: fill-box; transform-origin: 50% 0; }
+.bulb .cap { fill: var(--ink-3); }
+html[data-theme="solance"] .bulb ellipse { filter: drop-shadow(0 0 3px var(--c)); }
+@keyframes twinkle { 0%, 100% { opacity: 1; } 45% { opacity: .55; } 55% { opacity: .95; } }
+.flag { stroke: color-mix(in srgb, var(--bg) 40%, transparent); stroke-width: .6; }
+.flag.a { fill: var(--gold); } .flag.b { fill: var(--crimson); }
+.g-bunting .flag { opacity: .9; }
+
+/* ---------- unity week: the two worlds' colors trade places ---------- */
+html[data-season="unity"]:not(.unity-off) { --here: var(--gold); --there: var(--crimson); }
+html[data-season="unity"][data-theme="solance"]:not(.unity-off) { --here: var(--crimson); --there: var(--gold); }
+
+/* ---------- the veil: Umbrasol close to the glass ---------- */
+.fx-veil .mist { position: absolute; left: -20%; right: -20%; bottom: -8%; height: 46%; opacity: .55;
+  background: radial-gradient(40% 60% at 20% 80%, color-mix(in srgb, var(--crimson) 32%, transparent), transparent 70%),
+              radial-gradient(35% 55% at 70% 90%, rgba(120, 80, 150, .32), transparent 70%),
+              radial-gradient(45% 50% at 50% 100%, rgba(40, 20, 50, .5), transparent 75%);
+  animation: drift 38s ease-in-out infinite alternate; filter: blur(6px); }
+.fx-veil .mist.m2 { height: 34%; opacity: .4; animation-duration: 55s; animation-direction: alternate-reverse; transform: scaleX(-1); }
+.fx-veil .vignette { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 40%, transparent 55%, color-mix(in srgb, var(--crimson-deep) 45%, transparent) 100%); }
+html[data-theme="solance"] .fx-veil .mist { opacity: .3; }
+html[data-theme="solance"] .fx-veil .mist.m2 { opacity: .2; }
+html[data-theme="solance"] .fx-veil .vignette { background: radial-gradient(120% 90% at 50% 40%, transparent 60%, rgba(110, 30, 41, .1) 100%); }
+@keyframes drift { from { transform: translateX(-6%); } to { transform: translateX(6%); } }
+.fx-veil .bat { position: absolute; left: 0; top: 0; width: 60px; height: 30px; will-change: transform; }
+.fx-veil .bat svg { width: 100%; height: 100%; fill: #0b0610; filter: drop-shadow(0 0 3px rgba(207, 74, 88, .55)); animation: flap .26s ease-in-out infinite alternate; transform-origin: 50% 40%; }
+html[data-theme="solance"] .fx-veil .bat svg { fill: #2a1a2e; filter: none; }
+@keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(.4) translateY(-12%); } }
+/* the moons swell and redden, and show faintly through the glass even above */
+html[data-season="veil"] .moon { box-shadow: 0 0 60px 14px rgba(207, 74, 88, .42), 0 0 160px 50px rgba(207, 74, 88, .16); }
+html[data-season="veil"] body .moons { opacity: .9; transform: none; }
+html[data-season="veil"][data-theme="solance"] body .moons { opacity: .16; transform: none; filter: saturate(.7); }
+html.veil-flare body .moons { opacity: 1 !important; transition: opacity .3s ease; }
+html.veil-flare .moon { box-shadow: 0 0 70px 22px rgba(207, 74, 88, .6), 0 0 170px 60px rgba(207, 74, 88, .22); }
+@media (max-width: 700px) { html[data-season="veil"] body .moons { transform: scale(.5); transform-origin: top right; } }
+
+/* ---------- the note ---------- */
+.season-note { position: fixed; left: 16px; bottom: 16px; z-index: 45; width: min(360px, calc(100vw - 32px)); box-sizing: border-box;
+  display: flex; gap: .75rem; align-items: flex-start; padding: .8rem .8rem .75rem .9rem;
+  background: color-mix(in srgb, var(--bg-2) 94%, transparent); backdrop-filter: blur(6px);
+  border: 1px solid var(--line-strong); border-left: 3px solid var(--there); border-radius: var(--radius);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .6); color: var(--ink);
+  opacity: 0; transform: translateY(14px); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.7,.2,1); }
+.season-note.in { opacity: 1; transform: none; }
+.sn-mark { flex: none; width: 10px; height: 10px; margin-top: .45rem; border-radius: 50%; background: var(--there); box-shadow: 0 0 10px 2px color-mix(in srgb, var(--there) 60%, transparent); }
+.sn-body { flex: 1; min-width: 0; }
+.sn-name { margin: 0; font: 400 1.12rem/1.2 var(--display); color: var(--there); }
+.sn-name small { font: .72rem var(--text-sc); letter-spacing: .06em; color: var(--ink-3); margin-left: .3rem; text-transform: lowercase; }
+.sn-text { margin: .2rem 0 0; font-size: .94rem; line-height: 1.4; color: var(--ink-2); }
+.sn-acts { margin: .5rem 0 0; display: flex; gap: .9rem; align-items: center; flex-wrap: wrap; font-family: var(--text-sc); font-size: .86rem; letter-spacing: .03em; }
+.sn-do { font: inherit; color: var(--ink); background: color-mix(in srgb, var(--there) 16%, transparent); border: 1px solid color-mix(in srgb, var(--there) 50%, transparent); border-radius: 999px; padding: .22rem .75rem; cursor: pointer; }
+.sn-do:hover, .sn-do:focus-visible { background: color-mix(in srgb, var(--there) 28%, transparent); }
+.sn-x { flex: none; width: 30px; height: 30px; display: grid; place-items: center; margin: -.3rem -.3rem 0 0; background: none; border: 0; color: var(--ink-3); cursor: pointer; border-radius: 50%; }
+.sn-x:hover, .sn-x:focus-visible { color: var(--ink); background: var(--glass); }
+.sn-x svg { width: 16px; height: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bulb ellipse, .fx-veil .mist, .fx-veil .bat svg { animation: none; }
+  .season-note { transition: none; transform: none; }
+}
+@media print { .season-layer, .season-garland, .season-note { display: none !important; } }
